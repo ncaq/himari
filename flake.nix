@@ -25,7 +25,7 @@
       overlays = [
         haskellNix.overlay
         (
-          final: prev:
+          final: _prev:
           let
             # haskell.nixのtoolsで参照されるhaskell-language-server。
             tool-haskell-language-server =
