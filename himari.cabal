@@ -37,6 +37,7 @@ common basic
     hashable ^>=1.5.0.0,
     lens ^>=5.3.5,
     mtl ^>=2.3.1,
+    primitive ^>=0.9.1.0,
     text ^>=2.1.2,
     time ^>=1.12.2,
     typed-process ^>=0.2.13.0,
