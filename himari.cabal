@@ -1,0 +1,23 @@
+cabal-version: 3.0
+name: himari
+version: 0.1.0.0
+synopsis: A standard library for Haskell as an alternative to rio
+homepage: https://github.com/ncaq/himari
+license: Apache-2.0
+license-file: LICENSE
+author: ncaq
+maintainer: ncaq@ncaq.net
+category: Control
+build-type: Simple
+
+common warnings
+  ghc-options: -Wall
+
+library
+  import: warnings
+  exposed-modules: MyLib
+  -- other-modules:
+  -- other-extensions:
+  build-depends: base ^>=4.19.2.0
+  hs-source-dirs: src
+  default-language: GHC2024
