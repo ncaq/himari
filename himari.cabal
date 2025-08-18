@@ -26,7 +26,7 @@ common basic
     OverloadedStrings
 
   build-depends:
-    base ^>=4.19.2.0
+    base >=4.19.2.0 && <4.22
 
 library
   import: basic
