@@ -23,6 +23,7 @@ common basic
 
   default-language: GHC2024
   default-extensions:
+    NoImplicitPrelude
     OverloadedStrings
 
   build-depends:
