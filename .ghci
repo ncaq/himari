@@ -1,0 +1,3 @@
+-- デフォルトの`show`の代わりに日本語などを文字化けさせず、代数的データ型を適度に改行して表示するものを使用。
+import qualified Text.Pretty.Simple
+:set -interactive-print=Text.Pretty.Simple.pPrint
