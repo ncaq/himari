@@ -50,4 +50,6 @@ library
   import: basic
   hs-source-dirs: src
   -- cabal-gild: discover ./src
-  exposed-modules: Himari
+  exposed-modules:
+    Himari
+    Himari.Prelude
