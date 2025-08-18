@@ -130,7 +130,13 @@
           };
         });
       in
-      flake
+      # haskell.nixのproject.flakeはciJobsとhydraJobsを生成するが、
+      # ciJobsは非標準のoutputであり警告を誘発し、
+      # hydraJobsもGitHub Actionsを使うため不要なので除外。
+      builtins.removeAttrs flake [
+        "ciJobs"
+        "hydraJobs"
+      ]
       // {
         checks =
           flake.checks
