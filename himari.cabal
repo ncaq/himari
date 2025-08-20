@@ -67,3 +67,4 @@ test-suite himari-test
     himari
 
   -- cabal-gild: discover ./test --exclude=**/Main.hs
+  other-modules: Himari.Title
