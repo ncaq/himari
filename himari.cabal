@@ -52,3 +52,22 @@ library
   exposed-modules:
     Himari
     Himari.Prelude
+
+test-suite himari-test
+  import: basic
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Main.hs
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+
+  build-depends:
+    himari,
+    sydtest ^>=0.18.0.0,
+
+  -- cabal-gild: discover ./test --exclude=**/Main.hs
+  other-modules:
+    Himari.Title
+    TitleSpec
