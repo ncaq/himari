@@ -1,4 +1,9 @@
-module Himari.Title where
+module Himari.Title
+  ( titleComponents
+  , generateAllCombinations
+  , renderTitle
+  , printAllTitle
+  ) where
 
 import Data.List.NonEmpty qualified as NE
 import Data.Text qualified as T
