@@ -64,7 +64,10 @@ test-suite himari-test
     -with-rtsopts=-N
 
   build-depends:
-    himari
+    himari,
+    sydtest ^>=0.18.0.0,
 
   -- cabal-gild: discover ./test --exclude=**/Main.hs
-  other-modules: Himari.Title
+  other-modules:
+    Himari.Title
+    TitleSpec
