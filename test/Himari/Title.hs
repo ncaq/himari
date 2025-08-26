@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Himari.Title
   ( titleComponents
   , generateAllCombinations

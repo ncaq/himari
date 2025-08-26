@@ -25,7 +25,6 @@ common basic
   default-language: GHC2024
   default-extensions:
     NoImplicitPrelude
-    OverloadedStrings
 
   build-depends:
     base >=4.19.2.0 && <4.22,
