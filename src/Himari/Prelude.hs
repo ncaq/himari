@@ -1,5 +1,4 @@
--- |
--- Alternative to `Prelude`.
+-- | Alternative to `Prelude`.
 module Himari.Prelude
   ( module Export
   ) where
