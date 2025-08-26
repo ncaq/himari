@@ -53,6 +53,7 @@ library
   -- cabal-gild: discover ./src
   exposed-modules:
     Himari
+    Himari.Env.Simple
     Himari.Prelude
 
 test-suite himari-test
