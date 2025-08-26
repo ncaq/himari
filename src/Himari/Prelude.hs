@@ -35,9 +35,11 @@ import Data.Traversable as Export
 import Data.Tuple as Export
 import Data.Void as Export
 import Data.Word as Export
+import Debug.Pretty.Simple as Export
 import System.Directory as Export
 import System.FilePath as Export hiding ((<.>))
 import System.Process.Typed as Export
+import Text.Pretty.Simple as Export
 import Text.Show as Export
 import UnliftIO as Export
 import Prelude as Export
