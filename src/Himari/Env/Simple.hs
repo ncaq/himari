@@ -1,13 +1,12 @@
-{-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE NoFieldSelectors #-}
 
 -- | 基本的な環境を実行するためモジュール。
 module Himari.Env.Simple
   ( SimpleEnv
-  , HasLogger (..)
   ) where
 
+import Himari.Logger
 import Himari.Prelude
 
 -- | シンプルにロガーなどを持って解決するためのコンテキスト。

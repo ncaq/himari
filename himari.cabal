@@ -53,6 +53,7 @@ library
   exposed-modules:
     Himari
     Himari.Env.Simple
+    Himari.Logger
     Himari.Prelude
 
 test-suite himari-test
