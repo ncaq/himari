@@ -46,6 +46,7 @@ import Prelude as Export
 
 -- Type only.
 
+import Control.Monad.Catch as Export (MonadCatch, MonadMask, MonadThrow)
 import Data.ByteString as Export (ByteString, StrictByteString)
 import Data.ByteString.Lazy as Export (LazyByteString)
 import Data.ByteString.Short as Export (ShortByteString)
