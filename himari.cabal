@@ -74,5 +74,6 @@ test-suite himari-test
 
   -- cabal-gild: discover ./test --exclude=**/Main.hs
   other-modules:
+    Himari.Env.SimpleSpec
     Himari.Title
     TitleSpec
