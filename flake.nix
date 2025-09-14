@@ -139,8 +139,8 @@
       ]
       // {
         checks =
-          flake.checks
-          // flake.packages # テストがないパッケージもビルドしてエラーを検出する。
+          flake.packages # テストがないパッケージもビルドしてエラーを検出する。
+          // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
           };
