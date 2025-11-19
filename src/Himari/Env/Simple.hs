@@ -41,5 +41,4 @@ runSimpleEnvWith
   -> Himari SimpleEnv a
   -- ^ 実行したいアクション。
   -> m a
-runSimpleEnvWith logAction' action =
-  runHimari (SimpleEnv logAction') action
+runSimpleEnvWith logAction' = runHimari (SimpleEnv logAction')
