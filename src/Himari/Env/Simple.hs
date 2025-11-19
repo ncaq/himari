@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE NoFieldSelectors #-}
 
--- | 基本的な環境を実行するためモジュール。
+-- | 基本的な環境を提供するモジュール。
 module Himari.Env.Simple
   ( SimpleEnv
   ) where
