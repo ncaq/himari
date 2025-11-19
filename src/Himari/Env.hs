@@ -26,7 +26,7 @@ instance PrimMonad (Himari env) where
   type PrimState (Himari env) = PrimState IO
   primitive = Himari . ReaderT . const . primitive
 
--- | Using the environment run in IO the action that requires that environment.
+-- | Given an environment, runs the action that requires it in IO.
 runHimari :: (MonadIO m) => env -> Himari env a -> m a
 runHimari env (Himari (ReaderT f)) = liftIO (f env)
 
