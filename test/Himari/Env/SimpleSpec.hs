@@ -9,6 +9,7 @@ import Test.Syd
 
 spec :: Spec
 spec = do
-  it "logging works" $
-    (runSimpleEnv :: Himari SimpleEnv a -> IO a)
-      ($(logDebug) "logging allowed")
+  describe "logger" $ do
+    it "logging works" $
+      (runSimpleEnv :: Himari SimpleEnv a -> IO a)
+        ($(logDebug) "logging allowed")
