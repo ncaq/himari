@@ -29,7 +29,7 @@ runSimpleEnv = runSimpleEnvWith defaultOutput stderr
 
 -- | `SimpleEnv`をカスタム出力で実行する。
 runSimpleEnvWith
-  :: (MonadIO m) => (Handle -> Loc -> LogSource -> LogLevel -> LogStr -> IO ()) -> Handle -> Himari SimpleEnv a -> m a
+  :: (MonadIO m) => (Handle -> LogAction) -> Handle -> Himari SimpleEnv a -> m a
 runSimpleEnvWith logOutput toHandle action = do
   let logAction' = logOutput toHandle
   runHimari (SimpleEnv logAction') action
