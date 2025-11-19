@@ -1,5 +1,4 @@
--- |
--- Alternative to `Prelude`.
+-- | Alternative to `Prelude`.
 module Himari.Prelude
   ( module Export
   ) where
@@ -20,6 +19,7 @@ import Data.Bifoldable as Export
 import Data.Bifunctor as Export
 import Data.Bitraversable as Export
 import Data.Bool as Export
+import Data.Convertible as Export
 import Data.Either as Export
 import Data.Eq as Export
 import Data.Foldable as Export
@@ -36,6 +36,7 @@ import Data.Tuple as Export
 import Data.Void as Export
 import Data.Word as Export
 import Debug.Pretty.Simple as Export
+import GHC.Generics as Export hiding (from, to)
 import System.Directory as Export
 import System.FilePath as Export hiding ((<.>))
 import System.Process.Typed as Export
@@ -46,6 +47,7 @@ import Prelude as Export
 
 -- Type only.
 
+import Control.Monad.Catch as Export (MonadCatch, MonadMask, MonadThrow)
 import Data.ByteString as Export (ByteString, StrictByteString)
 import Data.ByteString.Lazy as Export (LazyByteString)
 import Data.ByteString.Short as Export (ShortByteString)
