@@ -31,7 +31,7 @@ runSimpleEnv = runSimpleEnvWith defaultOutput stderr
 runSimpleEnvWith
   :: (MonadIO m) => (Handle -> Loc -> LogSource -> LogLevel -> LogStr -> IO ()) -> Handle -> Himari SimpleEnv a -> m a
 runSimpleEnvWith logOutput toHandle action = do
-  let logAction' = \loc src level msg -> logOutput toHandle loc src level msg
+  let logAction' = logOutput toHandle
   runHimari (SimpleEnv logAction') action
 
 instance MonadLogger (Himari SimpleEnv) where

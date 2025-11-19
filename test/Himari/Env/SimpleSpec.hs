@@ -10,19 +10,24 @@ import Test.Syd
 spec :: Spec
 spec = do
   describe "logging" $ do
-    it "outputs debug level logs" $
+    it
+      "outputs debug level logs"
       (runSimpleEnv $ $(logDebug) "debug message" :: IO ())
 
-    it "outputs info level logs" $
+    it
+      "outputs info level logs"
       (runSimpleEnv $ $(logInfo) "info message" :: IO ())
 
-    it "outputs warning level logs" $
+    it
+      "outputs warning level logs"
       (runSimpleEnv $ $(logWarn) "warning message" :: IO ())
 
-    it "outputs error level logs" $
+    it
+      "outputs error level logs"
       (runSimpleEnv $ $(logError) "error message" :: IO ())
 
-    it "handles multiple log calls" $
+    it
+      "handles multiple log calls"
       ( runSimpleEnv
           ( do
               $(logInfo) "first log"
@@ -42,7 +47,8 @@ spec = do
         pure y
       result `shouldBe` 42
 
-    it "supports monad-logger functions" $
+    it
+      "supports monad-logger functions"
       ( runSimpleEnv
           ( do
               logInfoN "using logInfoN"
