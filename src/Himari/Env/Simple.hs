@@ -25,13 +25,12 @@ makeFieldsId ''SimpleEnv
 
 -- | `SimpleEnv`をデフォルト設定で実行する。
 runSimpleEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
-runSimpleEnv = runSimpleEnvWith defaultOutput stderr
+runSimpleEnv = runSimpleEnvWith $ defaultOutput stderr
 
 -- | `SimpleEnv`をカスタム出力で実行する。
 runSimpleEnvWith
-  :: (MonadIO m) => (Handle -> LogAction) -> Handle -> Himari SimpleEnv a -> m a
-runSimpleEnvWith logOutput toHandle action = do
-  let logAction' = logOutput toHandle
+  :: (MonadIO m) => LogAction -> Himari SimpleEnv a -> m a
+runSimpleEnvWith logAction' action = do
   runHimari (SimpleEnv logAction') action
 
 instance MonadLogger (Himari SimpleEnv) where

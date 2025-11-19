@@ -61,20 +61,20 @@ spec = do
   describe "custom log output" $ do
     it "can capture log messages" $ do
       chan <- newTChanIO :: IO (TChan Text)
-      let customLogOutput _h _loc _src _level msg = do
+      let customLogOutput _loc _src _level msg = do
             let msgText = convert (fromLogStr msg)
             atomically $ writeTChan chan msgText
-      runSimpleEnvWith customLogOutput stderr $ do
+      runSimpleEnvWith customLogOutput $ do
         $(logInfo) "custom output test"
       message <- atomically $ readTChan chan
       message `shouldBe` "custom output test"
 
     it "captures log level information" $ do
       chan <- newTChanIO :: IO (TChan (Text, LogLevel))
-      let customLogOutput _h _loc _src level msg = do
+      let customLogOutput _loc _src level msg = do
             let msgText = convert (fromLogStr msg)
             atomically $ writeTChan chan (msgText, level)
-      runSimpleEnvWith customLogOutput stderr $ do
+      runSimpleEnvWith customLogOutput $ do
         $(logError) "error log"
         $(logWarn) "warning log"
       msg1 <- atomically $ readTChan chan
