@@ -33,8 +33,13 @@ instance MonadLogger (Himari SimpleEnv) where
 runSimpleEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
 runSimpleEnv = runSimpleEnvWith $ defaultOutput stderr
 
--- | `SimpleEnv`をカスタム出力で実行する。
+-- | `SimpleEnv`をカスタム出力で実行します。
 runSimpleEnvWith
-  :: (MonadIO m) => LogAction -> Himari SimpleEnv a -> m a
+  :: (MonadIO m)
+  => LogAction
+  -- ^ ログの出力方法。例えば`defaultOutput stdout`にすれば標準出力にログが出力されます。
+  -> Himari SimpleEnv a
+  -- ^ 実行したいアクション。
+  -> m a
 runSimpleEnvWith logAction' action = do
   runHimari (SimpleEnv logAction') action
