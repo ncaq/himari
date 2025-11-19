@@ -10,7 +10,7 @@ module Himari.Env
 import Himari.Prelude
 
 -- | The Reader + IO monad.
--- It equal to `RIO`.
+-- It nearly equal to `RIO`.
 newtype Himari env a = Himari
   { unHimari :: ReaderT env IO a
   }
