@@ -336,6 +336,13 @@ import Data.Convertible
 どうしてもshadowing警告が発生しやすくなります。
 そのため最初からlensを使ってフィールドにアクセスしてください。
 
+## テストや品質保証の基準
+
+テストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
+
+主要なAPIは[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)を参照してください。
+sydtestはhspecそのものではないことに注意してください。
+
 ### モジュール名
 
 テストする対象と同じ名前空間に置いて、
