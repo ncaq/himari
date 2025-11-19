@@ -33,3 +33,8 @@ runSimpleEnvWith
 runSimpleEnvWith logOutput toHandle action = do
   let logAction' = \loc src level msg -> logOutput toHandle loc src level msg
   runHimari (SimpleEnv logAction') action
+
+instance MonadLogger (Himari SimpleEnv) where
+  monadLoggerLog loc src level msg = do
+    logAction' <- view logAction
+    liftIO $ logAction' loc src level (toLogStr msg)
