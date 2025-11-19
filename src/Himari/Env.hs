@@ -1,5 +1,6 @@
 {-# LANGUAGE TypeFamilies #-}
 
+-- | Core environment monad for Himari.
 module Himari.Env
   ( Himari (..)
   , runHimari
