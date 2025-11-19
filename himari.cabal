@@ -30,6 +30,7 @@ common basic
     base >=4.19.2.0 && <4.22,
     bytestring ^>=0.12.2.0,
     containers ^>=0.7,
+    convertible ^>=1.1.1.1,
     deepseq ^>=1.5.0.0,
     directory ^>=1.3.9.0,
     exceptions ^>=0.10.9,

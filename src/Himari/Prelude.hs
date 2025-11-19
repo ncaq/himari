@@ -19,6 +19,7 @@ import Data.Bifoldable as Export
 import Data.Bifunctor as Export
 import Data.Bitraversable as Export
 import Data.Bool as Export
+import Data.Convertible as Export
 import Data.Either as Export
 import Data.Eq as Export
 import Data.Foldable as Export
