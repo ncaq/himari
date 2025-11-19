@@ -197,9 +197,7 @@ Unicodeで正しく表現できる文字列である場合`Text`を使い、
 使わなければいけない場合に一瞬`convert`などで変換するだけにしてください。
 
 詳しく知りたい場合は、
-[Haskellの文字列型：分類と特徴 #Haskell - Qiita](https://qiita.com/mod_poppo/items/740659702f31216fdade)
-参照してください。
-
+[Haskellの文字列型：分類と特徴 #Haskell - Qiita](https://qiita.com/mod_poppo/items/740659702f31216fdade)を参照してください。
 ### mutableな変数の使用を避ける
 
 Haskellに限らずmutableな変数は避けるべきだとされています。
