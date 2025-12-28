@@ -1,11 +1,11 @@
 {
   inputs = {
-    nixpkgs.follows = "haskellNix/nixpkgs-unstable";
+    nixpkgs.follows = "haskellNix/nixpkgs-2511";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs = {
-        nixpkgs.follows = "haskellNix/nixpkgs-unstable";
+        nixpkgs.follows = "nixpkgs";
       };
     };
     haskellNix.url = "github:input-output-hk/haskell.nix";
@@ -22,6 +22,7 @@
     # 現状はLinuxのみを想定。
     let
       ghc-version = "ghc9102";
+      hls-version = "2.12.0.0";
       overlays = [
         haskellNix.overlay
         (
@@ -30,7 +31,7 @@
             # haskell.nixのtoolsで参照されるhaskell-language-server。
             tool-haskell-language-server =
               final.haskell-nix.tool ghc-version "haskell-language-server"
-                "latest";
+                hls-version;
           in
           {
             # nixpkgsで普通にインストールされるfourmoluはhaskell-language-serverのものと違うので上書きして合わせる。
@@ -79,10 +80,10 @@
             ];
             shell = {
               tools = {
-                cabal = "latest";
-                cabal-gild = "latest"; # treefmtで管理されているがvscodeのHaskell拡張向けに使えるようにしておく
-                haskell-language-server = "latest";
-                implicit-hie = "latest";
+                cabal = "3.14.2.0";
+                cabal-gild = "1.6.0.2"; # treefmtで管理されているがvscodeのHaskell拡張向けに使えるようにしておく
+                haskell-language-server = hls-version;
+                implicit-hie = "0.1.4.0";
               };
               # ランタイム依存。
               buildInputs = with prev; [
