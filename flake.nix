@@ -30,7 +30,7 @@
             # haskell.nixのtoolsで参照されるhaskell-language-server。
             tool-haskell-language-server =
               final.haskell-nix.tool ghc-version "haskell-language-server"
-                "latest";
+                "2.12.0.0";
           in
           {
             # nixpkgsで普通にインストールされるfourmoluはhaskell-language-serverのものと違うので上書きして合わせる。
@@ -79,10 +79,10 @@
             ];
             shell = {
               tools = {
-                cabal = "latest";
-                cabal-gild = "latest"; # treefmtで管理されているがvscodeのHaskell拡張向けに使えるようにしておく
-                haskell-language-server = "latest";
-                implicit-hie = "latest";
+                cabal = "3.14.2.0";
+                cabal-gild = "1.6.0.2"; # treefmtで管理されているがvscodeのHaskell拡張向けに使えるようにしておく
+                haskell-language-server = "2.12.0.0";
+                implicit-hie = "0.1.4.0";
               };
               # ランタイム依存。
               buildInputs = with prev; [
