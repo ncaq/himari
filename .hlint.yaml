@@ -406,6 +406,104 @@
       within: []
       message: "Unsafe version of fixIO. Avoid."
 
+# convertible推奨ルール
+# 各種文字列変換関数の代わりに`Data.Convertible.convert`関数を使うことを推奨します。
+# convertを使うと型変換が統一的になり、コードの可読性が向上します。
+
+# `Data.Text`(Strict)
+- hint:
+    lhs: Data.Text.pack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.unpack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
+# `Data.Text.Lazy`
+- hint:
+    lhs: Data.Text.Lazy.pack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.unpack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.toStrict
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.fromStrict
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
+# `Data.Text.Encoding`(Strict Text <-> ByteString)
+- hint:
+    lhs: Data.Text.Encoding.encodeUtf8
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Encoding.decodeUtf8
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
+# `Data.Text.Lazy.Encoding`(Lazy Text <-> Lazy ByteString)
+- hint:
+    lhs: Data.Text.Lazy.Encoding.encodeUtf8
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.Encoding.decodeUtf8
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
+# `Data.ByteString`(Strict)
+- hint:
+    lhs: Data.ByteString.pack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.ByteString.unpack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
+# `Data.ByteString.Lazy`
+- hint:
+    lhs: Data.ByteString.Lazy.pack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.ByteString.Lazy.unpack
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.ByteString.Lazy.toStrict
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.ByteString.Lazy.fromStrict
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
+# `Data.Text.Lazy.Builder`
+- hint:
+    lhs: Data.Text.Lazy.Builder.fromText
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.Builder.fromLazyText
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.Builder.fromString
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+- hint:
+    lhs: Data.Text.Lazy.Builder.toLazyText
+    rhs: convert
+    note: "Use convert from Data.Convertible for uniform type conversion"
+
 # unliftio優先ルール
 # MonadUnliftIOをサポートするunliftioパッケージの関数を優先的に使うことを推奨します。
 
