@@ -7,9 +7,6 @@
 
 # グループ有効化
 
-# 組み込み部分関数警告 (head, tail, init, !!, fromJust, NonEmpty.fromList)
-- group: { name: partial, enabled: true }
-
 # `map` → `fmap`, `++` → `<>` などの汎用化
 - group: { name: generalise, enabled: true }
 
@@ -22,17 +19,50 @@
 # `TH.varE 'a` → `[| a |]`
 - group: { name: use-th-quotes, enabled: true }
 
-# リスト操作の部分関数
-# (head, tail, init, !!, fromJust, NonEmpty.fromListは組み込みpartialでカバー)
+# 組み込み部分関数警告の `partial` グループは `NonEmpty.head` 等も誤検出するため無効化し、個別に設定します。
+# - group: { name: partial, enabled: true }
+
+# リストの部分関数 (NonEmpty版は安全なので対象外)
 - functions:
-    - { name: last, within: [], message: "Use listToMaybe . reverse or unsnoc instead" }
-    - { name: foldl1, within: [], message: "Use foldl' with a default value instead" }
-    - { name: foldl1', within: [], message: "Use foldl' with a default value instead" }
-    - { name: foldr1, within: [], message: "Use foldr with a default value instead" }
-    - { name: maximum, within: [], message: "Use maximumMay from safe package or viaNonEmpty maximum" }
-    - { name: minimum, within: [], message: "Use minimumMay from safe package or viaNonEmpty minimum" }
-    - { name: maximumBy, within: [], message: "Use maximumByMay from safe package" }
-    - { name: minimumBy, within: [], message: "Use minimumByMay from safe package" }
+    - { name: Data.List.head, within: [], message: "Partial: throws on empty list. Use listToMaybe or pattern match." }
+    - { name: Data.List.tail, within: [], message: "Partial: throws on empty list. Use drop 1 or pattern match." }
+    - { name: Data.List.init, within: [], message: "Partial: throws on empty list. Use initMay from safe package." }
+    - { name: Data.List.last, within: [], message: "Partial: throws on empty list. Use lastMay from safe package." }
+    - { name: "Data.List.!!", within: [], message: "Partial: throws on out-of-bounds. Use safe indexing." }
+    - { name: Data.Maybe.fromJust, within: [], message: "Partial: throws on Nothing. Use fromMaybe or pattern match." }
+    - { name: Data.List.NonEmpty.fromList, within: [], message: "Partial: throws on empty list. Use nonEmpty instead." }
+
+# Foldable の部分関数
+- functions:
+    - { name: Data.Foldable.foldl1, within: [], message: "Use foldl' with a default value instead" }
+    - { name: Data.Foldable.foldr1, within: [], message: "Use foldr with a default value instead" }
+    - { name: Data.Foldable.maximum, within: [], message: "Use maximumMay from safe package or viaNonEmpty maximum" }
+    - { name: Data.Foldable.minimum, within: [], message: "Use minimumMay from safe package or viaNonEmpty minimum" }
+    - { name: Data.Foldable.maximumBy, within: [], message: "Use maximumByMay from safe package" }
+    - { name: Data.Foldable.minimumBy, within: [], message: "Use minimumByMay from safe package" }
+
+# Bifoldable の部分関数
+- functions:
+    - { name: Data.Bifoldable.bifoldl1, within: [], message: "Use bifoldl with a default value instead" }
+    - { name: Data.Bifoldable.bifoldr1, within: [], message: "Use bifoldr with a default value instead" }
+    - { name: Data.Bifoldable.bimaximum, within: [], message: "Partial: throws on empty structure" }
+    - { name: Data.Bifoldable.biminimum, within: [], message: "Partial: throws on empty structure" }
+    - { name: Data.Bifoldable.bimaximumBy, within: [], message: "Partial: throws on empty structure" }
+    - { name: Data.Bifoldable.biminimumBy, within: [], message: "Partial: throws on empty structure" }
+
+# Data.Bits の部分関数
+- functions:
+    - {
+        name: Data.Bits.bitSize,
+        within: [],
+        message: "Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead.",
+      }
+    - { name: Data.Bits.shiftL, within: [], message: "Undefined for negative shift. Use explicit bounds checking." }
+    - { name: Data.Bits.shiftR, within: [], message: "Undefined for negative shift. Use explicit bounds checking." }
+    - { name: Data.Bits.unsafeShiftL, within: [], message: "Undefined for negative or overflow shift." }
+    - { name: Data.Bits.unsafeShiftR, within: [], message: "Undefined for negative or overflow shift." }
+    - { name: Data.Bits.rotateL, within: [], message: "Undefined for negative rotation." }
+    - { name: Data.Bits.rotateR, within: [], message: "Undefined for negative rotation." }
 
 # Data.Text部分関数
 - functions:
