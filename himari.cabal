@@ -9,7 +9,10 @@ author: ncaq
 maintainer: ncaq@ncaq.net
 category: Control
 build-type: Simple
-tested-with: ghc ==9.10.3
+tested-with:
+  ghc ==9.10.2
+  ghc ==9.10.3
+  ghc ==9.12.2
 
 common basic
   ghc-options:
