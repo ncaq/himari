@@ -28,7 +28,7 @@ generateAllCombinations = nonEmptySubsequences titleComponents
   nonEmptySubsequences (x NE.:| []) = [x NE.:| []]
   nonEmptySubsequences (x NE.:| (y : ys)) =
     let rest = nonEmptySubsequences (y NE.:| ys)
-     in rest ++ map (x NE.<|) rest ++ [x NE.:| []]
+     in rest <> fmap (x NE.<|) rest <> [x NE.:| []]
 
 -- | 肩書きを`Text`に変換。
 renderTitle :: NonEmpty Text -> Text
