@@ -1,0 +1,141 @@
+# himari hlint configuration
+# 部分関数・危険関数の警告ルール + 推奨グループ
+#
+# 使い方:
+#   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
+#   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/file.yaml]
+
+# グループ有効化
+
+# 組み込み部分関数警告 (head, tail, init, !!, fromJust, NonEmpty.fromList)
+- group: { name: partial, enabled: true }
+
+# `map` → `fmap`, `++` → `<>` などの汎用化
+- group: { name: generalise, enabled: true }
+
+# `a $ b $ c` → `a . b $ c` (関数合成スタイル)
+- group: { name: dollar, enabled: true }
+
+# `either Just (const Nothing)` → `preview _Left` など
+- group: { name: use-lens, enabled: true }
+
+# `TH.varE 'a` → `[| a |]`
+- group: { name: use-th-quotes, enabled: true }
+
+# リスト操作の部分関数
+# (head, tail, init, !!, fromJust, NonEmpty.fromListは組み込みpartialでカバー)
+- functions:
+    - { name: last, within: [], message: "Use listToMaybe . reverse or unsnoc instead" }
+    - { name: foldl1, within: [], message: "Use foldl' with a default value instead" }
+    - { name: foldl1', within: [], message: "Use foldl' with a default value instead" }
+    - { name: foldr1, within: [], message: "Use foldr with a default value instead" }
+    - { name: maximum, within: [], message: "Use maximumMay from safe package or viaNonEmpty maximum" }
+    - { name: minimum, within: [], message: "Use minimumMay from safe package or viaNonEmpty minimum" }
+    - { name: maximumBy, within: [], message: "Use maximumByMay from safe package" }
+    - { name: minimumBy, within: [], message: "Use minimumByMay from safe package" }
+
+# Data.Text部分関数
+- functions:
+    - { name: Data.Text.head, within: [], message: "Use Data.Text.uncons instead" }
+    - { name: Data.Text.tail, within: [], message: "Use Data.Text.uncons instead" }
+    - { name: Data.Text.init, within: [], message: "Use Data.Text.unsnoc instead" }
+    - { name: Data.Text.last, within: [], message: "Use Data.Text.unsnoc instead" }
+    - { name: Data.Text.maximum, within: [], message: "Throws on empty Text" }
+    - { name: Data.Text.minimum, within: [], message: "Throws on empty Text" }
+
+# Data.ByteString部分関数
+- functions:
+    - { name: Data.ByteString.head, within: [], message: "Use Data.ByteString.uncons instead" }
+    - { name: Data.ByteString.tail, within: [], message: "Use Data.ByteString.uncons instead" }
+    - { name: Data.ByteString.init, within: [], message: "Use Data.ByteString.unsnoc instead" }
+    - { name: Data.ByteString.last, within: [], message: "Use Data.ByteString.unsnoc instead" }
+
+# 読み取り・パース
+- functions:
+    - { name: read, within: [], message: "Use readMaybe or readEither instead. read also operates on String." }
+
+# Enum関連
+- functions:
+    - { name: toEnum, within: [], message: "Partial: throws on out-of-bounds. Use explicit bounds checking." }
+    - { name: succ, within: [], message: "Partial: throws on maxBound. Use succMay from safe package." }
+    - { name: pred, within: [], message: "Partial: throws on minBound. Use predMay from safe package." }
+
+# 例外を投げる関数
+- functions:
+    - { name: throw, within: [], message: "Don't throw in pure code. Use throwM in MonadThrow context." }
+    - {
+        name: error,
+        within: [],
+        message: "Avoid in production code. For development placeholders, consider typed holes instead.",
+      }
+    - {
+        name: undefined,
+        within: [],
+        message: "Remember to implement before release. Consider typed holes for better error messages.",
+      }
+    - { name: errorWithoutStackTrace, within: [], message: "Use proper error handling" }
+
+# Map/HashMap操作
+- functions:
+    - { name: "Data.Map.!", within: [], message: "Use Data.Map.lookup or Data.Map.!? instead" }
+    - { name: Data.Map.findMin, within: [], message: "Use Data.Map.lookupMin instead" }
+    - { name: Data.Map.findMax, within: [], message: "Use Data.Map.lookupMax instead" }
+    - { name: "Data.HashMap.Strict.!", within: [], message: "Use Data.HashMap.lookup instead" }
+    - { name: "Data.HashMap.Lazy.!", within: [], message: "Use Data.HashMap.lookup instead" }
+
+# パフォーマンス問題
+- functions:
+    - { name: nub, within: [], message: "O(n²) complexity. Use ordNub or nubOrd instead." }
+    - { name: foldl, within: [], message: "Lazy accumulator causes space leaks. Use foldl' instead." }
+    - { name: genericLength, within: [], message: "O(n) stack space. Use length with explicit conversion." }
+
+# String IO (環境依存エンコーディング問題)
+# Text (UTF-8) または ByteString (バイナリ) を推奨
+- functions:
+    - { name: System.IO.getChar, within: [], message: "Encoding depends on LANG env. Use Text or ByteString." }
+    - { name: System.IO.getLine, within: [], message: "Encoding depends on LANG env. Use Text or ByteString." }
+    - {
+        name: System.IO.getContents,
+        within: [],
+        message: "Lazy IO + env-dependent encoding. Use strict Text or ByteString.",
+      }
+    - {
+        name: System.IO.readFile,
+        within: [],
+        message: "Lazy IO + env-dependent encoding. Use Data.Text.IO.readFile or Data.ByteString.readFile.",
+      }
+    - { name: System.IO.interact, within: [], message: "Lazy IO + env-dependent encoding." }
+    - { name: System.IO.readIO, within: [], message: "Env-dependent + partial (uses read)." }
+    - { name: System.IO.readLn, within: [], message: "Env-dependent + partial (uses read)." }
+    - { name: System.IO.putChar, within: [], message: "Encoding depends on LANG env. Use Text or ByteString." }
+    - { name: System.IO.putStr, within: [], message: "Encoding depends on LANG env. Use Text or ByteString." }
+    - { name: System.IO.putStrLn, within: [], message: "Encoding depends on LANG env. Use Text or ByteString." }
+    - { name: System.IO.print, within: [], message: "Encoding depends on LANG env. Use Text or ByteString." }
+    - {
+        name: System.IO.writeFile,
+        within: [],
+        message: "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile.",
+      }
+    - {
+        name: System.IO.appendFile,
+        within: [],
+        message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile.",
+      }
+
+# 並行処理
+- functions:
+    - { name: forkIO, within: [], message: "Exceptions don't propagate to parent thread. Use async library." }
+    - { name: forkProcess, within: [], message: "Almost impossible to use correctly. Use async library." }
+
+# Unsafe関数
+- functions:
+    - { name: unsafePerformIO, within: [], message: "Breaks type safety. Only for very specific use cases." }
+    - { name: unsafeDupablePerformIO, within: [], message: "Even more dangerous than unsafePerformIO." }
+    - { name: unsafeInterleaveIO, within: [], message: "Creates lazy IO. Avoid." }
+    - { name: unsafeCoerce, within: [], message: "Can cause segfaults. Avoid." }
+    - { name: unsafeFixIO, within: [], message: "Unsafe version of fixIO. Avoid." }
+# 警告対象外のものの理由
+# - return: pureの代わりにreturnを使うのは好みの問題
+# - isJust/fromJustパターン: hlintデフォルトで提案される
+# - ゼロ除算 (div, mod等): 排除不可能、型レベル保証には依存型が必要
+# - fromIntegral/realToFrac: 代替手段が常に使えるわけではない
