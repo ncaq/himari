@@ -23,7 +23,7 @@ jobs:
           haskell: true # Nixで管理しているので不要
           large-packages: true
           swap-storage: true
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
@@ -37,7 +37,7 @@ jobs:
   format: # `nix flake check`で実行される`nix fmt`で対応していない範囲のフォーマットチェックを行う。
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
