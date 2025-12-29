@@ -81,8 +81,8 @@
             # `ghc-version`だけではなく`variants`で定義したGHCバージョンも`nix flake check`で自動的にテストされます。
             # 個別ビルド: nix build .#ghc9122:himari:lib:himari
             flake.variants = {
-              ghc9102.compiler-nix-name = final.lib.mkForce "ghc9102"; # GHC 9.10.2
-              ghc9122.compiler-nix-name = final.lib.mkForce "ghc9122"; # GHC 9.12.2
+              ghc9102.compiler-nix-name = final.lib.mkDefault "ghc9102"; # GHC 9.10.2
+              ghc9122.compiler-nix-name = final.lib.mkDefault "ghc9122"; # GHC 9.12.2
             };
             shell = {
               tools = {
