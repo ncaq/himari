@@ -34,8 +34,10 @@
                 hls-version;
           in
           {
-            # nixpkgsで普通にインストールされるfourmoluはhaskell-language-serverのものと違うので上書きして合わせる。
+            # nixpkgsとhaskell-language-serverの対応バージョンが異なる場合があるため、
+            # hlsからパッケージを取ってくる。
             inherit (tool-haskell-language-server.project.hsPkgs.fourmolu.components.exes) fourmolu;
+            inherit (tool-haskell-language-server.project.hsPkgs.hlint.components.exes) hlint;
           }
         )
         (final: prev: {
@@ -96,6 +98,7 @@
               # ランタイム依存。
               buildInputs = with prev; [
                 fourmolu
+                hlint
                 nil
                 nixfmt-rfc-style
                 parallel
@@ -134,6 +137,7 @@
 
             hlint = {
               enable = true;
+              package = pkgs.hlint;
               # hlint-samplesディレクトリはhlintルールのテスト用であり、意図的に警告を出すコードを含む
               excludes = [ "test/hlint-samples/*" ];
             };
