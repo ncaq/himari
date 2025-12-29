@@ -2,7 +2,6 @@
 
 module HlintUnliftioSpec (spec) where
 
-import Data.Convertible
 import Data.Text qualified as T
 import Himari
 import Test.Syd
