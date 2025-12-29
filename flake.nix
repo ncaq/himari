@@ -91,6 +91,7 @@
                 nil
                 nixfmt-rfc-style
                 parallel
+                yamllint
 
                 (writeScriptBin "haskell-language-server-wrapper" ''
                   #!${stdenv.shell}
