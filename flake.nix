@@ -21,7 +21,7 @@
     }:
     # 現状はLinuxのみを想定。
     let
-      ghc-version = "ghc9102";
+      ghc-version = "ghc9103"; # GHC 9.10.3
       hls-version = "2.12.0.0";
       overlays = [
         haskellNix.overlay
