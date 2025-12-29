@@ -4,7 +4,6 @@
 # 使い方:
 #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
 #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/file.yaml]
-
 # グループ有効化
 
 # `map` → `fmap`, `++` → `<>` などの汎用化
@@ -103,12 +102,13 @@
     - name: Data.Bits.bitSize
       within: []
       message: "Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead."
-    - name: Data.Bits.shiftL
-      within: []
-      message: "Undefined for negative shift. Use explicit bounds checking."
-    - name: Data.Bits.shiftR
-      within: []
-      message: "Undefined for negative shift. Use explicit bounds checking."
+    # 無効にするには厳しすぎるので許可します。
+    # - name: Data.Bits.shiftL
+    #   within: []
+    #   message: "Undefined for negative shift. Use explicit bounds checking."
+    # - name: Data.Bits.shiftR
+    #   within: []
+    #   message: "Undefined for negative shift. Use explicit bounds checking."
     - name: Data.Bits.unsafeShiftL
       within: []
       message: "Undefined for negative or overflow shift."
@@ -169,12 +169,13 @@
     - name: toEnum
       within: []
       message: "Partial: throws on out-of-bounds. Use explicit bounds checking."
-    - name: succ
-      within: []
-      message: "Partial: throws on maxBound. Use succMay from safe package."
-    - name: pred
-      within: []
-      message: "Partial: throws on minBound. Use predMay from safe package."
+      # 代替手段が見つからないので許可します。
+      # - name: succ
+      #   within: []
+      #   message: "Partial: throws on maxBound. Use succMay from safe package."
+      # - name: pred
+      #   within: []
+      #   message: "Partial: throws on minBound. Use predMay from safe package."
 
 # 例外を投げる関数
 - functions:
