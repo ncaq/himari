@@ -126,12 +126,17 @@
           programs = {
             cabal-gild.enable = true;
             deadnix.enable = true;
-            hlint.enable = true;
             nixfmt.enable = true;
             prettier.enable = true;
             shellcheck.enable = true;
             shfmt.enable = true;
             statix.enable = true;
+
+            hlint = {
+              enable = true;
+              # hlint-samplesディレクトリはhlintルールのテスト用であり、意図的に警告を出すコードを含む
+              excludes = [ "test/hlint-samples/*" ];
+            };
 
             fourmolu = {
               enable = true;

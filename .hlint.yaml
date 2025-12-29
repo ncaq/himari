@@ -405,6 +405,219 @@
     - name: unsafeFixIO
       within: []
       message: "Unsafe version of fixIO. Avoid."
+
+# unliftio優先ルール
+# MonadUnliftIOをサポートするunliftioパッケージの関数を優先的に使うことを推奨します。
+
+# Control.Concurrent.Async -> UnliftIO.Async
+- functions:
+    - name: Control.Concurrent.Async.async
+      within: []
+      message: "Use UnliftIO.Async.async instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.asyncBound
+      within: []
+      message: "Use UnliftIO.Async.asyncBound instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.asyncOn
+      within: []
+      message: "Use UnliftIO.Async.asyncOn instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.asyncWithUnmask
+      within: []
+      message: "Use UnliftIO.Async.asyncWithUnmask instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.withAsync
+      within: []
+      message: "Use UnliftIO.Async.withAsync instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.withAsyncBound
+      within: []
+      message: "Use UnliftIO.Async.withAsyncBound instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.withAsyncOn
+      within: []
+      message: "Use UnliftIO.Async.withAsyncOn instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.withAsyncWithUnmask
+      within: []
+      message: "Use UnliftIO.Async.withAsyncWithUnmask instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.wait
+      within: []
+      message: "Use UnliftIO.Async.wait instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.poll
+      within: []
+      message: "Use UnliftIO.Async.poll instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitCatch
+      within: []
+      message: "Use UnliftIO.Async.waitCatch instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.cancel
+      within: []
+      message: "Use UnliftIO.Async.cancel instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.uninterruptibleCancel
+      within: []
+      message: "Use UnliftIO.Async.uninterruptibleCancel instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.cancelWith
+      within: []
+      message: "Use UnliftIO.Async.cancelWith instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.race
+      within: []
+      message: "Use UnliftIO.Async.race instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.race_
+      within: []
+      message: "Use UnliftIO.Async.race_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.concurrently
+      within: []
+      message: "Use UnliftIO.Async.concurrently instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.concurrently_
+      within: []
+      message: "Use UnliftIO.Async.concurrently_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.mapConcurrently
+      within: []
+      message: "Use UnliftIO.Async.mapConcurrently instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.forConcurrently
+      within: []
+      message: "Use UnliftIO.Async.forConcurrently instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.mapConcurrently_
+      within: []
+      message: "Use UnliftIO.Async.mapConcurrently_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.forConcurrently_
+      within: []
+      message: "Use UnliftIO.Async.forConcurrently_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.replicateConcurrently
+      within: []
+      message: "Use UnliftIO.Async.replicateConcurrently instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.replicateConcurrently_
+      within: []
+      message: "Use UnliftIO.Async.replicateConcurrently_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitAny
+      within: []
+      message: "Use UnliftIO.Async.waitAny instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitAnyCatch
+      within: []
+      message: "Use UnliftIO.Async.waitAnyCatch instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitAnyCancel
+      within: []
+      message: "Use UnliftIO.Async.waitAnyCancel instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitAnyCatchCancel
+      within: []
+      message: "Use UnliftIO.Async.waitAnyCatchCancel instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitEither
+      within: []
+      message: "Use UnliftIO.Async.waitEither instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitEitherCatch
+      within: []
+      message: "Use UnliftIO.Async.waitEitherCatch instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitEitherCancel
+      within: []
+      message: "Use UnliftIO.Async.waitEitherCancel instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitEitherCatchCancel
+      within: []
+      message: "Use UnliftIO.Async.waitEitherCatchCancel instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitEither_
+      within: []
+      message: "Use UnliftIO.Async.waitEither_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.waitBoth
+      within: []
+      message: "Use UnliftIO.Async.waitBoth instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.link
+      within: []
+      message: "Use UnliftIO.Async.link instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.linkOnly
+      within: []
+      message: "Use UnliftIO.Async.linkOnly instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.link2
+      within: []
+      message: "Use UnliftIO.Async.link2 instead for MonadUnliftIO support."
+    - name: Control.Concurrent.Async.link2Only
+      within: []
+      message: "Use UnliftIO.Async.link2Only instead for MonadUnliftIO support."
+
+# Control.Exception -> UnliftIO.Exception
+- functions:
+    - name: Control.Exception.catch
+      within: []
+      message: "Use UnliftIO.Exception.catch instead for MonadUnliftIO support."
+    - name: Control.Exception.catchJust
+      within: []
+      message: "Use UnliftIO.Exception.catchJust instead for MonadUnliftIO support."
+    - name: Control.Exception.handle
+      within: []
+      message: "Use UnliftIO.Exception.handle instead for MonadUnliftIO support."
+    - name: Control.Exception.handleJust
+      within: []
+      message: "Use UnliftIO.Exception.handleJust instead for MonadUnliftIO support."
+    - name: Control.Exception.try
+      within: []
+      message: "Use UnliftIO.Exception.try instead for MonadUnliftIO support."
+    - name: Control.Exception.tryJust
+      within: []
+      message: "Use UnliftIO.Exception.tryJust instead for MonadUnliftIO support."
+    - name: Control.Exception.bracket
+      within: []
+      message: "Use UnliftIO.Exception.bracket instead for MonadUnliftIO support."
+    - name: Control.Exception.bracket_
+      within: []
+      message: "Use UnliftIO.Exception.bracket_ instead for MonadUnliftIO support."
+    - name: Control.Exception.bracketOnError
+      within: []
+      message: "Use UnliftIO.Exception.bracketOnError instead for MonadUnliftIO support."
+    - name: Control.Exception.finally
+      within: []
+      message: "Use UnliftIO.Exception.finally instead for MonadUnliftIO support."
+    - name: Control.Exception.onException
+      within: []
+      message: "Use UnliftIO.Exception.onException instead for MonadUnliftIO support."
+    - name: Control.Exception.mask
+      within: []
+      message: "Use UnliftIO.Exception.mask instead for MonadUnliftIO support."
+    - name: Control.Exception.mask_
+      within: []
+      message: "Use UnliftIO.Exception.mask_ instead for MonadUnliftIO support."
+    - name: Control.Exception.uninterruptibleMask
+      within: []
+      message: "Use UnliftIO.Exception.uninterruptibleMask instead for MonadUnliftIO support."
+    - name: Control.Exception.uninterruptibleMask_
+      within: []
+      message: "Use UnliftIO.Exception.uninterruptibleMask_ instead for MonadUnliftIO support."
+    - name: Control.Exception.evaluate
+      within: []
+      message: "Use UnliftIO.Exception.evaluate instead for MonadUnliftIO support."
+
+# Control.Concurrent.MVar -> UnliftIO.MVar
+- functions:
+    - name: Control.Concurrent.MVar.withMVar
+      within: []
+      message: "Use UnliftIO.MVar.withMVar instead for MonadUnliftIO support."
+    - name: Control.Concurrent.MVar.withMVarMasked
+      within: []
+      message: "Use UnliftIO.MVar.withMVarMasked instead for MonadUnliftIO support."
+    - name: Control.Concurrent.MVar.modifyMVar
+      within: []
+      message: "Use UnliftIO.MVar.modifyMVar instead for MonadUnliftIO support."
+    - name: Control.Concurrent.MVar.modifyMVar_
+      within: []
+      message: "Use UnliftIO.MVar.modifyMVar_ instead for MonadUnliftIO support."
+    - name: Control.Concurrent.MVar.modifyMVarMasked
+      within: []
+      message: "Use UnliftIO.MVar.modifyMVarMasked instead for MonadUnliftIO support."
+    - name: Control.Concurrent.MVar.modifyMVarMasked_
+      within: []
+      message: "Use UnliftIO.MVar.modifyMVarMasked_ instead for MonadUnliftIO support."
+
+# System.Timeout -> UnliftIO.Timeout
+- functions:
+    - name: System.Timeout.timeout
+      within: []
+      message: "Use UnliftIO.Timeout.timeout instead for MonadUnliftIO support."
+
+# System.IO.Temp -> UnliftIO.Temporary
+- functions:
+    - name: System.IO.Temp.withSystemTempFile
+      within: []
+      message: "Use UnliftIO.Temporary.withSystemTempFile instead for MonadUnliftIO support."
+    - name: System.IO.Temp.withSystemTempDirectory
+      within: []
+      message: "Use UnliftIO.Temporary.withSystemTempDirectory instead for MonadUnliftIO support."
+    - name: System.IO.Temp.withTempFile
+      within: []
+      message: "Use UnliftIO.Temporary.withTempFile instead for MonadUnliftIO support."
+    - name: System.IO.Temp.withTempDirectory
+      within: []
+      message: "Use UnliftIO.Temporary.withTempDirectory instead for MonadUnliftIO support."
 # 警告対象外のものの理由
 # - `return`: `pure`の代わりに`return`を使うのは好みの問題
 # - `isJust`/`fromJust`パターン: hlintデフォルトで提案される

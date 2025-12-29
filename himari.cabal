@@ -74,10 +74,12 @@ test-suite himari-test
 
   build-depends:
     himari,
+    process ^>=1.6.21.0,
     sydtest ^>=0.18.0.0,
 
   -- cabal-gild: discover ./test --exclude=**/Main.hs
   other-modules:
     Himari.Env.SimpleSpec
     Himari.Title
+    HlintUnliftioSpec
     TitleSpec
