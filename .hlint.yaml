@@ -290,6 +290,9 @@
     - name: throw
       within: []
       message: "Don't throw in pure code. Use throwM in MonadThrow context."
+    - name: throwString
+      within: []
+      message: "Use typed exceptions with throwM instead of throwString."
     - name: error
       within: []
       message: "Avoid in production code. For development placeholders, consider typed holes instead."
