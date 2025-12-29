@@ -2,9 +2,7 @@
 
 module HlintUnliftioSpec (spec) where
 
-import Data.ByteString.Lazy qualified as LBS
 import Data.Text qualified as T
-import Data.Text.Encoding qualified as TE
 import Himari
 import Test.Syd
 
@@ -52,10 +50,9 @@ runHlintOnSample = do
   (exitCode, stdoutOutput, stderrOutput) <-
     readProcess
       $ proc "hlint" ["test/hlint-samples/UnliftioPreference.hs"]
-  let decodeOutput = TE.decodeUtf8 . LBS.toStrict
   pure $ case exitCode of
-    ExitSuccess -> decodeOutput stdoutOutput
-    ExitFailure _ -> decodeOutput stdoutOutput <> decodeOutput stderrOutput
+    ExitSuccess -> convert stdoutOutput
+    ExitFailure _ -> convert stdoutOutput <> convert stderrOutput
 
 containsWarning :: Text -> Text -> Bool
 containsWarning expectedMsg output = expectedMsg `T.isInfixOf` output
