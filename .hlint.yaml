@@ -293,6 +293,9 @@
     - name: throwString
       within: []
       message: "Use typed exceptions with throwM instead of throwString."
+    - name: throwIO
+      within: []
+      message: "Use typed exceptions with throwM instead of throwIO."
     - name: error
       within: []
       message: "Avoid in production code. For development placeholders, consider typed holes instead."
