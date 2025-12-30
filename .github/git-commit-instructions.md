@@ -141,3 +141,12 @@ Must be one of the following:
 - **refactor**: A code change that neither fixes a bug nor adds a feature
 - **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - **test**: Adding missing tests or correcting existing tests
+
+# プロジェクト固有の事情
+
+プロジェクトルートの`.hlint.yaml`ファイルはDhallソースコードから自動生成されています。
+よってこれだけを更新するコミットのタイトルは、
+```
+chore(hlint): regenerate `.hlint.yaml`
+```
+とだけしてください。
