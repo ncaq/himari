@@ -521,7 +521,7 @@
     - as: V
       importStyle: explicitOrQualified
       name: Data.Vector
-    - as: V
+    - as: VG
       importStyle: explicitOrQualified
       name: Data.Vector.Generic
     - as: VS
