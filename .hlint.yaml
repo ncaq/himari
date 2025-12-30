@@ -5,6 +5,9 @@
 #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
 #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/file.yaml]
 #
+# 部分関数や危険な関数の使用を警告したり、
+# そちら方が可読性が高くなりがちなパターンを提案します。
+#
 # 警告対象外のものの理由
 # - `return`: `pure`の代わりに`return`を使うのは好みの問題
 # - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
