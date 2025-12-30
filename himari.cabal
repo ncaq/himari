@@ -10,6 +10,10 @@ maintainer: ncaq@ncaq.net
 category: Control
 build-type: Simple
 data-files: .hlint.yaml
+extra-doc-files:
+  CHANGELOG.md
+  README.md
+
 tested-with:
   ghc ==9.10.2
   ghc ==9.10.3
