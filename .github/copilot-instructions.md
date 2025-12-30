@@ -42,6 +42,11 @@ cabal test --disable-optimization --enable-tests
 Nix FlakesでHaskell部分を管理するには[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使っています。
 Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)です。
 
+## ディレクトリ構成
+
+`.hlint.yaml`は他の`hlint`ディレクトリ以下のDhallファイルから自動生成しているため、
+直接の読み書きは想定していません。
+
 ## Haskell
 
 ### 言語設定
