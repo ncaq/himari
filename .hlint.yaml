@@ -6,12 +6,6 @@
 #
 # 部分関数や危険な関数の使用を警告したり、
 # より可読性の高いパターンを提案します。
-#
-# 警告対象外のものの理由:
-# - `return`: `pure`の代わりに`return`を使うのは好みの問題
-# - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
-# - ゼロ除算(`div`, `mod`等): 排除不可能、型レベル保証には依存型が必要
-# - `fromIntegral`, `realToFrac`: 代替手段が常に使えるわけではない
 
 # 分割ファイルの読み込み
 - arguments:
@@ -30,7 +24,15 @@
     - --hint=.hlint/unsafe.yaml
     - --hint=.hlint/vector.yaml
 
+# 警告対象外のものの理由:
+# - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
+# - ゼロ除算(`div`, `mod`等): 排除不可能、型レベル保証には依存型が必要
+# - `fromIntegral`, `realToFrac`: 代替手段が常に使えるわけではない
+
 # グループ有効化
+
+# `feature`グループは`pure`の代わりに`return`を使うのは好みの問題のため無効化します。
+# `partial`グループは`NonEmpty.head`等も誤検出するため無効化し、個別に設定します。
 
 # `map` → `fmap`, `++` → `<>` などの汎用化
 - group:
@@ -51,8 +53,3 @@
 - group:
     name: use-th-quotes
     enabled: true
-#
-# 組み込み部分関数警告の `partial` グループは `NonEmpty.head` 等も誤検出するため無効化し、個別に設定します。
-# - group:
-#     name: partial
-#     enabled: true
