@@ -127,6 +127,12 @@ let rules
           ]
       , Builder.functions
           [ Builder.restrictInModule
+              "Data.Ix"
+              "index"
+              "Partial: throws on out-of-range. Use indexMay or indexDef from Safe instead."
+          ]
+      , Builder.functions
+          [ Builder.restrictInModule
               "Safe"
               "abort"
               "Partial: synonym for error. Use throwM or Left instead."
