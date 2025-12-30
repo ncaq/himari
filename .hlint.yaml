@@ -1671,6 +1671,63 @@
       within: []
       message: "Unsafe: no length checking. Use copy for safety."
 
+# `Data.Vector.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+
 # `Data.Vector.Generic`部分関数
 - functions:
     # インデックス
@@ -1856,6 +1913,72 @@
       within: []
       message: "Unsafe: no length checking. Use copy for safety."
 
+# `Data.Vector.Generic.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Generic.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Generic.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Generic.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Generic.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Generic.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Generic.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Generic.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Generic.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Generic.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Generic.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Generic.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Generic.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Generic.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Generic.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Generic.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeGrowFront
+      within: []
+      message: "Unsafe: no non-negative check. Use growFront for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+    - name: Data.Vector.Generic.Mutable.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeUpdate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update for safety."
+
 # `Data.Vector.Primitive`部分関数
 - functions:
     - name: "Data.Vector.Primitive.!"
@@ -2018,6 +2141,69 @@
       within: []
       message: "Unsafe: no length checking. Use copy for safety."
 
+# `Data.Vector.Primitive.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Primitive.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Primitive.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Primitive.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Primitive.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Primitive.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Primitive.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Primitive.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Primitive.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Primitive.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeCast
+      within: []
+      message: "Unsafe: type cast without memory safety guarantees. Ensure correct memory layout."
+    - name: Data.Vector.Primitive.Mutable.unsafeCoerceMVector
+      within: []
+      message: "Unsafe: coerces vector type without safety checks."
+
 # `Data.Vector.Storable`部分関数
 - functions:
     - name: "Data.Vector.Storable.!"
@@ -2179,6 +2365,84 @@
     - name: Data.Vector.Storable.unsafeCopy
       within: []
       message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Storable.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Storable.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Storable.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Storable.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Storable.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Storable.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Storable.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Storable.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Storable.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Storable.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Storable.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Storable.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Storable.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Storable.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Storable.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Storable.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Storable.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Storable.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Storable.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+    - name: Data.Vector.Storable.Mutable.unsafeCast
+      within: []
+      message: "Unsafe: type cast without memory safety guarantees. Ensure correct memory layout."
+    - name: Data.Vector.Storable.Mutable.unsafeCoerceMVector
+      within: []
+      message: "Unsafe: coerces vector type without safety checks."
+    - name: Data.Vector.Storable.Mutable.unsafeFromForeignPtr
+      within: []
+      message: "Unsafe: creates vector from raw pointer without validation."
+    - name: Data.Vector.Storable.Mutable.unsafeFromForeignPtr0
+      within: []
+      message: "Unsafe: creates vector from raw pointer without validation."
+    - name: Data.Vector.Storable.Mutable.unsafeToForeignPtr
+      within: []
+      message: "Unsafe: extracts raw pointer, vector may not be used safely after."
+    - name: Data.Vector.Storable.Mutable.unsafeToForeignPtr0
+      within: []
+      message: "Unsafe: extracts raw pointer, vector may not be used safely after."
+    - name: Data.Vector.Storable.Mutable.unsafeWith
+      within: []
+      message: "Unsafe: passes raw pointer to IO action without safety guarantees."
 
 # `Data.Vector.Strict`部分関数
 - functions:
@@ -2354,6 +2618,63 @@
       within: []
       message: "Unsafe: no length checking. Use copy for safety."
 
+# `Data.Vector.Strict.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Strict.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Strict.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Strict.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Strict.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Strict.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Strict.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Strict.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Strict.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Strict.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Strict.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Strict.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Strict.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Strict.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Strict.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Strict.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Strict.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Strict.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Strict.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+
 # `Data.Vector.Unboxed`部分関数
 - functions:
     - name: "Data.Vector.Unboxed.!"
@@ -2527,6 +2848,63 @@
     - name: Data.Vector.Unboxed.unsafeCopy
       within: []
       message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Unboxed.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Unboxed.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Unboxed.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Unboxed.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Unboxed.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Unboxed.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Unboxed.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Unboxed.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Unboxed.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Unboxed.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
 # 警告対象外のものの理由
 # - `return`: `pure`の代わりに`return`を使うのは好みの問題
 # - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
