@@ -1,0 +1,41 @@
+# 例外・Unsafe関数警告
+# 純粋なコードで例外を投げる関数や、型安全性を破壊するunsafe関数を警告します。
+
+# 例外を投げる関数
+- functions:
+    - name: throw
+      within: []
+      message: "Don't throw in pure code. Use throwM in MonadThrow context."
+    - name: throwString
+      within: []
+      message: "Use typed exceptions with throwM instead of throwString."
+    - name: throwIO
+      within: []
+      message: "Use typed exceptions with throwM instead of throwIO."
+    - name: error
+      within: []
+      message: "Avoid in production code. For development placeholders, consider typed holes instead."
+    - name: undefined
+      within: []
+      message: "Remember to implement before release. Consider typed holes for better error messages."
+    - name: errorWithoutStackTrace
+      within: []
+      message: "Use proper error handling"
+
+# Unsafe関数
+- functions:
+    - name: unsafePerformIO
+      within: []
+      message: "Breaks type safety. Only for very specific use cases."
+    - name: unsafeDupablePerformIO
+      within: []
+      message: "Even more dangerous than unsafePerformIO."
+    - name: unsafeInterleaveIO
+      within: []
+      message: "Creates lazy IO. Avoid."
+    - name: unsafeCoerce
+      within: []
+      message: "Can cause segfaults. Avoid."
+    - name: unsafeFixIO
+      within: []
+      message: "Unsafe version of fixIO. Avoid."

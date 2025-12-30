@@ -1,0 +1,87 @@
+# 基本的な部分関数警告
+# リスト、Maybe、NonEmpty、Foldable、Bifoldable、Enum、read等の基本的な部分関数を警告します。
+
+# リストの部分関数(`NonEmpty`版は安全なので対象外)
+- functions:
+    - name: Data.List.head
+      within: []
+      message: "Partial: throws on empty list. Use listToMaybe or pattern match."
+    - name: Data.List.tail
+      within: []
+      message: "Partial: throws on empty list. Use drop 1 or pattern match."
+    - name: Data.List.init
+      within: []
+      message: "Partial: throws on empty list. Use initMay from safe package."
+    - name: Data.List.last
+      within: []
+      message: "Partial: throws on empty list. Use lastMay from safe package."
+    - name: "Data.List.!!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use safe indexing."
+    - name: Data.Maybe.fromJust
+      within: []
+      message: "Partial: throws on Nothing. Use fromMaybe or pattern match."
+    - name: Data.List.NonEmpty.fromList
+      within: []
+      message: "Partial: throws on empty list. Use nonEmpty instead."
+
+# Foldableの部分関数
+- functions:
+    - name: Data.Foldable.foldl1
+      within: []
+      message: "Use foldl' with a default value instead"
+    - name: Data.Foldable.foldr1
+      within: []
+      message: "Use foldr with a default value instead"
+    - name: Data.Foldable.maximum
+      within: []
+      message: "Use maximumMay from safe package or viaNonEmpty maximum"
+    - name: Data.Foldable.minimum
+      within: []
+      message: "Use minimumMay from safe package or viaNonEmpty minimum"
+    - name: Data.Foldable.maximumBy
+      within: []
+      message: "Use maximumByMay from safe package"
+    - name: Data.Foldable.minimumBy
+      within: []
+      message: "Use minimumByMay from safe package"
+
+# Bifoldableの部分関数
+- functions:
+    - name: Data.Bifoldable.bifoldl1
+      within: []
+      message: "Use bifoldl with a default value instead"
+    - name: Data.Bifoldable.bifoldr1
+      within: []
+      message: "Use bifoldr with a default value instead"
+    - name: Data.Bifoldable.bimaximum
+      within: []
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+    - name: Data.Bifoldable.biminimum
+      within: []
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+    - name: Data.Bifoldable.bimaximumBy
+      within: []
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+    - name: Data.Bifoldable.biminimumBy
+      within: []
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+
+# 読み取り・パース
+- functions:
+    - name: read
+      within: []
+      message: "Use readMaybe or readEither instead. read also operates on String."
+
+# Enum関連
+- functions:
+    - name: toEnum
+      within: []
+      message: "Partial: throws on out-of-bounds. Use explicit bounds checking."
+      # 代替手段が見つからないので許可します。
+      # - name: succ
+      #   within: []
+      #   message: "Partial: throws on maxBound. Use succMay from safe package."
+      # - name: pred
+      #   within: []
+      #   message: "Partial: throws on minBound. Use predMay from safe package."

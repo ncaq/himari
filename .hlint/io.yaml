@@ -1,0 +1,55 @@
+# System.IO・並行処理警告
+# 環境依存エンコーディング問題があるString.IO関数と、
+# 危険な並行処理関数を警告します。
+
+# String.IO(環境依存エンコーディング問題)
+# Text(UTF-8)またはByteString(バイナリ)を推奨
+- functions:
+    - name: System.IO.getChar
+      within: []
+      message: "Encoding depends on LANG env. Use Text or ByteString."
+    - name: System.IO.getLine
+      within: []
+      message: "Encoding depends on LANG env. Use Text or ByteString."
+    - name: System.IO.getContents
+      within: []
+      message: "Lazy IO + env-dependent encoding. Use strict Text or ByteString."
+    - name: System.IO.readFile
+      within: []
+      message: "Lazy IO + env-dependent encoding. Use Data.Text.IO.readFile or Data.ByteString.readFile."
+    - name: System.IO.interact
+      within: []
+      message: "Lazy IO + env-dependent encoding."
+    - name: System.IO.readIO
+      within: []
+      message: "Env-dependent + partial (uses read)."
+    - name: System.IO.readLn
+      within: []
+      message: "Env-dependent + partial (uses read)."
+    - name: System.IO.putChar
+      within: []
+      message: "Encoding depends on LANG env. Use Text or ByteString."
+    - name: System.IO.putStr
+      within: []
+      message: "Encoding depends on LANG env. Use Text or ByteString."
+    - name: System.IO.putStrLn
+      within: []
+      message: "Encoding depends on LANG env. Use Text or ByteString."
+    - name: System.IO.print
+      within: []
+      message: "Encoding depends on LANG env. Use Text or ByteString."
+    - name: System.IO.writeFile
+      within: []
+      message: "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile."
+    - name: System.IO.appendFile
+      within: []
+      message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile."
+
+# 並行処理
+- functions:
+    - name: forkIO
+      within: []
+      message: "Exceptions don't propagate to parent thread. Use async library."
+    - name: forkProcess
+      within: []
+      message: "Almost impossible to use correctly. Use async library."
