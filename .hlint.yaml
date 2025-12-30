@@ -479,18 +479,28 @@
       asRequired: true
       importStyle: qualified
       name: Data.Text.Lazy
-    - as: Map
-      asRequired: true
-      importStyle: qualified
+    - message: "Data.Map is a re-export of Data.Map.Lazy. Use Data.Map.Strict or Data.Map.Lazy directly."
       name: Data.Map
+      within: []
     - as: Map
       asRequired: true
       importStyle: qualified
       name: Data.Map.Strict
-    - as: Map
+    - as: MapL
       asRequired: true
       importStyle: qualified
       name: Data.Map.Lazy
+    - message: "Data.IntMap is a re-export of Data.IntMap.Lazy. Use Data.IntMap.Strict or Data.IntMap.Lazy directly."
+      name: Data.IntMap
+      within: []
+    - as: IntMap
+      asRequired: true
+      importStyle: qualified
+      name: Data.IntMap.Strict
+    - as: IntMapL
+      asRequired: true
+      importStyle: qualified
+      name: Data.IntMap.Lazy
     - as: Set
       asRequired: true
       importStyle: qualified
@@ -499,18 +509,6 @@
       asRequired: true
       importStyle: qualified
       name: Data.Sequence
-    - as: IntMap
-      asRequired: true
-      importStyle: qualified
-      name: Data.IntMap
-    - as: IntMap
-      asRequired: true
-      importStyle: qualified
-      name: Data.IntMap.Strict
-    - as: IntMap
-      asRequired: true
-      importStyle: qualified
-      name: Data.IntMap.Lazy
     - as: IntSet
       asRequired: true
       importStyle: qualified
@@ -519,7 +517,7 @@
       asRequired: true
       importStyle: qualified
       name: Data.HashMap.Strict
-    - as: HM
+    - as: HML
       asRequired: true
       importStyle: qualified
       name: Data.HashMap.Lazy
