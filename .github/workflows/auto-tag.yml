@@ -20,6 +20,7 @@ jobs:
         id: version
         run: |
           VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
+          [ -n "$VERSION" ] || { echo "Failed to extract version"; exit 1; }
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Check if tag exists
         id: check_tag
