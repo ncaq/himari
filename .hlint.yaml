@@ -86,16 +86,16 @@
       message: "Use bifoldr with a default value instead"
     - name: Data.Bifoldable.bimaximum
       within: []
-      message: "Partial: throws on empty structure"
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
     - name: Data.Bifoldable.biminimum
       within: []
-      message: "Partial: throws on empty structure"
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
     - name: Data.Bifoldable.bimaximumBy
       within: []
-      message: "Partial: throws on empty structure"
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
     - name: Data.Bifoldable.biminimumBy
       within: []
-      message: "Partial: throws on empty structure"
+      message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
 
 # `Data.Bits`の部分関数
 - functions:
@@ -138,10 +138,10 @@
       message: "Use Data.Text.unsnoc instead"
     - name: Data.Text.maximum
       within: []
-      message: "Throws on empty Text"
+      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
     - name: Data.Text.minimum
       within: []
-      message: "Throws on empty Text"
+      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
 
 # `Data.Text.Lazy`部分関数
 - functions:
@@ -159,10 +159,10 @@
       message: "Use Data.Text.Lazy.unsnoc instead"
     - name: Data.Text.Lazy.maximum
       within: []
-      message: "Throws on empty Text"
+      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
     - name: Data.Text.Lazy.minimum
       within: []
-      message: "Throws on empty Text"
+      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
 
 # `Data.ByteString`部分関数(Strict)
 - functions:
@@ -180,10 +180,10 @@
       message: "Use Data.ByteString.unsnoc instead"
     - name: Data.ByteString.maximum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
     - name: Data.ByteString.minimum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
 
 # `Data.ByteString.Char8`部分関数
 - functions:
@@ -201,10 +201,10 @@
       message: "Use Data.ByteString.Char8.unsnoc instead"
     - name: Data.ByteString.Char8.maximum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
     - name: Data.ByteString.Char8.minimum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
 
 # `Data.ByteString.Lazy`部分関数
 - functions:
@@ -222,10 +222,10 @@
       message: "Use Data.ByteString.Lazy.unsnoc instead"
     - name: Data.ByteString.Lazy.maximum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
     - name: Data.ByteString.Lazy.minimum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
 
 # `Data.ByteString.Lazy.Char8`部分関数
 - functions:
@@ -243,10 +243,10 @@
       message: "Use Data.ByteString.Lazy.Char8.unsnoc instead"
     - name: Data.ByteString.Lazy.Char8.maximum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
     - name: Data.ByteString.Lazy.Char8.minimum
       within: []
-      message: "Throws on empty ByteString"
+      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
 
 # `Data.ByteString.Short`部分関数
 - functions:
@@ -1529,27 +1529,27 @@
     # バルク更新
     - name: "Data.Vector.Generic.//"
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Generic.update
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Generic.update_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     # 累積
     - name: Data.Vector.Generic.accum
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Generic.accumulate
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Generic.accumulate_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     # 順列
     - name: Data.Vector.Generic.backpermute
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     # fold1系
     - name: Data.Vector.Generic.foldl1
       within: []
@@ -1566,28 +1566,28 @@
     # 特化fold
     - name: Data.Vector.Generic.maximum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Generic.maximumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Generic.minimum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Generic.minimumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Generic.minIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Generic.minIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Generic.maxIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Generic.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     # モナディックfold1系
     - name: Data.Vector.Generic.fold1M
       within: []
@@ -1710,25 +1710,25 @@
       message: "Partial: throws on empty vector. Use uncons for safe tail."
     - name: "Data.Vector.//"
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.update
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.update_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.accum
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.accumulate
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.accumulate_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.backpermute
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.foldl1
       within: []
       message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -1743,28 +1743,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.maximum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.maximumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.minimum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.minimumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.minIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.minIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.maxIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -1884,25 +1884,25 @@
       message: "Partial: throws on empty vector. Use uncons for safe tail."
     - name: "Data.Vector.Unboxed.//"
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.update
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.update_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.accum
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.accumulate
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.accumulate_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.backpermute
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Unboxed.foldl1
       within: []
       message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -1917,28 +1917,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Unboxed.maximum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Unboxed.maximumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Unboxed.minimum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Unboxed.minimumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Unboxed.minIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Unboxed.minIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Unboxed.maxIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Unboxed.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Unboxed.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -2058,19 +2058,19 @@
       message: "Partial: throws on empty vector. Use uncons for safe tail."
     - name: "Data.Vector.Storable.//"
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Storable.update_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Storable.accum
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Storable.accumulate_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Storable.backpermute
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Storable.foldl1
       within: []
       message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2085,28 +2085,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Storable.maximum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Storable.maximumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Storable.minimum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Storable.minimumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Storable.minIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Storable.minIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Storable.maxIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Storable.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Storable.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -2220,19 +2220,19 @@
       message: "Partial: throws on empty vector. Use uncons for safe tail."
     - name: "Data.Vector.Primitive.//"
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Primitive.update_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Primitive.accum
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Primitive.accumulate_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Primitive.backpermute
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Primitive.foldl1
       within: []
       message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2247,28 +2247,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Primitive.maximum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Primitive.maximumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Primitive.minimum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Primitive.minimumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Primitive.minIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Primitive.minIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Primitive.maxIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Primitive.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Primitive.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -2382,25 +2382,25 @@
       message: "Partial: throws on empty vector. Use uncons for safe tail."
     - name: "Data.Vector.Strict.//"
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.update
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.update_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.accum
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.accumulate
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.accumulate_
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.backpermute
       within: []
-      message: "Partial: throws on out-of-bounds indices."
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
     - name: Data.Vector.Strict.foldl1
       within: []
       message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2415,28 +2415,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Strict.maximum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Strict.maximumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Strict.minimum
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Strict.minimumBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
     - name: Data.Vector.Strict.minIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Strict.minIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Strict.maxIndex
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Strict.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector."
+      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
     - name: Data.Vector.Strict.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
