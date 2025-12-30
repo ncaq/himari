@@ -54,7 +54,7 @@ let preferModule
               restrictInModule
                 fromModule
                 func
-                "Use ${toModule}.${func} instead of ${reason}"
+                "Use ${toModule}.${func} instead ${reason}"
           )
           funcs
 
