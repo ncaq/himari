@@ -1505,10 +1505,10 @@
       message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
     - name: Data.Vector.Generic.head
       within: []
-      message: "Partial: throws on empty vector. Use headM with pattern match or (!?) 0."
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Generic.last
       within: []
-      message: "Partial: throws on empty vector. Use lastM with pattern match or (!?) (length - 1)."
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
     # モナディックインデックス
     - name: Data.Vector.Generic.indexM
       within: []
@@ -1689,10 +1689,10 @@
       message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
     - name: Data.Vector.head
       within: []
-      message: "Partial: throws on empty vector. Use headM with pattern match or (!?) 0."
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
     - name: Data.Vector.last
       within: []
-      message: "Partial: throws on empty vector. Use lastM with pattern match or (!?) (length - 1)."
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
     - name: Data.Vector.indexM
       within: []
       message: "Partial: throws on out-of-bounds despite Monad return. Use (!?) for safe indexing."
@@ -1863,10 +1863,10 @@
       message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
     - name: Data.Vector.Unboxed.head
       within: []
-      message: "Partial: throws on empty vector. Use headM with pattern match or (!?) 0."
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Unboxed.last
       within: []
-      message: "Partial: throws on empty vector. Use lastM with pattern match or (!?) (length - 1)."
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
     - name: Data.Vector.Unboxed.indexM
       within: []
       message: "Partial: throws on out-of-bounds despite Monad return. Use (!?) for safe indexing."
@@ -2037,10 +2037,10 @@
       message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
     - name: Data.Vector.Storable.head
       within: []
-      message: "Partial: throws on empty vector. Use headM with pattern match or (!?) 0."
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Storable.last
       within: []
-      message: "Partial: throws on empty vector. Use lastM with pattern match or (!?) (length - 1)."
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
     - name: Data.Vector.Storable.indexM
       within: []
       message: "Partial: throws on out-of-bounds despite Monad return. Use (!?) for safe indexing."
@@ -2199,10 +2199,10 @@
       message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
     - name: Data.Vector.Primitive.head
       within: []
-      message: "Partial: throws on empty vector. Use headM with pattern match or (!?) 0."
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Primitive.last
       within: []
-      message: "Partial: throws on empty vector. Use lastM with pattern match or (!?) (length - 1)."
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
     - name: Data.Vector.Primitive.indexM
       within: []
       message: "Partial: throws on out-of-bounds despite Monad return. Use (!?) for safe indexing."
@@ -2361,10 +2361,10 @@
       message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
     - name: Data.Vector.Strict.head
       within: []
-      message: "Partial: throws on empty vector. Use headM with pattern match or (!?) 0."
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Strict.last
       within: []
-      message: "Partial: throws on empty vector. Use lastM with pattern match or (!?) (length - 1)."
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
     - name: Data.Vector.Strict.indexM
       within: []
       message: "Partial: throws on out-of-bounds despite Monad return. Use (!?) for safe indexing."
