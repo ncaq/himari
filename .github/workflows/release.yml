@@ -1,8 +1,9 @@
 name: release
 
+on:
+  workflow_dispatch:
 # まだリリースできる段階にはないので一旦無効化しておきます。
 # リリースできる段階になったらコメントアウトを外してください。
-# on:
 #   push:
 #     branches:
 #       - master
