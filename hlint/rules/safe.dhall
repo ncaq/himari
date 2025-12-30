@@ -5,7 +5,127 @@ let Builder = ../Builder.dhall
 
 let rules
     : List Types.Rule
-    = [ Builder.functions
+    =
+      -- Prelude/base partial functions -> Safe alternatives
+      [ Builder.functions
+          [ Builder.restrictFunction
+              "succ"
+              "Partial: throws on maxBound. Use succMay, succDef, or succSafe from Safe instead."
+          , Builder.restrictFunction
+              "pred"
+              "Partial: throws on minBound. Use predMay, predDef, or predSafe from Safe instead."
+          , Builder.restrictFunction
+              "toEnum"
+              "Partial: throws on out-of-bounds. Use toEnumMay, toEnumDef, or toEnumSafe from Safe instead."
+          ]
+      , Builder.functions
+          [ Builder.restrictInModule
+              "Data.List"
+              "head"
+              "Partial: throws on empty list. Use headMay or headDef from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "tail"
+              "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "init"
+              "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "last"
+              "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
+          , Builder.restrictFunction
+              "Data.List.!!"
+              "Partial: throws on out-of-bounds. Use atMay or atDef from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "cycle"
+              "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "scanl1"
+              "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "scanr1"
+              "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "foldl1"
+              "Partial: throws on empty list. Use foldl1May from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "foldl1'"
+              "Partial: throws on empty list. Use foldl1May' from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "foldr1"
+              "Partial: throws on empty list. Use foldr1May from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "maximum"
+              "Partial: throws on empty list. Use maximumMay or maximumBound from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "minimum"
+              "Partial: throws on empty list. Use minimumMay or minimumBound from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "maximumBy"
+              "Partial: throws on empty list. Use maximumByMay or maximumBoundBy from Safe instead."
+          , Builder.restrictInModule
+              "Data.List"
+              "minimumBy"
+              "Partial: throws on empty list. Use minimumByMay or minimumBoundBy from Safe instead."
+          ]
+      , Builder.functions
+          [ Builder.restrictInModule
+              "Data.Maybe"
+              "fromJust"
+              "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
+          ]
+      , Builder.functions
+          [ Builder.restrictFunction
+              "read"
+              "Partial: throws on parse failure. Use readMay or readDef from Safe instead."
+          ]
+      , Builder.functions
+          [ Builder.restrictInModule
+              "Data.Foldable"
+              "foldl1"
+              "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
+          , Builder.restrictInModule
+              "Data.Foldable"
+              "foldr1"
+              "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
+          , Builder.restrictInModule
+              "Data.Foldable"
+              "maximum"
+              "Partial: throws on empty structure. Use maximumMay or maximumBound from Safe.Foldable instead."
+          , Builder.restrictInModule
+              "Data.Foldable"
+              "minimum"
+              "Partial: throws on empty structure. Use minimumMay or minimumBound from Safe.Foldable instead."
+          , Builder.restrictInModule
+              "Data.Foldable"
+              "maximumBy"
+              "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
+          , Builder.restrictInModule
+              "Data.Foldable"
+              "minimumBy"
+              "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
+          ]
+      , Builder.functions
+          [ Builder.restrictFunction
+              "Data.List.NonEmpty.!!"
+              "Partial: throws on out-of-bounds. Use atMay or atDef from Safe with toList instead."
+          , Builder.restrictInModule
+              "Data.List.NonEmpty"
+              "fromList"
+              "Partial: throws on empty list. Use nonEmpty instead."
+          ]
+      , Builder.functions
           [ Builder.restrictInModule
               "Safe"
               "abort"
