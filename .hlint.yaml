@@ -545,6 +545,10 @@
       name: Data.List.NonEmpty.fromList
       within: []
 - functions:
+    - message: "Partial: throws on out-of-range. Use indexMay or indexDef from Safe instead."
+      name: Data.Ix.index
+      within: []
+- functions:
     - message: "Partial: synonym for error. Use throwM or Left instead."
       name: Safe.abort
       within: []
