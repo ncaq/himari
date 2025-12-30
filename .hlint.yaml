@@ -1623,28 +1623,28 @@
       message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
     - name: Data.Vector.Generic.unsafeHead
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use head or headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Generic.unsafeLast
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use last or lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Generic.unsafeIndexM
       within: []
-      message: "Unsafe: no bounds checking, may cause segfaults. Use indexM instead."
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
     - name: Data.Vector.Generic.unsafeHeadM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Generic.unsafeLastM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Generic.unsafeSlice
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
     - name: Data.Vector.Generic.unsafeInit
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use init instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
     - name: Data.Vector.Generic.unsafeTail
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use tail instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
     - name: Data.Vector.Generic.unsafeTake
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
@@ -1797,28 +1797,28 @@
       message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
     - name: Data.Vector.unsafeHead
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use head or headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.unsafeLast
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use last or lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.unsafeIndexM
       within: []
-      message: "Unsafe: no bounds checking, may cause segfaults. Use indexM instead."
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
     - name: Data.Vector.unsafeHeadM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.unsafeLastM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.unsafeSlice
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
     - name: Data.Vector.unsafeInit
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use init instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
     - name: Data.Vector.unsafeTail
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use tail instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
     - name: Data.Vector.unsafeTake
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
@@ -1971,28 +1971,28 @@
       message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
     - name: Data.Vector.Unboxed.unsafeHead
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use head or headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Unboxed.unsafeLast
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use last or lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Unboxed.unsafeIndexM
       within: []
-      message: "Unsafe: no bounds checking, may cause segfaults. Use indexM instead."
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
     - name: Data.Vector.Unboxed.unsafeHeadM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Unboxed.unsafeLastM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Unboxed.unsafeSlice
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
     - name: Data.Vector.Unboxed.unsafeInit
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use init instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
     - name: Data.Vector.Unboxed.unsafeTail
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use tail instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
     - name: Data.Vector.Unboxed.unsafeTake
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
@@ -2139,28 +2139,28 @@
       message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
     - name: Data.Vector.Storable.unsafeHead
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use head or headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Storable.unsafeLast
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use last or lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Storable.unsafeIndexM
       within: []
-      message: "Unsafe: no bounds checking, may cause segfaults. Use indexM instead."
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
     - name: Data.Vector.Storable.unsafeHeadM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Storable.unsafeLastM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Storable.unsafeSlice
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
     - name: Data.Vector.Storable.unsafeInit
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use init instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
     - name: Data.Vector.Storable.unsafeTail
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use tail instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
     - name: Data.Vector.Storable.unsafeTake
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
@@ -2301,28 +2301,28 @@
       message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
     - name: Data.Vector.Primitive.unsafeHead
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use head or headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Primitive.unsafeLast
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use last or lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Primitive.unsafeIndexM
       within: []
-      message: "Unsafe: no bounds checking, may cause segfaults. Use indexM instead."
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
     - name: Data.Vector.Primitive.unsafeHeadM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Primitive.unsafeLastM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Primitive.unsafeSlice
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
     - name: Data.Vector.Primitive.unsafeInit
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use init instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
     - name: Data.Vector.Primitive.unsafeTail
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use tail instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
     - name: Data.Vector.Primitive.unsafeTake
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
@@ -2469,28 +2469,28 @@
       message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
     - name: Data.Vector.Strict.unsafeHead
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use head or headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Strict.unsafeLast
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use last or lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Strict.unsafeIndexM
       within: []
-      message: "Unsafe: no bounds checking, may cause segfaults. Use indexM instead."
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
     - name: Data.Vector.Strict.unsafeHeadM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use headM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
     - name: Data.Vector.Strict.unsafeLastM
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use lastM instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
     - name: Data.Vector.Strict.unsafeSlice
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
     - name: Data.Vector.Strict.unsafeInit
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use init instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
     - name: Data.Vector.Strict.unsafeTail
       within: []
-      message: "Unsafe: no empty check, may cause segfaults. Use tail instead."
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
     - name: Data.Vector.Strict.unsafeTake
       within: []
       message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
