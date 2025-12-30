@@ -37,7 +37,6 @@ import Data.Void as Export
 import Data.Word as Export
 import Debug.Pretty.Simple as Export
 import GHC.Generics as Export hiding (from, to)
-import System.Directory as Export
 import System.FilePath as Export hiding ((<.>))
 import System.Process.Typed as Export
 import Text.Pretty.Simple as Export
