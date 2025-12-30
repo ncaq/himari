@@ -456,102 +456,79 @@
       within: []
 - modules:
     - as: B
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.ByteString
     - as: B8
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.ByteString.Char8
     - as: BL
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.ByteString.Lazy
     - as: BL8
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.ByteString.Lazy.Char8
     - as: T
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Text
     - as: TL
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Text.Lazy
     - message: "Data.Map is a re-export of Data.Map.Lazy. Use Data.Map.Strict or Data.Map.Lazy directly."
       name: Data.Map
       within: []
     - as: Map
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Map.Strict
     - as: MapL
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Map.Lazy
     - message: "Data.IntMap is a re-export of Data.IntMap.Lazy. Use Data.IntMap.Strict or Data.IntMap.Lazy directly."
       name: Data.IntMap
       within: []
     - as: IntMap
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.IntMap.Strict
     - as: IntMapL
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.IntMap.Lazy
     - as: Set
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Set
     - as: Seq
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Sequence
     - as: IntSet
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.IntSet
     - as: HM
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.HashMap.Strict
     - as: HML
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.HashMap.Lazy
     - as: HS
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.HashSet
     - as: L
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.List
     - as: NE
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.List.NonEmpty
     - as: C
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Char
     - as: V
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Vector
     - as: V
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Vector.Generic
     - as: VS
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Vector.Storable
     - as: VU
-      asRequired: true
-      importStyle: qualified
+      importStyle: explicitOrQualified
       name: Data.Vector.Unboxed
 - functions:
     - message: "Partial: throws on maxBound. Use succMay, succDef, or succSafe from Safe instead."
