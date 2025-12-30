@@ -26,6 +26,7 @@
     - --hint=.hlint/text.yaml
     - --hint=.hlint/typed-process.yaml
     - --hint=.hlint/unliftio.yaml
+    - --hint=.hlint/unsafe.yaml
     - --hint=.hlint/vector.yaml
 
 # グループ有効化

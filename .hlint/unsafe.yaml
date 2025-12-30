@@ -1,0 +1,19 @@
+# Unsafe関数警告
+# 型安全性を破壊するunsafe関数を警告します。
+
+- functions:
+    - name: unsafePerformIO
+      within: []
+      message: "Breaks type safety. Only for very specific use cases."
+    - name: unsafeDupablePerformIO
+      within: []
+      message: "Even more dangerous than unsafePerformIO."
+    - name: unsafeInterleaveIO
+      within: []
+      message: "Creates lazy IO. Avoid."
+    - name: unsafeCoerce
+      within: []
+      message: "Can cause segfaults. Avoid."
+    - name: unsafeFixIO
+      within: []
+      message: "Unsafe version of fixIO. Avoid."
