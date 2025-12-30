@@ -454,6 +454,107 @@
     - message: "O(n) stack space. Use length with explicit conversion."
       name: genericLength
       within: []
+- modules:
+    - as: B
+      asRequired: true
+      importStyle: qualified
+      name: Data.ByteString
+    - as: B
+      asRequired: true
+      importStyle: qualified
+      name: Data.ByteString.Char8
+    - as: BL
+      asRequired: true
+      importStyle: qualified
+      name: Data.ByteString.Lazy
+    - as: BL
+      asRequired: true
+      importStyle: qualified
+      name: Data.ByteString.Lazy.Char8
+    - as: T
+      asRequired: true
+      importStyle: qualified
+      name: Data.Text
+    - as: TL
+      asRequired: true
+      importStyle: qualified
+      name: Data.Text.Lazy
+    - as: Map
+      asRequired: true
+      importStyle: qualified
+      name: Data.Map
+    - as: Map
+      asRequired: true
+      importStyle: qualified
+      name: Data.Map.Strict
+    - as: Map
+      asRequired: true
+      importStyle: qualified
+      name: Data.Map.Lazy
+    - as: Set
+      asRequired: true
+      importStyle: qualified
+      name: Data.Set
+    - as: Seq
+      asRequired: true
+      importStyle: qualified
+      name: Data.Sequence
+    - as: IntMap
+      asRequired: true
+      importStyle: qualified
+      name: Data.IntMap
+    - as: IntMap
+      asRequired: true
+      importStyle: qualified
+      name: Data.IntMap.Strict
+    - as: IntMap
+      asRequired: true
+      importStyle: qualified
+      name: Data.IntMap.Lazy
+    - as: IntSet
+      asRequired: true
+      importStyle: qualified
+      name: Data.IntSet
+    - as: HM
+      asRequired: true
+      importStyle: qualified
+      name: Data.HashMap.Strict
+    - as: HM
+      asRequired: true
+      importStyle: qualified
+      name: Data.HashMap.Lazy
+    - as: HS
+      asRequired: true
+      importStyle: qualified
+      name: Data.HashSet
+    - as: L
+      asRequired: true
+      importStyle: qualified
+      name: Data.List
+    - as: NE
+      asRequired: true
+      importStyle: qualified
+      name: Data.List.NonEmpty
+    - as: C
+      asRequired: true
+      importStyle: qualified
+      name: Data.Char
+    - as: V
+      asRequired: true
+      importStyle: qualified
+      name: Data.Vector
+    - as: V
+      asRequired: true
+      importStyle: qualified
+      name: Data.Vector.Generic
+    - as: VS
+      asRequired: true
+      importStyle: qualified
+      name: Data.Vector.Storable
+    - as: VU
+      asRequired: true
+      importStyle: qualified
+      name: Data.Vector.Unboxed
 - functions:
     - message: "Partial: throws on maxBound. Use succMay, succDef, or succSafe from Safe instead."
       name: succ
