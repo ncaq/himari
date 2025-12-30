@@ -1,0 +1,85 @@
+# System.Process -> System.Process.Typed優先ルール
+# typed-processパッケージの関数を優先的に使うことを推奨します。
+# typed-processは型安全なプロセス操作を提供し、MonadIO/MonadUnliftIOをサポートします。
+- functions:
+    # プロセス起動関数
+    - name: System.Process.callProcess
+      within: []
+      message: "Use System.Process.Typed.runProcess_ instead for type-safe process execution."
+    - name: System.Process.callCommand
+      within: []
+      message: "Use System.Process.Typed.runProcess_ with shell instead for type-safe process execution."
+    - name: System.Process.spawnProcess
+      within: []
+      message: "Use System.Process.Typed.startProcess instead for type-safe process execution."
+    - name: System.Process.spawnCommand
+      within: []
+      message: "Use System.Process.Typed.startProcess with shell instead for type-safe process execution."
+    - name: System.Process.createProcess
+      within: []
+      message: "Use System.Process.Typed.startProcess instead for type-safe process execution."
+    - name: System.Process.createProcess_
+      within: []
+      message: "Use System.Process.Typed.startProcess instead for type-safe process execution."
+    - name: System.Process.cleanupProcess
+      within: []
+      message: "Use System.Process.Typed.stopProcess instead for type-safe process cleanup."
+    # プロセス読み取り関数
+    - name: System.Process.readProcess
+      within: []
+      message: "Use System.Process.Typed.readProcessStdout instead for type-safe output capture."
+    - name: System.Process.readProcessWithExitCode
+      within: []
+      message: "Use System.Process.Typed.readProcess instead for type-safe output capture."
+    - name: System.Process.readCreateProcess
+      within: []
+      message: "Use System.Process.Typed.readProcessStdout instead for type-safe output capture."
+    - name: System.Process.readCreateProcessWithExitCode
+      within: []
+      message: "Use System.Process.Typed.readProcess instead for type-safe output capture."
+    # プロセス待機・終了コード関数
+    - name: System.Process.waitForProcess
+      within: []
+      message: "Use System.Process.Typed.waitExitCode instead for MonadIO support."
+    - name: System.Process.getProcessExitCode
+      within: []
+      message: "Use System.Process.Typed.getExitCode instead for MonadIO support."
+    - name: System.Process.terminateProcess
+      within: []
+      message: "Use System.Process.Typed.stopProcess instead for proper cleanup."
+    - name: System.Process.interruptProcessGroupOf
+      within: []
+      message: "Consider using System.Process.Typed with setCreateGroup for process group management."
+    # シェル関数
+    - name: System.Process.runCommand
+      within: []
+      message: "Use System.Process.Typed.runProcess with shell instead for type-safe process execution."
+    - name: System.Process.runProcess
+      within: []
+      message: "Use System.Process.Typed.runProcess instead for type-safe process execution."
+    - name: System.Process.runInteractiveCommand
+      within: []
+      message: "Use System.Process.Typed.startProcess with shell and createPipe instead."
+    - name: System.Process.runInteractiveProcess
+      within: []
+      message: "Use System.Process.Typed.startProcess with createPipe instead."
+    - name: System.Process.system
+      within: []
+      message: "Use System.Process.Typed.runProcess with shell instead for type-safe process execution."
+    - name: System.Process.rawSystem
+      within: []
+      message: "Use System.Process.Typed.runProcess instead for type-safe process execution."
+    # ProcessConfig作成関数
+    - name: System.Process.proc
+      within: []
+      message: "Use System.Process.Typed.proc instead for type-safe ProcessConfig."
+    - name: System.Process.shell
+      within: []
+      message: "Use System.Process.Typed.shell instead for type-safe ProcessConfig."
+    # withパターン関数
+    - name: System.Process.withCreateProcess
+      within: []
+      message: "Use System.Process.Typed.withProcessWait or withProcessTerm instead for MonadUnliftIO support."
+    - name: System.Process.withCreateProcess_
+      within: []
+      message: "Use System.Process.Typed.withProcessWait_ or withProcessTerm_ instead for MonadUnliftIO support."

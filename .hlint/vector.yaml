@@ -1,0 +1,1410 @@
+# `vector`パッケージに関する警告
+
+# `Data.Vector`(Boxed)部分関数
+- functions:
+    - name: "Data.Vector.!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
+    - name: Data.Vector.head
+      within: []
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.last
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
+    - name: Data.Vector.indexM
+      within: []
+      message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - name: Data.Vector.headM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - name: Data.Vector.lastM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - name: Data.Vector.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc for safe init."
+    - name: Data.Vector.tail
+      within: []
+      message: "Partial: throws on empty vector. Use uncons for safe tail."
+    - name: "Data.Vector.//"
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.update
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.update_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.accum
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.accumulate
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.accumulate_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.backpermute
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.foldl1
+      within: []
+      message: "Partial: throws on empty vector. Use foldl with explicit initial value."
+    - name: Data.Vector.foldl1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldl' with explicit initial value."
+    - name: Data.Vector.foldr1
+      within: []
+      message: "Partial: throws on empty vector. Use foldr with explicit initial value."
+    - name: Data.Vector.foldr1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
+    - name: Data.Vector.maximum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.maximumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.minimum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.minimumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.minIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.minIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.maxIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.maxIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.fold1M
+      within: []
+      message: "Partial: throws on empty vector. Use foldM with explicit initial value."
+    - name: Data.Vector.fold1M'
+      within: []
+      message: "Partial: throws on empty vector. Use foldM' with explicit initial value."
+    - name: Data.Vector.fold1M_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM_ with explicit initial value."
+    - name: Data.Vector.fold1M'_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM'_ with explicit initial value."
+    - name: Data.Vector.scanl1
+      within: []
+      message: "Partial: throws on empty vector. Use scanl with explicit initial value."
+    - name: Data.Vector.scanl1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanl' with explicit initial value."
+    - name: Data.Vector.scanr1
+      within: []
+      message: "Partial: throws on empty vector. Use scanr with explicit initial value."
+    - name: Data.Vector.scanr1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanr' with explicit initial value."
+
+# `Data.Vector`(Boxed) unsafe関数
+- functions:
+    - name: Data.Vector.unsafeIndex
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
+    - name: Data.Vector.unsafeHead
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.unsafeLast
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.unsafeIndexM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
+    - name: Data.Vector.unsafeHeadM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.unsafeLastM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
+    - name: Data.Vector.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
+    - name: Data.Vector.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.unsafeUpd
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (//) instead."
+    - name: Data.Vector.unsafeUpdate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update instead."
+    - name: Data.Vector.unsafeUpdate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update_ instead."
+    - name: Data.Vector.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum instead."
+    - name: Data.Vector.unsafeAccumulate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate instead."
+    - name: Data.Vector.unsafeAccumulate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate_ instead."
+    - name: Data.Vector.unsafeBackpermute
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use backpermute instead."
+    - name: Data.Vector.unsafeFreeze
+      within: []
+      message: "Unsafe: the mutable vector may not be used after this. Use freeze for safety."
+    - name: Data.Vector.unsafeThaw
+      within: []
+      message: "Unsafe: the immutable vector may not be used after this. Use thaw for safety."
+    - name: Data.Vector.unsafeCopy
+      within: []
+      message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+
+# `Data.Vector.Generic`部分関数
+- functions:
+    # インデックス
+    - name: "Data.Vector.Generic.!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
+    - name: Data.Vector.Generic.head
+      within: []
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Generic.last
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
+    # モナディックインデックス
+    - name: Data.Vector.Generic.indexM
+      within: []
+      message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - name: Data.Vector.Generic.headM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - name: Data.Vector.Generic.lastM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    # 部分抽出
+    - name: Data.Vector.Generic.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc for safe init."
+    - name: Data.Vector.Generic.tail
+      within: []
+      message: "Partial: throws on empty vector. Use uncons for safe tail."
+    # バルク更新
+    - name: "Data.Vector.Generic.//"
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Generic.update
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Generic.update_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    # 累積
+    - name: Data.Vector.Generic.accum
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Generic.accumulate
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Generic.accumulate_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    # 順列
+    - name: Data.Vector.Generic.backpermute
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    # fold1系
+    - name: Data.Vector.Generic.foldl1
+      within: []
+      message: "Partial: throws on empty vector. Use foldl with explicit initial value."
+    - name: Data.Vector.Generic.foldl1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldl' with explicit initial value."
+    - name: Data.Vector.Generic.foldr1
+      within: []
+      message: "Partial: throws on empty vector. Use foldr with explicit initial value."
+    - name: Data.Vector.Generic.foldr1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
+    # 特化fold
+    - name: Data.Vector.Generic.maximum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Generic.maximumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Generic.minimum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Generic.minimumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Generic.minIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Generic.minIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Generic.maxIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Generic.maxIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    # モナディックfold1系
+    - name: Data.Vector.Generic.fold1M
+      within: []
+      message: "Partial: throws on empty vector. Use foldM with explicit initial value."
+    - name: Data.Vector.Generic.fold1M'
+      within: []
+      message: "Partial: throws on empty vector. Use foldM' with explicit initial value."
+    - name: Data.Vector.Generic.fold1M_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM_ with explicit initial value."
+    - name: Data.Vector.Generic.fold1M'_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM'_ with explicit initial value."
+    # scan1系
+    - name: Data.Vector.Generic.scanl1
+      within: []
+      message: "Partial: throws on empty vector. Use scanl with explicit initial value."
+    - name: Data.Vector.Generic.scanl1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanl' with explicit initial value."
+    - name: Data.Vector.Generic.scanr1
+      within: []
+      message: "Partial: throws on empty vector. Use scanr with explicit initial value."
+    - name: Data.Vector.Generic.scanr1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanr' with explicit initial value."
+
+# `Data.Vector.Generic` unsafe関数
+# 境界チェックを行わないため、セグメンテーション違反を引き起こす可能性があります
+- functions:
+    - name: Data.Vector.Generic.unsafeIndex
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
+    - name: Data.Vector.Generic.unsafeHead
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Generic.unsafeLast
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Generic.unsafeIndexM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
+    - name: Data.Vector.Generic.unsafeHeadM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Generic.unsafeLastM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Generic.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Generic.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
+    - name: Data.Vector.Generic.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
+    - name: Data.Vector.Generic.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Generic.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Generic.unsafeUpd
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (//) instead."
+    - name: Data.Vector.Generic.unsafeUpdate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update instead."
+    - name: Data.Vector.Generic.unsafeUpdate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update_ instead."
+    - name: Data.Vector.Generic.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum instead."
+    - name: Data.Vector.Generic.unsafeAccumulate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate instead."
+    - name: Data.Vector.Generic.unsafeAccumulate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate_ instead."
+    - name: Data.Vector.Generic.unsafeBackpermute
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use backpermute instead."
+    - name: Data.Vector.Generic.unsafeFreeze
+      within: []
+      message: "Unsafe: the mutable vector may not be used after this. Use freeze for safety."
+    - name: Data.Vector.Generic.unsafeThaw
+      within: []
+      message: "Unsafe: the immutable vector may not be used after this. Use thaw for safety."
+    - name: Data.Vector.Generic.unsafeCopy
+      within: []
+      message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Generic.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Generic.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Generic.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Generic.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Generic.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Generic.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Generic.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Generic.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Generic.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Generic.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Generic.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Generic.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Generic.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Generic.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Generic.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Generic.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeGrowFront
+      within: []
+      message: "Unsafe: no non-negative check. Use growFront for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+    - name: Data.Vector.Generic.Mutable.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum for safety."
+    - name: Data.Vector.Generic.Mutable.unsafeUpdate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update for safety."
+
+# `Data.Vector.Primitive`部分関数
+- functions:
+    - name: "Data.Vector.Primitive.!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
+    - name: Data.Vector.Primitive.head
+      within: []
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Primitive.last
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
+    - name: Data.Vector.Primitive.indexM
+      within: []
+      message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - name: Data.Vector.Primitive.headM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - name: Data.Vector.Primitive.lastM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - name: Data.Vector.Primitive.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc for safe init."
+    - name: Data.Vector.Primitive.tail
+      within: []
+      message: "Partial: throws on empty vector. Use uncons for safe tail."
+    - name: "Data.Vector.Primitive.//"
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Primitive.update_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Primitive.accum
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Primitive.accumulate_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Primitive.backpermute
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Primitive.foldl1
+      within: []
+      message: "Partial: throws on empty vector. Use foldl with explicit initial value."
+    - name: Data.Vector.Primitive.foldl1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldl' with explicit initial value."
+    - name: Data.Vector.Primitive.foldr1
+      within: []
+      message: "Partial: throws on empty vector. Use foldr with explicit initial value."
+    - name: Data.Vector.Primitive.foldr1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
+    - name: Data.Vector.Primitive.maximum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Primitive.maximumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Primitive.minimum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Primitive.minimumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Primitive.minIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Primitive.minIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Primitive.maxIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Primitive.maxIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Primitive.fold1M
+      within: []
+      message: "Partial: throws on empty vector. Use foldM with explicit initial value."
+    - name: Data.Vector.Primitive.fold1M'
+      within: []
+      message: "Partial: throws on empty vector. Use foldM' with explicit initial value."
+    - name: Data.Vector.Primitive.fold1M_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM_ with explicit initial value."
+    - name: Data.Vector.Primitive.fold1M'_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM'_ with explicit initial value."
+    - name: Data.Vector.Primitive.scanl1
+      within: []
+      message: "Partial: throws on empty vector. Use scanl with explicit initial value."
+    - name: Data.Vector.Primitive.scanl1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanl' with explicit initial value."
+    - name: Data.Vector.Primitive.scanr1
+      within: []
+      message: "Partial: throws on empty vector. Use scanr with explicit initial value."
+    - name: Data.Vector.Primitive.scanr1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanr' with explicit initial value."
+
+# `Data.Vector.Primitive` unsafe関数
+- functions:
+    - name: Data.Vector.Primitive.unsafeIndex
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
+    - name: Data.Vector.Primitive.unsafeHead
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Primitive.unsafeLast
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Primitive.unsafeIndexM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
+    - name: Data.Vector.Primitive.unsafeHeadM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Primitive.unsafeLastM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Primitive.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Primitive.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
+    - name: Data.Vector.Primitive.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
+    - name: Data.Vector.Primitive.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Primitive.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Primitive.unsafeUpd
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (//) instead."
+    - name: Data.Vector.Primitive.unsafeUpdate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update_ instead."
+    - name: Data.Vector.Primitive.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum instead."
+    - name: Data.Vector.Primitive.unsafeAccumulate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate_ instead."
+    - name: Data.Vector.Primitive.unsafeBackpermute
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use backpermute instead."
+    - name: Data.Vector.Primitive.unsafeFreeze
+      within: []
+      message: "Unsafe: the mutable vector may not be used after this. Use freeze for safety."
+    - name: Data.Vector.Primitive.unsafeThaw
+      within: []
+      message: "Unsafe: the immutable vector may not be used after this. Use thaw for safety."
+    - name: Data.Vector.Primitive.unsafeCopy
+      within: []
+      message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Primitive.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Primitive.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Primitive.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Primitive.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Primitive.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Primitive.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Primitive.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Primitive.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Primitive.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Primitive.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+    - name: Data.Vector.Primitive.Mutable.unsafeCast
+      within: []
+      message: "Unsafe: type cast without memory safety guarantees. Ensure correct memory layout."
+    - name: Data.Vector.Primitive.Mutable.unsafeCoerceMVector
+      within: []
+      message: "Unsafe: coerces vector type without safety checks."
+
+# `Data.Vector.Storable`部分関数
+- functions:
+    - name: "Data.Vector.Storable.!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
+    - name: Data.Vector.Storable.head
+      within: []
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Storable.last
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
+    - name: Data.Vector.Storable.indexM
+      within: []
+      message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - name: Data.Vector.Storable.headM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - name: Data.Vector.Storable.lastM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - name: Data.Vector.Storable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc for safe init."
+    - name: Data.Vector.Storable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use uncons for safe tail."
+    - name: "Data.Vector.Storable.//"
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Storable.update_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Storable.accum
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Storable.accumulate_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Storable.backpermute
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Storable.foldl1
+      within: []
+      message: "Partial: throws on empty vector. Use foldl with explicit initial value."
+    - name: Data.Vector.Storable.foldl1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldl' with explicit initial value."
+    - name: Data.Vector.Storable.foldr1
+      within: []
+      message: "Partial: throws on empty vector. Use foldr with explicit initial value."
+    - name: Data.Vector.Storable.foldr1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
+    - name: Data.Vector.Storable.maximum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Storable.maximumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Storable.minimum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Storable.minimumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Storable.minIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Storable.minIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Storable.maxIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Storable.maxIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Storable.fold1M
+      within: []
+      message: "Partial: throws on empty vector. Use foldM with explicit initial value."
+    - name: Data.Vector.Storable.fold1M'
+      within: []
+      message: "Partial: throws on empty vector. Use foldM' with explicit initial value."
+    - name: Data.Vector.Storable.fold1M_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM_ with explicit initial value."
+    - name: Data.Vector.Storable.fold1M'_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM'_ with explicit initial value."
+    - name: Data.Vector.Storable.scanl1
+      within: []
+      message: "Partial: throws on empty vector. Use scanl with explicit initial value."
+    - name: Data.Vector.Storable.scanl1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanl' with explicit initial value."
+    - name: Data.Vector.Storable.scanr1
+      within: []
+      message: "Partial: throws on empty vector. Use scanr with explicit initial value."
+    - name: Data.Vector.Storable.scanr1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanr' with explicit initial value."
+
+# `Data.Vector.Storable` unsafe関数
+- functions:
+    - name: Data.Vector.Storable.unsafeIndex
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
+    - name: Data.Vector.Storable.unsafeHead
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Storable.unsafeLast
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Storable.unsafeIndexM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
+    - name: Data.Vector.Storable.unsafeHeadM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Storable.unsafeLastM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Storable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Storable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
+    - name: Data.Vector.Storable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
+    - name: Data.Vector.Storable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Storable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Storable.unsafeUpd
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (//) instead."
+    - name: Data.Vector.Storable.unsafeUpdate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update_ instead."
+    - name: Data.Vector.Storable.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum instead."
+    - name: Data.Vector.Storable.unsafeAccumulate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate_ instead."
+    - name: Data.Vector.Storable.unsafeBackpermute
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use backpermute instead."
+    - name: Data.Vector.Storable.unsafeFreeze
+      within: []
+      message: "Unsafe: the mutable vector may not be used after this. Use freeze for safety."
+    - name: Data.Vector.Storable.unsafeThaw
+      within: []
+      message: "Unsafe: the immutable vector may not be used after this. Use thaw for safety."
+    - name: Data.Vector.Storable.unsafeCopy
+      within: []
+      message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Storable.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Storable.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Storable.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Storable.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Storable.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Storable.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Storable.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Storable.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Storable.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Storable.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Storable.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Storable.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Storable.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Storable.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Storable.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Storable.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Storable.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Storable.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Storable.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+    - name: Data.Vector.Storable.Mutable.unsafeCast
+      within: []
+      message: "Unsafe: type cast without memory safety guarantees. Ensure correct memory layout."
+    - name: Data.Vector.Storable.Mutable.unsafeCoerceMVector
+      within: []
+      message: "Unsafe: coerces vector type without safety checks."
+    - name: Data.Vector.Storable.Mutable.unsafeFromForeignPtr
+      within: []
+      message: "Unsafe: creates vector from raw pointer without validation."
+    - name: Data.Vector.Storable.Mutable.unsafeFromForeignPtr0
+      within: []
+      message: "Unsafe: creates vector from raw pointer without validation."
+    - name: Data.Vector.Storable.Mutable.unsafeToForeignPtr
+      within: []
+      message: "Unsafe: extracts raw pointer, vector may not be used safely after."
+    - name: Data.Vector.Storable.Mutable.unsafeToForeignPtr0
+      within: []
+      message: "Unsafe: extracts raw pointer, vector may not be used safely after."
+    - name: Data.Vector.Storable.Mutable.unsafeWith
+      within: []
+      message: "Unsafe: passes raw pointer to IO action without safety guarantees."
+
+# `Data.Vector.Strict`部分関数
+- functions:
+    - name: "Data.Vector.Strict.!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
+    - name: Data.Vector.Strict.head
+      within: []
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Strict.last
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
+    - name: Data.Vector.Strict.indexM
+      within: []
+      message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - name: Data.Vector.Strict.headM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - name: Data.Vector.Strict.lastM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - name: Data.Vector.Strict.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc for safe init."
+    - name: Data.Vector.Strict.tail
+      within: []
+      message: "Partial: throws on empty vector. Use uncons for safe tail."
+    - name: "Data.Vector.Strict.//"
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.update
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.update_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.accum
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.accumulate
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.accumulate_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.backpermute
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Strict.foldl1
+      within: []
+      message: "Partial: throws on empty vector. Use foldl with explicit initial value."
+    - name: Data.Vector.Strict.foldl1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldl' with explicit initial value."
+    - name: Data.Vector.Strict.foldr1
+      within: []
+      message: "Partial: throws on empty vector. Use foldr with explicit initial value."
+    - name: Data.Vector.Strict.foldr1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
+    - name: Data.Vector.Strict.maximum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Strict.maximumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Strict.minimum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Strict.minimumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Strict.minIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Strict.minIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Strict.maxIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Strict.maxIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Strict.fold1M
+      within: []
+      message: "Partial: throws on empty vector. Use foldM with explicit initial value."
+    - name: Data.Vector.Strict.fold1M'
+      within: []
+      message: "Partial: throws on empty vector. Use foldM' with explicit initial value."
+    - name: Data.Vector.Strict.fold1M_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM_ with explicit initial value."
+    - name: Data.Vector.Strict.fold1M'_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM'_ with explicit initial value."
+    - name: Data.Vector.Strict.scanl1
+      within: []
+      message: "Partial: throws on empty vector. Use scanl with explicit initial value."
+    - name: Data.Vector.Strict.scanl1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanl' with explicit initial value."
+    - name: Data.Vector.Strict.scanr1
+      within: []
+      message: "Partial: throws on empty vector. Use scanr with explicit initial value."
+    - name: Data.Vector.Strict.scanr1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanr' with explicit initial value."
+
+# `Data.Vector.Strict` unsafe関数
+- functions:
+    - name: Data.Vector.Strict.unsafeIndex
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
+    - name: Data.Vector.Strict.unsafeHead
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Strict.unsafeLast
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Strict.unsafeIndexM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
+    - name: Data.Vector.Strict.unsafeHeadM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Strict.unsafeLastM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Strict.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Strict.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
+    - name: Data.Vector.Strict.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
+    - name: Data.Vector.Strict.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Strict.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Strict.unsafeUpd
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (//) instead."
+    - name: Data.Vector.Strict.unsafeUpdate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update instead."
+    - name: Data.Vector.Strict.unsafeUpdate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update_ instead."
+    - name: Data.Vector.Strict.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum instead."
+    - name: Data.Vector.Strict.unsafeAccumulate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate instead."
+    - name: Data.Vector.Strict.unsafeAccumulate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate_ instead."
+    - name: Data.Vector.Strict.unsafeBackpermute
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use backpermute instead."
+    - name: Data.Vector.Strict.unsafeFreeze
+      within: []
+      message: "Unsafe: the mutable vector may not be used after this. Use freeze for safety."
+    - name: Data.Vector.Strict.unsafeThaw
+      within: []
+      message: "Unsafe: the immutable vector may not be used after this. Use thaw for safety."
+    - name: Data.Vector.Strict.unsafeCopy
+      within: []
+      message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Strict.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Strict.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Strict.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Strict.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Strict.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Strict.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Strict.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Strict.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Strict.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Strict.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Strict.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Strict.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Strict.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Strict.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Strict.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Strict.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Strict.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Strict.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Strict.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
+
+# `Data.Vector.Unboxed`部分関数
+- functions:
+    - name: "Data.Vector.Unboxed.!"
+      within: []
+      message: "Partial: throws on out-of-bounds. Use (!?) for safe indexing."
+    - name: Data.Vector.Unboxed.head
+      within: []
+      message: "Partial: throws on empty vector. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Unboxed.last
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc or check null first."
+    - name: Data.Vector.Unboxed.indexM
+      within: []
+      message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - name: Data.Vector.Unboxed.headM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - name: Data.Vector.Unboxed.lastM
+      within: []
+      message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - name: Data.Vector.Unboxed.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsnoc for safe init."
+    - name: Data.Vector.Unboxed.tail
+      within: []
+      message: "Partial: throws on empty vector. Use uncons for safe tail."
+    - name: "Data.Vector.Unboxed.//"
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.update
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.update_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.accum
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.accumulate
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.accumulate_
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.backpermute
+      within: []
+      message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - name: Data.Vector.Unboxed.foldl1
+      within: []
+      message: "Partial: throws on empty vector. Use foldl with explicit initial value."
+    - name: Data.Vector.Unboxed.foldl1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldl' with explicit initial value."
+    - name: Data.Vector.Unboxed.foldr1
+      within: []
+      message: "Partial: throws on empty vector. Use foldr with explicit initial value."
+    - name: Data.Vector.Unboxed.foldr1'
+      within: []
+      message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
+    - name: Data.Vector.Unboxed.maximum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Unboxed.maximumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Unboxed.minimum
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Unboxed.minimumBy
+      within: []
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
+    - name: Data.Vector.Unboxed.minIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Unboxed.minIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Unboxed.maxIndex
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Unboxed.maxIndexBy
+      within: []
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
+    - name: Data.Vector.Unboxed.fold1M
+      within: []
+      message: "Partial: throws on empty vector. Use foldM with explicit initial value."
+    - name: Data.Vector.Unboxed.fold1M'
+      within: []
+      message: "Partial: throws on empty vector. Use foldM' with explicit initial value."
+    - name: Data.Vector.Unboxed.fold1M_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM_ with explicit initial value."
+    - name: Data.Vector.Unboxed.fold1M'_
+      within: []
+      message: "Partial: throws on empty vector. Use foldM'_ with explicit initial value."
+    - name: Data.Vector.Unboxed.scanl1
+      within: []
+      message: "Partial: throws on empty vector. Use scanl with explicit initial value."
+    - name: Data.Vector.Unboxed.scanl1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanl' with explicit initial value."
+    - name: Data.Vector.Unboxed.scanr1
+      within: []
+      message: "Partial: throws on empty vector. Use scanr with explicit initial value."
+    - name: Data.Vector.Unboxed.scanr1'
+      within: []
+      message: "Partial: throws on empty vector. Use scanr' with explicit initial value."
+
+# `Data.Vector.Unboxed` unsafe関数
+- functions:
+    - name: Data.Vector.Unboxed.unsafeIndex
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!) or (!?) instead."
+    - name: Data.Vector.Unboxed.unsafeHead
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Unboxed.unsafeLast
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Unboxed.unsafeIndexM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (!?) instead."
+    - name: Data.Vector.Unboxed.unsafeHeadM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons or (!?) 0 instead."
+    - name: Data.Vector.Unboxed.unsafeLastM
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc or check null first."
+    - name: Data.Vector.Unboxed.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Unboxed.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use unsnoc instead."
+    - name: Data.Vector.Unboxed.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Use uncons instead."
+    - name: Data.Vector.Unboxed.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Unboxed.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Unboxed.unsafeUpd
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use (//) instead."
+    - name: Data.Vector.Unboxed.unsafeUpdate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update instead."
+    - name: Data.Vector.Unboxed.unsafeUpdate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use update_ instead."
+    - name: Data.Vector.Unboxed.unsafeAccum
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accum instead."
+    - name: Data.Vector.Unboxed.unsafeAccumulate
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate instead."
+    - name: Data.Vector.Unboxed.unsafeAccumulate_
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use accumulate_ instead."
+    - name: Data.Vector.Unboxed.unsafeBackpermute
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use backpermute instead."
+    - name: Data.Vector.Unboxed.unsafeFreeze
+      within: []
+      message: "Unsafe: the mutable vector may not be used after this. Use freeze for safety."
+    - name: Data.Vector.Unboxed.unsafeThaw
+      within: []
+      message: "Unsafe: the immutable vector may not be used after this. Use thaw for safety."
+    - name: Data.Vector.Unboxed.unsafeCopy
+      within: []
+      message: "Unsafe: no length checking. Use copy for safety."
+
+# `Data.Vector.Unboxed.Mutable`部分関数
+- functions:
+    - name: Data.Vector.Unboxed.Mutable.init
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeInit only if you've verified non-empty."
+    - name: Data.Vector.Unboxed.Mutable.tail
+      within: []
+      message: "Partial: throws on empty vector. Use unsafeTail only if you've verified non-empty."
+
+# `Data.Vector.Unboxed.Mutable` unsafe関数
+- functions:
+    - name: Data.Vector.Unboxed.Mutable.unsafeSlice
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use slice instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeInit
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Unboxed.Mutable.unsafeTail
+      within: []
+      message: "Unsafe: no empty check, may cause segfaults. Verify non-empty first."
+    - name: Data.Vector.Unboxed.Mutable.unsafeTake
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use take instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeDrop
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use drop instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeRead
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use read instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeWrite
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use write instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeModify
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modify instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeModifyM
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use modifyM instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeSwap
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use swap instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeExchange
+      within: []
+      message: "Unsafe: no bounds checking, may cause segfaults. Use exchange instead."
+    - name: Data.Vector.Unboxed.Mutable.unsafeCopy
+      within: []
+      message: "Unsafe: no length/overlap checking. Use copy for safety."
+    - name: Data.Vector.Unboxed.Mutable.unsafeMove
+      within: []
+      message: "Unsafe: no length checking. Use move for safety."
+    - name: Data.Vector.Unboxed.Mutable.unsafeGrow
+      within: []
+      message: "Unsafe: no non-negative check. Use grow for safety."
+    - name: Data.Vector.Unboxed.Mutable.unsafeNew
+      within: []
+      message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
