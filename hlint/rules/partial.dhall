@@ -95,6 +95,37 @@ let rules
           [ Builder.restrictFunction
               "toEnum"
               "Partial: throws on out-of-bounds. Use explicit bounds checking."
+          , Builder.restrictFunction
+              "pred"
+              "Partial: throws on minBound. Use explicit bounds checking."
+          , Builder.restrictFunction
+              "succ"
+              "Partial: throws on maxBound. Use explicit bounds checking."
+          ]
+      , Builder.functions
+          [ Builder.restrictInModule
+              "Data.Char"
+              "digitToInt"
+              "Partial: throws on non-hex-digit character. Use digitToIntSafe or pattern match."
+          , Builder.restrictInModule
+              "Data.Char"
+              "intToDigit"
+              "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
+          , Builder.restrictInModule
+              "Data.Char"
+              "chr"
+              "Partial: throws on invalid code point. Use explicit bounds checking."
+          ]
+      , Builder.functions
+          [ Builder.restrictInModule
+              "Data.List"
+              "foldl1'"
+              "Partial: throws on empty list. Use foldl' with explicit initial value."
+          ]
+      , Builder.functions
+          [ Builder.restrictFunction
+              "Data.List.NonEmpty.!!"
+              "Partial: throws on out-of-bounds. Use safe indexing."
           ]
       ]
 
