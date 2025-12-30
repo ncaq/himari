@@ -7,9 +7,9 @@ let rules
     : List Types.Rule
     = [ Builder.modules
           [ Builder.qualifiedAsRequired "Data.ByteString" "B"
-          , Builder.qualifiedAsRequired "Data.ByteString.Char8" "B"
+          , Builder.qualifiedAsRequired "Data.ByteString.Char8" "B8"
           , Builder.qualifiedAsRequired "Data.ByteString.Lazy" "BL"
-          , Builder.qualifiedAsRequired "Data.ByteString.Lazy.Char8" "BL"
+          , Builder.qualifiedAsRequired "Data.ByteString.Lazy.Char8" "BL8"
           , Builder.qualifiedAsRequired "Data.Text" "T"
           , Builder.qualifiedAsRequired "Data.Text.Lazy" "TL"
           , Builder.qualifiedAsRequired "Data.Map" "Map"
