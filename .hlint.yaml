@@ -17,12 +17,13 @@
 - arguments:
     - --hint=.hlint/bits.yaml
     - --hint=.hlint/bytestring.yaml
+    - --hint=.hlint/concurrency.yaml
     - --hint=.hlint/containers.yaml
     - --hint=.hlint/convertible.yaml
     - --hint=.hlint/exceptions.yaml
-    - --hint=.hlint/io.yaml
     - --hint=.hlint/partial.yaml
     - --hint=.hlint/performance.yaml
+    - --hint=.hlint/string-io.yaml
     - --hint=.hlint/text.yaml
     - --hint=.hlint/typed-process.yaml
     - --hint=.hlint/unliftio.yaml

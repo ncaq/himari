@@ -1,9 +1,7 @@
-# System.IO・並行処理警告
-# 環境依存エンコーディング問題があるString.IO関数と、
-# 危険な並行処理関数を警告します。
+# String IO警告
+# 環境依存エンコーディング問題があるSystem.IOのString関数を警告します。
+# Text(UTF-8)またはByteString(バイナリ)を推奨します。
 
-# String.IO(環境依存エンコーディング問題)
-# Text(UTF-8)またはByteString(バイナリ)を推奨
 - functions:
     - name: System.IO.getChar
       within: []
@@ -44,12 +42,3 @@
     - name: System.IO.appendFile
       within: []
       message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile."
-
-# 並行処理
-- functions:
-    - name: forkIO
-      within: []
-      message: "Exceptions don't propagate to parent thread. Use async library."
-    - name: forkProcess
-      within: []
-      message: "Almost impossible to use correctly. Use async library."
