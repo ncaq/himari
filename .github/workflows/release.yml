@@ -30,6 +30,10 @@ jobs:
             echo "Failed to extract version from himari.cabal"
             exit 1
           fi
+          if ! echo "$VERSION" | grep -qE '^[0-9]+(\.[0-9]+){1,3}$'; then
+            echo "Invalid PVP version format: $VERSION"
+            exit 1
+          fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Check if tag exists
         id: check_tag
