@@ -58,17 +58,6 @@ let preferModule
           )
           funcs
 
-let partialVector
-    : Text -> Text -> List Text -> List Types.Function
-    = \(module : Text) ->
-      \(msgSuffix : Text) ->
-      \(funcs : List Text) ->
-        Prelude.List.map
-          Text
-          Types.Function
-          (\(func : Text) -> restrictInModule module func msgSuffix)
-          funcs
-
 in  { restrictFunction
     , restrictInModule
     , functions
@@ -76,6 +65,5 @@ in  { restrictFunction
     , useConvert
     , enableGroup
     , preferModule
-    , partialVector
     , Prelude
     }
