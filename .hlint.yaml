@@ -1,9 +1,19 @@
 # himari hlint configuration
-# 部分関数・危険関数の警告ルール + 推奨グループ
+# himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
 #
 # 使い方:
 #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
 #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/file.yaml]
+#
+# 部分関数や危険な関数の使用を警告したり、
+# より可読性の高いパターンを提案します。
+#
+# 警告対象外のものの理由
+# - `return`: `pure`の代わりに`return`を使うのは好みの問題
+# - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
+# - ゼロ除算(`div`, `mod`等): 排除不可能、型レベル保証には依存型が必要
+# - `fromIntegral`, `realToFrac`: 代替手段が常に使えるわけではない
+
 # グループ有効化
 
 # `map` → `fmap`, `++` → `<>` などの汎用化
@@ -2905,8 +2915,3 @@
     - name: Data.Vector.Unboxed.Mutable.unsafeNew
       within: []
       message: "Unsafe: elements are uninitialized and may cause exceptions. Use new or replicate instead."
-# 警告対象外のものの理由
-# - `return`: `pure`の代わりに`return`を使うのは好みの問題
-# - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
-# - ゼロ除算(`div`, `mod`等): 排除不可能、型レベル保証には依存型が必要
-# - `fromIntegral`, `realToFrac`: 代替手段が常に使えるわけではない
