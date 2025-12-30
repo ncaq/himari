@@ -416,51 +416,10 @@
       name: errorWithoutStackTrace
       within: []
 - functions:
-    - message: "Partial: throws on empty list. Use listToMaybe or pattern match."
-      name: Data.List.head
-      within: []
-    - message: "Partial: throws on empty list. Use drop 1 or pattern match."
-      name: Data.List.tail
-      within: []
-    - message: "Partial: throws on empty list. Use initMay from safe package."
-      name: Data.List.init
-      within: []
-    - message: "Partial: throws on empty list. Use lastMay from safe package."
-      name: Data.List.last
-      within: []
-    - message: "Partial: throws on out-of-bounds. Use safe indexing."
-      name: "Data.List.!!"
-      within: []
-    - message: "Partial: throws on Nothing. Use fromMaybe or pattern match."
-      name: Data.Maybe.fromJust
-      within: []
-    - message: "Partial: throws on empty list. Use nonEmpty instead."
-      name: Data.List.NonEmpty.fromList
-      within: []
-- functions:
-    - message: "Use foldl' with a default value instead"
-      name: Data.Foldable.foldl1
-      within: []
-    - message: Use foldr with a default value instead
-      name: Data.Foldable.foldr1
-      within: []
-    - message: Use maximumMay from safe package or viaNonEmpty maximum
-      name: Data.Foldable.maximum
-      within: []
-    - message: Use minimumMay from safe package or viaNonEmpty minimum
-      name: Data.Foldable.minimum
-      within: []
-    - message: Use maximumByMay from safe package
-      name: Data.Foldable.maximumBy
-      within: []
-    - message: Use minimumByMay from safe package
-      name: Data.Foldable.minimumBy
-      within: []
-- functions:
-    - message: Use bifoldl with a default value instead
+    - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
       name: Data.Bifoldable.bifoldl1
       within: []
-    - message: Use bifoldr with a default value instead
+    - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
       name: Data.Bifoldable.bifoldr1
       within: []
     - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
@@ -476,20 +435,6 @@
       name: Data.Bifoldable.biminimumBy
       within: []
 - functions:
-    - message: Use readMaybe or readEither instead. read also operates on String.
-      name: read
-      within: []
-- functions:
-    - message: "Partial: throws on out-of-bounds. Use explicit bounds checking."
-      name: toEnum
-      within: []
-    - message: "Partial: throws on minBound. Use explicit bounds checking."
-      name: pred
-      within: []
-    - message: "Partial: throws on maxBound. Use explicit bounds checking."
-      name: succ
-      within: []
-- functions:
     - message: "Partial: throws on non-hex-digit character. No safe alternative exists. Use pattern matching on '0'..'9', 'a'..'f', 'A'..'F'."
       name: Data.Char.digitToInt
       within: []
@@ -500,14 +445,6 @@
       name: Data.Char.chr
       within: []
 - functions:
-    - message: "Partial: throws on empty list. Use foldl' with explicit initial value."
-      name: "Data.List.foldl1'"
-      within: []
-- functions:
-    - message: "Partial: throws on out-of-bounds. Use safe indexing."
-      name: "Data.List.NonEmpty.!!"
-      within: []
-- functions:
     - message: "O(n^2) complexity. Use ordNub or nubOrd instead."
       name: nub
       within: []
@@ -516,6 +453,96 @@
       within: []
     - message: "O(n) stack space. Use length with explicit conversion."
       name: genericLength
+      within: []
+- functions:
+    - message: "Partial: throws on maxBound. Use succMay, succDef, or succSafe from Safe instead."
+      name: succ
+      within: []
+    - message: "Partial: throws on minBound. Use predMay, predDef, or predSafe from Safe instead."
+      name: pred
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use toEnumMay, toEnumDef, or toEnumSafe from Safe instead."
+      name: toEnum
+      within: []
+- functions:
+    - message: "Partial: throws on empty list. Use headMay or headDef from Safe instead."
+      name: Data.List.head
+      within: []
+    - message: "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
+      name: Data.List.tail
+      within: []
+    - message: "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
+      name: Data.List.init
+      within: []
+    - message: "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
+      name: Data.List.last
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use atMay or atDef from Safe instead."
+      name: "Data.List.!!"
+      within: []
+    - message: "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
+      name: Data.List.cycle
+      within: []
+    - message: "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
+      name: Data.List.scanl1
+      within: []
+    - message: "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
+      name: Data.List.scanr1
+      within: []
+    - message: "Partial: throws on empty list. Use foldl1May from Safe instead."
+      name: Data.List.foldl1
+      within: []
+    - message: "Partial: throws on empty list. Use foldl1May' from Safe instead."
+      name: "Data.List.foldl1'"
+      within: []
+    - message: "Partial: throws on empty list. Use foldr1May from Safe instead."
+      name: Data.List.foldr1
+      within: []
+    - message: "Partial: throws on empty list. Use maximumMay or maximumBound from Safe instead."
+      name: Data.List.maximum
+      within: []
+    - message: "Partial: throws on empty list. Use minimumMay or minimumBound from Safe instead."
+      name: Data.List.minimum
+      within: []
+    - message: "Partial: throws on empty list. Use maximumByMay or maximumBoundBy from Safe instead."
+      name: Data.List.maximumBy
+      within: []
+    - message: "Partial: throws on empty list. Use minimumByMay or minimumBoundBy from Safe instead."
+      name: Data.List.minimumBy
+      within: []
+- functions:
+    - message: "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
+      name: Data.Maybe.fromJust
+      within: []
+- functions:
+    - message: "Partial: throws on parse failure. Use readMay or readDef from Safe instead."
+      name: read
+      within: []
+- functions:
+    - message: "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
+      name: Data.Foldable.foldl1
+      within: []
+    - message: "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
+      name: Data.Foldable.foldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumMay or maximumBound from Safe.Foldable instead."
+      name: Data.Foldable.maximum
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumMay or minimumBound from Safe.Foldable instead."
+      name: Data.Foldable.minimum
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
+      name: Data.Foldable.maximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
+      name: Data.Foldable.minimumBy
+      within: []
+- functions:
+    - message: "Partial: throws on out-of-bounds. Use atMay or atDef from Safe with toList instead."
+      name: "Data.List.NonEmpty.!!"
+      within: []
+    - message: "Partial: throws on empty list. Use nonEmpty instead."
+      name: Data.List.NonEmpty.fromList
       within: []
 - functions:
     - message: "Partial: synonym for error. Use throwM or Left instead."
