@@ -133,6 +133,7 @@
           programs = {
             cabal-gild.enable = true;
             deadnix.enable = true;
+            dhall.enable = true;
             nixfmt.enable = true;
             prettier.enable = true;
             shellcheck.enable = true;
