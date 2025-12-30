@@ -97,6 +97,10 @@
               };
               # ランタイム依存。
               buildInputs = with prev; [
+                dhall
+                dhall-docs
+                dhall-lsp-server
+                dhall-yaml
                 fourmolu
                 hlint
                 nil
@@ -129,6 +133,7 @@
           programs = {
             cabal-gild.enable = true;
             deadnix.enable = true;
+            dhall.enable = true;
             nixfmt.enable = true;
             prettier.enable = true;
             shellcheck.enable = true;
@@ -157,6 +162,44 @@
         "hydraJobs"
       ]
       // {
+        apps = flake.apps // {
+          generate-hlint = {
+            type = "app";
+            program = pkgs.lib.getExe (
+              pkgs.writeShellApplication {
+                name = "generate-hlint";
+                runtimeInputs = [
+                  pkgs.dhall-yaml
+                  pkgs.git
+                  pkgs.prettier
+                ];
+                text = ''
+                  #!/usr/bin/env bash
+                  set -euo pipefail
+                  cd "$(git rev-parse --show-toplevel)"
+                  {
+                    cat <<'HEADER'
+                  # himari hlint configuration
+                  #
+                  # このファイルはDhallによって自動生成されています。
+                  # 直接編集しないでください。
+                  #
+                  # himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
+                  # 部分関数や危険な関数の使用を警告したり、
+                  # より可読性の高いパターンを提案します。
+                  #
+                  # 使い方:
+                  #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
+                  #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
+                  HEADER
+                    dhall-to-yaml-ng --file hlint/hlint.dhall
+                  } > .hlint.yaml
+                  prettier --write .hlint.yaml
+                '';
+              }
+            );
+          };
+        };
         checks =
           flake.packages # テストがないパッケージもビルドしてエラーを検出する。
           // flake.checks

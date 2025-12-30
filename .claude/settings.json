@@ -1,4 +1,7 @@
 {
+  "permissions": {
+    "allow": ["Bash(dhall-to-yaml-ng:*)", "Bash(dhall:*)", "Bash(hlint:*)", "Bash(nix run '.#generate-hlint')"]
+  },
   "hooks": {
     "PostToolUse": [
       {
