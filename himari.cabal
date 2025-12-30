@@ -36,7 +36,6 @@ common basic
     containers ^>=0.7,
     convertible ^>=1.1.1.1,
     deepseq ^>=1.5.0.0,
-    directory ^>=1.3.9.0,
     exceptions ^>=0.10.9,
     filepath ^>=1.5.4.0,
     hashable ^>=1.5.0.0,
