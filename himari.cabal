@@ -2,11 +2,22 @@ cabal-version: 3.0
 name: himari
 version: 0.1.0.0
 synopsis: A standard library for Haskell as an alternative to rio
+description:
+  A standard library for Haskell inspired by rio.
+  .
+  Unlike rio, himari uses the full lens library instead of microlens,
+  and provides hlint rules to warn against partial functions
+  instead of providing safe wrapper modules.
+  .
+  See the README at <https://github.com/ncaq/himari#readme> for more information.
+
 homepage: https://github.com/ncaq/himari
+bug-reports: https://github.com/ncaq/himari/issues
 license: Apache-2.0
 license-file: LICENSE
 author: ncaq
 maintainer: ncaq@ncaq.net
+copyright: 2024 ncaq
 category: Control
 build-type: Simple
 data-files: .hlint.yaml
@@ -18,6 +29,10 @@ tested-with:
   ghc ==9.10.2
   ghc ==9.10.3
   ghc ==9.12.2
+
+source-repository head
+  type: git
+  location: https://github.com/ncaq/himari.git
 
 common basic
   ghc-options:
