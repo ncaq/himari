@@ -459,7 +459,7 @@
       asRequired: true
       importStyle: qualified
       name: Data.ByteString
-    - as: B
+    - as: B8
       asRequired: true
       importStyle: qualified
       name: Data.ByteString.Char8
@@ -467,7 +467,7 @@
       asRequired: true
       importStyle: qualified
       name: Data.ByteString.Lazy
-    - as: BL
+    - as: BL8
       asRequired: true
       importStyle: qualified
       name: Data.ByteString.Lazy.Char8
