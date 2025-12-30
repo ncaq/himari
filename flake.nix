@@ -127,10 +127,10 @@
         };
         flake = pkgs.project.flake { };
         treefmtEval = treefmt-nix.lib.evalModule pkgs (_: {
-          # actionlintはセルフホストランナーの設定ファイルを正常に読み込まなかった。
           # yamlfmtはprettierと競合する。
           projectRootFile = "flake.nix";
           programs = {
+            actionlint.enable = true;
             cabal-gild.enable = true;
             deadnix.enable = true;
             dhall.enable = true;
