@@ -97,6 +97,10 @@
               };
               # ランタイム依存。
               buildInputs = with prev; [
+                dhall
+                dhall-docs
+                dhall-lsp-server
+                dhall-yaml
                 fourmolu
                 hlint
                 nil
