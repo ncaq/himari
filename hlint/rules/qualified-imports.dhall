@@ -32,7 +32,7 @@ let rules
           , Builder.qualifiedAsRequired "Data.List.NonEmpty" "NE"
           , Builder.qualifiedAsRequired "Data.Char" "C"
           , Builder.qualifiedAsRequired "Data.Vector" "V"
-          , Builder.qualifiedAsRequired "Data.Vector.Generic" "V"
+          , Builder.qualifiedAsRequired "Data.Vector.Generic" "VG"
           , Builder.qualifiedAsRequired "Data.Vector.Storable" "VS"
           , Builder.qualifiedAsRequired "Data.Vector.Unboxed" "VU"
           ]
