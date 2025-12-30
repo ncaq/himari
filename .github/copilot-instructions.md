@@ -44,8 +44,28 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 
 ## ディレクトリ構成
 
+### ルートディレクトリ
+
 `.hlint.yaml`は他の`hlint`ディレクトリ以下のDhallファイルから自動生成しているため、
 直接の読み書きは想定していません。
+
+### hlint
+
+`.hlint.yaml`ファイルを生成するためのDhallソースコードが配置されています。
+
+```zsh
+nix run '.#generate-hlint'
+```
+
+コマンドで`.hlint.yaml`が新しく生成されます。
+
+### src
+
+カスタムPreludeとしてのhimariライブラリのソースコードが配置されています。
+
+### test
+
+動作を継続してある程度確認するためのテストコードが配置されています。
 
 ## Haskell
 

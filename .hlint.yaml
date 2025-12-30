@@ -51,6 +51,18 @@
     - message: Use Data.ByteString.unsnoc instead
       name: Data.ByteString.last
       within: []
+    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+      name: Data.ByteString.foldl1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+      name: "Data.ByteString.foldl1'"
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+      name: Data.ByteString.foldr1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+      name: "Data.ByteString.foldr1'"
+      within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.maximum
       within: []
@@ -69,6 +81,18 @@
       within: []
     - message: Use Data.ByteString.Char8.unsnoc instead
       name: Data.ByteString.Char8.last
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+      name: Data.ByteString.Char8.foldl1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+      name: "Data.ByteString.Char8.foldl1'"
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+      name: Data.ByteString.Char8.foldr1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+      name: "Data.ByteString.Char8.foldr1'"
       within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Char8.maximum
@@ -89,6 +113,18 @@
     - message: Use Data.ByteString.Lazy.unsnoc instead
       name: Data.ByteString.Lazy.last
       within: []
+    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+      name: Data.ByteString.Lazy.foldl1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+      name: "Data.ByteString.Lazy.foldl1'"
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+      name: Data.ByteString.Lazy.foldr1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+      name: "Data.ByteString.Lazy.foldr1'"
+      within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Lazy.maximum
       within: []
@@ -108,6 +144,18 @@
     - message: Use Data.ByteString.Lazy.Char8.unsnoc instead
       name: Data.ByteString.Lazy.Char8.last
       within: []
+    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+      name: Data.ByteString.Lazy.Char8.foldl1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+      name: "Data.ByteString.Lazy.Char8.foldl1'"
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+      name: Data.ByteString.Lazy.Char8.foldr1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+      name: "Data.ByteString.Lazy.Char8.foldr1'"
+      within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Lazy.Char8.maximum
       within: []
@@ -126,6 +174,18 @@
       within: []
     - message: Use Data.ByteString.Short.unsnoc instead
       name: Data.ByteString.Short.last
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+      name: Data.ByteString.Short.foldl1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+      name: "Data.ByteString.Short.foldl1'"
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+      name: Data.ByteString.Short.foldr1
+      within: []
+    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+      name: "Data.ByteString.Short.foldr1'"
       within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Short.maximum
@@ -147,12 +207,109 @@
     - message: "Use Data.Map.lookup or Data.Map.!? instead"
       name: "Data.Map.!"
       within: []
-    - message: Use Data.Map.lookupMin instead
+    - message: "Partial: throws on empty map. Use Data.Map.lookupMin instead."
       name: Data.Map.findMin
       within: []
-    - message: Use Data.Map.lookupMax instead
+    - message: "Partial: throws on empty map. Use Data.Map.lookupMax instead."
       name: Data.Map.findMax
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.Map.lookupMin/lookupMax or check size."
+      name: Data.Map.elemAt
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Map.deleteAt
+      within: []
+    - message: "Partial: throws if key not found. Use Data.Map.lookupIndex instead."
+      name: Data.Map.findIndex
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Map.updateAt
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.minViewWithKey instead."
+      name: Data.Map.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.maxViewWithKey instead."
+      name: Data.Map.deleteFindMax
+      within: []
+- functions:
+    - message: "Use Data.Map.Strict.lookup or Data.Map.Strict.!? instead"
+      name: "Data.Map.Strict.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Strict.lookupMin instead."
+      name: Data.Map.Strict.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Strict.lookupMax instead."
+      name: Data.Map.Strict.findMax
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.Map.Strict.lookupMin/lookupMax or check size."
+      name: Data.Map.Strict.elemAt
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Map.Strict.deleteAt
+      within: []
+    - message: "Partial: throws if key not found. Use Data.Map.Strict.lookupIndex instead."
+      name: Data.Map.Strict.findIndex
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Map.Strict.updateAt
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Strict.minViewWithKey instead."
+      name: Data.Map.Strict.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Strict.maxViewWithKey instead."
+      name: Data.Map.Strict.deleteFindMax
+      within: []
+- functions:
+    - message: "Use Data.Map.Lazy.lookup or Data.Map.Lazy.!? instead"
+      name: "Data.Map.Lazy.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Lazy.lookupMin instead."
+      name: Data.Map.Lazy.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Lazy.lookupMax instead."
+      name: Data.Map.Lazy.findMax
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.Map.Lazy.lookupMin/lookupMax or check size."
+      name: Data.Map.Lazy.elemAt
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Map.Lazy.deleteAt
+      within: []
+    - message: "Partial: throws if key not found. Use Data.Map.Lazy.lookupIndex instead."
+      name: Data.Map.Lazy.findIndex
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Map.Lazy.updateAt
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Lazy.minViewWithKey instead."
+      name: Data.Map.Lazy.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.Map.Lazy.maxViewWithKey instead."
+      name: Data.Map.Lazy.deleteFindMax
+      within: []
+- functions:
+    - message: "Partial: throws on empty set. Use Data.Set.lookupMin instead."
+      name: Data.Set.findMin
+      within: []
+    - message: "Partial: throws on empty set. Use Data.Set.lookupMax instead."
+      name: Data.Set.findMax
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.Set.lookupMin/lookupMax or check size."
+      name: Data.Set.elemAt
+      within: []
+    - message: "Partial: throws on out-of-bounds. Check size before using."
+      name: Data.Set.deleteAt
+      within: []
+    - message: "Partial: throws if element not found. Use Data.Set.lookupIndex instead."
+      name: Data.Set.findIndex
+      within: []
+    - message: "Partial: throws on empty set. Use Data.Set.minView instead."
+      name: Data.Set.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty set. Use Data.Set.maxView instead."
+      name: Data.Set.deleteFindMax
+      within: []
+- functions:
     - message: Use Data.HashMap.lookup instead
       name: "Data.HashMap.Strict.!"
       within: []
@@ -326,6 +483,30 @@
     - message: "Partial: throws on out-of-bounds. Use explicit bounds checking."
       name: toEnum
       within: []
+    - message: "Partial: throws on minBound. Use explicit bounds checking."
+      name: pred
+      within: []
+    - message: "Partial: throws on maxBound. Use explicit bounds checking."
+      name: succ
+      within: []
+- functions:
+    - message: "Partial: throws on non-hex-digit character. No safe alternative exists. Use pattern matching on '0'..'9', 'a'..'f', 'A'..'F'."
+      name: Data.Char.digitToInt
+      within: []
+    - message: "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
+      name: Data.Char.intToDigit
+      within: []
+    - message: "Partial: throws on invalid code point. Use explicit bounds checking."
+      name: Data.Char.chr
+      within: []
+- functions:
+    - message: "Partial: throws on empty list. Use foldl' with explicit initial value."
+      name: "Data.List.foldl1'"
+      within: []
+- functions:
+    - message: "Partial: throws on out-of-bounds. Use safe indexing."
+      name: "Data.List.NonEmpty.!!"
+      within: []
 - functions:
     - message: "O(n^2) complexity. Use ordNub or nubOrd instead."
       name: nub
@@ -389,6 +570,15 @@
     - message: Use Data.Text.unsnoc instead
       name: Data.Text.last
       within: []
+    - message: "Partial: throws on empty Text. Use foldl with explicit initial value."
+      name: Data.Text.foldl1
+      within: []
+    - message: "Partial: throws on empty Text. Use foldl' with explicit initial value."
+      name: "Data.Text.foldl1'"
+      within: []
+    - message: "Partial: throws on empty Text. Use foldr with explicit initial value."
+      name: Data.Text.foldr1
+      within: []
     - message: "Partial: throws on empty Text. Use fold with explicit initial value."
       name: Data.Text.maximum
       within: []
@@ -407,6 +597,15 @@
       within: []
     - message: Use Data.Text.Lazy.unsnoc instead
       name: Data.Text.Lazy.last
+      within: []
+    - message: "Partial: throws on empty Text. Use foldl with explicit initial value."
+      name: Data.Text.Lazy.foldl1
+      within: []
+    - message: "Partial: throws on empty Text. Use foldl' with explicit initial value."
+      name: "Data.Text.Lazy.foldl1'"
+      within: []
+    - message: "Partial: throws on empty Text. Use foldr with explicit initial value."
+      name: Data.Text.Lazy.foldr1
       within: []
     - message: "Partial: throws on empty Text. Use fold with explicit initial value."
       name: Data.Text.Lazy.maximum
