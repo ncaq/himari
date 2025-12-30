@@ -146,7 +146,9 @@ Must be one of the following:
 
 プロジェクトルートの`.hlint.yaml`ファイルはDhallソースコードから自動生成されています。
 よってこれだけを更新するコミットのタイトルは、
+
 ```
 chore(hlint): regenerate `.hlint.yaml`
 ```
+
 とだけしてください。
