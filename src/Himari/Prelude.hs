@@ -149,6 +149,17 @@ import Safe.Foldable as Export hiding
   , minimumNote
   )
 
+-- aeson系には被りそうな関数名が多いので、hidingしたり個別importします。
+import Data.Aeson as Export hiding ((.=))
+import Data.Aeson.Encode.Pretty as Export
+  ( encodePretty
+  , encodePretty'
+  , encodePrettyToTextBuilder
+  , encodePrettyToTextBuilder'
+  )
+import Data.Aeson.QQ.Simple as Export
+import Deriving.Aeson as Export
+
 -- Type only.
 
 import Control.Monad.Catch as Export (MonadCatch, MonadMask, MonadThrow)
