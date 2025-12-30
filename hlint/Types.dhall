@@ -29,6 +29,7 @@ let Module
       , importStyle : Optional ImportStyle
       , qualifiedStyle : Optional QualifiedStyle
       , within : Optional (List Text)
+      , message : Optional Text
       }
 
 let Rule

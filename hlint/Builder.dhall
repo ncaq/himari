@@ -72,6 +72,7 @@ let qualifiedAs
         , importStyle = Some Types.ImportStyle.qualified
         , qualifiedStyle = None Types.QualifiedStyle
         , within = None (List Text)
+        , message = None Text
         }
 
 let qualifiedAsRequired
@@ -84,6 +85,20 @@ let qualifiedAsRequired
         , importStyle = Some Types.ImportStyle.qualified
         , qualifiedStyle = None Types.QualifiedStyle
         , within = None (List Text)
+        , message = None Text
+        }
+
+let banModule
+    : Text -> Text -> Types.Module
+    = \(name : Text) ->
+      \(reason : Text) ->
+        { name
+        , `as` = None Text
+        , asRequired = None Bool
+        , importStyle = None Types.ImportStyle
+        , qualifiedStyle = None Types.QualifiedStyle
+        , within = Some ([] : List Text)
+        , message = Some reason
         }
 
 in  { restrictFunction
@@ -96,5 +111,6 @@ in  { restrictFunction
     , modules
     , qualifiedAs
     , qualifiedAsRequired
+    , banModule
     , Prelude
     }
