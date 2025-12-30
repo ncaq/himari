@@ -21,14 +21,11 @@ jobs:
         id: version
         run: |
           set -euo pipefail
-
           if [ ! -f himari.cabal ]; then
             echo "himari.cabal not found"
             exit 1
           fi
-
           VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
-
           if [ -z "${VERSION:-}" ]; then
             echo "Failed to extract version from himari.cabal"
             exit 1
@@ -37,6 +34,7 @@ jobs:
       - name: Check if tag exists
         id: check_tag
         run: |
+          set -euo pipefail
           if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
@@ -45,7 +43,7 @@ jobs:
       - name: Create tag
         if: steps.check_tag.outputs.exists == 'false'
         run: |
-          set -e
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
