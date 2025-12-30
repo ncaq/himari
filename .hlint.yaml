@@ -138,10 +138,10 @@
       message: "Use Data.Text.unsnoc instead"
     - name: Data.Text.maximum
       within: []
-      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty Text. Use fold with explicit initial value."
     - name: Data.Text.minimum
       within: []
-      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty Text. Use fold with explicit initial value."
 
 # `Data.Text.Lazy`部分関数
 - functions:
@@ -159,10 +159,10 @@
       message: "Use Data.Text.Lazy.unsnoc instead"
     - name: Data.Text.Lazy.maximum
       within: []
-      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty Text. Use fold with explicit initial value."
     - name: Data.Text.Lazy.minimum
       within: []
-      message: "Partial: throws on empty Text. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty Text. Use fold with explicit initial value."
 
 # `Data.ByteString`部分関数(Strict)
 - functions:
@@ -180,10 +180,10 @@
       message: "Use Data.ByteString.unsnoc instead"
     - name: Data.ByteString.maximum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
     - name: Data.ByteString.minimum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
 
 # `Data.ByteString.Char8`部分関数
 - functions:
@@ -201,10 +201,10 @@
       message: "Use Data.ByteString.Char8.unsnoc instead"
     - name: Data.ByteString.Char8.maximum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
     - name: Data.ByteString.Char8.minimum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
 
 # `Data.ByteString.Lazy`部分関数
 - functions:
@@ -222,10 +222,10 @@
       message: "Use Data.ByteString.Lazy.unsnoc instead"
     - name: Data.ByteString.Lazy.maximum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
     - name: Data.ByteString.Lazy.minimum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
 
 # `Data.ByteString.Lazy.Char8`部分関数
 - functions:
@@ -243,10 +243,10 @@
       message: "Use Data.ByteString.Lazy.Char8.unsnoc instead"
     - name: Data.ByteString.Lazy.Char8.maximum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
     - name: Data.ByteString.Lazy.Char8.minimum
       within: []
-      message: "Partial: throws on empty ByteString. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
 
 # `Data.ByteString.Short`部分関数
 - functions:
@@ -1566,28 +1566,28 @@
     # 特化fold
     - name: Data.Vector.Generic.maximum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Generic.maximumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Generic.minimum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Generic.minimumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Generic.minIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Generic.minIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Generic.maxIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Generic.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     # モナディックfold1系
     - name: Data.Vector.Generic.fold1M
       within: []
@@ -1743,28 +1743,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.maximum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.maximumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.minimum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.minimumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.minIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.minIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.maxIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -1917,28 +1917,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Unboxed.maximum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Unboxed.maximumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Unboxed.minimum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Unboxed.minimumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Unboxed.minIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Unboxed.minIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Unboxed.maxIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Unboxed.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Unboxed.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -2085,28 +2085,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Storable.maximum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Storable.maximumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Storable.minimum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Storable.minimumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Storable.minIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Storable.minIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Storable.maxIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Storable.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Storable.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -2247,28 +2247,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Primitive.maximum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Primitive.maximumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Primitive.minimum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Primitive.minimumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Primitive.minIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Primitive.minIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Primitive.maxIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Primitive.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Primitive.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
@@ -2415,28 +2415,28 @@
       message: "Partial: throws on empty vector. Use foldr' with explicit initial value."
     - name: Data.Vector.Strict.maximum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Strict.maximumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Strict.minimum
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Strict.minimumBy
       within: []
-      message: "Partial: throws on empty vector. Use uncons to get first element, then foldl' over rest."
+      message: "Partial: throws on empty vector. Use fold with explicit initial value."
     - name: Data.Vector.Strict.minIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Strict.minIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Strict.maxIndex
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Strict.maxIndexBy
       within: []
-      message: "Partial: throws on empty vector. Use ifoldl' to track index manually with Maybe result."
+      message: "Partial: throws on empty vector. Use indexed fold with Maybe result."
     - name: Data.Vector.Strict.fold1M
       within: []
       message: "Partial: throws on empty vector. Use foldM with explicit initial value."
