@@ -69,19 +69,6 @@ let qualifiedAs
         { name
         , `as` = Some moduleAlias
         , asRequired = None Bool
-        , importStyle = Some Types.ImportStyle.qualified
-        , qualifiedStyle = None Types.QualifiedStyle
-        , within = None (List Text)
-        , message = None Text
-        }
-
-let qualifiedAsRequired
-    : Text -> Text -> Types.Module
-    = \(name : Text) ->
-      \(moduleAlias : Text) ->
-        { name
-        , `as` = Some moduleAlias
-        , asRequired = None Bool
         , importStyle = Some Types.ImportStyle.explicitOrQualified
         , qualifiedStyle = None Types.QualifiedStyle
         , within = None (List Text)
@@ -110,7 +97,6 @@ in  { restrictFunction
     , preferModule
     , modules
     , qualifiedAs
-    , qualifiedAsRequired
     , banModule
     , Prelude
     }
