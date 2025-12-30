@@ -1,17 +1,15 @@
 # himari hlint configuration
+#
+# このファイルはDhallによって自動生成されています。
+# 直接編集しないでください。
+#
 # himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
-#
-# このファイルはhlint/hlint.dhallからdhall-to-yaml-ngで生成されています。
-# 編集する場合はDhallファイルを編集してください。
-#
 # 部分関数や危険な関数の使用を警告したり、
 # より可読性の高いパターンを提案します。
-
-# 警告対象外のものの理由:
-# - `isJust`/`fromJust`パターン: hlintデフォルトで提案される
-# - ゼロ除算(`div`, `mod`等): 排除不可能、型レベル保証には依存型が必要
-# - `fromIntegral`, `realToFrac`: 代替手段が常に使えるわけではない
-
+#
+# 使い方:
+#   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
+#   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
 - group:
     enabled: true
     name: generalise
