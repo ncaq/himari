@@ -13,6 +13,7 @@ let rules
       # ./rules/exceptions.dhall
       # ./rules/partial.dhall
       # ./rules/performance.dhall
+      # ./rules/qualified-imports.dhall
       # ./rules/safe.dhall
       # ./rules/string-io.dhall
       # ./rules/text.dhall

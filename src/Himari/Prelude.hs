@@ -1,6 +1,26 @@
 -- | Alternative to `Prelude`.
 module Himari.Prelude
   ( module Export
+  -- Type only re-exports.
+  , ByteString
+  , StrictByteString
+  , LazyByteString
+  , ShortByteString
+  , HashMap
+  , HashSet
+  , IntMap
+  , IntSet
+  , List
+  , NonEmpty
+  , Map
+  , Seq
+  , Set
+  , StrictText
+  , Text
+  , LazyText
+  , Tree
+  , MVector
+  , Vector
   ) where
 
 import Control.Applicative as Export
@@ -132,19 +152,19 @@ import Safe.Foldable as Export hiding
 -- Type only.
 
 import Control.Monad.Catch as Export (MonadCatch, MonadMask, MonadThrow)
-import Data.ByteString as Export (ByteString, StrictByteString)
-import Data.ByteString.Lazy as Export (LazyByteString)
-import Data.ByteString.Short as Export (ShortByteString)
-import Data.HashMap.Strict as Export (HashMap)
-import Data.HashSet as Export (HashSet)
-import Data.IntMap as Export (IntMap)
-import Data.IntSet as Export (IntSet)
-import Data.List as Export (List)
-import Data.List.NonEmpty as Export (NonEmpty)
-import Data.Map.Strict as Export (Map)
-import Data.Sequence as Export (Seq)
-import Data.Set as Export (Set)
-import Data.Text as Export (StrictText, Text)
-import Data.Text.Lazy as Export (LazyText)
-import Data.Tree as Export (Tree)
-import Data.Vector as Export (MVector, Vector)
+import Data.ByteString (ByteString, StrictByteString)
+import Data.ByteString.Lazy (LazyByteString)
+import Data.ByteString.Short (ShortByteString)
+import Data.HashMap.Strict (HashMap)
+import Data.HashSet (HashSet)
+import Data.IntMap.Strict (IntMap)
+import Data.IntSet (IntSet)
+import Data.List (List)
+import Data.List.NonEmpty (NonEmpty)
+import Data.Map.Strict (Map)
+import Data.Sequence (Seq)
+import Data.Set (Set)
+import Data.Text (StrictText, Text)
+import Data.Text.Lazy (LazyText)
+import Data.Tree (Tree)
+import Data.Vector (MVector, Vector)

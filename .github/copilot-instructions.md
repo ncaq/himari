@@ -4,6 +4,16 @@ AIは日本語で出力してください。
 
 ## 重要コマンド
 
+### `nix flake check`
+
+対応しているフォーマット・ビルド・テストを全て実行します。
+
+```console
+nix flake check
+```
+
+例えば`nix fmt`, `cabal build`, `cabal test`も全て含まれています。
+
 ### フォーマット
 
 基本的にファイルはツールで自動フォーマットしています。
@@ -48,6 +58,10 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 
 `.hlint.yaml`は他の`hlint`ディレクトリ以下のDhallファイルから自動生成しているため、
 直接の読み書きは想定していません。
+
+`.hlint.yaml`は通常のHaskellプロジェクトと異なり、
+このプロジェクトのリンターというだけではなく、
+他のユーザにも配るhimariライブラリのリンター設定として開発しています。
 
 ### hlint
 

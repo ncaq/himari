@@ -454,6 +454,82 @@
     - message: "O(n) stack space. Use length with explicit conversion."
       name: genericLength
       within: []
+- modules:
+    - as: B
+      importStyle: explicitOrQualified
+      name: Data.ByteString
+    - as: B8
+      importStyle: explicitOrQualified
+      name: Data.ByteString.Char8
+    - as: BL
+      importStyle: explicitOrQualified
+      name: Data.ByteString.Lazy
+    - as: BL8
+      importStyle: explicitOrQualified
+      name: Data.ByteString.Lazy.Char8
+    - as: T
+      importStyle: explicitOrQualified
+      name: Data.Text
+    - as: TL
+      importStyle: explicitOrQualified
+      name: Data.Text.Lazy
+    - message: "Data.Map is a re-export of Data.Map.Lazy. Use Data.Map.Strict or Data.Map.Lazy directly."
+      name: Data.Map
+      within: []
+    - as: Map
+      importStyle: explicitOrQualified
+      name: Data.Map.Strict
+    - as: MapL
+      importStyle: explicitOrQualified
+      name: Data.Map.Lazy
+    - message: "Data.IntMap is a re-export of Data.IntMap.Lazy. Use Data.IntMap.Strict or Data.IntMap.Lazy directly."
+      name: Data.IntMap
+      within: []
+    - as: IntMap
+      importStyle: explicitOrQualified
+      name: Data.IntMap.Strict
+    - as: IntMapL
+      importStyle: explicitOrQualified
+      name: Data.IntMap.Lazy
+    - as: Set
+      importStyle: explicitOrQualified
+      name: Data.Set
+    - as: Seq
+      importStyle: explicitOrQualified
+      name: Data.Sequence
+    - as: IntSet
+      importStyle: explicitOrQualified
+      name: Data.IntSet
+    - as: HM
+      importStyle: explicitOrQualified
+      name: Data.HashMap.Strict
+    - as: HML
+      importStyle: explicitOrQualified
+      name: Data.HashMap.Lazy
+    - as: HS
+      importStyle: explicitOrQualified
+      name: Data.HashSet
+    - as: L
+      importStyle: explicitOrQualified
+      name: Data.List
+    - as: NE
+      importStyle: explicitOrQualified
+      name: Data.List.NonEmpty
+    - as: C
+      importStyle: explicitOrQualified
+      name: Data.Char
+    - as: V
+      importStyle: explicitOrQualified
+      name: Data.Vector
+    - as: VG
+      importStyle: explicitOrQualified
+      name: Data.Vector.Generic
+    - as: VS
+      importStyle: explicitOrQualified
+      name: Data.Vector.Storable
+    - as: VU
+      importStyle: explicitOrQualified
+      name: Data.Vector.Unboxed
 - functions:
     - message: "Partial: throws on maxBound. Use succMay, succDef, or succSafe from Safe instead."
       name: succ

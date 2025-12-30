@@ -1,4 +1,8 @@
 -- hlintルールのビルダー関数
+let Prelude =
+      https://prelude.dhall-lang.org/v23.1.0/package.dhall
+        sha256:931cbfae9d746c4611b07633ab1e547637ab4ba138b16bf65ef1b9ad66a60b7f
+
 let Types = ./Types.dhall
 
 let restrictFunction
@@ -37,10 +41,6 @@ let enableGroup
     : Text -> Types.Rule
     = \(name : Text) -> Types.Rule.Group { group = { name, enabled = True } }
 
-let Prelude =
-      https://prelude.dhall-lang.org/v23.1.0/package.dhall
-        sha256:931cbfae9d746c4611b07633ab1e547637ab4ba138b16bf65ef1b9ad66a60b7f
-
 let preferModule
     : Text -> Text -> Text -> List Text -> List Types.Function
     = \(fromModule : Text) ->
@@ -58,6 +58,36 @@ let preferModule
           )
           funcs
 
+let modules
+    : List Types.Module -> Types.Rule
+    = \(ms : List Types.Module) -> Types.Rule.Modules { modules = ms }
+
+let qualifiedAs
+    : Text -> Text -> Types.Module
+    = \(name : Text) ->
+      \(moduleAlias : Text) ->
+        { name
+        , `as` = Some moduleAlias
+        , asRequired = None Bool
+        , importStyle = Some Types.ImportStyle.explicitOrQualified
+        , qualifiedStyle = None Types.QualifiedStyle
+        , within = None (List Text)
+        , message = None Text
+        }
+
+let banModule
+    : Text -> Text -> Types.Module
+    = \(name : Text) ->
+      \(reason : Text) ->
+        { name
+        , `as` = None Text
+        , asRequired = None Bool
+        , importStyle = None Types.ImportStyle
+        , qualifiedStyle = None Types.QualifiedStyle
+        , within = Some ([] : List Text)
+        , message = Some reason
+        }
+
 in  { restrictFunction
     , restrictInModule
     , functions
@@ -65,5 +95,8 @@ in  { restrictFunction
     , useConvert
     , enableGroup
     , preferModule
+    , modules
+    , qualifiedAs
+    , banModule
     , Prelude
     }
