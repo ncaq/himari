@@ -165,6 +165,7 @@
         apps = flake.apps // {
           generate-hlint = {
             type = "app";
+            meta.description = "Generate .hlint.yaml from Dhall source";
             program = pkgs.lib.getExe (
               pkgs.writeShellApplication {
                 name = "generate-hlint";
