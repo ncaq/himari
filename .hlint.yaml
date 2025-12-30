@@ -518,6 +518,178 @@
       name: genericLength
       within: []
 - functions:
+    - message: "Partial: synonym for error. Use throwM or Left instead."
+      name: Safe.abort
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use atMay or atDef instead."
+      name: Safe.at
+      within: []
+    - message: "Partial: throws on empty list. Use headMay or headDef instead."
+      name: Safe.headErr
+      within: []
+    - message: "Partial: throws on empty list. Use tailMay or tailDef instead."
+      name: Safe.tailErr
+      within: []
+    - message: "Partial: throws on missing key. Use lookup or lookupJustDef instead."
+      name: Safe.lookupJust
+      within: []
+    - message: "Partial: throws when not found. Use find or findJustDef instead."
+      name: Safe.findJust
+      within: []
+    - message: "Partial: throws when not found. Use elemIndex or elemIndexJustDef instead."
+      name: Safe.elemIndexJust
+      within: []
+    - message: "Partial: throws when not found. Use findIndex or findIndexJustDef instead."
+      name: Safe.findIndexJust
+      within: []
+- functions:
+    - message: "Partial: throws on empty list. Use tailMay or tailDef instead."
+      name: Safe.tailNote
+      within: []
+    - message: "Partial: throws on empty list. Use initMay or initDef instead."
+      name: Safe.initNote
+      within: []
+    - message: "Partial: throws on empty list. Use headMay or headDef instead."
+      name: Safe.headNote
+      within: []
+    - message: "Partial: throws on empty list. Use lastMay or lastDef instead."
+      name: Safe.lastNote
+      within: []
+    - message: "Partial: throws on empty list. Use minimumMay or minimumBound instead."
+      name: Safe.minimumNote
+      within: []
+    - message: "Partial: throws on empty list. Use maximumMay or maximumBound instead."
+      name: Safe.maximumNote
+      within: []
+    - message: "Partial: throws on empty list. Use minimumByMay or minimumBoundBy instead."
+      name: Safe.minimumByNote
+      within: []
+    - message: "Partial: throws on empty list. Use maximumByMay or maximumBoundBy instead."
+      name: Safe.maximumByNote
+      within: []
+    - message: "Partial: throws on empty list. Use foldr1May instead."
+      name: Safe.foldr1Note
+      within: []
+    - message: "Partial: throws on empty list. Use foldl1May instead."
+      name: Safe.foldl1Note
+      within: []
+    - message: "Partial: throws on empty list. Use foldl1May' instead."
+      name: "Safe.foldl1Note'"
+      within: []
+    - message: "Partial: throws on empty list. Use scanr1May or scanr1Def instead."
+      name: Safe.scanr1Note
+      within: []
+    - message: "Partial: throws on empty list. Use scanl1May or scanl1Def instead."
+      name: Safe.scanl1Note
+      within: []
+    - message: "Partial: throws on empty list. Use cycleMay or cycleDef instead."
+      name: Safe.cycleNote
+      within: []
+    - message: "Partial: throws on Nothing. Use fromMaybe instead."
+      name: Safe.fromJustNote
+      within: []
+    - message: "Partial: throws on False. Use guard or when instead."
+      name: Safe.assertNote
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use atMay or atDef instead."
+      name: Safe.atNote
+      within: []
+    - message: "Partial: throws on parse failure. Use readMay or readDef instead."
+      name: Safe.readNote
+      within: []
+    - message: "Partial: throws on missing key. Use lookup or lookupJustDef instead."
+      name: Safe.lookupJustNote
+      within: []
+    - message: "Partial: throws when not found. Use find or findJustDef instead."
+      name: Safe.findJustNote
+      within: []
+    - message: "Partial: throws when not found. Use elemIndex or elemIndexJustDef instead."
+      name: Safe.elemIndexJustNote
+      within: []
+    - message: "Partial: throws when not found. Use findIndex or findIndexJustDef instead."
+      name: Safe.findIndexJustNote
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use toEnumMay or toEnumDef instead."
+      name: Safe.toEnumNote
+      within: []
+    - message: "Partial: throws on maxBound. Use succMay or succDef instead."
+      name: Safe.succNote
+      within: []
+    - message: "Partial: throws on minBound. Use predMay or predDef instead."
+      name: Safe.predNote
+      within: []
+    - message: "Partial: throws on out-of-range. Use indexMay or indexDef instead."
+      name: Safe.indexNote
+      within: []
+- functions:
+    - message: "Partial: throws on insufficient elements. Use takeExactMay or takeExactDef instead."
+      name: Safe.Exact.takeExact
+      within: []
+    - message: "Partial: throws on insufficient elements. Use dropExactMay or dropExactDef instead."
+      name: Safe.Exact.dropExact
+      within: []
+    - message: "Partial: throws on insufficient elements. Use splitAtExactMay or splitAtExactDef instead."
+      name: Safe.Exact.splitAtExact
+      within: []
+    - message: "Partial: throws on length mismatch. Use zipExactMay or zipExactDef instead."
+      name: Safe.Exact.zipExact
+      within: []
+    - message: "Partial: throws on length mismatch. Use zipWithExactMay or zipWithExactDef instead."
+      name: Safe.Exact.zipWithExact
+      within: []
+    - message: "Partial: throws on length mismatch. Use zip3ExactMay or zip3ExactDef instead."
+      name: Safe.Exact.zip3Exact
+      within: []
+    - message: "Partial: throws on length mismatch. Use zipWith3ExactMay or zipWith3ExactDef instead."
+      name: Safe.Exact.zipWith3Exact
+      within: []
+    - message: "Partial: throws on insufficient elements. Use takeExactMay or takeExactDef instead."
+      name: Safe.Exact.takeExactNote
+      within: []
+    - message: "Partial: throws on insufficient elements. Use dropExactMay or dropExactDef instead."
+      name: Safe.Exact.dropExactNote
+      within: []
+    - message: "Partial: throws on insufficient elements. Use splitAtExactMay or splitAtExactDef instead."
+      name: Safe.Exact.splitAtExactNote
+      within: []
+    - message: "Partial: throws on length mismatch. Use zipExactMay or zipExactDef instead."
+      name: Safe.Exact.zipExactNote
+      within: []
+    - message: "Partial: throws on length mismatch. Use zipWithExactMay or zipWithExactDef instead."
+      name: Safe.Exact.zipWithExactNote
+      within: []
+    - message: "Partial: throws on length mismatch. Use zip3ExactMay or zip3ExactDef instead."
+      name: Safe.Exact.zip3ExactNote
+      within: []
+    - message: "Partial: throws on length mismatch. Use zipWith3ExactMay or zipWith3ExactDef instead."
+      name: Safe.Exact.zipWith3ExactNote
+      within: []
+- functions:
+    - message: "Partial: throws on empty structure. Use foldl1May instead."
+      name: Safe.Foldable.foldl1Note
+      within: []
+    - message: "Partial: throws on empty structure. Use foldr1May instead."
+      name: Safe.Foldable.foldr1Note
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumMay or minimumBound instead."
+      name: Safe.Foldable.minimumNote
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumMay or maximumBound instead."
+      name: Safe.Foldable.maximumNote
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy instead."
+      name: Safe.Foldable.minimumByNote
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy instead."
+      name: Safe.Foldable.maximumByNote
+      within: []
+    - message: "Partial: throws when not found. Use find or findJustDef instead."
+      name: Safe.Foldable.findJust
+      within: []
+    - message: "Partial: throws when not found. Use find or findJustDef instead."
+      name: Safe.Foldable.findJustNote
+      within: []
+- functions:
     - message: Encoding depends on LANG env. Use Text or ByteString.
       name: System.IO.getChar
       within: []
