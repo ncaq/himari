@@ -59,6 +59,10 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 `.hlint.yaml`は他の`hlint`ディレクトリ以下のDhallファイルから自動生成しているため、
 直接の読み書きは想定していません。
 
+`.hlint.yaml`は通常のHaskellプロジェクトと異なり、
+このプロジェクトのリンターというだけではなく、
+他のユーザにも配るhimariライブラリのリンター設定として開発しています。
+
 ### hlint
 
 `.hlint.yaml`ファイルを生成するためのDhallソースコードが配置されています。
