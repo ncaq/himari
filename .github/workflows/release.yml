@@ -2,17 +2,56 @@ name: release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - master
+    paths:
+      - "himari.cabal"
 
 permissions:
   contents: write
 
 jobs:
-  gh-release-create:
+  release:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
-      - run: gh release create "${{ github.ref_name }}" --generate-notes
+        with:
+          fetch-depth: 0
+      - name: Extract version from cabal
+        id: version
+        run: |
+          set -euo pipefail
+
+          if [ ! -f himari.cabal ]; then
+            echo "himari.cabal not found"
+            exit 1
+          fi
+
+          VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
+
+          if [ -z "${VERSION:-}" ]; then
+            echo "Failed to extract version from himari.cabal"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Create tag
+        if: steps.check_tag.outputs.exists == 'false'
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+          git push origin "v${{ steps.version.outputs.version }}"
+      - name: Create GitHub Release
+        if: steps.check_tag.outputs.exists == 'false'
+        run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
