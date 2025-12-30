@@ -13,12 +13,31 @@ let Group
     : Type
     = { name : Text, enabled : Bool }
 
+let ImportStyle
+    : Type
+    = < qualified | unqualified | explicitOrQualified | unrestricted >
+
+let QualifiedStyle
+    : Type
+    = < pre | post >
+
+let Module
+    : Type
+    = { name : Text
+      , `as` : Optional Text
+      , asRequired : Optional Bool
+      , importStyle : Optional ImportStyle
+      , qualifiedStyle : Optional QualifiedStyle
+      , within : Optional (List Text)
+      }
+
 let Rule
     : Type
     = < Functions : { functions : List Function }
       | Hint : { hint : Hint }
       | Group : { group : Group }
       | Arguments : { arguments : List Text }
+      | Modules : { modules : List Module }
       >
 
-in  { Function, Hint, Group, Rule }
+in  { Function, Hint, Group, ImportStyle, QualifiedStyle, Module, Rule }
