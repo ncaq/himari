@@ -81,8 +81,8 @@ let qualifiedAsRequired
       \(moduleAlias : Text) ->
         { name
         , `as` = Some moduleAlias
-        , asRequired = Some True
-        , importStyle = Some Types.ImportStyle.qualified
+        , asRequired = None Bool
+        , importStyle = Some Types.ImportStyle.explicitOrQualified
         , qualifiedStyle = None Types.QualifiedStyle
         , within = None (List Text)
         , message = None Text
