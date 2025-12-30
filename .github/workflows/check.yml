@@ -48,3 +48,6 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: editorconfig-checker
         run: nix run 'nixpkgs#editorconfig-checker' -- -config .editorconfig-checker.json
+      - name: generate-hlint
+        run: nix run '.#generate-hlint'
+      - run: git diff --exit-code
