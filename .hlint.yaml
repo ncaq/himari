@@ -490,7 +490,7 @@
       name: succ
       within: []
 - functions:
-    - message: "Partial: throws on non-hex-digit character. Use digitToIntSafe or pattern match."
+    - message: "Partial: throws on non-hex-digit character. No safe alternative exists. Use pattern matching on '0'..'9', 'a'..'f', 'A'..'F'."
       name: Data.Char.digitToInt
       within: []
     - message: "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
