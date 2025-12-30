@@ -19,8 +19,19 @@ jobs:
       - name: Extract version from cabal
         id: version
         run: |
+          set -euo pipefail
+
+          if [ ! -f himari.cabal ]; then
+            echo "himari.cabal not found"
+            exit 1
+          fi
+
           VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
-          [ -n "$VERSION" ] || { echo "Failed to extract version"; exit 1; }
+
+          if [ -z "${VERSION:-}" ]; then
+            echo "Failed to extract version from himari.cabal"
+            exit 1
+          fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Check if tag exists
         id: check_tag
