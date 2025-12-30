@@ -1,0 +1,38 @@
+name: Auto Tag on Version Change
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "himari.cabal"
+
+jobs:
+  auto-tag:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 50
+      - name: Extract version from cabal
+        id: version
+        run: |
+          VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Create tag
+        if: steps.check_tag.outputs.exists == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+          git push origin "v${{ steps.version.outputs.version }}"
