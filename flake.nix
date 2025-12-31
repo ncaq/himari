@@ -144,8 +144,8 @@
             hlint = {
               enable = true;
               package = pkgs.hlint;
-              # hlint-samplesディレクトリはhlintルールのテスト用であり、意図的に警告を出すコードを含む
-              excludes = [ "test/hlint-samples/*" ];
+              # HlintSamplesディレクトリはhlintルールのテスト用であり、意図的に警告を出すコードを含む
+              excludes = [ "test/HlintSamples/*" ];
             };
 
             fourmolu = {

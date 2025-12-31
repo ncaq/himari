@@ -1,39 +1,11 @@
-{-# LANGUAGE ImportQualifiedPost #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-
 -- This file contains code patterns that should trigger hlint warnings
 -- for preferring unliftio functions over standard library functions.
--- This file is excluded from treefmt checks via flake.nix settings.
-module UnliftioPreference where
+module HlintSamples.UnliftioPreference where
 
-import Control.Concurrent.Async qualified as Async
 import Control.Concurrent.MVar qualified as MVar
 import Control.Exception qualified as Exception
+import Himari
 import System.Timeout qualified as Timeout
-
--- Control.Concurrent.Async functions (should warn)
-badAsync :: IO ()
-badAsync = do
-  _ <- Async.async (pure ())
-  pure ()
-
-badWithAsync :: IO ()
-badWithAsync = Async.withAsync (pure ()) $ \_ -> pure ()
-
-badRace :: IO ()
-badRace = do
-  _ <- Async.race (pure ()) (pure ())
-  pure ()
-
-badConcurrently :: IO ()
-badConcurrently = do
-  _ <- Async.concurrently (pure ()) (pure ())
-  pure ()
-
-badMapConcurrently :: IO ()
-badMapConcurrently = do
-  _ <- Async.mapConcurrently pure [1 :: Int, 2, 3]
-  pure ()
 
 -- Control.Exception functions (should warn)
 badCatch :: IO ()
