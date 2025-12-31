@@ -83,7 +83,7 @@ nix run '.#generate-hlint'
 
 ## Nix
 
-Nix Flakesはgitで管理されていないファイルを意図的に無視します
+Nix Flakesはgitで管理されていないファイルを意図的に無視します。
 よって新規にソースコードなどを追加した時に`nix flake check`を通すためには、
 git addで使いたいファイルを追加する必要があります。
 
