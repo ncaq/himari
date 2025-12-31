@@ -152,17 +152,8 @@ import Safe.Foldable as Export hiding
 -- Safe alternatives to partial functions from Data.Char.
 -- These functions return Maybe instead of throwing exceptions.
 import Himari.Char as Export
-  ( intToDigitMay
-  )
-import Text.Ascii as Export
-  ( fromDecDigit
-  , fromHexDigit
-  , fromLowHexDigit
-  , fromNzDecDigit
-  , fromNzHexDigit
-  , fromNzOctDigit
-  , fromOctDigit
-  , fromUpHexDigit
+  ( digitToIntMay
+  , intToDigitMay
   )
 
 -- aeson系には被りそうな関数名が多いので、hidingしたり、シンボルを個別importします。

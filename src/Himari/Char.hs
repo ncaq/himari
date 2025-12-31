@@ -1,13 +1,37 @@
 -- | Safe alternatives to partial functions from "Data.Char".
 module Himari.Char
-  ( intToDigitMay
+  ( digitToIntMay
+  , intToDigitMay
   ) where
 
-import Data.Bool (otherwise, (&&))
-import Data.Char (Char, intToDigit)
-import Data.Int (Int)
-import Data.Maybe (Maybe (..))
-import Data.Ord ((<=))
+import Data.Char (digitToInt, intToDigit, isHexDigit)
+import Prelude
+
+-- | Safe version of 'digitToInt'.
+--
+-- Converts a hexadecimal digit character to the corresponding 'Int' value.
+-- Accepts decimal digits (@\'0\'@-@\'9\'@), lowercase hex digits (@\'a\'@-@\'f\'@),
+-- and uppercase hex digits (@\'A\'@-@\'F\'@).
+--
+-- Returns 'Nothing' for characters outside the valid range,
+-- instead of throwing an exception like 'digitToInt'.
+--
+-- >>> digitToIntMay '0'
+-- Just 0
+-- >>> digitToIntMay '9'
+-- Just 9
+-- >>> digitToIntMay 'a'
+-- Just 10
+-- >>> digitToIntMay 'F'
+-- Just 15
+-- >>> digitToIntMay 'g'
+-- Nothing
+-- >>> digitToIntMay ' '
+-- Nothing
+digitToIntMay :: Char -> Maybe Int
+digitToIntMay c
+  | isHexDigit c = Just (digitToInt c {- HLINT ignore "Avoid restricted function" -})
+  | otherwise = Nothing
 
 -- | Safe version of 'intToDigit'.
 --

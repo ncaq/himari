@@ -68,7 +68,6 @@ common basic
     primitive ^>=0.9.1.0,
     safe ^>=0.3.21,
     text ^>=2.1.2,
-    text-latin1 ^>=0.3.1,
     time ^>=1.12.2,
     typed-process ^>=0.2.13.0,
     unliftio ^>=0.2.25.1,
@@ -109,7 +108,6 @@ test-suite himari-test
   other-modules:
     Himari.CharSpec
     Himari.Env.SimpleSpec
-    Himari.PreludeSpec
     Himari.Title
     HlintBaseSpec
     HlintSamples.BasePartial

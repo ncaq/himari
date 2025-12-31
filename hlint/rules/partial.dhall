@@ -35,7 +35,7 @@ let rules
           [ Builder.restrictInModule
               "Data.Char"
               "digitToInt"
-              "Partial: throws on non-hex-digit character. Use fromHexDigit from Text.Ascii (text-latin1 package) which returns Maybe. Also available: fromDecDigit, fromOctDigit."
+              "Partial: throws on non-hex-digit character. Use digitToIntMay from Himari.Char which returns Maybe."
           , Builder.restrictInModule
               "Data.Char"
               "intToDigit"
