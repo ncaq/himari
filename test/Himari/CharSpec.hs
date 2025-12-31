@@ -1,6 +1,6 @@
 module Himari.CharSpec (spec) where
 
-import Data.Char (digitToInt, intToDigit, isHexDigit, toUpper)
+import Data.Char (chr, digitToInt, intToDigit, isHexDigit, ord, toUpper)
 import Himari hiding (elements)
 import Test.QuickCheck
 import Test.Syd
@@ -134,3 +134,75 @@ spec = do
           case intToDigitMay n of
             Just c -> c `elem` ['0' .. '9']
             Nothing -> False
+
+  describe "chrMay" $ do
+    describe "boundary values" $ do
+      it "returns Just for 0 (NUL)" $ do
+        chrMay 0 `shouldBe` Just '\0'
+
+      it "returns Just 'A' for 65" $ do
+        chrMay 65 `shouldBe` Just 'A'
+
+      it "returns Just for max valid code point (0x10FFFF)" $ do
+        chrMay 0x10FFFF `shouldBe` Just '\x10FFFF'
+
+      it "returns Nothing for -1" $ do
+        chrMay (-1) `shouldBe` Nothing
+
+      it "returns Nothing for 0x110000 (beyond max)" $ do
+        chrMay 0x110000 `shouldBe` Nothing
+
+      it "returns Nothing for surrogate start (0xD800)" $ do
+        chrMay 0xD800 `shouldBe` Nothing
+
+      it "returns Nothing for surrogate end (0xDFFF)" $ do
+        chrMay 0xDFFF `shouldBe` Nothing
+
+      it "returns Nothing for surrogate middle (0xDC00)" $ do
+        chrMay 0xDC00 `shouldBe` Nothing
+
+    describe "valid ranges" $ do
+      it "returns Just for code points before surrogate range" $ do
+        chrMay 0xD7FF `shouldSatisfy` isJust
+
+      it "returns Just for code points after surrogate range" $ do
+        chrMay 0xE000 `shouldSatisfy` isJust
+
+      it "returns Just for common characters" $ do
+        forM_ [('a', 97), ('z', 122), ('0', 48), ('9', 57)] $ \(expected, n) ->
+          chrMay n `shouldBe` Just expected
+
+    describe "QuickCheck properties" $ do
+      it "returns Just for valid BMP code points (excluding surrogates)" $ do
+        property . forAll (choose (0, 0xD7FF)) $ \n ->
+          isJust (chrMay n)
+
+      it "returns Just for valid code points after surrogates" $ do
+        property . forAll (choose (0xE000, 0x10FFFF)) $ \n ->
+          isJust (chrMay n)
+
+      it "returns Nothing for surrogate range" $ do
+        property . forAll (choose (0xD800, 0xDFFF)) $ \n ->
+          isNothing (chrMay n)
+
+      it "returns Nothing for negative values" $ do
+        property . forAll (choose (-1000, -1)) $ \n ->
+          isNothing (chrMay n)
+
+      it "returns Nothing for values beyond max code point" $ do
+        property . forAll (choose (0x110000, 0x200000)) $ \n ->
+          isNothing (chrMay n)
+
+      it "matches chr for all valid inputs" $ do
+        property . forAll (choose (0, 0xD7FF)) $ \n ->
+          chrMay n == Just (chr n {- HLINT ignore "Avoid restricted function" -})
+
+      it "is inverse of ord for valid characters" $ do
+        property $ \c ->
+          chrMay (ord c) == Just c
+
+      it "never throws an exception for any Int value" $ do
+        withMaxSuccess 10000 . property $ \n ->
+          case chrMay n of
+            Just _ -> True
+            Nothing -> True

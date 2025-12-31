@@ -43,7 +43,7 @@ let rules
           , Builder.restrictInModule
               "Data.Char"
               "chr"
-              "Partial: throws on invalid code point. Use explicit bounds checking."
+              "Partial: throws on invalid code point. Use chrMay from Himari.Char which returns Maybe."
           ]
       ]
 

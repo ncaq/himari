@@ -152,7 +152,8 @@ import Safe.Foldable as Export hiding
 -- Safe alternatives to partial functions from Data.Char.
 -- These functions return Maybe instead of throwing exceptions.
 import Himari.Char as Export
-  ( digitToIntMay
+  ( chrMay
+  , digitToIntMay
   , intToDigitMay
   )
 

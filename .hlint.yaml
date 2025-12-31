@@ -672,7 +672,7 @@
     - message: "Partial: throws on out-of-range (must be 0-15). Use intToDigitMay from Himari.Char which returns Maybe."
       name: Data.Char.intToDigit
       within: []
-    - message: "Partial: throws on invalid code point. Use explicit bounds checking."
+    - message: "Partial: throws on invalid code point. Use chrMay from Himari.Char which returns Maybe."
       name: Data.Char.chr
       within: []
 - functions:
