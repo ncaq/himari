@@ -73,6 +73,66 @@
       name: Data.Aeson.Types.Internal.parseMaybe
       within: []
 - functions:
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.trace
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceId
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceShow
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceShowId
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceWith
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceShowWith
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceStack
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceIO
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceM
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceShowM
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.putTraceMsg
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceEvent
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceEventWith
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceEventIO
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.flushEventLog
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceMarker
+      within: []
+    - message: "Debug function, not for production. Remove before release."
+      name: Debug.Trace.traceMarkerIO
+      within: []
+- modules:
+    - message: Unsafe ST operations. Use Control.Monad.ST instead.
+      name: Control.Monad.ST.Unsafe
+      within: []
+    - message: Unsafe lazy ST operations. Use Control.Monad.ST.Lazy instead.
+      name: Control.Monad.ST.Lazy.Unsafe
+      within: []
+- functions: []
+- functions:
     - message: Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead.
       name: Data.Bits.bitSize
       within: []
