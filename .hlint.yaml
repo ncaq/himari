@@ -288,10 +288,28 @@
       name: Data.ByteString.Unsafe.unsafeDrop
       within: []
 - functions:
-    - message: "Exceptions don't propagate to parent thread. Use async library."
+    - message: "Exceptions don't propagate to parent thread. Use async or withAsync from UnliftIO.Async instead."
       name: forkIO
       within: []
-    - message: Almost impossible to use correctly. Use async library.
+    - message: "Exceptions don't propagate to parent thread. Use asyncBound or withAsyncBound from UnliftIO.Async instead."
+      name: forkOS
+      within: []
+    - message: "Exceptions don't propagate to parent thread. Use asyncOn or withAsyncOn from UnliftIO.Async instead."
+      name: forkOn
+      within: []
+    - message: "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
+      name: forkIOWithUnmask
+      within: []
+    - message: "Deprecated and exceptions don't propagate. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
+      name: forkWithUnmask
+      within: []
+    - message: Use withAsync from UnliftIO.Async for automatic cancellation and exception handling.
+      name: forkFinally
+      within: []
+    - message: Prefer structured cancellation with cancel or withAsync from UnliftIO.Async.
+      name: killThread
+      within: []
+    - message: "Almost impossible to use correctly. Consider using typed-process or UnliftIO.Async."
       name: forkProcess
       within: []
 - functions:
