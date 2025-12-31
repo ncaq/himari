@@ -39,7 +39,7 @@ let rules
           , Builder.restrictInModule
               "Data.Char"
               "intToDigit"
-              "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
+              "Partial: throws on out-of-range (must be 0-15). Use intToDigitMay from Himari.Char which returns Maybe."
           , Builder.restrictInModule
               "Data.Char"
               "chr"

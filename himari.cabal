@@ -81,6 +81,7 @@ library
   -- cabal-gild: discover ./src
   exposed-modules:
     Himari
+    Himari.Char
     Himari.Env
     Himari.Env.Simple
     Himari.Logger
@@ -106,6 +107,7 @@ test-suite himari-test
 
   -- cabal-gild: discover ./test --exclude=**/Main.hs
   other-modules:
+    Himari.CharSpec
     Himari.Env.SimpleSpec
     Himari.PreludeSpec
     Himari.Title

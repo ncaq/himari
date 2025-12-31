@@ -669,7 +669,7 @@
     - message: "Partial: throws on non-hex-digit character. Use fromHexDigit from Text.Ascii (text-latin1 package) which returns Maybe. Also available: fromDecDigit, fromOctDigit."
       name: Data.Char.digitToInt
       within: []
-    - message: "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
+    - message: "Partial: throws on out-of-range (must be 0-15). Use intToDigitMay from Himari.Char which returns Maybe."
       name: Data.Char.intToDigit
       within: []
     - message: "Partial: throws on invalid code point. Use explicit bounds checking."
