@@ -13,6 +13,7 @@ let rules
       # ./rules/convertible.dhall
       # ./rules/exceptions.dhall
       # ./rules/lens.dhall
+      # ./rules/mtl.dhall
       # ./rules/partial.dhall
       # ./rules/performance.dhall
       # ./rules/qualified-imports.dhall
