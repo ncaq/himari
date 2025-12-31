@@ -331,8 +331,14 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 import Himari
 ```
 
-ただし`Himari.Prelude`モジュール自身がimportしているモジュールは循環参照の問題のためimport出来ません。
-それ以外ではなるべく`import Himari`でimportを済ませてください。
+ただし`Himari`モジュール自身がimportしているモジュールは循環参照の問題のためimport出来ません。
+
+`Himari.Prelude`は外部モジュールしかimportしていないので、
+循環参照の問題がある場合は以下のようにしてください。
+
+```haskell
+import Himari.Prelude
+```
 
 ### Template Haskellの`mkName`と`newName`の使いかた
 
