@@ -149,8 +149,19 @@ import Safe.Foldable as Export hiding
   , minimumNote
   )
 
--- aeson系には被りそうな関数名が多いので、hidingしたり個別importします。
-import Data.Aeson as Export hiding ((.=))
+-- aeson系には被りそうな関数名が多いので、hidingしたり、シンボルを個別importします。
+-- 非推奨の関数もhidingします。
+import Data.Aeson as Export hiding
+  ( decode'
+  , decodeFileStrict'
+  , decodeStrict'
+  , eitherDecode'
+  , eitherDecodeFileStrict'
+  , eitherDecodeStrict'
+  , throwDecode'
+  , throwDecodeStrict'
+  , (.=)
+  )
 import Data.Aeson.Encode.Pretty as Export
   ( encodePretty
   , encodePretty'
