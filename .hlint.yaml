@@ -72,58 +72,6 @@
     - message: Discards error info. Use parseEither instead to get error messages.
       name: Data.Aeson.Types.Internal.parseMaybe
       within: []
-- functions:
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.trace
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceId
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceShow
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceShowId
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceWith
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceShowWith
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceStack
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceIO
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceM
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceShowM
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.putTraceMsg
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceEvent
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceEventWith
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceEventIO
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.flushEventLog
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceMarker
-      within: []
-    - message: "Debug function, not for production. Remove before release."
-      name: Debug.Trace.traceMarkerIO
-      within: []
 - modules:
     - message: Unsafe ST operations. Use Control.Monad.ST instead.
       name: Control.Monad.ST.Unsafe
@@ -720,6 +668,62 @@
     - message: "O(n) stack space. Use length with explicit conversion."
       name: genericLength
       within: []
+- hint:
+    lhs: trace
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTrace
+- hint:
+    lhs: traceId
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceId
+- hint:
+    lhs: traceShow
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShow
+- hint:
+    lhs: traceShowId
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShowId
+- hint:
+    lhs: traceWith
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceWith
+- hint:
+    lhs: traceShowWith
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShowWith
+- hint:
+    lhs: traceStack
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceStack
+- hint:
+    lhs: traceIO
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceIO
+- hint:
+    lhs: traceM
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceM
+- hint:
+    lhs: traceShowM
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShowM
+- hint:
+    lhs: traceEvent
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceEvent
+- hint:
+    lhs: traceEventIO
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceEventIO
+- hint:
+    lhs: traceMarker
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceMarker
+- hint:
+    lhs: traceMarkerIO
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceMarkerIO
 - modules:
     - as: B
       importStyle: explicitOrQualified
