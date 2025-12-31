@@ -394,6 +394,77 @@
       name: Data.Set.deleteFindMax
       within: []
 - functions:
+    - message: "Use Data.IntMap.lookup or Data.IntMap.!? instead"
+      name: "Data.IntMap.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.lookupMin instead."
+      name: Data.IntMap.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.lookupMax instead."
+      name: Data.IntMap.findMax
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.minViewWithKey instead."
+      name: Data.IntMap.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.maxViewWithKey instead."
+      name: Data.IntMap.deleteFindMax
+      within: []
+- functions:
+    - message: "Use Data.IntMap.Strict.lookup or Data.IntMap.Strict.!? instead"
+      name: "Data.IntMap.Strict.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.lookupMin instead."
+      name: Data.IntMap.Strict.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.lookupMax instead."
+      name: Data.IntMap.Strict.findMax
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.minViewWithKey instead."
+      name: Data.IntMap.Strict.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.maxViewWithKey instead."
+      name: Data.IntMap.Strict.deleteFindMax
+      within: []
+- functions:
+    - message: "Use Data.IntMap.Lazy.lookup or Data.IntMap.Lazy.!? instead"
+      name: "Data.IntMap.Lazy.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.lookupMin instead."
+      name: Data.IntMap.Lazy.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.lookupMax instead."
+      name: Data.IntMap.Lazy.findMax
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.minViewWithKey instead."
+      name: Data.IntMap.Lazy.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.maxViewWithKey instead."
+      name: Data.IntMap.Lazy.deleteFindMax
+      within: []
+- functions:
+    - message: "Partial: throws on empty set. Use Data.IntSet.lookupMin instead."
+      name: Data.IntSet.findMin
+      within: []
+    - message: "Partial: throws on empty set. Use Data.IntSet.lookupMax instead."
+      name: Data.IntSet.findMax
+      within: []
+    - message: "Partial: throws on empty set. Use Data.IntSet.minView instead."
+      name: Data.IntSet.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty set. Use Data.IntSet.maxView instead."
+      name: Data.IntSet.deleteFindMax
+      within: []
+- functions:
+    - message: "Partial: throws on out-of-bounds. Use Data.Sequence.lookup or Data.Sequence.!? instead."
+      name: Data.Sequence.index
+      within: []
+    - message: "Partial: throws on empty Seq."
+      name: Data.Sequence.scanl1
+      within: []
+    - message: "Partial: throws on empty Seq."
+      name: Data.Sequence.scanr1
+      within: []
+- functions:
     - message: Use Data.HashMap.lookup instead
       name: "Data.HashMap.Strict.!"
       within: []
