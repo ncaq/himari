@@ -20,6 +20,7 @@ let rules
       # ./rules/text.dhall
       # ./rules/typed-process.dhall
       # ./rules/unliftio.dhall
+      # ./rules/unordered-containers.dhall
       # ./rules/unsafe.dhall
       # ./rules/vector.dhall
 

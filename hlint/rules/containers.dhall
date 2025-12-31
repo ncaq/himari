@@ -1,4 +1,3 @@
--- Map/HashMap/Set/IntMap/IntSet/Sequence部分関数警告
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
@@ -146,14 +145,6 @@ let rules
       , Builder.functions (partialIntMap "Data.IntMap.Lazy")
       , Builder.functions partialIntSet
       , Builder.functions partialSequence
-      , Builder.functions
-          [ Builder.restrictFunction
-              "Data.HashMap.Strict.!"
-              "Use Data.HashMap.lookup instead"
-          , Builder.restrictFunction
-              "Data.HashMap.Lazy.!"
-              "Use Data.HashMap.lookup instead"
-          ]
       ]
 
 in  rules
