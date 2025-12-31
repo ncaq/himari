@@ -1152,6 +1152,13 @@
       name: System.Process.withCreateProcess_
       within: []
 - functions:
+    - message: Use typed exceptions instead. Define a proper exception type.
+      name: UnliftIO.Exception.throwString
+      within: []
+    - message: Use typed exceptions instead. Define a proper exception type.
+      name: UnliftIO.Exception.stringException
+      within: []
+- functions:
     - message: Use UnliftIO.Async.async instead for MonadUnliftIO support.
       name: Control.Concurrent.Async.async
       within: []
