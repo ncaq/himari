@@ -5,8 +5,7 @@ module Himari.Char
   , chrMay
   ) where
 
-import Data.Char (chr, digitToInt, intToDigit, isHexDigit)
-import Prelude
+import Himari.Prelude
 
 -- | Safe version of 'digitToInt'.
 --

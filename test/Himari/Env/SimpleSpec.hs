@@ -4,7 +4,6 @@
 module Himari.Env.SimpleSpec (spec) where
 
 import Himari
-import Himari.Env.Simple
 import Test.Syd
 
 spec :: Spec
