@@ -1,4 +1,4 @@
--- | Alternative to `Prelude`.
+-- | Alternative to "Prelude".
 module Himari.Prelude
   ( module Export
   -- Type only re-exports.

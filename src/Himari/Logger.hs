@@ -1,5 +1,6 @@
 {-# LANGUAGE FunctionalDependencies #-}
 
+-- | Logger utilities for Himari.
 module Himari.Logger
   ( HasLogAction (..)
   , LogAction

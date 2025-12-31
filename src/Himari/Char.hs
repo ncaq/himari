@@ -8,14 +8,14 @@ module Himari.Char
 import Data.Char qualified as C
 import Himari.Prelude
 
--- | Safe version of 'digitToInt'.
+-- | Safe version of "Data.Char".'digitToInt'.
 --
 -- Converts a hexadecimal digit character to the corresponding 'Int' value.
 -- Accepts decimal digits (@\'0\'@-@\'9\'@), lowercase hex digits (@\'a\'@-@\'f\'@),
 -- and uppercase hex digits (@\'A\'@-@\'F\'@).
 --
 -- Returns 'Nothing' for characters outside the valid range,
--- instead of throwing an exception like 'digitToInt'.
+-- instead of throwing an exception like "Data.Char".'digitToInt'.
 --
 -- >>> digitToIntMay '0'
 -- Just 0
@@ -34,13 +34,13 @@ digitToIntMay c
   | C.isHexDigit c = Just (C.digitToInt c {- HLINT ignore "Avoid restricted function" -})
   | otherwise = Nothing
 
--- | Safe version of 'intToDigit'.
+-- | Safe version of "Data.Char".'intToDigit'.
 --
 -- Converts an 'Int' in the range 0..15 to the corresponding
--- single hexadecimal digit 'Char' (using lowercase 'a'-'f' for 10-15).
+-- single hexadecimal digit 'Char' (using lowercase @\'a\'@-@\'f\'@ for 10-15).
 --
 -- Returns 'Nothing' for values outside the valid range,
--- instead of throwing an exception like 'intToDigit'.
+-- instead of throwing an exception like "Data.Char".'intToDigit'.
 --
 -- >>> intToDigitMay 0
 -- Just '0'
@@ -57,14 +57,14 @@ intToDigitMay n
   | 0 <= n, n <= 15 = Just (C.intToDigit n {- HLINT ignore "Avoid restricted function" -})
   | otherwise = Nothing
 
--- | Safe version of 'chr'.
+-- | Safe version of "Data.Char".'chr'.
 --
 -- Converts an 'Int' to a Unicode 'Char'.
 -- Valid code points are 0 to 0x10FFFF, excluding the surrogate range
 -- 0xD800 to 0xDFFF.
 --
 -- Returns 'Nothing' for invalid code points,
--- instead of throwing an exception like 'chr'.
+-- instead of throwing an exception like "Data.Char".'chr'.
 --
 -- >>> chrMay 65
 -- Just 'A'
