@@ -3548,3 +3548,14 @@
     - message: "Unsafe: passes raw pointer to IO action without safety guarantees."
       name: Data.Vector.Storable.Mutable.unsafeWith
       within: []
+- functions:
+    - message: "Discards error info. Use decodeEither' or decodeThrow instead."
+      name: Data.Yaml.decode
+      within: []
+    - message: Discards error info. Use decodeFileEither or decodeFileThrow instead.
+      name: Data.Yaml.decodeFile
+      within: []
+- functions:
+    - message: "Deprecated. Use decodeEither' instead for ParseException details."
+      name: Data.Yaml.decodeEither
+      within: []
