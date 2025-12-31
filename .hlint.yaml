@@ -119,6 +119,9 @@
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.indexMaybe or Data.ByteString.(!?) instead"
+      name: Data.ByteString.index
+      within: []
 - functions:
     - message: Use Data.ByteString.Char8.uncons instead
       name: Data.ByteString.Char8.head
@@ -149,6 +152,9 @@
       within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Char8.minimum
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Char8.indexMaybe or Data.ByteString.Char8.(!?) instead"
+      name: Data.ByteString.Char8.index
       within: []
 - functions:
     - message: Use Data.ByteString.Lazy.uncons instead
@@ -181,6 +187,12 @@
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Lazy.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Lazy.indexMaybe or Data.ByteString.Lazy.(!?) instead"
+      name: Data.ByteString.Lazy.index
+      within: []
+    - message: "Partial: throws on empty ByteString."
+      name: Data.ByteString.Lazy.cycle
+      within: []
 - functions:
     - message: Use Data.ByteString.Lazy.Char8.uncons instead
       name: Data.ByteString.Lazy.Char8.head
@@ -212,6 +224,12 @@
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Lazy.Char8.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Lazy.Char8.indexMaybe or Data.ByteString.Lazy.Char8.(!?) instead"
+      name: Data.ByteString.Lazy.Char8.index
+      within: []
+    - message: "Partial: throws on empty ByteString."
+      name: Data.ByteString.Lazy.Char8.cycle
+      within: []
 - functions:
     - message: Use Data.ByteString.Short.uncons instead
       name: Data.ByteString.Short.head
@@ -225,26 +243,42 @@
     - message: Use Data.ByteString.Short.unsnoc instead
       name: Data.ByteString.Short.last
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldl with explicit initial value."
       name: Data.ByteString.Short.foldl1
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldl' with explicit initial value."
       name: "Data.ByteString.Short.foldl1'"
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldr with explicit initial value."
       name: Data.ByteString.Short.foldr1
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldr' with explicit initial value."
       name: "Data.ByteString.Short.foldr1'"
       within: []
-    - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
-      name: Data.ByteString.Short.maximum
-      within: []
-    - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
-      name: Data.ByteString.Short.minimum
-      within: []
-    - message: "Throws on out-of-bounds. Use Data.ByteString.Short.indexMaybe instead"
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Short.indexMaybe or Data.ByteString.Short.(!?) instead"
       name: Data.ByteString.Short.index
+      within: []
+- functions:
+    - message: "Unsafe: no bounds check. Use Data.ByteString.uncons instead"
+      name: Data.ByteString.Unsafe.unsafeHead
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.uncons instead"
+      name: Data.ByteString.Unsafe.unsafeTail
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.unsnoc instead"
+      name: Data.ByteString.Unsafe.unsafeInit
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.unsnoc instead"
+      name: Data.ByteString.Unsafe.unsafeLast
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.indexMaybe instead"
+      name: Data.ByteString.Unsafe.unsafeIndex
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.take instead"
+      name: Data.ByteString.Unsafe.unsafeTake
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.drop instead"
+      name: Data.ByteString.Unsafe.unsafeDrop
       within: []
 - functions:
     - message: "Exceptions don't propagate to parent thread. Use async library."
