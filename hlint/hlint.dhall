@@ -16,7 +16,6 @@ let rules
       # ./rules/exceptions.dhall
       # ./rules/lens.dhall
       # ./rules/mtl.dhall
-      # ./rules/partial.dhall
       # ./rules/performance.dhall
       # ./rules/pretty-simple.dhall
       # ./rules/primitive.dhall

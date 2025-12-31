@@ -116,6 +116,32 @@ let rules
               "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
           ]
       , Builder.functions
+          [ Builder.restrictInModule
+              "Data.Bifoldable"
+              "bifoldl1"
+              "Partial: throws on empty structure. Use bifoldl with a default value instead."
+          , Builder.restrictInModule
+              "Data.Bifoldable"
+              "bifoldr1"
+              "Partial: throws on empty structure. Use bifoldr with a default value instead."
+          , Builder.restrictInModule
+              "Data.Bifoldable"
+              "bimaximum"
+              "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+          , Builder.restrictInModule
+              "Data.Bifoldable"
+              "biminimum"
+              "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+          , Builder.restrictInModule
+              "Data.Bifoldable"
+              "bimaximumBy"
+              "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+          , Builder.restrictInModule
+              "Data.Bifoldable"
+              "biminimumBy"
+              "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+          ]
+      , Builder.functions
           [ Builder.restrictFunction
               "Data.List.NonEmpty.!!"
               "Partial: throws on out-of-bounds. Use atMay or atDef from Safe with toList instead."
