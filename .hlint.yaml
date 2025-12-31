@@ -288,6 +288,16 @@
       name: Data.ByteString.Unsafe.unsafeDrop
       within: []
 - functions:
+    - message: "Partial: throws on non-hex-digit character. Use digitToIntMay from Himari.Char which returns Maybe."
+      name: Data.Char.digitToInt
+      within: []
+    - message: "Partial: throws on out-of-range (must be 0-15). Use intToDigitMay from Himari.Char which returns Maybe."
+      name: Data.Char.intToDigit
+      within: []
+    - message: "Partial: throws on invalid code point. Use chrMay from Himari.Char which returns Maybe."
+      name: Data.Char.chr
+      within: []
+- functions:
     - message: "Exceptions don't propagate to parent thread. Use async or withAsync from UnliftIO.Async instead."
       name: forkIO
       within: []
@@ -664,16 +674,6 @@
       within: []
     - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
       name: Data.Bifoldable.biminimumBy
-      within: []
-- functions:
-    - message: "Partial: throws on non-hex-digit character. No safe alternative exists. Use pattern matching on '0'..'9', 'a'..'f', 'A'..'F'."
-      name: Data.Char.digitToInt
-      within: []
-    - message: "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
-      name: Data.Char.intToDigit
-      within: []
-    - message: "Partial: throws on invalid code point. Use explicit bounds checking."
-      name: Data.Char.chr
       within: []
 - functions:
     - message: "O(n^2) complexity. Use ordNub or nubOrd instead."

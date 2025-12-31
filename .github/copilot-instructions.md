@@ -81,6 +81,12 @@ nix run '.#generate-hlint'
 
 動作を継続してある程度確認するためのテストコードが配置されています。
 
+## Nix
+
+Nix Flakesはgitで管理されていないファイルを意図的に無視します。
+よって新規にソースコードなどを追加した時に`nix flake check`を通すためには、
+git addで使いたいファイルを追加する必要があります。
+
 ## Haskell
 
 ### 言語設定
@@ -315,6 +321,24 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 などの関数です。
 
 存在するならばそれを優先します。
+
+### himari
+
+このhimariプロジェクトはrioに変わるカスタムPreludeライブラリを提供することを目的としています。
+このプロジェクト自身でもhimariライブラリを使えます。
+
+```haskell
+import Himari
+```
+
+ただし`Himari`モジュール自身がimportしているモジュールは循環参照の問題のためimport出来ません。
+
+`Himari.Prelude`は外部モジュールしかimportしていないので、
+循環参照の問題がある場合は以下のようにしてください。
+
+```haskell
+import Himari.Prelude
+```
 
 ### Template Haskellの`mkName`と`newName`の使いかた
 

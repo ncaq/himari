@@ -31,20 +31,6 @@ let rules
               "biminimumBy"
               "Partial: throws on empty structure. Use bifoldr with explicit initial value."
           ]
-      , Builder.functions
-          [ Builder.restrictInModule
-              "Data.Char"
-              "digitToInt"
-              "Partial: throws on non-hex-digit character. No safe alternative exists. Use pattern matching on '0'..'9', 'a'..'f', 'A'..'F'."
-          , Builder.restrictInModule
-              "Data.Char"
-              "intToDigit"
-              "Partial: throws on out-of-range (must be 0-15). Use explicit bounds checking."
-          , Builder.restrictInModule
-              "Data.Char"
-              "chr"
-              "Partial: throws on invalid code point. Use explicit bounds checking."
-          ]
       ]
 
 in  rules
