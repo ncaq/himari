@@ -73,16 +73,6 @@
       name: Data.Aeson.Types.Internal.parseMaybe
       within: []
 - functions:
-    - message: Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors.
-      name: Data.Aeson.fromJSON
-      within: []
-    - message: Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors.
-      name: Data.Aeson.Types.fromJSON
-      within: []
-    - message: Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors.
-      name: Data.Aeson.Types.Class.fromJSON
-      within: []
-- functions:
     - message: Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead.
       name: Data.Bits.bitSize
       within: []
