@@ -954,6 +954,9 @@
     - message: "Partial: throws on empty Text. Use fold with explicit initial value."
       name: Data.Text.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use safe indexing alternatives."
+      name: Data.Text.index
+      within: []
 - functions:
     - message: Use Data.Text.Lazy.uncons instead
       name: Data.Text.Lazy.head
@@ -981,6 +984,25 @@
       within: []
     - message: "Partial: throws on empty Text. Use fold with explicit initial value."
       name: Data.Text.Lazy.minimum
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use safe indexing alternatives."
+      name: Data.Text.Lazy.index
+      within: []
+    - message: "Partial: throws on empty Text."
+      name: Data.Text.Lazy.cycle
+      within: []
+- functions:
+    - message: "Unsafe: no bounds check. Use Data.Text.uncons instead"
+      name: Data.Text.Unsafe.unsafeHead
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.Text.uncons instead"
+      name: Data.Text.Unsafe.unsafeTail
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.Text.take instead"
+      name: Data.Text.Unsafe.takeWord8
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.Text.drop instead"
+      name: Data.Text.Unsafe.dropWord8
       within: []
 - functions:
     - message: "Use System.Process.Typed.runProcess_ instead for type-safe process execution."
