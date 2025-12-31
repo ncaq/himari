@@ -9,6 +9,7 @@ let rules
       # ./rules/base.dhall
       # ./rules/bits.dhall
       # ./rules/bytestring.dhall
+      # ./rules/char.dhall
       # ./rules/concurrency.dhall
       # ./rules/containers.dhall
       # ./rules/convertible.dhall

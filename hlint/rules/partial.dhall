@@ -31,20 +31,6 @@ let rules
               "biminimumBy"
               "Partial: throws on empty structure. Use bifoldr with explicit initial value."
           ]
-      , Builder.functions
-          [ Builder.restrictInModule
-              "Data.Char"
-              "digitToInt"
-              "Partial: throws on non-hex-digit character. Use digitToIntMay from Himari.Char which returns Maybe."
-          , Builder.restrictInModule
-              "Data.Char"
-              "intToDigit"
-              "Partial: throws on out-of-range (must be 0-15). Use intToDigitMay from Himari.Char which returns Maybe."
-          , Builder.restrictInModule
-              "Data.Char"
-              "chr"
-              "Partial: throws on invalid code point. Use chrMay from Himari.Char which returns Maybe."
-          ]
       ]
 
 in  rules
