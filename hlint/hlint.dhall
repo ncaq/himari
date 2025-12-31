@@ -6,6 +6,7 @@ let rules
     : List Types.Rule
     =   ./rules/groups.dhall
       # ./rules/aeson.dhall
+      # ./rules/base.dhall
       # ./rules/bits.dhall
       # ./rules/bytestring.dhall
       # ./rules/concurrency.dhall
