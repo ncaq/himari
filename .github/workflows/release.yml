@@ -69,6 +69,13 @@ jobs:
         with:
           name: himari
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      # ビルドを先に実行して、成功した場合のみタグとリリースを作成する
+      - name: Build sdist
+        if: steps.check_tag.outputs.exists == 'false'
+        run: nix develop --command cabal sdist
+      - name: Build documentation for Hackage
+        if: steps.check_tag.outputs.exists == 'false'
+        run: nix develop --command cabal haddock --haddock-for-hackage
       - name: Create tag
         if: steps.check_tag.outputs.exists == 'false'
         run: |
@@ -82,12 +89,6 @@ jobs:
         run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build sdist
-        if: steps.check_tag.outputs.exists == 'false'
-        run: nix develop --command cabal sdist
-      - name: Build documentation for Hackage
-        if: steps.check_tag.outputs.exists == 'false'
-        run: nix develop --command cabal haddock --haddock-for-hackage
       - name: Publish to Hackage
         if: steps.check_tag.outputs.exists == 'false'
         uses: haskell-actions/hackage-publish@v1.1
