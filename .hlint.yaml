@@ -564,6 +564,35 @@
       name: errorWithoutStackTrace
       within: []
 - functions:
+    - message: "Partial: throws on empty Fold. Use (^?) instead."
+      name: "Control.Lens.Fold.^?!"
+      within: []
+    - message: "Partial: throws on empty Fold. Use (^@?) instead."
+      name: "Control.Lens.Fold.^@?!"
+      within: []
+    - message: "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
+      name: Control.Lens.Traversal.singular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements."
+      name: Control.Lens.Traversal.unsafeSingular
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Control.Lens.Traversal.unsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Control.Lens.Traversal.iunsafePartsOf
+      within: []
+- functions:
+    - message: "Unsound: violates lens laws unless lenses are disjoint. Use alongside instead."
+      name: Control.Lens.Unsound.lensProduct
+      within: []
+    - message: "Unsound: violates prism laws. Use without instead."
+      name: Control.Lens.Unsound.prismSum
+      within: []
+    - message: "Unsound: violates traversal laws unless traversals are disjoint. Use failing instead."
+      name: Control.Lens.Unsound.adjoin
+      within: []
+- functions:
     - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
       name: Data.Bifoldable.bifoldl1
       within: []
