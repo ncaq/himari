@@ -592,6 +592,35 @@
     - message: "Unsound: violates traversal laws unless traversals are disjoint. Use failing instead."
       name: Control.Lens.Unsound.adjoin
       within: []
+- modules:
+    - message: Replace with Control.Monad.Writer.CPS to avoid space leaks.
+      name: Control.Monad.Writer
+      within: []
+    - message: Replace with Control.Monad.Writer.CPS to avoid space leaks.
+      name: Control.Monad.Writer.Lazy
+      within: []
+    - message: Replace with Control.Monad.Writer.CPS to avoid space leaks.
+      name: Control.Monad.Writer.Strict
+      within: []
+    - message: Replace with Control.Monad.RWS.CPS to avoid space leaks.
+      name: Control.Monad.RWS
+      within: []
+    - message: Replace with Control.Monad.RWS.CPS to avoid space leaks.
+      name: Control.Monad.RWS.Lazy
+      within: []
+    - message: Replace with Control.Monad.RWS.CPS to avoid space leaks.
+      name: Control.Monad.RWS.Strict
+      within: []
+- modules:
+    - message: "Ambiguous: Use Control.Monad.State.Lazy or Control.Monad.State.Strict explicitly."
+      name: Control.Monad.State
+      within: []
+    - message: "Redirect: Import Control.Monad.Trans.Class or Control.Monad.IO.Class directly."
+      name: Control.Monad.Trans
+      within: []
+    - message: "Redirect: Import Data.Functor.Identity directly."
+      name: Control.Monad.Identity
+      within: []
 - functions:
     - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
       name: Data.Bifoldable.bifoldl1
