@@ -17,15 +17,15 @@ spec = do
       itWithOuter "Data.List.NonEmpty.head should NOT warn (it's safe)" $ \output -> do
         output `shouldSatisfy` notContainsWarningAt "useNonEmptyHead"
 
-    describe "Debug.Trace functions" $ do
-      itWithOuter "Debug.Trace.trace should warn" $ \output -> do
-        output `shouldSatisfy` containsWarningAt "trace" "Debug function"
+    describe "Debug.Trace functions suggest pTrace*" $ do
+      itWithOuter "Debug.Trace.trace should suggest pTrace" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "trace" "pTrace"
 
-      itWithOuter "Debug.Trace.traceShow should warn" $ \output -> do
-        output `shouldSatisfy` containsWarningAt "traceShow" "Debug function"
+      itWithOuter "Debug.Trace.traceShow should suggest pTraceShow" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "traceShow" "pTraceShow"
 
-      itWithOuter "Debug.Trace.traceM should warn" $ \output -> do
-        output `shouldSatisfy` containsWarningAt "traceM" "Debug function"
+      itWithOuter "Debug.Trace.traceM should suggest pTraceM" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "traceM" "pTraceM"
 
 runHlintOnSample :: IO Text
 runHlintOnSample = do

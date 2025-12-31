@@ -17,6 +17,7 @@ let rules
       # ./rules/mtl.dhall
       # ./rules/partial.dhall
       # ./rules/performance.dhall
+      # ./rules/pretty-simple.dhall
       # ./rules/qualified-imports.dhall
       # ./rules/safe.dhall
       # ./rules/string-io.dhall
