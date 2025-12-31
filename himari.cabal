@@ -106,5 +106,8 @@ test-suite himari-test
   other-modules:
     Himari.Env.SimpleSpec
     Himari.Title
+    HlintBaseSpec
+    HlintSamples.BasePartial
+    HlintSamples.UnliftioPreference
     HlintUnliftioSpec
     TitleSpec

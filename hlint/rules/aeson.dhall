@@ -1,4 +1,3 @@
--- aeson部分関数・危険な関数警告
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall

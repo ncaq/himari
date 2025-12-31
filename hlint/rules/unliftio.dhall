@@ -1,4 +1,3 @@
--- unliftio優先ルール
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
@@ -332,9 +331,21 @@ let foreignForeignPtrFuncs =
 let foreignStablePtrFuncs =
       [ "newStablePtr", "deRefStablePtr", "freeStablePtr" ]
 
+let untypedExceptionFuncs =
+      [ Builder.restrictInModule
+          "UnliftIO.Exception"
+          "throwString"
+          "Use typed exceptions instead. Define a proper exception type."
+      , Builder.restrictInModule
+          "UnliftIO.Exception"
+          "stringException"
+          "Use typed exceptions instead. Define a proper exception type."
+      ]
+
 let rules
     : List Types.Rule
-    = [ Builder.functions
+    = [ Builder.functions untypedExceptionFuncs
+      , Builder.functions
           ( Builder.preferModule
               "Control.Concurrent.Async"
               "UnliftIO.Async"

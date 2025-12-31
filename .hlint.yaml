@@ -72,6 +72,13 @@
     - message: Discards error info. Use parseEither instead to get error messages.
       name: Data.Aeson.Types.Internal.parseMaybe
       within: []
+- modules:
+    - message: Unsafe ST operations. Use Control.Monad.ST instead.
+      name: Control.Monad.ST.Unsafe
+      within: []
+    - message: Unsafe lazy ST operations. Use Control.Monad.ST.Lazy instead.
+      name: Control.Monad.ST.Lazy.Unsafe
+      within: []
 - functions:
     - message: Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead.
       name: Data.Bits.bitSize
@@ -119,6 +126,9 @@
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.indexMaybe or Data.ByteString.(!?) instead"
+      name: Data.ByteString.index
+      within: []
 - functions:
     - message: Use Data.ByteString.Char8.uncons instead
       name: Data.ByteString.Char8.head
@@ -149,6 +159,9 @@
       within: []
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Char8.minimum
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Char8.indexMaybe or Data.ByteString.Char8.(!?) instead"
+      name: Data.ByteString.Char8.index
       within: []
 - functions:
     - message: Use Data.ByteString.Lazy.uncons instead
@@ -181,6 +194,12 @@
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Lazy.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Lazy.indexMaybe or Data.ByteString.Lazy.(!?) instead"
+      name: Data.ByteString.Lazy.index
+      within: []
+    - message: "Partial: throws on empty ByteString."
+      name: Data.ByteString.Lazy.cycle
+      within: []
 - functions:
     - message: Use Data.ByteString.Lazy.Char8.uncons instead
       name: Data.ByteString.Lazy.Char8.head
@@ -212,6 +231,12 @@
     - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
       name: Data.ByteString.Lazy.Char8.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Lazy.Char8.indexMaybe or Data.ByteString.Lazy.Char8.(!?) instead"
+      name: Data.ByteString.Lazy.Char8.index
+      within: []
+    - message: "Partial: throws on empty ByteString."
+      name: Data.ByteString.Lazy.Char8.cycle
+      within: []
 - functions:
     - message: Use Data.ByteString.Short.uncons instead
       name: Data.ByteString.Short.head
@@ -225,26 +250,42 @@
     - message: Use Data.ByteString.Short.unsnoc instead
       name: Data.ByteString.Short.last
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldl with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldl with explicit initial value."
       name: Data.ByteString.Short.foldl1
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldl' with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldl' with explicit initial value."
       name: "Data.ByteString.Short.foldl1'"
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldr with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldr with explicit initial value."
       name: Data.ByteString.Short.foldr1
       within: []
-    - message: "Partial: throws on empty ByteString. Use foldr' with explicit initial value."
+    - message: "Partial: throws on empty ShortByteString. Use foldr' with explicit initial value."
       name: "Data.ByteString.Short.foldr1'"
       within: []
-    - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
-      name: Data.ByteString.Short.maximum
-      within: []
-    - message: "Partial: throws on empty ByteString. Use fold with explicit initial value."
-      name: Data.ByteString.Short.minimum
-      within: []
-    - message: "Throws on out-of-bounds. Use Data.ByteString.Short.indexMaybe instead"
+    - message: "Partial: throws on out-of-bounds. Use Data.ByteString.Short.indexMaybe or Data.ByteString.Short.(!?) instead"
       name: Data.ByteString.Short.index
+      within: []
+- functions:
+    - message: "Unsafe: no bounds check. Use Data.ByteString.uncons instead"
+      name: Data.ByteString.Unsafe.unsafeHead
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.uncons instead"
+      name: Data.ByteString.Unsafe.unsafeTail
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.unsnoc instead"
+      name: Data.ByteString.Unsafe.unsafeInit
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.unsnoc instead"
+      name: Data.ByteString.Unsafe.unsafeLast
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.indexMaybe instead"
+      name: Data.ByteString.Unsafe.unsafeIndex
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.take instead"
+      name: Data.ByteString.Unsafe.unsafeTake
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.ByteString.drop instead"
+      name: Data.ByteString.Unsafe.unsafeDrop
       within: []
 - functions:
     - message: "Exceptions don't propagate to parent thread. Use async library."
@@ -360,11 +401,75 @@
       name: Data.Set.deleteFindMax
       within: []
 - functions:
-    - message: Use Data.HashMap.lookup instead
-      name: "Data.HashMap.Strict.!"
+    - message: "Use Data.IntMap.lookup or Data.IntMap.!? instead"
+      name: "Data.IntMap.!"
       within: []
-    - message: Use Data.HashMap.lookup instead
-      name: "Data.HashMap.Lazy.!"
+    - message: "Partial: throws on empty map. Use Data.IntMap.lookupMin instead."
+      name: Data.IntMap.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.lookupMax instead."
+      name: Data.IntMap.findMax
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.minViewWithKey instead."
+      name: Data.IntMap.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.maxViewWithKey instead."
+      name: Data.IntMap.deleteFindMax
+      within: []
+- functions:
+    - message: "Use Data.IntMap.Strict.lookup or Data.IntMap.Strict.!? instead"
+      name: "Data.IntMap.Strict.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.lookupMin instead."
+      name: Data.IntMap.Strict.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.lookupMax instead."
+      name: Data.IntMap.Strict.findMax
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.minViewWithKey instead."
+      name: Data.IntMap.Strict.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Strict.maxViewWithKey instead."
+      name: Data.IntMap.Strict.deleteFindMax
+      within: []
+- functions:
+    - message: "Use Data.IntMap.Lazy.lookup or Data.IntMap.Lazy.!? instead"
+      name: "Data.IntMap.Lazy.!"
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.lookupMin instead."
+      name: Data.IntMap.Lazy.findMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.lookupMax instead."
+      name: Data.IntMap.Lazy.findMax
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.minViewWithKey instead."
+      name: Data.IntMap.Lazy.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty map. Use Data.IntMap.Lazy.maxViewWithKey instead."
+      name: Data.IntMap.Lazy.deleteFindMax
+      within: []
+- functions:
+    - message: "Partial: throws on empty set. Use Data.IntSet.lookupMin instead."
+      name: Data.IntSet.findMin
+      within: []
+    - message: "Partial: throws on empty set. Use Data.IntSet.lookupMax instead."
+      name: Data.IntSet.findMax
+      within: []
+    - message: "Partial: throws on empty set. Use Data.IntSet.minView instead."
+      name: Data.IntSet.deleteFindMin
+      within: []
+    - message: "Partial: throws on empty set. Use Data.IntSet.maxView instead."
+      name: Data.IntSet.deleteFindMax
+      within: []
+- functions:
+    - message: "Partial: throws on out-of-bounds. Use Data.Sequence.lookup or Data.Sequence.!? instead."
+      name: Data.Sequence.index
+      within: []
+    - message: "Partial: throws on empty Seq."
+      name: Data.Sequence.scanl1
+      within: []
+    - message: "Partial: throws on empty Seq."
+      name: Data.Sequence.scanr1
       within: []
 - hint:
     lhs: Data.Text.pack
@@ -466,6 +571,64 @@
       name: errorWithoutStackTrace
       within: []
 - functions:
+    - message: "Partial: throws on empty Fold. Use (^?) instead."
+      name: "Control.Lens.Fold.^?!"
+      within: []
+    - message: "Partial: throws on empty Fold. Use (^@?) instead."
+      name: "Control.Lens.Fold.^@?!"
+      within: []
+    - message: "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
+      name: Control.Lens.Traversal.singular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements."
+      name: Control.Lens.Traversal.unsafeSingular
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Control.Lens.Traversal.unsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Control.Lens.Traversal.iunsafePartsOf
+      within: []
+- functions:
+    - message: "Unsound: violates lens laws unless lenses are disjoint. Use alongside instead."
+      name: Control.Lens.Unsound.lensProduct
+      within: []
+    - message: "Unsound: violates prism laws. Use without instead."
+      name: Control.Lens.Unsound.prismSum
+      within: []
+    - message: "Unsound: violates traversal laws unless traversals are disjoint. Use failing instead."
+      name: Control.Lens.Unsound.adjoin
+      within: []
+- modules:
+    - message: Replace with Control.Monad.Writer.CPS to avoid space leaks.
+      name: Control.Monad.Writer
+      within: []
+    - message: Replace with Control.Monad.Writer.CPS to avoid space leaks.
+      name: Control.Monad.Writer.Lazy
+      within: []
+    - message: Replace with Control.Monad.Writer.CPS to avoid space leaks.
+      name: Control.Monad.Writer.Strict
+      within: []
+    - message: Replace with Control.Monad.RWS.CPS to avoid space leaks.
+      name: Control.Monad.RWS
+      within: []
+    - message: Replace with Control.Monad.RWS.CPS to avoid space leaks.
+      name: Control.Monad.RWS.Lazy
+      within: []
+    - message: Replace with Control.Monad.RWS.CPS to avoid space leaks.
+      name: Control.Monad.RWS.Strict
+      within: []
+- modules:
+    - message: "Ambiguous: Use Control.Monad.State.Lazy or Control.Monad.State.Strict explicitly."
+      name: Control.Monad.State
+      within: []
+    - message: "Redirect: Import Control.Monad.Trans.Class or Control.Monad.IO.Class directly."
+      name: Control.Monad.Trans
+      within: []
+    - message: "Redirect: Import Data.Functor.Identity directly."
+      name: Control.Monad.Identity
+      within: []
+- functions:
     - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
       name: Data.Bifoldable.bifoldl1
       within: []
@@ -503,6 +666,90 @@
       within: []
     - message: "O(n) stack space. Use length with explicit conversion."
       name: genericLength
+      within: []
+- hint:
+    lhs: trace
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTrace
+- hint:
+    lhs: traceId
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceId
+- hint:
+    lhs: traceShow
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShow
+- hint:
+    lhs: traceShowId
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShowId
+- hint:
+    lhs: traceWith
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceWith
+- hint:
+    lhs: traceShowWith
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShowWith
+- hint:
+    lhs: traceStack
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceStack
+- hint:
+    lhs: traceIO
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceIO
+- hint:
+    lhs: traceM
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceM
+- hint:
+    lhs: traceShowM
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceShowM
+- hint:
+    lhs: traceEvent
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceEvent
+- hint:
+    lhs: traceEventIO
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceEventIO
+- hint:
+    lhs: traceMarker
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceMarker
+- hint:
+    lhs: traceMarkerIO
+    note: "pTrace* provides pretty-printed output for easier debugging"
+    rhs: pTraceMarkerIO
+- functions:
+    - message: Unsafe primitive state token conversion. Use safe alternatives.
+      name: unsafePrimToPrim
+      within: []
+    - message: Unsafe freeze without copying. Use freezeArray for safety.
+      name: unsafeFreezeArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawArray for safety.
+      name: unsafeThawArray
+      within: []
+    - message: Unsafe freeze without copying. Use freezeByteArray for safety.
+      name: unsafeFreezeByteArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawByteArray for safety.
+      name: unsafeThawByteArray
+      within: []
+    - message: Unsafe freeze without copying. Use freezeSmallArray for safety.
+      name: unsafeFreezeSmallArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawSmallArray for safety.
+      name: unsafeThawSmallArray
+      within: []
+    - message: Unsafe freeze without copying. Use freezePrimArray for safety.
+      name: unsafeFreezePrimArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawPrimArray for safety.
+      name: unsafeThawPrimArray
       within: []
 - modules:
     - as: B
@@ -920,6 +1167,9 @@
     - message: "Partial: throws on empty Text. Use fold with explicit initial value."
       name: Data.Text.minimum
       within: []
+    - message: "Partial: throws on out-of-bounds. Use safe indexing alternatives."
+      name: Data.Text.index
+      within: []
 - functions:
     - message: Use Data.Text.Lazy.uncons instead
       name: Data.Text.Lazy.head
@@ -947,6 +1197,25 @@
       within: []
     - message: "Partial: throws on empty Text. Use fold with explicit initial value."
       name: Data.Text.Lazy.minimum
+      within: []
+    - message: "Partial: throws on out-of-bounds. Use safe indexing alternatives."
+      name: Data.Text.Lazy.index
+      within: []
+    - message: "Partial: throws on empty Text."
+      name: Data.Text.Lazy.cycle
+      within: []
+- functions:
+    - message: "Unsafe: no bounds check. Use Data.Text.uncons instead"
+      name: Data.Text.Unsafe.unsafeHead
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.Text.uncons instead"
+      name: Data.Text.Unsafe.unsafeTail
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.Text.take instead"
+      name: Data.Text.Unsafe.takeWord8
+      within: []
+    - message: "Unsafe: no bounds check. Use Data.Text.drop instead"
+      name: Data.Text.Unsafe.dropWord8
       within: []
 - functions:
     - message: "Use System.Process.Typed.runProcess_ instead for type-safe process execution."
@@ -1023,6 +1292,13 @@
       within: []
     - message: Use System.Process.Typed.withProcessWait_ or withProcessTerm_ instead for MonadUnliftIO support.
       name: System.Process.withCreateProcess_
+      within: []
+- functions:
+    - message: Use typed exceptions instead. Define a proper exception type.
+      name: UnliftIO.Exception.throwString
+      within: []
+    - message: Use typed exceptions instead. Define a proper exception type.
+      name: UnliftIO.Exception.stringException
       within: []
 - functions:
     - message: Use UnliftIO.Async.async instead for MonadUnliftIO support.
@@ -1875,6 +2151,14 @@
       within: []
     - message: Use UnliftIO.Foreign.freeStablePtr instead for MonadIO support.
       name: Foreign.StablePtr.freeStablePtr
+      within: []
+- functions:
+    - message: "Partial: throws on missing key. Use Data.HashMap.Strict.lookup or Data.HashMap.Strict.!? instead"
+      name: "Data.HashMap.Strict.!"
+      within: []
+- functions:
+    - message: "Partial: throws on missing key. Use Data.HashMap.Lazy.lookup or Data.HashMap.Lazy.!? instead"
+      name: "Data.HashMap.Lazy.!"
       within: []
 - functions:
     - message: Breaks type safety. Only for very specific use cases.

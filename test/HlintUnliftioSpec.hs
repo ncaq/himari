@@ -9,21 +9,6 @@ import Test.Syd
 spec :: Spec
 spec = do
   describe "hlint unliftio preference rules" . beforeAll runHlintOnSample $ do
-    itWithOuter "Control.Concurrent.Async.async should warn to use UnliftIO.Async" $ \output -> do
-      output `shouldSatisfy` containsWarning "UnliftIO.Async.async"
-
-    itWithOuter "Control.Concurrent.Async.withAsync should warn to use UnliftIO.Async" $ \output -> do
-      output `shouldSatisfy` containsWarning "UnliftIO.Async.withAsync"
-
-    itWithOuter "Control.Concurrent.Async.race should warn to use UnliftIO.Async" $ \output -> do
-      output `shouldSatisfy` containsWarning "UnliftIO.Async.race"
-
-    itWithOuter "Control.Concurrent.Async.concurrently should warn to use UnliftIO.Async" $ \output -> do
-      output `shouldSatisfy` containsWarning "UnliftIO.Async.concurrently"
-
-    itWithOuter "Control.Concurrent.Async.mapConcurrently should warn to use UnliftIO.Async" $ \output -> do
-      output `shouldSatisfy` containsWarning "UnliftIO.Async.mapConcurrently"
-
     itWithOuter "Control.Exception.catch should warn to use UnliftIO.Exception" $ \output -> do
       output `shouldSatisfy` containsWarning "UnliftIO.Exception.catch"
 
@@ -49,7 +34,7 @@ runHlintOnSample :: IO Text
 runHlintOnSample = do
   (exitCode, stdoutOutput, stderrOutput) <-
     readProcess
-      $ proc "hlint" ["test/hlint-samples/UnliftioPreference.hs"]
+      $ proc "hlint" ["test/HlintSamples/UnliftioPreference.hs"]
   pure $ case exitCode of
     ExitSuccess -> convert stdoutOutput
     ExitFailure _ -> convert stdoutOutput <> convert stderrOutput

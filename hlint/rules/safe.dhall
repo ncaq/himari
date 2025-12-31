@@ -1,4 +1,3 @@
--- safe package
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
