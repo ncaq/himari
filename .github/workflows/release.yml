@@ -11,7 +11,6 @@ on:
 #       - "himari.cabal"
 
 permissions:
-  actions: write # キャッシュアクションに必要かもしれない
   contents: write
 
 jobs:
