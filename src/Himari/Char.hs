@@ -54,9 +54,8 @@ digitToIntMay c
 -- Nothing
 intToDigitMay :: Int -> Maybe C.Char
 intToDigitMay n
-  | n < 0 = Nothing
-  | n > 15 = Nothing
-  | otherwise = Just (C.intToDigit n {- HLINT ignore "Avoid restricted function" -})
+  | 0 <= n, n <= 15 = Just (C.intToDigit n {- HLINT ignore "Avoid restricted function" -})
+  | otherwise = Nothing
 
 -- | Safe version of 'chr'.
 --
@@ -84,6 +83,6 @@ intToDigitMay n
 chrMay :: Int -> Maybe C.Char
 chrMay n
   | n < 0 = Nothing
-  | n > 0x10FFFF = Nothing
-  | n >= 0xD800, n <= 0xDFFF = Nothing -- surrogate range
+  | 0x10FFFF < n = Nothing
+  | 0xD800 <= n, n <= 0xDFFF = Nothing -- surrogate range
   | otherwise = Just (C.chr n {- HLINT ignore "Avoid restricted function" -})
