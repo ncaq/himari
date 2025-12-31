@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: read # リポジトリコンテンツの読み取り
-  actions: write # キャッシュアクションに必要
 
 jobs:
   nix-flake-check:

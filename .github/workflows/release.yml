@@ -47,6 +47,34 @@ jobs:
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
+      # 以降はタグが存在しない場合のみ実行
+      - uses: jlumbroso/free-disk-space@v1.3.1
+        if: steps.check_tag.outputs.exists == 'false'
+        with:
+          tool-cache: false
+          android: true
+          docker-images: true
+          dotnet: true
+          haskell: true # Nixで管理しているので不要
+          large-packages: true
+          swap-storage: true
+      - uses: cachix/install-nix-action@v31
+        if: steps.check_tag.outputs.exists == 'false'
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+      - uses: cachix/cachix-action@v16
+        if: steps.check_tag.outputs.exists == 'false'
+        with:
+          name: himari
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      # ビルドを先に実行して、成功した場合のみタグとリリースを作成する
+      - name: Build sdist
+        if: steps.check_tag.outputs.exists == 'false'
+        run: nix develop --command cabal sdist
+      - name: Build documentation for Hackage
+        if: steps.check_tag.outputs.exists == 'false'
+        run: nix develop --command cabal haddock --haddock-for-hackage
       - name: Create tag
         if: steps.check_tag.outputs.exists == 'false'
         run: |
@@ -60,3 +88,11 @@ jobs:
         run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to Hackage
+        if: steps.check_tag.outputs.exists == 'false'
+        uses: haskell-actions/hackage-publish@v1.1
+        with:
+          hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
+          packagesPath: dist-newstyle/sdist/
+          docsPath: dist-newstyle/
+          publish: true
