@@ -724,6 +724,34 @@
     lhs: traceMarkerIO
     note: "pTrace* provides pretty-printed output for easier debugging"
     rhs: pTraceMarkerIO
+- functions:
+    - message: Unsafe primitive state token conversion. Use safe alternatives.
+      name: unsafePrimToPrim
+      within: []
+    - message: Unsafe freeze without copying. Use freezeArray for safety.
+      name: unsafeFreezeArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawArray for safety.
+      name: unsafeThawArray
+      within: []
+    - message: Unsafe freeze without copying. Use freezeByteArray for safety.
+      name: unsafeFreezeByteArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawByteArray for safety.
+      name: unsafeThawByteArray
+      within: []
+    - message: Unsafe freeze without copying. Use freezeSmallArray for safety.
+      name: unsafeFreezeSmallArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawSmallArray for safety.
+      name: unsafeThawSmallArray
+      within: []
+    - message: Unsafe freeze without copying. Use freezePrimArray for safety.
+      name: unsafeFreezePrimArray
+      within: []
+    - message: Unsafe thaw without copying. Use thawPrimArray for safety.
+      name: unsafeThawPrimArray
+      within: []
 - modules:
     - as: B
       importStyle: explicitOrQualified
