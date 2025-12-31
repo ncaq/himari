@@ -12,6 +12,7 @@ let rules
       # ./rules/containers.dhall
       # ./rules/convertible.dhall
       # ./rules/exceptions.dhall
+      # ./rules/lens.dhall
       # ./rules/partial.dhall
       # ./rules/performance.dhall
       # ./rules/qualified-imports.dhall
