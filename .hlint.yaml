@@ -657,25 +657,6 @@
       name: Control.Monad.Identity
       within: []
 - functions:
-    - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
-      name: Data.Bifoldable.bifoldl1
-      within: []
-    - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
-      name: Data.Bifoldable.bifoldr1
-      within: []
-    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
-      name: Data.Bifoldable.bimaximum
-      within: []
-    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
-      name: Data.Bifoldable.biminimum
-      within: []
-    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
-      name: Data.Bifoldable.bimaximumBy
-      within: []
-    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
-      name: Data.Bifoldable.biminimumBy
-      within: []
-- functions:
     - message: "O(n^2) complexity. Use ordNub or nubOrd instead."
       name: nub
       within: []
@@ -933,6 +914,25 @@
       within: []
     - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
       name: Data.Foldable.minimumBy
+      within: []
+- functions:
+    - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
+      name: Data.Bifoldable.bifoldl1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
+      name: Data.Bifoldable.bifoldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Data.Bifoldable.bimaximum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Data.Bifoldable.biminimum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Data.Bifoldable.bimaximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Data.Bifoldable.biminimumBy
       within: []
 - functions:
     - message: "Partial: throws on out-of-bounds. Use atMay or atDef from Safe with toList instead."
