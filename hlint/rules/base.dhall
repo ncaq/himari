@@ -15,14 +15,8 @@ let stUnsafeModules
           "Unsafe lazy ST operations. Use Control.Monad.ST.Lazy instead."
       ]
 
-let preludePartialFunctions
-    : List Types.Function
-    = [] : List Types.Function
-
 let rules
     : List Types.Rule
-    = [ Builder.modules stUnsafeModules
-      , Builder.functions preludePartialFunctions
-      ]
+    = [ Builder.modules stUnsafeModules ]
 
 in  rules
