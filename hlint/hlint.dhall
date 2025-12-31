@@ -28,5 +28,6 @@ let rules
       # ./rules/unordered-containers.dhall
       # ./rules/unsafe.dhall
       # ./rules/vector.dhall
+      # ./rules/yaml.dhall
 
 in  rules
