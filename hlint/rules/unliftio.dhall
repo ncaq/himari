@@ -1,4 +1,3 @@
--- unliftio優先ルール
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall

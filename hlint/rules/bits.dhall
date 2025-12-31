@@ -1,4 +1,3 @@
--- Data.Bits部分関数警告
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
