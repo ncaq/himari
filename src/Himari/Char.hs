@@ -5,6 +5,7 @@ module Himari.Char
   , chrMay
   ) where
 
+import Data.Char qualified as C
 import Himari.Prelude
 
 -- | Safe version of 'digitToInt'.
@@ -28,9 +29,9 @@ import Himari.Prelude
 -- Nothing
 -- >>> digitToIntMay ' '
 -- Nothing
-digitToIntMay :: Char -> Maybe Int
+digitToIntMay :: C.Char -> Maybe Int
 digitToIntMay c
-  | isHexDigit c = Just (digitToInt c {- HLINT ignore "Avoid restricted function" -})
+  | C.isHexDigit c = Just (C.digitToInt c {- HLINT ignore "Avoid restricted function" -})
   | otherwise = Nothing
 
 -- | Safe version of 'intToDigit'.
@@ -51,9 +52,9 @@ digitToIntMay c
 -- Nothing
 -- >>> intToDigitMay 16
 -- Nothing
-intToDigitMay :: Int -> Maybe Char
+intToDigitMay :: Int -> Maybe C.Char
 intToDigitMay n
-  | 0 <= n && n <= 15 = Just (intToDigit n {- HLINT ignore "Avoid restricted function" -})
+  | 0 <= n && n <= 15 = Just (C.intToDigit n {- HLINT ignore "Avoid restricted function" -})
   | otherwise = Nothing
 
 -- | Safe version of 'chr'.
@@ -79,8 +80,8 @@ intToDigitMay n
 -- Nothing
 -- >>> chrMay 0xDFFF
 -- Nothing
-chrMay :: Int -> Maybe Char
+chrMay :: Int -> Maybe C.Char
 chrMay n
   | n >= 0 && n <= 0x10FFFF && not (n >= 0xD800 && n <= 0xDFFF) =
-      Just (chr n {- HLINT ignore "Avoid restricted function" -})
+      Just (C.chr n {- HLINT ignore "Avoid restricted function" -})
   | otherwise = Nothing
