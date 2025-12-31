@@ -464,13 +464,6 @@
     - message: "Partial: throws on empty Seq."
       name: Data.Sequence.scanr1
       within: []
-- functions:
-    - message: Use Data.HashMap.lookup instead
-      name: "Data.HashMap.Strict.!"
-      within: []
-    - message: Use Data.HashMap.lookup instead
-      name: "Data.HashMap.Lazy.!"
-      within: []
 - hint:
     lhs: Data.Text.pack
     note: Use convert from Data.Convertible for uniform type conversion
@@ -2009,6 +2002,14 @@
       within: []
     - message: Use UnliftIO.Foreign.freeStablePtr instead for MonadIO support.
       name: Foreign.StablePtr.freeStablePtr
+      within: []
+- functions:
+    - message: "Partial: throws on missing key. Use Data.HashMap.Strict.lookup or Data.HashMap.Strict.!? instead"
+      name: "Data.HashMap.Strict.!"
+      within: []
+- functions:
+    - message: "Partial: throws on missing key. Use Data.HashMap.Lazy.lookup or Data.HashMap.Lazy.!? instead"
+      name: "Data.HashMap.Lazy.!"
       within: []
 - functions:
     - message: Breaks type safety. Only for very specific use cases.
