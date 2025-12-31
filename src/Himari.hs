@@ -1,3 +1,4 @@
+-- | Custom Prelude library providing a comprehensive set of commonly used modules and utilities.
 module Himari (module Export) where
 
 import Himari.Char as Export
