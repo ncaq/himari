@@ -31,6 +31,8 @@ let rules
           , Builder.qualifiedAs "Data.List" "L"
           , Builder.qualifiedAs "Data.List.NonEmpty" "NE"
           , Builder.qualifiedAs "Data.Char" "C"
+          , Builder.qualifiedAs "Data.Aeson.Key" "Key"
+          , Builder.qualifiedAs "Data.Aeson.KeyMap" "KeyMap"
           , Builder.qualifiedAs "Data.Vector" "V"
           , Builder.qualifiedAs "Data.Vector.Generic" "VG"
           , Builder.qualifiedAs "Data.Vector.Storable" "VS"

@@ -23,6 +23,56 @@
     enabled: true
     name: "use-th-quotes"
 - functions:
+    - message: Discards error info. Use eitherDecode instead to get error messages.
+      name: Data.Aeson.decode
+      within: []
+    - message: Discards error info. Use eitherDecodeStrict instead to get error messages.
+      name: Data.Aeson.decodeStrict
+      within: []
+    - message: Discards error info. Use eitherDecodeFileStrict instead to get error messages.
+      name: Data.Aeson.decodeFileStrict
+      within: []
+    - message: Discards error info. Use eitherDecodeStrictText instead to get error messages.
+      name: Data.Aeson.decodeStrictText
+      within: []
+- functions:
+    - message: Deprecated alias since aeson 2.2.0.0. Use eitherDecode instead.
+      name: "Data.Aeson.decode'"
+      within: []
+    - message: Deprecated alias since aeson 2.2.0.0. Use eitherDecodeStrict instead.
+      name: "Data.Aeson.decodeStrict'"
+      within: []
+    - message: Deprecated alias since aeson 2.2.0.0. Use eitherDecodeFileStrict instead.
+      name: "Data.Aeson.decodeFileStrict'"
+      within: []
+- functions:
+    - message: Deprecated alias since aeson 2.2.0.0. Use eitherDecode instead.
+      name: "Data.Aeson.eitherDecode'"
+      within: []
+    - message: Deprecated alias since aeson 2.2.0.0. Use eitherDecodeStrict instead.
+      name: "Data.Aeson.eitherDecodeStrict'"
+      within: []
+    - message: Deprecated alias since aeson 2.2.0.0. Use eitherDecodeFileStrict instead.
+      name: "Data.Aeson.eitherDecodeFileStrict'"
+      within: []
+- functions:
+    - message: Deprecated alias since aeson 2.2.0.0. Use throwDecode instead.
+      name: "Data.Aeson.throwDecode'"
+      within: []
+    - message: Deprecated alias since aeson 2.2.0.0. Use throwDecodeStrict instead.
+      name: "Data.Aeson.throwDecodeStrict'"
+      within: []
+- functions:
+    - message: Discards error info. Use parseEither instead to get error messages.
+      name: Data.Aeson.parseMaybe
+      within: []
+    - message: Discards error info. Use parseEither instead to get error messages.
+      name: Data.Aeson.Types.parseMaybe
+      within: []
+    - message: Discards error info. Use parseEither instead to get error messages.
+      name: Data.Aeson.Types.Internal.parseMaybe
+      within: []
+- functions:
     - message: Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead.
       name: Data.Bits.bitSize
       within: []
@@ -518,6 +568,12 @@
     - as: C
       importStyle: explicitOrQualified
       name: Data.Char
+    - as: Key
+      importStyle: explicitOrQualified
+      name: Data.Aeson.Key
+    - as: KeyMap
+      importStyle: explicitOrQualified
+      name: Data.Aeson.KeyMap
     - as: V
       importStyle: explicitOrQualified
       name: Data.Vector

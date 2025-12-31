@@ -107,6 +107,7 @@
                 nixfmt-rfc-style
                 parallel
                 yamllint
+                zlib # aesonを開発環境でビルド。
 
                 (writeScriptBin "haskell-language-server-wrapper" ''
                   #!${stdenv.shell}
