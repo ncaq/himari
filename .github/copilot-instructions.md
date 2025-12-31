@@ -322,6 +322,18 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 
 存在するならばそれを優先します。
 
+### himari
+
+このhimariプロジェクトはrioに変わるカスタムPreludeライブラリを提供することを目的としています。
+このプロジェクト自身でもhimariライブラリを使えます。
+
+```haskell
+import Himari
+```
+
+ただし`Himari.Prelude`モジュール自身がimportしているモジュールは循環参照の問題のためimport出来ません。
+それ以外ではなるべく`import Himari`でimportを済ませてください。
+
 ### Template Haskellの`mkName`と`newName`の使いかた
 
 既にスコープに存在する名前をキャプチャする形で参照したい時は`mkName`を使います。
