@@ -75,20 +75,6 @@ let rules
               "parseMaybe"
               "Discards error info. Use parseEither instead to get error messages."
           ]
-      , Builder.functions
-          [ Builder.restrictInModule
-              "Data.Aeson"
-              "fromJSON"
-              "Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors."
-          , Builder.restrictInModule
-              "Data.Aeson.Types"
-              "fromJSON"
-              "Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors."
-          , Builder.restrictInModule
-              "Data.Aeson.Types.Class"
-              "fromJSON"
-              "Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors."
-          ]
       ]
 
 in  rules
