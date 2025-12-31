@@ -23,6 +23,48 @@
     enabled: true
     name: "use-th-quotes"
 - functions:
+    - message: Discards error info. Use eitherDecode instead to get error messages.
+      name: Data.Aeson.decode
+      within: []
+    - message: "Discards error info. Use eitherDecode' instead to get error messages."
+      name: "Data.Aeson.decode'"
+      within: []
+    - message: Discards error info. Use eitherDecodeStrict instead to get error messages.
+      name: Data.Aeson.decodeStrict
+      within: []
+    - message: "Discards error info. Use eitherDecodeStrict' instead to get error messages."
+      name: "Data.Aeson.decodeStrict'"
+      within: []
+    - message: Discards error info. Use eitherDecodeFileStrict instead to get error messages.
+      name: Data.Aeson.decodeFileStrict
+      within: []
+    - message: "Discards error info. Use eitherDecodeFileStrict' instead to get error messages."
+      name: "Data.Aeson.decodeFileStrict'"
+      within: []
+    - message: Discards error info. Use eitherDecodeStrictText instead to get error messages.
+      name: Data.Aeson.decodeStrictText
+      within: []
+- functions:
+    - message: Discards error info. Use parseEither instead to get error messages.
+      name: Data.Aeson.parseMaybe
+      within: []
+    - message: Discards error info. Use parseEither instead to get error messages.
+      name: Data.Aeson.Types.parseMaybe
+      within: []
+    - message: Discards error info. Use parseEither instead to get error messages.
+      name: Data.Aeson.Types.Internal.parseMaybe
+      within: []
+- functions:
+    - message: Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors.
+      name: Data.Aeson.fromJSON
+      within: []
+    - message: Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors.
+      name: Data.Aeson.Types.fromJSON
+      within: []
+    - message: Result type lacks JSONPath info. Use parseEither parseJSON instead for detailed errors.
+      name: Data.Aeson.Types.Class.fromJSON
+      within: []
+- functions:
     - message: Deprecated and partial. Use bitSizeMaybe or finiteBitSize instead.
       name: Data.Bits.bitSize
       within: []
