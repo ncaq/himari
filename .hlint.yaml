@@ -518,6 +518,12 @@
     - as: C
       importStyle: explicitOrQualified
       name: Data.Char
+    - as: Key
+      importStyle: explicitOrQualified
+      name: Data.Aeson.Key
+    - as: KeyMap
+      importStyle: explicitOrQualified
+      name: Data.Aeson.KeyMap
     - as: V
       importStyle: explicitOrQualified
       name: Data.Vector
