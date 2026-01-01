@@ -1,21 +1,65 @@
-name: release
+name: push
 
 on:
   workflow_dispatch:
-# まだリリースできる段階にはないので一旦無効化しておきます。
-# リリースできる段階になったらコメントアウトを外してください。
-#   push:
-#     branches:
-#       - master
-#     paths:
-#       - "himari.cabal"
+  push:
+    branches: master
+  pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  release:
+  nix-flake-check:
     runs-on: ubuntu-24.04
+    steps:
+      - uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false # GitHub Actionsのツールキャッシュは残す
+          android: true
+          docker-images: true
+          dotnet: true
+          haskell: true # Nixで管理しているので不要
+          large-packages: true
+          swap-storage: true
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+      - uses: cachix/cachix-action@v16
+        with:
+          name: himari
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - run: nix flake check
+
+  format: # `nix flake check`で実行される`nix fmt`で対応していない範囲のフォーマットチェックを行う。
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+      - uses: cachix/cachix-action@v16
+        with:
+          name: himari
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: editorconfig-checker
+        run: nix run 'nixpkgs#editorconfig-checker' -- -config .editorconfig-checker.json
+      - name: generate-hlint
+        run: nix run '.#generate-hlint'
+      - run: git diff --exit-code
+
+  # まだリリースできる段階にはないので一旦無効化しておきます。
+  # リリースできる段階になったらifのfalseを削除してください。
+  release:
+    needs: [nix-flake-check, format]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # タグ作成のため
+    # masterへのpushまたはworkflow_dispatchの場合のみ実行
+    if: false && (github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch')
     steps:
       - uses: actions/checkout@v6
         with:
