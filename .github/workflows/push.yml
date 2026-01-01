@@ -7,7 +7,7 @@ on:
   pull_request:
 
 permissions:
-  contents: write # リリース時にタグを作成するため
+  contents: read
 
 jobs:
   nix-flake-check:
@@ -56,6 +56,8 @@ jobs:
   release:
     needs: [nix-flake-check, format]
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write # タグ作成のため
     # masterへのpushまたはworkflow_dispatchの場合のみ実行
     if: false && (github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch')
     steps:
