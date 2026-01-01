@@ -176,22 +176,6 @@
       ]
       // {
         apps = flake.apps // {
-          editorconfig-checker = {
-            type = "app";
-            meta.description = "Run editorconfig-checker";
-            program = pkgs.lib.getExe pkgs.editorconfig-checker;
-          };
-          cabal-check = {
-            type = "app";
-            meta.description = "Run cabal check using project's cabal version";
-            program = pkgs.lib.getExe (
-              pkgs.writeShellApplication {
-                name = "cabal-check";
-                runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" "3.14.2.0") ];
-                text = "cabal check";
-              }
-            );
-          };
           generate-hlint = {
             type = "app";
             meta.description = "Generate .hlint.yaml from Dhall source";
@@ -235,6 +219,15 @@
           // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
+            editorconfig = pkgs.runCommand "editorconfig" { } ''
+              ${pkgs.editorconfig-checker}/bin/editorconfig-checker -config ${self}/.editorconfig-checker.json ${self}
+              touch $out
+            '';
+            cabal-check = pkgs.runCommand "cabal-check" { } ''
+              cd ${self}
+              ${pkgs.haskell-nix.tool ghc-version "cabal" "3.14.2.0"}/bin/cabal check
+              touch $out
+            '';
             changelog-lint = pkgs.runCommand "changelog-lint" { } ''
               ${pkgs.changelog-lint}/bin/changelog-lint -config ${self}/.changelog-lint.toml ${self}/CHANGELOG.md
               touch $out
