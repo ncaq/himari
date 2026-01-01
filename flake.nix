@@ -176,6 +176,17 @@
       ]
       // {
         apps = flake.apps // {
+          cabal-check = {
+            type = "app";
+            meta.description = "Run cabal check using project's cabal version";
+            program = pkgs.lib.getExe (
+              pkgs.writeShellApplication {
+                name = "cabal-check";
+                runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" "3.14.2.0") ];
+                text = "cabal check";
+              }
+            );
+          };
           generate-hlint = {
             type = "app";
             meta.description = "Generate .hlint.yaml from Dhall source";
