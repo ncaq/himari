@@ -220,7 +220,7 @@
           // {
             formatting = treefmtEval.config.build.check self;
             changelog-lint = pkgs.runCommand "changelog-lint" { } ''
-              ${pkgs.changelog-lint}/bin/changelog-lint ${self}/CHANGELOG.md
+              ${pkgs.changelog-lint}/bin/changelog-lint -config ${self}/.changelog-lint.toml ${self}/CHANGELOG.md
               touch $out
             '';
           };
