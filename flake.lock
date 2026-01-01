@@ -83,6 +83,22 @@
         "type": "github"
       }
     },
+    "changelog-lint-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667633745,
+        "narHash": "sha256-ZVLuE0SbNY1LZ773GeVs3em/G2vCNRXiV41VYNOtcGA=",
+        "ref": "refs/heads/master",
+        "rev": "e9310dee1b58d2bd19223034d48a654849bc9d96",
+        "revCount": 49,
+        "type": "git",
+        "url": "https://codeberg.org/chavacava/changelog-lint.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/chavacava/changelog-lint.git"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -605,6 +621,7 @@
     },
     "root": {
       "inputs": {
+        "changelog-lint-src": "changelog-lint-src",
         "flake-utils": "flake-utils",
         "haskellNix": "haskellNix",
         "nixpkgs": [
