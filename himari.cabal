@@ -17,7 +17,7 @@ license: Apache-2.0
 license-file: LICENSE
 author: ncaq
 maintainer: ncaq@ncaq.net
-copyright: 2024 ncaq
+copyright: ncaq
 category: Control
 build-type: Simple
 data-files: .hlint.yaml
