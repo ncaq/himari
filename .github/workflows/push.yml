@@ -46,7 +46,7 @@ jobs:
           name: himari
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: editorconfig-checker
-        run: nix run 'nixpkgs#editorconfig-checker' -- -config .editorconfig-checker.json
+        run: nix run '.#editorconfig-checker' -- -config .editorconfig-checker.json
       - run: nix run '.#cabal-check'
       - name: generate-hlint
         run: nix run '.#generate-hlint'

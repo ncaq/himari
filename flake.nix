@@ -176,6 +176,11 @@
       ]
       // {
         apps = flake.apps // {
+          editorconfig-checker = {
+            type = "app";
+            meta.description = "Run editorconfig-checker";
+            program = pkgs.lib.getExe pkgs.editorconfig-checker;
+          };
           cabal-check = {
             type = "app";
             meta.description = "Run cabal check using project's cabal version";
