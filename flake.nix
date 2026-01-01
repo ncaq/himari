@@ -27,6 +27,7 @@
     # 現状はLinuxのみを想定。
     let
       ghc-version = "ghc9103"; # GHC 9.10.3
+      cabal-version = "3.14.2.0";
       hls-version = "2.12.0.0";
       overlays = [
         haskellNix.overlay
@@ -95,7 +96,7 @@
             };
             shell = {
               tools = {
-                cabal = "3.14.2.0";
+                cabal = cabal-version;
                 cabal-gild = "1.6.0.2"; # treefmtで管理されているがvscodeのHaskell拡張向けに使えるようにしておく
                 haskell-language-server = hls-version;
                 implicit-hie = "0.1.4.0";
@@ -219,6 +220,15 @@
           // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
+            editorconfig = pkgs.runCommand "editorconfig" { } ''
+              ${pkgs.editorconfig-checker}/bin/editorconfig-checker -config ${self}/.editorconfig-checker.json ${self}
+              touch $out
+            '';
+            cabal-check = pkgs.runCommand "cabal-check" { } ''
+              cd ${self}
+              ${pkgs.haskell-nix.tool ghc-version "cabal" cabal-version}/bin/cabal check
+              touch $out
+            '';
             changelog-lint = pkgs.runCommand "changelog-lint" { } ''
               ${pkgs.changelog-lint}/bin/changelog-lint -config ${self}/.changelog-lint.toml ${self}/CHANGELOG.md
               touch $out
