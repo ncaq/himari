@@ -51,15 +51,13 @@ jobs:
         run: nix run '.#generate-hlint'
       - run: git diff --exit-code
 
-  # まだリリースできる段階にはないので一旦無効化しておきます。
-  # リリースできる段階になったらifのfalseを削除してください。
   release:
     needs: [nix-flake-check, format]
     runs-on: ubuntu-24.04
     permissions:
       contents: write # タグ作成のため
     # masterへのpushまたはworkflow_dispatchの場合のみ実行
-    if: false && (github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch')
+    if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v6
         with:
