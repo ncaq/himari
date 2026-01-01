@@ -9,6 +9,10 @@
       };
     };
     haskellNix.url = "github:input-output-hk/haskell.nix";
+    changelog-lint-src = {
+      url = "git+https://codeberg.org/chavacava/changelog-lint.git";
+      flake = false;
+    };
   };
 
   outputs =
@@ -18,6 +22,7 @@
       flake-utils,
       treefmt-nix,
       haskellNix,
+      changelog-lint-src,
     }:
     # 現状はLinuxのみを想定。
     let
@@ -101,6 +106,7 @@
                 dhall-docs
                 dhall-lsp-server
                 dhall-yaml
+                final.changelog-lint
                 fourmolu
                 hlint
                 nil
@@ -115,6 +121,12 @@
                 '')
               ];
             };
+          };
+          changelog-lint = final.buildGoModule {
+            pname = "changelog-lint";
+            version = "0.3.0";
+            src = changelog-lint-src;
+            vendorHash = "sha256-b0cTP7aIh26/E9BvG6aGnpktmFmL49Nb8t4AhWvZzP8=";
           };
         })
       ];
@@ -207,6 +219,10 @@
           // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
+            changelog-lint = pkgs.runCommand "changelog-lint" { } ''
+              ${pkgs.changelog-lint}/bin/changelog-lint ${self}/CHANGELOG.md
+              touch $out
+            '';
           };
         formatter = treefmtEval.config.build.wrapper;
       }
