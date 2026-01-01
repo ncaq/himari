@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Haskell Package Versioning Policy](https://pvp.haskell.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Move `-j` (parallel compilation) option from `himari.cabal` ghc-options to `cabal.project` to fix Hackage upload compatibility
+
 ## [1.0.0.0] - 2026-01-01
 
 ### Added
