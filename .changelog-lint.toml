@@ -4,3 +4,8 @@
 [parser.patterns]
 # PVP format: A.B.C.D (4 numbers) instead of semver (3 numbers)
 version = '^## \[?(\d+\.\d+\.\d+\.\d+|Unreleased)\]?( .*)*$'
+
+[rule.version-order]
+# Disabled because changelog-lint's version comparison assumes semver (3 numbers)
+# but PVP uses 4 numbers, causing a panic in the comparison logic
+Disabled = true
