@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.0.1] - 2026-01-01
+
 ### Changed
 
 - Move `-j` (parallel compilation) option from `himari.cabal` ghc-options to `cabal.project` to fix Hackage upload compatibility
