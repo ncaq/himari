@@ -1,4 +1,4 @@
--- | System.FilePath re-exports, hiding symbols that conflict with lens.
+-- | "System.FilePath" re-exports, hiding symbols that conflict with "Control.Lens".
 module Himari.Prelude.FilePath
   ( module Export
   ) where

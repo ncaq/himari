@@ -1,6 +1,6 @@
--- | Safe alternatives to partial functions from the safe library.
+-- | "Safe", "Safe.Exact", and "Safe.Foldable" re-exports.
 -- Only total functions are exported; partial functions are hidden.
--- Safe.Foldable is preferred for more generic versions, so conflicting functions are hidden from Safe.
+-- "Safe.Foldable" is preferred for more generic versions, so conflicting functions are hidden from "Safe".
 module Himari.Prelude.Safe
   ( module Export
   ) where
