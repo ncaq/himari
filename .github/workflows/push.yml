@@ -50,7 +50,7 @@ jobs:
         id: ghc
         shell: bash
         run: |
-          VERSION=$(grep -oP 'with-compiler: ghc-\K[0-9.]+' cabal.project)
+          VERSION=$(sed -n 's/^with-compiler: ghc-//p' cabal.project)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - uses: haskell-actions/setup@v2
         with:
