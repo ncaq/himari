@@ -85,6 +85,9 @@ library
     Himari.Logger
     Himari.Prelude
     Himari.Prelude.Aeson
+    Himari.Prelude.Category
+    Himari.Prelude.FilePath
+    Himari.Prelude.Generics
     Himari.Prelude.Safe
 
 test-suite himari-test

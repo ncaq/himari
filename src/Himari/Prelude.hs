@@ -24,7 +24,6 @@ module Himari.Prelude
   ) where
 
 import Control.Applicative as Export
-import Control.Category as Export hiding (id, (.))
 import Control.DeepSeq as Export
 import Control.Lens as Export
 import Control.Monad as Export
@@ -56,10 +55,11 @@ import Data.Tuple as Export
 import Data.Void as Export
 import Data.Word as Export
 import Debug.Pretty.Simple as Export
-import GHC.Generics as Export hiding (from, to)
 import Himari.Prelude.Aeson as Export
+import Himari.Prelude.Category as Export
+import Himari.Prelude.FilePath as Export
+import Himari.Prelude.Generics as Export
 import Himari.Prelude.Safe as Export
-import System.FilePath as Export hiding ((<.>))
 import System.Process.Typed as Export
 import Text.Pretty.Simple as Export
 import Text.Show as Export
