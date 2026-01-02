@@ -96,3 +96,16 @@ LLMのコーディングエージェントに独自のシンボルを使うこ�
 rioの`RIO.Text`のように個別にimportする必要はありません。
 万が一誤ってサブモジュールを直接importした場合でも、
 `Himari.Prelude`と重複importすることになり、GHCが警告を出してくれます。
+
+## Nix
+
+このプロジェクトは[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使用しています。
+
+### `nix flake show`が失敗する場合
+
+haskell.nixはIFD(Import From Derivation)を使用するため、
+複数システムをサポートするflakeで`nix flake show`を実行すると、
+異なるシステム向けのビルドを評価しようとして失敗することがあります。
+
+これはhaskell.nixの既知の制限であり、
+現在のところ完全な回避策はありません。

@@ -49,11 +49,6 @@
           project = final.haskell-nix.cabalProject' {
             src = ./.;
             compiler-nix-name = ghc-version;
-            # IFDの評価を現在のシステムで実行することで、
-            # 異なるシステム向けの出力を持つflakeでも`nix flake show`が動作するようになります。
-            # pureモードではx86_64-linuxにフォールバックします。
-            # https://github.com/input-output-hk/haskell.nix/issues/1386
-            evalSystem = builtins.currentSystem or "x86_64-linux";
             modules = [
               # `nix flake check`レベルではcabalの警告をエラーとして扱います。
               # ライブラリの問題ない範囲の不一致とか考えるとcabalの警告はエラーにしないべきですが、
