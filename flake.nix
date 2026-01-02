@@ -24,7 +24,6 @@
       haskellNix,
       changelog-lint-src,
     }:
-    # 現状はLinuxのみを想定。
     let
       ghc-version = "ghc9103"; # GHC 9.10.3
       cabal-version = "3.14.2.0";
@@ -132,7 +131,7 @@
         })
       ];
     in
-    flake-utils.lib.eachSystem [ flake-utils.lib.system.x86_64-linux ] (
+    flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs {
