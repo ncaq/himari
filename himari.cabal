@@ -84,6 +84,8 @@ library
     Himari.Env.Simple
     Himari.Logger
     Himari.Prelude
+    Himari.Prelude.Aeson
+    Himari.Prelude.Safe
 
 test-suite himari-test
   import: basic
