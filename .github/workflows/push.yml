@@ -41,6 +41,22 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix flake check
 
+  windows:
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v6
+      # バージョンは一つに絞られてしまいますが、他のnix-flake-checkジョブで十分カバーできているので問題ありません。
+      - name: Extract GHC version from cabal.project
+        id: ghc
+        shell: bash
+        run: |
+          VERSION=$(grep -oP 'with-compiler: ghc-\K[0-9.]+' cabal.project)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - uses: haskell-actions/setup@v2
+        with:
+          ghc-version: ${{ steps.ghc.outputs.version }}
+      - run: cabal test --disable-optimization --enable-tests
+
   format: # `nix flake check`で実行される`nix fmt`で対応していない範囲のフォーマットチェックを行う。
     runs-on: ubuntu-24.04
     steps:
@@ -58,7 +74,7 @@ jobs:
       - run: git diff --exit-code
 
   release:
-    needs: [nix-flake-check, format]
+    needs: [nix-flake-check, windows, format]
     runs-on: ubuntu-24.04
     permissions:
       contents: write # タグ作成のため
