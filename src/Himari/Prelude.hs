@@ -1,26 +1,6 @@
 -- | Alternative to "Prelude".
 module Himari.Prelude
   ( module Export
-  -- Type only re-exports.
-  , ByteString
-  , StrictByteString
-  , LazyByteString
-  , ShortByteString
-  , HashMap
-  , HashSet
-  , IntMap
-  , IntSet
-  , List
-  , NonEmpty
-  , Map
-  , Seq
-  , Set
-  , StrictText
-  , Text
-  , LazyText
-  , Tree
-  , MVector
-  , Vector
   ) where
 
 import Control.Applicative as Export
@@ -60,28 +40,9 @@ import Himari.Prelude.Category as Export
 import Himari.Prelude.FilePath as Export
 import Himari.Prelude.Generics as Export
 import Himari.Prelude.Safe as Export
+import Himari.Prelude.Type as Export
 import System.Process.Typed as Export
 import Text.Pretty.Simple as Export
 import Text.Show as Export
 import UnliftIO as Export
 import Prelude as Export
-
--- Type only.
-
-import Control.Monad.Catch as Export (MonadCatch, MonadMask, MonadThrow)
-import Data.ByteString (ByteString, StrictByteString)
-import Data.ByteString.Lazy (LazyByteString)
-import Data.ByteString.Short (ShortByteString)
-import Data.HashMap.Strict (HashMap)
-import Data.HashSet (HashSet)
-import Data.IntMap.Strict (IntMap)
-import Data.IntSet (IntSet)
-import Data.List (List)
-import Data.List.NonEmpty (NonEmpty)
-import Data.Map.Strict (Map)
-import Data.Sequence (Seq)
-import Data.Set (Set)
-import Data.Text (StrictText, Text)
-import Data.Text.Lazy (LazyText)
-import Data.Tree (Tree)
-import Data.Vector (MVector, Vector)

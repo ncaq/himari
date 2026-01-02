@@ -89,6 +89,7 @@ library
     Himari.Prelude.FilePath
     Himari.Prelude.Generics
     Himari.Prelude.Safe
+    Himari.Prelude.Type
 
 test-suite himari-test
   import: basic
