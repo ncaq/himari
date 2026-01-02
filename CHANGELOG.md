@@ -7,6 +7,19 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `Himari.Prelude.Aeson` module for JSON-related re-exports
+- `Himari.Prelude.Safe` module for safe function re-exports
+- `Himari.Prelude.Category` module for `Control.Category` re-exports (hiding `id` and `.`)
+- `Himari.Prelude.Generics` module for `GHC.Generics` re-exports (hiding `from` and `to`)
+- `Himari.Prelude.FilePath` module for `System.FilePath` re-exports (hiding `<.>`)
+- `Himari.Prelude.Type` module for type-only re-exports (`ByteString`, `Text`, `Map`, `Vector`, etc.)
+
+### Changed
+
+- Refactor `Himari.Prelude` to use submodules for cleaner Haddock documentation
+
 ## [1.0.0.1] - 2026-01-01
 
 ### Changed

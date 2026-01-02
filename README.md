@@ -81,3 +81,12 @@ import Himari
 himariはrioで言う`RIO.Text`のような独自のシンボルを定義することをなるべく避けます。
 LLMのコーディングエージェントに独自のシンボルを使うことを守ってもらうのが難しいからです。
 しばしばオリジナルのシンボルをimportしてしまいます。
+
+ただし`Himari.Prelude`のサブモジュール(`Himari.Prelude.Aeson`など)は例外的に存在します。
+これはHaddockの制限により、`hiding`を使ったre-exportはシンボルが全て展開されてドキュメントが肥大化してしまうためです。
+サブモジュールでhidingを隠蔽することで、`Himari.Prelude`のドキュメントをコンパクトに保っています。
+
+これらのサブモジュールは`Himari.Prelude`から自動的にre-exportされるため、
+rioの`RIO.Text`のように個別にimportする必要はありません。
+万が一誤ってサブモジュールを直接importした場合でも、
+`Himari.Prelude`と重複importすることになり、GHCが警告を出してくれます。
