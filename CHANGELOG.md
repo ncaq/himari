@@ -9,6 +9,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
+- Support for Windows
 - Support for macOS (x86_64-darwin, aarch64-darwin) and Linux ARM (aarch64-linux)
 - `Himari.Prelude.Aeson` module for JSON-related re-exports
 - `Himari.Prelude.Safe` module for safe function re-exports
