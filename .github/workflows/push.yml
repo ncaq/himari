@@ -53,9 +53,27 @@ jobs:
           VERSION=$(sed -n 's/^with-compiler: ghc-//p' cabal.project)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - uses: haskell-actions/setup@v2
+        id: setup
         with:
           ghc-version: ${{ steps.ghc.outputs.version }}
+      - name: Configure and generate build plan
+        run: |
+          cabal configure --disable-optimization --enable-tests
+          cabal build all --dry-run
+      - name: Restore cached dependencies
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ steps.setup.outputs.cabal-store }}
+          key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-plan-${{ hashFiles('**/plan.json') }}
+          restore-keys: |
+            ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-
       - run: cabal test --disable-optimization --enable-tests
+      - name: Save dependencies to cache
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.setup.outputs.cabal-store }}
+          key: ${{ steps.cache.outputs.cache-primary-key }}
 
   format: # `nix flake check`で実行される`nix fmt`で対応していない範囲のフォーマットチェックを行う。
     runs-on: ubuntu-24.04
