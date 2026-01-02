@@ -4,11 +4,9 @@ version: 1.0.0.1
 synopsis: A standard library for Haskell as an alternative to rio
 description:
   A standard library for Haskell inspired by rio.
-  .
   Unlike rio, himari uses the full lens library instead of microlens,
   and provides hlint rules to warn against partial functions
   instead of providing safe wrapper modules.
-  .
   See the README at <https://github.com/ncaq/himari#readme> for more information.
 
 homepage: https://github.com/ncaq/himari
