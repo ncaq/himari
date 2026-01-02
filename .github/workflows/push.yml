@@ -28,7 +28,7 @@ jobs:
           docker-images: true
           dotnet: true
           haskell: true # Nixで管理しているので不要
-          large-packages: true
+          large-packages: false # ARMランナーに存在しないパッケージ削除で警告が出るため無効化
           swap-storage: true
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
@@ -104,7 +104,7 @@ jobs:
           docker-images: true
           dotnet: true
           haskell: true # Nixで管理しているので不要
-          large-packages: true
+          large-packages: false # ARMランナーに存在しないパッケージ削除で警告が出るため無効化
           swap-storage: true
       - uses: cachix/install-nix-action@v31
         if: steps.check_tag.outputs.exists == 'false'
