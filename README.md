@@ -40,7 +40,11 @@ himariはそのままオリジナルのモジュールを使ってもらいま�
 なのでhimariはhlintのルールで警告を出すことで対処しています。
 
 プロジェクトルートにある[.hlint.yaml](./.hlint.yaml)ファイルを、
-あなたのプロジェクトにコピーしてください。
+以下のような方法であなたのプロジェクトにコピーしてください。
+
+```console
+curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/.hlint.yaml' -o '.hlint.yaml'
+```
 
 ## 背景
 
