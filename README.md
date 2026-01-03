@@ -2,9 +2,14 @@
 
 [![CI](https://github.com/ncaq/himari/actions/workflows/push.yml/badge.svg)](https://github.com/ncaq/himari/actions/workflows/push.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/ncaq/himari/blob/master/LICENSE)
+
 [![Haskell](https://img.shields.io/badge/language-Haskell-5D4F85.svg)](https://www.haskell.org/)
 [![Hackage](https://img.shields.io/hackage/v/himari.svg?logo=haskell)](https://hackage.haskell.org/package/himari)
 [![Haddock](https://img.shields.io/badge/docs-Haddock-purple.svg)](https://hackage.haskell.org/package/himari/docs/Himari.html)
+
+![Linux](https://img.shields.io/badge/linux-x86__64%20|%20ARM64-brightgreen?logo=linux&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-x86__64%20|%20ARM64-brightgreen?logo=apple&logoColor=white)
+![Windows](https://img.shields.io/badge/windows-x86__64-brightgreen?logo=windows&logoColor=white)
 
 A standard library for Haskell to replace rio
 
