@@ -43,7 +43,7 @@ himariはそのままオリジナルのモジュールを使ってもらいま�
 以下のような方法であなたのプロジェクトにコピーしてください。
 
 ```console
-curl 'https://raw.githubusercontent.com/ncaq/himari/master/.hlint.yaml' -o '.hlint.yaml'
+curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/.hlint.yaml' -o '.hlint.yaml'
 ```
 
 ## 背景
