@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.0.2] - 2026-01-03
+
 ### Added
 
 - Support for Windows
