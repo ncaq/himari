@@ -18,7 +18,10 @@ maintainer: ncaq@ncaq.net
 copyright: ncaq
 category: Control
 build-type: Simple
-data-files: .hlint.yaml
+data-files:
+  .hlint.yaml
+  fourmolu.yaml
+
 extra-doc-files:
   CHANGELOG.md
   README.md

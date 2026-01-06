@@ -38,13 +38,40 @@ himariはそのままオリジナルのモジュールを使ってもらいま�
 よってhimariは部分関数を除去していません。
 
 なのでhimariはhlintのルールで警告を出すことで対処しています。
+詳細は[セットアップ](#セットアップ)を参照してください。
 
-プロジェクトルートにある[.hlint.yaml](./.hlint.yaml)ファイルを、
-以下のような方法であなたのプロジェクトにコピーしてください。
+## セットアップ
+
+himariを使うプロジェクトでは、
+以下の設定ファイルをコピーすることを強く推奨します。
+
+### hlint
+
+himariは部分関数を除去する代わりに、
+hlintで警告を出すことで対処しています。
+プロジェクトルートにある[.hlint.yaml](./.hlint.yaml)ファイルをコピーしてください。
+既存の`hlint.yaml`がある場合はマージしてください。
 
 ```console
 curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/.hlint.yaml' -o '.hlint.yaml'
 ```
+
+### fourmolu
+
+[fourmolu](https://github.com/fourmolu/fourmolu)はHaskellのフォーマッタです。
+fourmoluは演算子の優先順位(fixity)を正しく解決するために、
+カスタムPreludeがどのモジュールをre-exportしているかを知る必要があります。
+
+プロジェクトルートにある[fourmolu.yaml](./fourmolu.yaml)ファイルの`reexports`セクションをコピーしてください。
+既存の`fourmolu.yaml`がある場合は`reexports`セクションをマージしてください。
+
+```console
+curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/fourmolu.yaml' -o 'fourmolu.yaml'
+```
+
+> [!NOTE]
+> fourmolu.yamlにはhimari固有のフォーマット設定(indentation, column-limitなど)も含まれています。
+> 素朴な設定ですが、プロジェクトに合わせて適宜変更してください。
 
 ## 背景
 

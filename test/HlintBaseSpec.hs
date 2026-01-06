@@ -30,8 +30,8 @@ spec = do
 runHlintOnSample :: IO Text
 runHlintOnSample = do
   (exitCode, stdoutOutput, stderrOutput) <-
-    readProcess
-      $ proc "hlint" ["test/HlintSamples/BasePartial.hs"]
+    readProcess $
+      proc "hlint" ["test/HlintSamples/BasePartial.hs"]
   pure $ case exitCode of
     ExitSuccess -> convert stdoutOutput
     ExitFailure _ -> convert stdoutOutput <> convert stderrOutput

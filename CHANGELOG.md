@@ -7,6 +7,13 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- Bundle `fourmolu.yaml` in Cabal `data-files` so downstream users can reuse the formatter config
+- Add `fourmolu.yaml` reexports and fixity settings to resolve operator precedence for Himari’s Prelude
+- Document setup steps in README for copying/merging `.hlint.yaml` and `fourmolu.yaml`
+- Add fourmolu customization notes to README
+
 ## [1.0.0.2] - 2026-01-03
 
 ### Added
