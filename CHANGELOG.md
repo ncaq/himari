@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.1.0] - 2026-01-06
+
 ### Added
 
 - Added `Magnify` instance for `Himari` monad
