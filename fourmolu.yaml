@@ -9,7 +9,11 @@ sort-derived-classes: true
 # Himariがre-exportしているモジュールの演算子fixity解決用
 # チェーン方式: fourmoluは再帰的にreexportsを展開する
 reexports:
-  # Himari → Himari.Prelude
+  # Himari → 内部モジュール
+  - module Himari exports "himari" Himari.Char
+  - module Himari exports "himari" Himari.Env
+  - module Himari exports "himari" Himari.Env.Simple
+  - module Himari exports "himari" Himari.Logger
   - module Himari exports "himari" Himari.Prelude
 
   # Himari.Prelude → 外部モジュール
@@ -56,6 +60,7 @@ reexports:
   - module Himari.Prelude exports "himari" Himari.Prelude.FilePath
   - module Himari.Prelude exports "himari" Himari.Prelude.Generics
   - module Himari.Prelude exports "himari" Himari.Prelude.Safe
+  - module Himari.Prelude exports "himari" Himari.Prelude.Type
 
   # Himari.Prelude.Aeson → 外部モジュール
   - module Himari.Prelude.Aeson exports "aeson" Data.Aeson
@@ -76,6 +81,25 @@ reexports:
   - module Himari.Prelude.Safe exports "safe" Safe
   - module Himari.Prelude.Safe exports "safe" Safe.Exact
   - module Himari.Prelude.Safe exports "safe" Safe.Foldable
+
+  # Himari.Prelude.Type → 外部モジュール
+  - module Himari.Prelude.Type exports "exceptions" Control.Monad.Catch
+  - module Himari.Prelude.Type exports "bytestring" Data.ByteString
+  - module Himari.Prelude.Type exports "bytestring" Data.ByteString.Lazy
+  - module Himari.Prelude.Type exports "bytestring" Data.ByteString.Short
+  - module Himari.Prelude.Type exports "unordered-containers" Data.HashMap.Strict
+  - module Himari.Prelude.Type exports "unordered-containers" Data.HashSet
+  - module Himari.Prelude.Type exports "containers" Data.IntMap.Strict
+  - module Himari.Prelude.Type exports "containers" Data.IntSet
+  - module Himari.Prelude.Type exports "base" Data.List
+  - module Himari.Prelude.Type exports "base" Data.List.NonEmpty
+  - module Himari.Prelude.Type exports "containers" Data.Map.Strict
+  - module Himari.Prelude.Type exports "containers" Data.Sequence
+  - module Himari.Prelude.Type exports "containers" Data.Set
+  - module Himari.Prelude.Type exports "text" Data.Text
+  - module Himari.Prelude.Type exports "text" Data.Text.Lazy
+  - module Himari.Prelude.Type exports "containers" Data.Tree
+  - module Himari.Prelude.Type exports "vector" Data.Vector
 
 # sandwichはinfix宣言がないため手動設定が必要
 # sydtestは既にinfix宣言があるため不要
