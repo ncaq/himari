@@ -8,6 +8,7 @@ module Himari.Env
   , mapHimari
   ) where
 
+import Control.Lens.Internal.Zoom (Effect) -- 直接の`UndecidableInstances`を避けるためにInternalを受け入れる。
 import Himari.Prelude
 
 -- | The Reader + IO monad.
@@ -26,6 +27,11 @@ instance (Monoid a) => Monoid (Himari env a) where
 instance PrimMonad (Himari env) where
   type PrimState (Himari env) = PrimState IO
   primitive = Himari . ReaderT . const . primitive
+
+type instance Magnified (Himari e) = Effect IO
+
+instance Magnify (Himari s) (Himari t) s t where
+  magnify l (Himari m) = Himari $ magnify l m
 
 -- | Given an environment, runs the action that requires it in IO.
 runHimari :: (MonadIO m) => env -> Himari env a -> m a

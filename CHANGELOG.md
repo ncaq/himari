@@ -9,6 +9,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
+- Added `Magnify` instance for `Himari` monad
 - Bundle `fourmolu.yaml` in Cabal `data-files` so downstream users can reuse the formatter config
 - Add `fourmolu.yaml` reexports and fixity settings to resolve operator precedence for Himari’s Prelude
 - Document setup steps in README for copying/merging `.hlint.yaml` and `fourmolu.yaml`
