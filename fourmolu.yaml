@@ -101,8 +101,10 @@ reexports:
   - module Himari.Prelude.Type exports "containers" Data.Tree
   - module Himari.Prelude.Type exports "vector" Data.Vector
 
-# sandwichはinfix宣言がないため手動設定が必要
+# 利用者向けの汎用的なfixity設定
+# hspecは既にfourmoluによってサポートされているため不要
 # sydtestは既にinfix宣言があるため不要
+# sandwichはinfix宣言がないため手動設定が必要
 fixities:
   - infix 1 `shouldBe`, `shouldNotBe`, `shouldContain`, `shouldNotContain`
   - infix 1 `shouldBeSet`, `shouldContainPredicate`, `shouldNotContainPredicate`
