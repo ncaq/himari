@@ -64,8 +64,8 @@ reexports:
 
   # Himari.Prelude.Aeson → 外部モジュール
   - module Himari.Prelude.Aeson exports "aeson" Data.Aeson
+  - module Himari.Prelude.Aeson exports "aeson" Data.Aeson.QQ.Simple
   - module Himari.Prelude.Aeson exports "aeson-pretty" Data.Aeson.Encode.Pretty
-  - module Himari.Prelude.Aeson exports "aeson-qq" Data.Aeson.QQ.Simple
   - module Himari.Prelude.Aeson exports "deriving-aeson" Deriving.Aeson
 
   # Himari.Prelude.Category → 外部モジュール
