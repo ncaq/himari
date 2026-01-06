@@ -105,6 +105,7 @@ reexports:
 # hspecは既にfourmoluによってサポートされているため不要
 # sydtestは既にinfix宣言があるため不要
 # sandwichはinfix宣言がないため手動設定が必要
+# hspec, sydtest, sandwichと名前が被っている演算子が多いが優先度は概ね同じなので使いまわします
 fixities:
   - infix 1 `shouldBe`, `shouldNotBe`, `shouldContain`, `shouldNotContain`
   - infix 1 `shouldBeSet`, `shouldContainPredicate`, `shouldNotContainPredicate`
