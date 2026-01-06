@@ -94,15 +94,15 @@ spec = do
   describe "Magnify instance" $ do
     it "works with magnify to access a sub-environment" $ do
       let
-        -- 小さな環境 (String) を要求するアクション
-        subAction :: Himari String String
+        -- 小さな環境 (Text) を要求するアクション
+        subAction :: Himari Text Text
         subAction = do
           env <- ask
           pure $ env <> " world"
-        -- 大きな環境 (Int, String)
-        bigEnv :: (Int, String)
+        -- 大きな環境 (Int, Text)
+        bigEnv :: (Int, Text)
         bigEnv = (100, "hello")
-      -- (Int, String) の環境下で、_2 レンズを使って String にズームして実行
+      -- (Int, Text) の環境下で、_2 レンズを使って Text にズームして実行
       -- これがコンパイル・実行できれば Effect IO へのマッピングは成功している
       result <- runHimari bigEnv $ magnify _2 subAction
       result `shouldBe` "hello world"
