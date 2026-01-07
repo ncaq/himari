@@ -25,7 +25,7 @@
       changelog-lint-src,
     }:
     let
-      ghc-version = "ghc9103"; # GHC 9.10.3
+      ghc-version = "ghc9122"; # GHC 9.12.2
       cabal-version = "3.16.1.0";
       hls-version = "2.12.0.0";
       overlays = [
@@ -86,12 +86,12 @@
               )
             ];
             # `ghc-version`だけではなく`variants`で定義したGHCバージョンも`nix flake check`で自動的にテストされます。
-            # 個別ビルド: nix build .#ghc9122:himari:lib:himari
+            # 個別ビルド: `nix build .#ghc9103:himari:lib:himari`
             # サポート方針としてはサポートできるものは基本的にサポートしていきます。
             # あまりにも古かったり、ビルドが何かしらの問題で出来ないものは除外します。
             flake.variants = {
               ghc9102.compiler-nix-name = final.lib.mkDefault "ghc9102"; # GHC 9.10.2
-              ghc9122.compiler-nix-name = final.lib.mkDefault "ghc9122"; # GHC 9.12.2
+              ghc9103.compiler-nix-name = final.lib.mkDefault "ghc9103"; # GHC 9.10.3
             };
             shell = {
               tools = {
