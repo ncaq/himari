@@ -26,7 +26,7 @@
     }:
     let
       ghc-version = "ghc9103"; # GHC 9.10.3
-      cabal-version = "3.14.2.0";
+      cabal-version = "3.16.1.0";
       hls-version = "2.12.0.0";
       overlays = [
         haskellNix.overlay
