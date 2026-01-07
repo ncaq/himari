@@ -1,16 +1,11 @@
 -- | Type-only re-exports from various modules.
 --
--- Includes types from "Control.Monad.Catch", "Data.ByteString", "Data.HashMap.Strict",
+-- Includes types from "Data.ByteString", "Data.HashMap.Strict",
 -- "Data.HashSet", "Data.IntMap.Strict", "Data.IntSet", "Data.List", "Data.List.NonEmpty",
 -- "Data.Map.Strict", "Data.Sequence", "Data.Set", "Data.Text", "Data.Tree", and "Data.Vector".
 module Himari.Prelude.Type
-  ( -- * Exception handling
-    MonadCatch
-  , MonadMask
-  , MonadThrow
-
-    -- * ByteString
-  , ByteString
+  ( -- * ByteString
+    ByteString
   , StrictByteString
   , LazyByteString
   , ShortByteString
@@ -37,7 +32,6 @@ module Himari.Prelude.Type
   , Vector
   ) where
 
-import Control.Monad.Catch (MonadCatch, MonadMask, MonadThrow)
 import Data.ByteString (ByteString, StrictByteString)
 import Data.ByteString.Lazy (LazyByteString)
 import Data.ByteString.Short (ShortByteString)

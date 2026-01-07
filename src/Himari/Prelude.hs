@@ -36,6 +36,7 @@ import Data.Void as Export
 import Data.Word as Export
 import Debug.Pretty.Simple as Export
 import Himari.Prelude.Aeson as Export
+import Himari.Prelude.Catch as Export
 import Himari.Prelude.Category as Export
 import Himari.Prelude.FilePath as Export
 import Himari.Prelude.Generics as Export

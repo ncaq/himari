@@ -86,6 +86,7 @@ library
     Himari.Logger
     Himari.Prelude
     Himari.Prelude.Aeson
+    Himari.Prelude.Catch
     Himari.Prelude.Category
     Himari.Prelude.FilePath
     Himari.Prelude.Generics
