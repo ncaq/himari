@@ -7,6 +7,10 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `Himari.Prelude.Catch` module for `Control.Monad.Catch` re-exports (hiding functions that conflict with `UnliftIO`)
+
 ## [1.0.1.0] - 2026-01-06
 
 ### Added
