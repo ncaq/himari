@@ -3,4 +3,4 @@ module Himari.Prelude.Generics
   ( module Export
   ) where
 
-import GHC.Generics as Export hiding (from, to)
+import GHC.Generics as Export hiding (Fixity, Infix, Prefix, from, to)

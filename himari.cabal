@@ -86,12 +86,16 @@ library
     Himari.Logger
     Himari.Prelude
     Himari.Prelude.Aeson
+    Himari.Prelude.Arrow
     Himari.Prelude.Catch
     Himari.Prelude.Category
+    Himari.Prelude.Data
     Himari.Prelude.FilePath
     Himari.Prelude.Generics
+    Himari.Prelude.Monoid
     Himari.Prelude.Safe
     Himari.Prelude.Type
+    Himari.Prelude.TypeLevel
 
 test-suite himari-test
   import: basic
@@ -115,6 +119,7 @@ test-suite himari-test
   other-modules:
     Himari.CharSpec
     Himari.Env.SimpleSpec
+    Himari.Prelude.FunctorSpec
     Himari.Title
     HlintBaseSpec
     HlintSamples.BasePartial
