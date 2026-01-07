@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.2.0] - 2026-01-07
+
 ### Added
 
 - `Himari.Prelude.Arrow`: `Control.Arrow` re-exports (hiding conflicting symbols)
