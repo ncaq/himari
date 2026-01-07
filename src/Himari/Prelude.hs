@@ -7,6 +7,7 @@ import Control.Applicative as Export
 import Control.DeepSeq as Export
 import Control.Lens as Export
 import Control.Monad as Export
+import Control.Monad.Catch as Export
 import Control.Monad.Cont as Export
 import Control.Monad.Logger as Export
 import Control.Monad.Primitive as Export
