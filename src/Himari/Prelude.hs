@@ -7,7 +7,6 @@ import Control.Applicative as Export
 import Control.DeepSeq as Export
 import Control.Lens as Export
 import Control.Monad as Export
-import Control.Monad.Catch as Export
 import Control.Monad.Cont as Export
 import Control.Monad.Logger as Export
 import Control.Monad.Primitive as Export
@@ -37,6 +36,7 @@ import Data.Void as Export
 import Data.Word as Export
 import Debug.Pretty.Simple as Export
 import Himari.Prelude.Aeson as Export
+import Himari.Prelude.Catch as Export
 import Himari.Prelude.Category as Export
 import Himari.Prelude.FilePath as Export
 import Himari.Prelude.Generics as Export
