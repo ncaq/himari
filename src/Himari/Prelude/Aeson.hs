@@ -6,16 +6,21 @@ module Himari.Prelude.Aeson
 -- aeson has many functions with common names that may conflict,
 -- so we hide some and selectively import others.
 import Data.Aeson as Export hiding
-  ( decode
+  ( KeyValue
+  , Options
+  , decode
   , decode'
   , decodeFileStrict
   , decodeFileStrict'
   , decodeStrict
   , decodeStrict'
   , decodeStrictText
+  , defaultOptions
   , eitherDecode'
   , eitherDecodeFileStrict'
   , eitherDecodeStrict'
+  , object
+  , pairs
   , throwDecode'
   , throwDecodeStrict'
   , (.=)

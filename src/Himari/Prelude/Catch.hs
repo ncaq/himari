@@ -7,7 +7,8 @@ module Himari.Prelude.Catch
   ) where
 
 import Control.Monad.Catch hiding
-  ( bracket
+  ( Handler
+  , bracket
   , bracketOnError
   , bracket_
   , catch
