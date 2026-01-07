@@ -28,6 +28,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `Data.Type.Coercion`/`Data.Type.Equality` re-export (via `Himari.Prelude.TypeLevel`)
 - `Numeric.Natural` re-export in `Himari.Prelude` for non-negative integers
 
+### Changed
+
+- `Himari.Prelude.Aeson`: Hide overly general symbols
+- `Himari.Prelude.Catch`: Hide `Handler` to avoid conflicts
+
 ## [1.0.1.0] - 2026-01-06
 
 ### Added
