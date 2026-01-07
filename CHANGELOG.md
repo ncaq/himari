@@ -9,7 +9,24 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
-- `Himari.Prelude.Catch` module for `Control.Monad.Catch` re-exports (hiding functions that conflict with `UnliftIO`)
+- `Himari.Prelude.Arrow`: `Control.Arrow` re-exports (hiding conflicting symbols)
+- `Himari.Prelude.Catch`: `Control.Monad.Catch` re-exports (hiding UnliftIO conflicts)
+- `Himari.Prelude.Data`: `Data.Data` re-exports (hiding GHC.Generics conflicts)
+- `Himari.Prelude.Monoid`: `Data.Monoid`/`Data.Semigroup` re-exports (hiding conflicts)
+- `Himari.Prelude.TypeLevel`: type-level programming (`Data.Type.Coercion`, `Data.Type.Equality`)
+- `Himari.Prelude.FunctorSpec`: test module for functor-related exports
+- `Control.Arrow` re-export in `Himari.Prelude` (via `Himari.Prelude.Arrow`)
+- `Data.Coerce` re-export in `Himari.Prelude` for safe type coercion
+- `Data.Complex` re-export in `Himari.Prelude` for complex number support
+- `Data.Data` re-export in `Himari.Prelude` (via `Himari.Prelude.Data`) for generic programming
+- `Data.Fixed` re-export in `Himari.Prelude` for fixed-point arithmetic
+- `Data.Functor.Compose` re-export in `Himari.Prelude` for functor composition
+- `Data.Int` re-export in `Himari.Prelude` for sized integer types
+- `Data.Kind` re-export in `Himari.Prelude` for kind-level types (`Type`, `Constraint`)
+- `Data.Monoid`/`Data.Semigroup` re-export in `Himari.Prelude` (via `Himari.Prelude.Monoid`)
+- `Data.Proxy` re-export in `Himari.Prelude` for type-level proxy values
+- `Data.Type.Coercion`/`Data.Type.Equality` re-export (via `Himari.Prelude.TypeLevel`)
+- `Numeric.Natural` re-export in `Himari.Prelude` for non-negative integers
 
 ## [1.0.1.0] - 2026-01-06
 
