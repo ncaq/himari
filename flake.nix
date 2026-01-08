@@ -165,6 +165,48 @@
               package = pkgs.fourmolu;
             };
           };
+          settings.formatter = {
+            editorconfig-checker = {
+              command = pkgs.lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "editorconfig-checker-wrapper";
+                  runtimeInputs = [ pkgs.editorconfig-checker ];
+                  text = ''
+                    editorconfig-checker -config .editorconfig-checker.json "$@"
+                  '';
+                }
+              );
+              includes = [ "*" ];
+              excludes = [
+                ".git/*"
+                "dist-newstyle/*"
+              ];
+            };
+            changelog-lint = {
+              command = pkgs.lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "changelog-lint-wrapper";
+                  runtimeInputs = [ pkgs.changelog-lint ];
+                  text = ''
+                    changelog-lint -config .changelog-lint.toml "$@"
+                  '';
+                }
+              );
+              includes = [ "CHANGELOG.md" ];
+            };
+            cabal-check = {
+              command = pkgs.lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "cabal-check-wrapper";
+                  runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" cabal-version) ];
+                  text = ''
+                    cabal check
+                  '';
+                }
+              );
+              includes = [ "*.cabal" ];
+            };
+          };
         });
       in
       # haskell.nixのproject.flakeはciJobsとhydraJobsを生成するが、
@@ -219,19 +261,6 @@
           // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
-            editorconfig = pkgs.runCommand "editorconfig" { } ''
-              ${pkgs.editorconfig-checker}/bin/editorconfig-checker -config ${self}/.editorconfig-checker.json ${self}
-              touch $out
-            '';
-            cabal-check = pkgs.runCommand "cabal-check" { } ''
-              cd ${self}
-              ${pkgs.haskell-nix.tool ghc-version "cabal" cabal-version}/bin/cabal check
-              touch $out
-            '';
-            changelog-lint = pkgs.runCommand "changelog-lint" { } ''
-              ${pkgs.changelog-lint}/bin/changelog-lint -config ${self}/.changelog-lint.toml ${self}/CHANGELOG.md
-              touch $out
-            '';
           };
         formatter = treefmtEval.config.build.wrapper;
       }
