@@ -7,6 +7,13 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Changed
+
+- Fix HLint language extension configuration: use `arguments` with `-X` flags for parsing
+  instead of `extensions` block (which is for restricting allowed extensions)
+- Rename `hlint/rules/extensions.dhall` to `hlint/rules/parse-extensions.dhall`
+- Remove `TemplateHaskell` from parse extensions (already enabled by default in HLint)
+
 ## [1.0.3.1] - 2026-01-08
 
 ### Added
