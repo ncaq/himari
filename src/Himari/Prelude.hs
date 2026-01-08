@@ -40,6 +40,7 @@ import Data.Tuple as Export
 import Data.Void as Export
 import Data.Word as Export
 import Debug.Pretty.Simple as Export
+import GHC.Stack as Export
 import Himari.Prelude.Aeson as Export
 import Himari.Prelude.Arrow as Export
 import Himari.Prelude.Catch as Export
