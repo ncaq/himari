@@ -7,6 +7,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `GHC.Stack` re-export in `Himari.Prelude` for call stack support (`HasCallStack`, `CallStack`, etc.)
+- HLint rule for `errorWithStackTrace` (deprecated function warning)
+
 ## [1.0.2.0] - 2026-01-07
 
 ### Added

@@ -145,10 +145,3 @@ Must be one of the following:
 # プロジェクト固有の事情
 
 プロジェクトルートの`.hlint.yaml`ファイルはDhallソースコードから自動生成されています。
-よって`.hlint.yaml`ファイルだけを更新するコミットのタイトルは、
-
-```
-chore(hlint): regenerate `.hlint.yaml`
-```
-
-とだけしてください。
