@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.3.2] - 2026-01-08
+
 ### Changed
 
 - Fix HLint language extension configuration: use `arguments` with `-X` flags for parsing
