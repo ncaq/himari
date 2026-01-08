@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.3.0] - 2026-01-08
+
 ### Added
 
 - `GHC.Stack` re-export in `Himari.Prelude` for call stack support (`HasCallStack`, `CallStack`, etc.)
