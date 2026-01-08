@@ -598,6 +598,9 @@
     - message: Use proper error handling
       name: errorWithoutStackTrace
       within: []
+    - message: "Deprecated. Use error instead, which now includes stack traces."
+      name: errorWithStackTrace
+      within: []
 - functions:
     - message: "Partial: throws on empty Fold. Use (^?) instead."
       name: "Control.Lens.Fold.^?!"

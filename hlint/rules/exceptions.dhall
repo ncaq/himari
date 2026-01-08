@@ -23,6 +23,9 @@ let rules
           , Builder.restrictFunction
               "errorWithoutStackTrace"
               "Use proper error handling"
+          , Builder.restrictFunction
+              "errorWithStackTrace"
+              "Deprecated. Use error instead, which now includes stack traces."
           ]
       ]
 
