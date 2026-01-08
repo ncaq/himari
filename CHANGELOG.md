@@ -7,6 +7,15 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- HLint language extension support in Dhall configuration
+- Default language extensions for parsing: `QuasiQuotes`, `CPP`, `RecursiveDo`, `OverloadedRecordDot`,
+  `OverloadedRecordUpdate`, `TemplateHaskell`, `BlockArguments`
+- `ExtensionItem` type and helper functions (`extensionNames`, `extensionNamesWithin`, `extensions`)
+  in `hlint/Builder.dhall`
+- `hlint/rules/extensions.dhall` for managing default enabled extensions
+
 ## [1.0.3.0] - 2026-01-08
 
 ### Added

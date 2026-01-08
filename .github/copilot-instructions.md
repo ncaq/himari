@@ -56,12 +56,27 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 
 ### ルートディレクトリ
 
+#### `.hlint.yaml`
+
 `.hlint.yaml`は他の`hlint`ディレクトリ以下のDhallファイルから自動生成しているため、
 直接の読み書きは想定していません。
 
 `.hlint.yaml`は通常のHaskellプロジェクトと異なり、
 このプロジェクトのリンターというだけではなく、
 他のユーザにも配るhimariライブラリのリンター設定として開発しています。
+
+#### `CHANGELOG.md`
+
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/)形式で変更履歴を管理しています。
+
+このChangeLogは英語で記述してください。
+
+行はなるべく最大120文字程度の長さまで収めてください。
+
+編集したあとは`nix fmt`で正しく書けているかチェックしてください。
+
+`changelog-lint`を使うには`.changelog-lint.toml`をconfigとして使う必要があるため、
+簡単に実行するために`nix fmt`を使用してください。
 
 ### hlint
 
@@ -112,7 +127,6 @@ default-extensions:
 - `LiberalTypeSynonyms`
 - `OverlappingInstances`
 - `RebindableSyntax`
-- `RecursiveDo`
 - `UndecidableInstances`
 - `UndecidableSuperClasses`
 
