@@ -127,7 +127,6 @@ default-extensions:
 - `LiberalTypeSynonyms`
 - `OverlappingInstances`
 - `RebindableSyntax`
-- `RecursiveDo`
 - `UndecidableInstances`
 - `UndecidableSuperClasses`
 
