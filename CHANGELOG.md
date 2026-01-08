@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.3.1] - 2026-01-08
+
 ### Added
 
 - HLint language extension support in Dhall configuration
