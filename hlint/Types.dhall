@@ -32,6 +32,12 @@ let Module
       , message : Optional Text
       }
 
+let ExtensionItem
+    : Type
+    = < Default : Bool
+      | Name : { name : List Text, within : Optional (List Text) }
+      >
+
 let Rule
     : Type
     = < Functions : { functions : List Function }
@@ -39,6 +45,15 @@ let Rule
       | Group : { group : Group }
       | Arguments : { arguments : List Text }
       | Modules : { modules : List Module }
+      | Extensions : { extensions : List ExtensionItem }
       >
 
-in  { Function, Hint, Group, ImportStyle, QualifiedStyle, Module, Rule }
+in  { Function
+    , Hint
+    , Group
+    , ImportStyle
+    , QualifiedStyle
+    , Module
+    , ExtensionItem
+    , Rule
+    }

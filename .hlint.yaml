@@ -10,6 +10,15 @@
 # 使い方:
 #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
 #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
+- extensions:
+    - name:
+        - BlockArguments
+        - CPP
+        - OverloadedRecordDot
+        - OverloadedRecordUpdate
+        - QuasiQuotes
+        - RecursiveDo
+        - TemplateHaskell
 - group:
     enabled: true
     name: generalise

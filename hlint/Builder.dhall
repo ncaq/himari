@@ -88,6 +88,22 @@ let banModule
         , message = Some reason
         }
 
+let extensionNames
+    : List Text -> Types.ExtensionItem
+    = \(names : List Text) ->
+        Types.ExtensionItem.Name { name = names, within = None (List Text) }
+
+let extensionNamesWithin
+    : List Text -> List Text -> Types.ExtensionItem
+    = \(names : List Text) ->
+      \(within : List Text) ->
+        Types.ExtensionItem.Name { name = names, within = Some within }
+
+let extensions
+    : List Types.ExtensionItem -> Types.Rule
+    = \(exts : List Types.ExtensionItem) ->
+        Types.Rule.Extensions { extensions = exts }
+
 in  { restrictFunction
     , restrictInModule
     , functions
@@ -98,5 +114,8 @@ in  { restrictFunction
     , modules
     , qualifiedAs
     , banModule
+    , extensionNames
+    , extensionNamesWithin
+    , extensions
     , Prelude
     }

@@ -4,7 +4,8 @@ let Types = ./Types.dhall
 
 let rules
     : List Types.Rule
-    =   ./rules/groups.dhall
+    =   ./rules/extensions.dhall
+      # ./rules/groups.dhall
       # ./rules/aeson.dhall
       # ./rules/base.dhall
       # ./rules/bits.dhall
