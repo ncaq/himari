@@ -1,3 +1,7 @@
+let Prelude =
+      https://prelude.dhall-lang.org/v23.1.0/package.dhall
+        sha256:931cbfae9d746c4611b07633ab1e547637ab4ba138b16bf65ef1b9ad66a60b7f
+
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
@@ -398,9 +402,9 @@ let unsafeStorableMutableExtra
 
 let immutablePartialFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             partialImmutable
@@ -409,9 +413,9 @@ let immutablePartialFuncs
 
 let immutableUnsafeFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             unsafeImmutable
@@ -420,9 +424,9 @@ let immutableUnsafeFuncs
 
 let mutablePartialFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             partialMutable
@@ -431,9 +435,9 @@ let mutablePartialFuncs
 
 let mutableUnsafeFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             unsafeMutable

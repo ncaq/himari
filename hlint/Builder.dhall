@@ -117,5 +117,4 @@ in  { restrictFunction
     , extensionNames
     , extensionNamesWithin
     , extensions
-    , Prelude
     }
