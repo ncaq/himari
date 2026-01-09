@@ -2,36 +2,57 @@ let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
 
+let useUnliftIOAsync
+    : Text -> Text -> Types.Function
+    = \(name : Text) ->
+      \(problem : Text) ->
+        Builder.restrictFunction name "${problem} Use UnliftIO.Async instead."
+
+let useUnliftIOAsyncWith
+    : Text -> Text -> Text -> Types.Function
+    = \(name : Text) ->
+      \(problem : Text) ->
+      \(alternative : Text) ->
+        Builder.restrictFunction
+          name
+          "${problem} Use ${alternative} from UnliftIO.Async instead."
+
 let rules
     : List Types.Rule
     = [ Builder.functions
-          [ Builder.restrictFunction
+          [ useUnliftIOAsyncWith
               "forkIO"
-              "Exceptions don't propagate to parent thread. Use async or withAsync from UnliftIO.Async instead."
-          , Builder.restrictFunction
+              "Exceptions don't propagate to parent thread."
+              "async or withAsync"
+          , useUnliftIOAsyncWith
               "forkOS"
-              "Exceptions don't propagate to parent thread. Use asyncBound or withAsyncBound from UnliftIO.Async instead."
-          , Builder.restrictFunction
+              "Exceptions don't propagate to parent thread."
+              "asyncBound or withAsyncBound"
+          , useUnliftIOAsyncWith
               "forkOn"
-              "Exceptions don't propagate to parent thread. Use asyncOn or withAsyncOn from UnliftIO.Async instead."
-          , Builder.restrictFunction
+              "Exceptions don't propagate to parent thread."
+              "asyncOn or withAsyncOn"
+          , useUnliftIOAsyncWith
               "forkIOWithUnmask"
-              "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
-          , Builder.restrictFunction
+              "Exceptions don't propagate to parent thread."
+              "asyncWithUnmask or withAsyncWithUnmask"
+          , useUnliftIOAsyncWith
               "forkOnWithUnmask"
-              "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
-          , Builder.restrictFunction
+              "Exceptions don't propagate to parent thread."
+              "asyncOnWithUnmask or withAsyncOnWithUnmask"
+          , useUnliftIOAsyncWith
               "forkWithUnmask"
-              "Deprecated and exceptions don't propagate. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
-          , Builder.restrictFunction
+              "Deprecated and exceptions don't propagate to parent thread."
+              "asyncWithUnmask or withAsyncWithUnmask"
+          , useUnliftIOAsync
               "forkFinally"
-              "Use withAsync from UnliftIO.Async for automatic cancellation and exception handling."
-          , Builder.restrictFunction
+              "No automatic cancellation or exception handling."
+          , useUnliftIOAsync
               "killThread"
-              "Prefer structured cancellation with cancel or withAsync from UnliftIO.Async."
+              "Prefer structured cancellation with cancel or withAsync."
           , Builder.restrictFunction
               "forkProcess"
-              "Almost impossible to use correctly. Consider using typed-process or UnliftIO.Async."
+              "Almost impossible to use correctly. Consider typed-process or UnliftIO.Async."
           ]
       ]
 
