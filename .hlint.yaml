@@ -317,6 +317,9 @@
     - message: "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
       name: forkIOWithUnmask
       within: []
+    - message: "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
+      name: forkOnWithUnmask
+      within: []
     - message: "Deprecated and exceptions don't propagate. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
       name: forkWithUnmask
       within: []
