@@ -331,6 +331,37 @@ let foreignForeignPtrFuncs =
 let foreignStablePtrFuncs =
       [ "newStablePtr", "deRefStablePtr", "freeStablePtr" ]
 
+let concurrentFuncs =
+      [ "myThreadId"
+      , "getNumCapabilities"
+      , "setNumCapabilities"
+      , "threadCapability"
+      , "yield"
+      , "threadDelay"
+      , "threadWaitRead"
+      , "threadWaitWrite"
+      , "isCurrentThreadBound"
+      , "runInBoundThread"
+      , "runInUnboundThread"
+      , "mkWeakThreadId"
+      ]
+
+let environmentFuncs =
+      [ "getArgs"
+      , "getProgName"
+      , "getExecutablePath"
+      , "getEnv"
+      , "lookupEnv"
+      , "setEnv"
+      , "unsetEnv"
+      , "withArgs"
+      , "withProgName"
+      , "getEnvironment"
+      ]
+
+let exceptionLensFuncs =
+      [ "catching", "catching_", "handling", "handling_", "trying", "trying_" ]
+
 let untypedExceptionFuncs =
       [ Builder.restrictInModule
           "UnliftIO.Exception"
@@ -486,6 +517,27 @@ let rules
               "UnliftIO.Foreign"
               monadio
               foreignStablePtrFuncs
+          )
+      , Builder.functions
+          ( Builder.preferModule
+              "Control.Concurrent"
+              "UnliftIO.Concurrent"
+              monadio
+              concurrentFuncs
+          )
+      , Builder.functions
+          ( Builder.preferModule
+              "System.Environment"
+              "UnliftIO.Environment"
+              monadio
+              environmentFuncs
+          )
+      , Builder.functions
+          ( Builder.preferModule
+              "Control.Exception.Lens"
+              "UnliftIO.Exception.Lens"
+              unliftio
+              exceptionLensFuncs
           )
       ]
 

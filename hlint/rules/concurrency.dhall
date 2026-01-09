@@ -18,6 +18,9 @@ let rules
               "forkIOWithUnmask"
               "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
           , Builder.restrictFunction
+              "forkOnWithUnmask"
+              "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
+          , Builder.restrictFunction
               "forkWithUnmask"
               "Deprecated and exceptions don't propagate. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
           , Builder.restrictFunction

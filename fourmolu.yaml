@@ -59,8 +59,12 @@ reexports:
   - module Himari.Prelude exports "pretty-simple" Text.Pretty.Simple
   - module Himari.Prelude exports "primitive" Control.Monad.Primitive
   - module Himari.Prelude exports "time" Data.Time
-  - module Himari.Prelude exports "typed-process" System.Process.Typed
   - module Himari.Prelude exports "unliftio" UnliftIO
+  - module Himari.Prelude exports "unliftio" UnliftIO.Concurrent
+  - module Himari.Prelude exports "unliftio" UnliftIO.Directory
+  - module Himari.Prelude exports "unliftio" UnliftIO.Environment
+  - module Himari.Prelude exports "unliftio" UnliftIO.Exception.Lens
+  - module Himari.Prelude exports "unliftio" UnliftIO.IO.File
   # Himari.Prelude → 内部サブモジュール
   - module Himari.Prelude exports "himari" Himari.Prelude.Aeson
   - module Himari.Prelude exports "himari" Himari.Prelude.Arrow
@@ -70,6 +74,7 @@ reexports:
   - module Himari.Prelude exports "himari" Himari.Prelude.FilePath
   - module Himari.Prelude exports "himari" Himari.Prelude.Generics
   - module Himari.Prelude exports "himari" Himari.Prelude.Monoid
+  - module Himari.Prelude exports "himari" Himari.Prelude.Process
   - module Himari.Prelude exports "himari" Himari.Prelude.Safe
   - module Himari.Prelude exports "himari" Himari.Prelude.Type
   - module Himari.Prelude exports "himari" Himari.Prelude.TypeLevel
@@ -106,6 +111,9 @@ reexports:
   # Himari.Prelude.Monoid → 外部モジュール
   - module Himari.Prelude.Monoid exports "base" Data.Monoid
   - module Himari.Prelude.Monoid exports "base" Data.Semigroup
+
+  # Himari.Prelude.Process → 外部モジュール
+  - module Himari.Prelude.Process exports "typed-process" System.Process.Typed
 
   # Himari.Prelude.Type → 外部モジュール
   - module Himari.Prelude.Type exports "bytestring" Data.ByteString

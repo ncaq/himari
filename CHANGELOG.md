@@ -7,6 +7,24 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `UnliftIO.Concurrent` re-export in `Himari.Prelude` for lifted concurrent operations
+- `UnliftIO.Directory` re-export in `Himari.Prelude` for lifted directory operations
+- `UnliftIO.Environment` re-export in `Himari.Prelude` for lifted environment operations
+- `UnliftIO.Exception.Lens` re-export in `Himari.Prelude` for lens-based exception handling
+- `UnliftIO.Foreign` is not re-exported to avoid `withArray` conflict with `Data.Aeson`
+- `UnliftIO.IO.File` re-export in `Himari.Prelude` for atomic/durable file operations
+- HLint rules: prefer `UnliftIO.Concurrent` over `Control.Concurrent` for MonadIO support
+- HLint rules: prefer `UnliftIO.Environment` over `System.Environment` for MonadIO support
+- HLint rules: prefer `UnliftIO.Exception.Lens` over `Control.Exception.Lens` for MonadUnliftIO support
+- HLint rule: restrict `forkOnWithUnmask` (exceptions don't propagate to parent thread)
+
+### Changed
+
+- `System.Process.Typed` hiding `setEnv` to prefer `UnliftIO.Environment.setEnv`
+- `System.Process.Typed` is now re-exported via `Himari.Prelude.Process` instead of directly
+
 ## [1.0.3.2] - 2026-01-08
 
 ### Changed
