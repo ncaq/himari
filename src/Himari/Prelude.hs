@@ -49,11 +49,11 @@ import Himari.Prelude.Data as Export
 import Himari.Prelude.FilePath as Export
 import Himari.Prelude.Generics as Export
 import Himari.Prelude.Monoid as Export
+import Himari.Prelude.Process as Export
 import Himari.Prelude.Safe as Export
 import Himari.Prelude.Type as Export
 import Himari.Prelude.TypeLevel as Export
 import Numeric.Natural as Export
-import System.Process.Typed as Export
 import Text.Pretty.Simple as Export
 import Text.Show as Export
 import UnliftIO as Export

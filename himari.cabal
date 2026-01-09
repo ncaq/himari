@@ -93,6 +93,7 @@ library
     Himari.Prelude.FilePath
     Himari.Prelude.Generics
     Himari.Prelude.Monoid
+    Himari.Prelude.Process
     Himari.Prelude.Safe
     Himari.Prelude.Type
     Himari.Prelude.TypeLevel
