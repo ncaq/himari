@@ -1,4 +1,5 @@
--- | "Data.Aeson", "Data.Aeson.Encode.Pretty", "Data.Aeson.QQ.Simple", and "Deriving.Aeson" re-exports for JSON handling.
+-- | Re-exports for JSON handling.
+-- "Data.Aeson", "Data.Aeson.Encode.Pretty", "Data.Aeson.QQ.Simple", and "Deriving.Aeson".
 module Himari.Prelude.Aeson
   ( module Export
   ) where
