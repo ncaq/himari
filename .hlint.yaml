@@ -2181,6 +2181,93 @@
       name: Foreign.StablePtr.freeStablePtr
       within: []
 - functions:
+    - message: Use UnliftIO.Concurrent.myThreadId instead for MonadIO support.
+      name: Control.Concurrent.myThreadId
+      within: []
+    - message: Use UnliftIO.Concurrent.getNumCapabilities instead for MonadIO support.
+      name: Control.Concurrent.getNumCapabilities
+      within: []
+    - message: Use UnliftIO.Concurrent.setNumCapabilities instead for MonadIO support.
+      name: Control.Concurrent.setNumCapabilities
+      within: []
+    - message: Use UnliftIO.Concurrent.threadCapability instead for MonadIO support.
+      name: Control.Concurrent.threadCapability
+      within: []
+    - message: Use UnliftIO.Concurrent.yield instead for MonadIO support.
+      name: Control.Concurrent.yield
+      within: []
+    - message: Use UnliftIO.Concurrent.threadDelay instead for MonadIO support.
+      name: Control.Concurrent.threadDelay
+      within: []
+    - message: Use UnliftIO.Concurrent.threadWaitRead instead for MonadIO support.
+      name: Control.Concurrent.threadWaitRead
+      within: []
+    - message: Use UnliftIO.Concurrent.threadWaitWrite instead for MonadIO support.
+      name: Control.Concurrent.threadWaitWrite
+      within: []
+    - message: Use UnliftIO.Concurrent.isCurrentThreadBound instead for MonadIO support.
+      name: Control.Concurrent.isCurrentThreadBound
+      within: []
+    - message: Use UnliftIO.Concurrent.runInBoundThread instead for MonadIO support.
+      name: Control.Concurrent.runInBoundThread
+      within: []
+    - message: Use UnliftIO.Concurrent.runInUnboundThread instead for MonadIO support.
+      name: Control.Concurrent.runInUnboundThread
+      within: []
+    - message: Use UnliftIO.Concurrent.mkWeakThreadId instead for MonadIO support.
+      name: Control.Concurrent.mkWeakThreadId
+      within: []
+- functions:
+    - message: Use UnliftIO.Environment.getArgs instead for MonadIO support.
+      name: System.Environment.getArgs
+      within: []
+    - message: Use UnliftIO.Environment.getProgName instead for MonadIO support.
+      name: System.Environment.getProgName
+      within: []
+    - message: Use UnliftIO.Environment.getExecutablePath instead for MonadIO support.
+      name: System.Environment.getExecutablePath
+      within: []
+    - message: Use UnliftIO.Environment.getEnv instead for MonadIO support.
+      name: System.Environment.getEnv
+      within: []
+    - message: Use UnliftIO.Environment.lookupEnv instead for MonadIO support.
+      name: System.Environment.lookupEnv
+      within: []
+    - message: Use UnliftIO.Environment.setEnv instead for MonadIO support.
+      name: System.Environment.setEnv
+      within: []
+    - message: Use UnliftIO.Environment.unsetEnv instead for MonadIO support.
+      name: System.Environment.unsetEnv
+      within: []
+    - message: Use UnliftIO.Environment.withArgs instead for MonadIO support.
+      name: System.Environment.withArgs
+      within: []
+    - message: Use UnliftIO.Environment.withProgName instead for MonadIO support.
+      name: System.Environment.withProgName
+      within: []
+    - message: Use UnliftIO.Environment.getEnvironment instead for MonadIO support.
+      name: System.Environment.getEnvironment
+      within: []
+- functions:
+    - message: Use UnliftIO.Exception.Lens.catching instead for MonadUnliftIO support.
+      name: Control.Exception.Lens.catching
+      within: []
+    - message: Use UnliftIO.Exception.Lens.catching_ instead for MonadUnliftIO support.
+      name: Control.Exception.Lens.catching_
+      within: []
+    - message: Use UnliftIO.Exception.Lens.handling instead for MonadUnliftIO support.
+      name: Control.Exception.Lens.handling
+      within: []
+    - message: Use UnliftIO.Exception.Lens.handling_ instead for MonadUnliftIO support.
+      name: Control.Exception.Lens.handling_
+      within: []
+    - message: Use UnliftIO.Exception.Lens.trying instead for MonadUnliftIO support.
+      name: Control.Exception.Lens.trying
+      within: []
+    - message: Use UnliftIO.Exception.Lens.trying_ instead for MonadUnliftIO support.
+      name: Control.Exception.Lens.trying_
+      within: []
+- functions:
     - message: "Partial: throws on missing key. Use Data.HashMap.Strict.lookup or Data.HashMap.Strict.!? instead"
       name: "Data.HashMap.Strict.!"
       within: []
