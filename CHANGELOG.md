@@ -111,7 +111,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Changed
 
-- Move `-j` (parallel compilation) option from `himari.cabal` ghc-options to `cabal.project` to fix Hackage upload compatibility
+- Move `-j` option from `himari.cabal` ghc-options to `cabal.project` to fix Hackage upload compatibility
 
 ## [1.0.0.0] - 2026-01-01
 
