@@ -57,4 +57,9 @@ import System.Process.Typed as Export
 import Text.Pretty.Simple as Export
 import Text.Show as Export
 import UnliftIO as Export
+import UnliftIO.Concurrent as Export
+import UnliftIO.Directory as Export
+import UnliftIO.Environment as Export
+import UnliftIO.Exception.Lens as Export
+import UnliftIO.IO.File as Export
 import Prelude as Export
