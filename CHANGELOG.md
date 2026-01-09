@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.4.0] - 2026-01-09
+
 ### Added
 
 - `UnliftIO.Concurrent` re-export in `Himari.Prelude` for lifted concurrent operations
