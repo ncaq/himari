@@ -1,6 +1,32 @@
+let Prelude =
+      https://prelude.dhall-lang.org/v23.1.0/package.dhall
+        sha256:931cbfae9d746c4611b07633ab1e547637ab4ba138b16bf65ef1b9ad66a60b7f
+
 let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
+
+let partialMonadic
+    : Text -> Text -> Text -> Text -> Types.Function
+    = \(module : Text) ->
+      \(name : Text) ->
+      \(condition : Text) ->
+      \(alternative : Text) ->
+        let message =
+                  "Partial: throws on ${condition} regardless of Monad "
+              ++  "(M is for evaluation control, not error handling). "
+              ++  "Use ${alternative}."
+
+        in  Builder.restrictInModule module name message
+
+let partialBatchUpdate
+    : Text -> Text -> Types.Function
+    = \(module : Text) ->
+      \(name : Text) ->
+        Builder.restrictInModule
+          module
+          name
+          "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
 
 let immutableModules =
       [ "Data.Vector"
@@ -35,18 +61,21 @@ let partialImmutable
             module
             "last"
             "Partial: throws on empty vector. Use unsnoc or check null first."
-        , Builder.restrictInModule
+        , partialMonadic
             module
             "indexM"
-            "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
-        , Builder.restrictInModule
+            "out-of-bounds"
+            "(!?) for safe indexing"
+        , partialMonadic
             module
             "headM"
-            "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
-        , Builder.restrictInModule
+            "empty vector"
+            "uncons or check null first"
+        , partialMonadic
             module
             "lastM"
-            "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+            "empty vector"
+            "unsnoc or check null first"
         , Builder.restrictInModule
             module
             "init"
@@ -55,34 +84,13 @@ let partialImmutable
             module
             "tail"
             "Partial: throws on empty vector. Use uncons for safe tail."
-        , Builder.restrictInModule
-            module
-            "//"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
-        , Builder.restrictInModule
-            module
-            "update"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
-        , Builder.restrictInModule
-            module
-            "update_"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
-        , Builder.restrictInModule
-            module
-            "accum"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
-        , Builder.restrictInModule
-            module
-            "accumulate"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
-        , Builder.restrictInModule
-            module
-            "accumulate_"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
-        , Builder.restrictInModule
-            module
-            "backpermute"
-            "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+        , partialBatchUpdate module "//"
+        , partialBatchUpdate module "update"
+        , partialBatchUpdate module "update_"
+        , partialBatchUpdate module "accum"
+        , partialBatchUpdate module "accumulate"
+        , partialBatchUpdate module "accumulate_"
+        , partialBatchUpdate module "backpermute"
         , Builder.restrictInModule
             module
             "foldl1"
@@ -394,9 +402,9 @@ let unsafeStorableMutableExtra
 
 let immutablePartialFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             partialImmutable
@@ -405,9 +413,9 @@ let immutablePartialFuncs
 
 let immutableUnsafeFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             unsafeImmutable
@@ -416,9 +424,9 @@ let immutableUnsafeFuncs
 
 let mutablePartialFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             partialMutable
@@ -427,9 +435,9 @@ let mutablePartialFuncs
 
 let mutableUnsafeFuncs
     : List Types.Function
-    = Builder.Prelude.List.concat
+    = Prelude.List.concat
         Types.Function
-        ( Builder.Prelude.List.map
+        ( Prelude.List.map
             Text
             (List Types.Function)
             unsafeMutable

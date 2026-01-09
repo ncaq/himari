@@ -317,19 +317,19 @@
     - message: "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
       name: forkIOWithUnmask
       within: []
-    - message: "Exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
+    - message: "Exceptions don't propagate to parent thread. Use asyncOnWithUnmask or withAsyncOnWithUnmask from UnliftIO.Async instead."
       name: forkOnWithUnmask
       within: []
-    - message: "Deprecated and exceptions don't propagate. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
+    - message: "Deprecated and exceptions don't propagate to parent thread. Use asyncWithUnmask or withAsyncWithUnmask from UnliftIO.Async instead."
       name: forkWithUnmask
       within: []
-    - message: Use withAsync from UnliftIO.Async for automatic cancellation and exception handling.
+    - message: No automatic cancellation or exception handling. Use UnliftIO.Async instead.
       name: forkFinally
       within: []
-    - message: Prefer structured cancellation with cancel or withAsync from UnliftIO.Async.
+    - message: Prefer structured cancellation with cancel or withAsync. Use UnliftIO.Async instead.
       name: killThread
       within: []
-    - message: "Almost impossible to use correctly. Consider using typed-process or UnliftIO.Async."
+    - message: "Almost impossible to use correctly. Consider typed-process or UnliftIO.Async."
       name: forkProcess
       within: []
 - functions:
@@ -2304,13 +2304,13 @@
     - message: "Partial: throws on empty vector. Use unsnoc or check null first."
       name: Data.Vector.last
       within: []
-    - message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - message: "Partial: throws on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
       name: Data.Vector.indexM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
       name: Data.Vector.headM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
       name: Data.Vector.lastM
       within: []
     - message: "Partial: throws on empty vector. Use unsnoc for safe init."
@@ -2319,25 +2319,25 @@
     - message: "Partial: throws on empty vector. Use uncons for safe tail."
       name: Data.Vector.tail
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.//
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.update
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.update_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.accum
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.accumulate
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.accumulate_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.backpermute
       within: []
     - message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2409,13 +2409,13 @@
     - message: "Partial: throws on empty vector. Use unsnoc or check null first."
       name: Data.Vector.Generic.last
       within: []
-    - message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - message: "Partial: throws on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
       name: Data.Vector.Generic.indexM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
       name: Data.Vector.Generic.headM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
       name: Data.Vector.Generic.lastM
       within: []
     - message: "Partial: throws on empty vector. Use unsnoc for safe init."
@@ -2424,25 +2424,25 @@
     - message: "Partial: throws on empty vector. Use uncons for safe tail."
       name: Data.Vector.Generic.tail
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.//
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.update
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.update_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.accum
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.accumulate
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.accumulate_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Generic.backpermute
       within: []
     - message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2514,13 +2514,13 @@
     - message: "Partial: throws on empty vector. Use unsnoc or check null first."
       name: Data.Vector.Primitive.last
       within: []
-    - message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - message: "Partial: throws on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
       name: Data.Vector.Primitive.indexM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
       name: Data.Vector.Primitive.headM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
       name: Data.Vector.Primitive.lastM
       within: []
     - message: "Partial: throws on empty vector. Use unsnoc for safe init."
@@ -2529,25 +2529,25 @@
     - message: "Partial: throws on empty vector. Use uncons for safe tail."
       name: Data.Vector.Primitive.tail
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.//
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.update
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.update_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.accum
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.accumulate
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.accumulate_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Primitive.backpermute
       within: []
     - message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2619,13 +2619,13 @@
     - message: "Partial: throws on empty vector. Use unsnoc or check null first."
       name: Data.Vector.Storable.last
       within: []
-    - message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - message: "Partial: throws on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
       name: Data.Vector.Storable.indexM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
       name: Data.Vector.Storable.headM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
       name: Data.Vector.Storable.lastM
       within: []
     - message: "Partial: throws on empty vector. Use unsnoc for safe init."
@@ -2634,25 +2634,25 @@
     - message: "Partial: throws on empty vector. Use uncons for safe tail."
       name: Data.Vector.Storable.tail
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.//
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.update
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.update_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.accum
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.accumulate
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.accumulate_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Storable.backpermute
       within: []
     - message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2724,13 +2724,13 @@
     - message: "Partial: throws on empty vector. Use unsnoc or check null first."
       name: Data.Vector.Strict.last
       within: []
-    - message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - message: "Partial: throws on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
       name: Data.Vector.Strict.indexM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
       name: Data.Vector.Strict.headM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
       name: Data.Vector.Strict.lastM
       within: []
     - message: "Partial: throws on empty vector. Use unsnoc for safe init."
@@ -2739,25 +2739,25 @@
     - message: "Partial: throws on empty vector. Use uncons for safe tail."
       name: Data.Vector.Strict.tail
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.//
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.update
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.update_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.accum
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.accumulate
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.accumulate_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Strict.backpermute
       within: []
     - message: "Partial: throws on empty vector. Use foldl with explicit initial value."
@@ -2829,13 +2829,13 @@
     - message: "Partial: throws on empty vector. Use unsnoc or check null first."
       name: Data.Vector.Unboxed.last
       within: []
-    - message: "Partial: throws exception on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
+    - message: "Partial: throws on out-of-bounds regardless of Monad (M is for evaluation control, not error handling). Use (!?) for safe indexing."
       name: Data.Vector.Unboxed.indexM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use uncons or check null first."
       name: Data.Vector.Unboxed.headM
       within: []
-    - message: "Partial: throws exception on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
+    - message: "Partial: throws on empty vector regardless of Monad (M is for evaluation control, not error handling). Use unsnoc or check null first."
       name: Data.Vector.Unboxed.lastM
       within: []
     - message: "Partial: throws on empty vector. Use unsnoc for safe init."
@@ -2844,25 +2844,25 @@
     - message: "Partial: throws on empty vector. Use uncons for safe tail."
       name: Data.Vector.Unboxed.tail
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.//
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.update
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.update_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.accum
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.accumulate
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.accumulate_
       within: []
-    - message: "Partial: throws on out-of-bounds indices. Validate indices against length, or use modify with bounds checking."
+    - message: "Partial: throws on out-of-bounds indices. Validate indices against length or use modify."
       name: Data.Vector.Unboxed.backpermute
       within: []
     - message: "Partial: throws on empty vector. Use foldl with explicit initial value."
