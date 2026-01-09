@@ -40,3 +40,7 @@ end_of_line = crlf
 [*.reg]
 charset = utf-8-bom
 end_of_line = crlf
+
+# 行を短くする文法を使いにくい自動生成ファイルのため行幅制限を大幅に緩めます。
+[.hlint.yaml]
+max_line_length = 200
