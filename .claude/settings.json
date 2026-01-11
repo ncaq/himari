@@ -1,14 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(changelog-lint -config .changelog-lint.toml:*)",
-      "Bash(dhall-to-yaml-ng:*)",
-      "Bash(dhall:*)",
-      "Bash(hlint:*)",
-      "Bash(nix derivation show:*)",
-      "Bash(nix flake check:*)",
-      "Bash(nix run '.#generate-hlint')"
-    ],
     "additionalDirectories": [
       "~/Desktop/aeson",
       "~/Desktop/bytestring",
@@ -29,6 +20,15 @@
       "~/Desktop/unliftio",
       "~/Desktop/unordered-containers",
       "~/Desktop/vector"
+    ],
+    "allow": [
+      "Bash(changelog-lint -config .changelog-lint.toml:*)",
+      "Bash(dhall-to-yaml-ng:*)",
+      "Bash(dhall:*)",
+      "Bash(hlint:*)",
+      "Bash(nix derivation show:*)",
+      "Bash(nix flake check:*)",
+      "Bash(nix run '.#generate-hlint')"
     ]
   },
   "hooks": {
