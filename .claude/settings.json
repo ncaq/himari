@@ -8,6 +8,27 @@
       "Bash(nix derivation show:*)",
       "Bash(nix flake check:*)",
       "Bash(nix run '.#generate-hlint')"
+    ],
+    "additionalDirectories": [
+      "~/Desktop/aeson",
+      "~/Desktop/bytestring",
+      "~/Desktop/containers",
+      "~/Desktop/convertible",
+      "~/Desktop/ghc",
+      "~/Desktop/haskell-language-server",
+      "~/Desktop/haskell.nix",
+      "~/Desktop/hlint",
+      "~/Desktop/lens",
+      "~/Desktop/mtl",
+      "~/Desktop/pretty-simple",
+      "~/Desktop/rio",
+      "~/Desktop/safe",
+      "~/Desktop/text",
+      "~/Desktop/time",
+      "~/Desktop/typed-process",
+      "~/Desktop/unliftio",
+      "~/Desktop/unordered-containers",
+      "~/Desktop/vector"
     ]
   },
   "hooks": {
