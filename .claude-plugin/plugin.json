@@ -1,0 +1,11 @@
+{
+  "name": "himari",
+  "description": "HimariカスタムPreludeを使用したHaskellプロジェクト開発支援プラグイン",
+  "version": "0.1.0",
+  "author": {
+    "name": "ncaq",
+    "url": "https://github.com/ncaq"
+  },
+  "repository": "https://github.com/ncaq/himari",
+  "license": "Apache-2.0"
+}
