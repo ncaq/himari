@@ -113,10 +113,28 @@ Haskellの言語バージョンや言語拡張はパッケージレベルで以�
 ```cabal
 default-language: GHC2024
 default-extensions:
+  ApplicativeDo
+  BlockArguments
+  DefaultSignatures
+  DerivingVia
+  DuplicateRecordFields
+  FunctionalDependencies
+  LexicalNegation
+  MultiWayIf
+  NegativeLiterals
+  NoFieldSelectors
   NoImplicitPrelude
+  OverloadedRecordDot
+  OverloadedStrings
+  ParallelListComp
+  PatternSynonyms
+  QuantifiedConstraints
+  QuasiQuotes
+  StrictData
+  TemplateHaskell
+  TypeFamilies
+  ViewPatterns
 ```
-
-他の言語拡張は読んだ時のわかりやすさを優先してモジュールレベルで個別に設定してください。
 
 ### 危険な言語拡張の禁止
 

@@ -1,7 +1,3 @@
-{-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE NoFieldSelectors #-}
-
 -- | 基本的な環境を提供するモジュール。
 -- 単純に実行だけをしたい場合、これで十分結果を手に入れられることが多いです。
 module Himari.Env.Simple

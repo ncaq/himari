@@ -47,7 +47,27 @@ common basic
 
   default-language: GHC2024
   default-extensions:
+    ApplicativeDo
+    BlockArguments
+    DefaultSignatures
+    DerivingVia
+    DuplicateRecordFields
+    FunctionalDependencies
+    LexicalNegation
+    MultiWayIf
+    NegativeLiterals
+    NoFieldSelectors
     NoImplicitPrelude
+    OverloadedRecordDot
+    OverloadedStrings
+    ParallelListComp
+    PatternSynonyms
+    QuantifiedConstraints
+    QuasiQuotes
+    StrictData
+    TemplateHaskell
+    TypeFamilies
+    ViewPatterns
 
   build-depends:
     aeson ^>=2.2.3.0,

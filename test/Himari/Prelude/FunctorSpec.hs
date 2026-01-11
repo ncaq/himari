@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 -- | Tests for functor-related re-exports in Himari.Prelude.
 module Himari.Prelude.FunctorSpec (spec) where
 
