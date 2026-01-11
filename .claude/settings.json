@@ -1,12 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(changelog-lint:*)",
+      "Bash(changelog-lint -config .changelog-lint.toml:*)",
       "Bash(dhall-to-yaml-ng:*)",
       "Bash(dhall:*)",
       "Bash(hlint:*)",
-      "Bash(nix run '.#generate-hlint')",
-      "Bash(timeout 600 nix flake check:*)"
+      "Bash(nix derivation show:*)",
+      "Bash(nix flake check:*)",
+      "Bash(nix run '.#generate-hlint')"
     ]
   },
   "hooks": {
