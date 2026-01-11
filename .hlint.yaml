@@ -11,6 +11,7 @@
 #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
 #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
 - arguments:
+    - "-XArrows"
     - "-XBlockArguments"
     - "-XCPP"
     - "-XOverloadedRecordDot"

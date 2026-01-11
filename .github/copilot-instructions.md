@@ -114,25 +114,32 @@ Haskellの言語バージョンや言語拡張はパッケージレベルで以�
 default-language: GHC2024
 default-extensions:
   ApplicativeDo
+  Arrows
   BlockArguments
   DefaultSignatures
   DerivingVia
   DuplicateRecordFields
   FunctionalDependencies
   LexicalNegation
+  LinearTypes
+  MonadComprehensions
   MultiWayIf
   NegativeLiterals
   NoFieldSelectors
   NoImplicitPrelude
+  OverloadedLabels
   OverloadedRecordDot
   OverloadedStrings
   ParallelListComp
   PatternSynonyms
+  QualifiedDo
   QuantifiedConstraints
   QuasiQuotes
   StrictData
   TemplateHaskell
+  TypeData
   TypeFamilies
+  TypeFamilyDependencies
   ViewPatterns
 ```
 
