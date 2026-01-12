@@ -62,4 +62,5 @@ import UnliftIO.Directory as Export
 import UnliftIO.Environment as Export
 import UnliftIO.Exception.Lens as Export
 import UnliftIO.IO.File as Export
+import UnliftIO.Retry as Export
 import Prelude as Export

@@ -9,6 +9,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
+- `retry` package (^>=0.9.3.1) as a dependency for retry combinators
+- `UnliftIO.Retry` re-export in `Himari.Prelude` for retry operations with exponential backoff
 - HLint rules to warn against dangerous language extensions: `AllowAmbiguousTypes`, `DeferTypeErrors`,
   `ExtendedDefaultRules`, `ImpredicativeTypes`, `IncoherentInstances`, `LiberalTypeSynonyms`,
   `OverlappingInstances`, `RebindableSyntax`, `UndecidableSuperClasses`
