@@ -435,12 +435,14 @@ GHC2024で`DerivingStrategies`が有効になっているので、
 
 #### OverloadedRecordUpdate
 
-`person { name = "new" }`のようなレコード更新構文をオーバーロードできます。
+`OverloadedRecordDot`と組み合わせて、
+ネストされたレコード更新に`.`記法が使えます(例: `c{owner.name = "Walter"}`)。
 現時点では`RebindableSyntax`が必須であり、
 `RebindableSyntax`は標準のdo記法やif-then-elseの意味を変えてしまう危険な拡張です。
+また`getField`と`setField`を自分で定義する必要があり実験的な段階です。
 将来GHCに`setField`がビルトインされれば実用的になりますが、
 現時点では使用不可です。
-レコードの更新にはlensを使ってください。
+ネストされたレコードの更新にはlensかネストしたレコード更新構文を使ってください。
 
 #### Strict
 
