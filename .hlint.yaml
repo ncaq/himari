@@ -18,6 +18,7 @@
     - "-XOverloadedRecordUpdate"
     - "-XQuasiQuotes"
     - "-XRecursiveDo"
+    - "-XRecursiveDo"
 - group:
     enabled: true
     name: generalise

@@ -136,6 +136,7 @@ default-extensions:
   QuantifiedConstraints
   QuasiQuotes
   RecordWildCards
+  RecursiveDo
   StrictData
   TemplateHaskell
   TypeData

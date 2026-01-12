@@ -11,6 +11,7 @@ in  [ Types.Rule.Arguments
           , "-XOverloadedRecordUpdate"
           , "-XQuasiQuotes"
           , "-XRecursiveDo"
+          , "-XRecursiveDo"
           ]
         }
     ]
