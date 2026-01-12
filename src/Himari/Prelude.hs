@@ -20,6 +20,7 @@ import Data.Bool as Export
 import Data.Coerce as Export
 import Data.Complex as Export
 import Data.Convertible as Export
+import Data.Default as Export
 import Data.Either as Export
 import Data.Eq as Export
 import Data.Fixed as Export
