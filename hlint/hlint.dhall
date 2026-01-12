@@ -15,6 +15,7 @@ let rules
       # ./rules/containers.dhall
       # ./rules/convertible.dhall
       # ./rules/exceptions.dhall
+      # ./rules/extensions.dhall
       # ./rules/lens.dhall
       # ./rules/mtl.dhall
       # ./rules/performance.dhall

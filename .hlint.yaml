@@ -636,6 +636,23 @@
     - message: "Deprecated. Use error instead, which now includes stack traces."
       name: errorWithStackTrace
       within: []
+- extensions:
+    - name:
+        - AllowAmbiguousTypes
+        - DeferTypeErrors
+        - ExtendedDefaultRules
+        - ImpredicativeTypes
+        - IncoherentInstances
+        - LiberalTypeSynonyms
+        - OverlappingInstances
+        - RebindableSyntax
+        - UndecidableSuperClasses
+      within: []
+- extensions:
+    - name:
+        - ImplicitParams
+        - UndecidableInstances
+      within: []
 - functions:
     - message: "Partial: throws on empty Fold. Use (^?) instead."
       name: "Control.Lens.Fold.^?!"

@@ -152,7 +152,9 @@ test-suite himari-test
     Himari.Prelude.FunctorSpec
     Himari.Title
     HlintBaseSpec
+    HlintExtensionSpec
     HlintSamples.BasePartial
+    HlintSamples.ExtensionDangerous
     HlintSamples.UnliftioPreference
     HlintUnliftioSpec
     TitleSpec
