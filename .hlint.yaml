@@ -11,12 +11,37 @@
 #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
 #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
 - arguments:
+    - "-XGHC2024"
+    - "-XApplicativeDo"
     - "-XBlockArguments"
     - "-XCPP"
+    - "-XDefaultSignatures"
+    - "-XDerivingVia"
+    - "-XDuplicateRecordFields"
+    - "-XFunctionalDependencies"
+    - "-XLexicalNegation"
+    - "-XLinearTypes"
+    - "-XMonadComprehensions"
+    - "-XMultiWayIf"
+    - "-XNegativeLiterals"
+    - "-XNoFieldSelectors"
+    - "-XNoImplicitPrelude"
+    - "-XOverloadedLabels"
     - "-XOverloadedRecordDot"
-    - "-XOverloadedRecordUpdate"
+    - "-XOverloadedStrings"
+    - "-XParallelListComp"
+    - "-XPatternSynonyms"
+    - "-XQualifiedDo"
+    - "-XQuantifiedConstraints"
     - "-XQuasiQuotes"
+    - "-XRecordWildCards"
     - "-XRecursiveDo"
+    - "-XStrictData"
+    - "-XTemplateHaskell"
+    - "-XTypeData"
+    - "-XTypeFamilies"
+    - "-XTypeFamilyDependencies"
+    - "-XViewPatterns"
 - group:
     enabled: true
     name: generalise
@@ -610,6 +635,52 @@
       within: []
     - message: "Deprecated. Use error instead, which now includes stack traces."
       name: errorWithStackTrace
+      within: []
+- extensions:
+    - message: "Defers ambiguity errors to call sites, making debugging harder"
+      name:
+        - AllowAmbiguousTypes
+      within: []
+    - message: "Defers type errors to runtime, defeating Haskell's type safety"
+      name:
+        - DeferTypeErrors
+      within: []
+    - message: "Causes unexpected type defaulting (e.g., show.read defaults to ())"
+      name:
+        - ExtendedDefaultRules
+      within: []
+    - message: Experimental and may break in future GHC versions
+      name:
+        - ImpredicativeTypes
+      within: []
+    - message: "Makes instance selection non-deterministic and order-dependent"
+      name:
+        - IncoherentInstances
+      within: []
+    - message: Can cause Core Lint errors with DataKinds and PolyKinds
+      name:
+        - LiberalTypeSynonyms
+      within: []
+    - message: "Deprecated since GHC 7.10, use OVERLAPPING pragma if truly needed"
+      name:
+        - OverlappingInstances
+      within: []
+    - message: "Changes do/if-then-else semantics, breaks deriving and TH"
+      name:
+        - RebindableSyntax
+      within: []
+    - message: "Can cause type checker non-termination or stack overflow"
+      name:
+        - UndecidableSuperClasses
+      within: []
+- extensions:
+    - message: 'Breaks coherence. If unavoidable, add {-# HLINT ignore "Avoid restricted extensions" #-}'
+      name:
+        - ImplicitParams
+      within: []
+    - message: 'May cause type checker loops. If unavoidable, add {-# HLINT ignore "Avoid restricted extensions" #-}'
+      name:
+        - UndecidableInstances
       within: []
 - functions:
     - message: "Partial: throws on empty Fold. Use (^?) instead."

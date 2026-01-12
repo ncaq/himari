@@ -91,13 +91,22 @@ let banModule
 let extensionNames
     : List Text -> Types.ExtensionItem
     = \(names : List Text) ->
-        Types.ExtensionItem.Name { name = names, within = None (List Text) }
+        Types.ExtensionItem.Name
+          { name = names, within = None (List Text), message = None Text }
 
 let extensionNamesWithin
     : List Text -> List Text -> Types.ExtensionItem
     = \(names : List Text) ->
       \(within : List Text) ->
-        Types.ExtensionItem.Name { name = names, within = Some within }
+        Types.ExtensionItem.Name
+          { name = names, within = Some within, message = None Text }
+
+let banExtensionWithMessage
+    : List Text -> Text -> Types.ExtensionItem
+    = \(names : List Text) ->
+      \(msg : Text) ->
+        Types.ExtensionItem.Name
+          { name = names, within = Some ([] : List Text), message = Some msg }
 
 let extensions
     : List Types.ExtensionItem -> Types.Rule
@@ -116,5 +125,6 @@ in  { restrictFunction
     , banModule
     , extensionNames
     , extensionNamesWithin
+    , banExtensionWithMessage
     , extensions
     }

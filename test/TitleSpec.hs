@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module TitleSpec (spec) where
 
 import Data.List.NonEmpty qualified as NE

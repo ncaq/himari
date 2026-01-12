@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module HlintBaseSpec (spec) where
 
 import Data.Text qualified as T

@@ -47,7 +47,36 @@ common basic
 
   default-language: GHC2024
   default-extensions:
+    ApplicativeDo
+    BlockArguments
+    CPP
+    DefaultSignatures
+    DerivingVia
+    DuplicateRecordFields
+    FunctionalDependencies
+    LexicalNegation
+    LinearTypes
+    MonadComprehensions
+    MultiWayIf
+    NegativeLiterals
+    NoFieldSelectors
     NoImplicitPrelude
+    OverloadedLabels
+    OverloadedRecordDot
+    OverloadedStrings
+    ParallelListComp
+    PatternSynonyms
+    QualifiedDo
+    QuantifiedConstraints
+    QuasiQuotes
+    RecordWildCards
+    RecursiveDo
+    StrictData
+    TemplateHaskell
+    TypeData
+    TypeFamilies
+    TypeFamilyDependencies
+    ViewPatterns
 
   build-depends:
     aeson ^>=2.2.3.0,
@@ -123,7 +152,9 @@ test-suite himari-test
     Himari.Prelude.FunctorSpec
     Himari.Title
     HlintBaseSpec
+    HlintExtensionSpec
     HlintSamples.BasePartial
+    HlintSamples.ExtensionDangerous
     HlintSamples.UnliftioPreference
     HlintUnliftioSpec
     TitleSpec

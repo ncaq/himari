@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module HlintUnliftioSpec (spec) where
 
 import Data.Text qualified as T
