@@ -48,7 +48,6 @@ common basic
   default-language: GHC2024
   default-extensions:
     ApplicativeDo
-    Arrows
     BlockArguments
     DefaultSignatures
     DerivingVia

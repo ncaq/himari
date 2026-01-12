@@ -4,8 +4,7 @@ let Types = ./../Types.dhall
 
 in  [ Types.Rule.Arguments
         { arguments =
-          [ "-XArrows"
-          , "-XBlockArguments"
+          [ "-XBlockArguments"
           , "-XCPP"
           , "-XOverloadedRecordDot"
           , "-XOverloadedRecordUpdate"

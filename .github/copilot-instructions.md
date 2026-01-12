@@ -114,7 +114,6 @@ Haskellの言語バージョンや言語拡張はパッケージレベルで以�
 default-language: GHC2024
 default-extensions:
   ApplicativeDo
-  Arrows
   BlockArguments
   DefaultSignatures
   DerivingVia
