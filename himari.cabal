@@ -85,6 +85,7 @@ common basic
     bytestring ^>=0.12.2.0,
     containers ^>=0.7,
     convertible ^>=1.1.1.1,
+    data-default ^>=0.8.0.2,
     deepseq ^>=1.5.0.0,
     deriving-aeson ^>=0.2.10,
     exceptions ^>=0.10.9,
