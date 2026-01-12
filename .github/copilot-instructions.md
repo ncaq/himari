@@ -458,6 +458,15 @@ GHC2024で`DerivingStrategies`が有効になっているので、
 `∀`や`→`などのUnicode記号が使えます。
 fourmoluとの相性が悪く意図しない変換が発生することがあるため有効にしていません。
 
+## 非推奨の言語拡張
+
+以下の言語拡張は動作が不安定になりがちですが、
+ライブラリを使用する時に必要になる場面があるため、
+最終手段として使用を許可します。
+
+- `ImplicitParams`
+- `UndecidableInstances`
+
 ## 危険な言語拡張の禁止
 
 以下の言語拡張は危険なので使用することを禁止します。
@@ -469,15 +478,6 @@ fourmoluとの相性が悪く意図しない変換が発生することがある
 - `OverlappingInstances`
 - `RebindableSyntax`
 - `UndecidableSuperClasses`
-
-## 非推奨の言語拡張
-
-以下の言語拡張は動作が不安定になりがちですが、
-ライブラリを使用する時に必要になる場面があるため、
-最終手段として使用を許可します。
-
-- `ImplicitParams`
-- `UndecidableInstances`
 
 ## 危険な関数の禁止
 
