@@ -30,8 +30,6 @@ Claude CodeがStopするときも自動で`nix fmt`が実行されます。
 
 ## ビルド
 
-### Haskell
-
 ビルドは以下のコマンドを実行します。
 
 ```console
