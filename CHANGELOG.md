@@ -14,6 +14,17 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
   `OverlappingInstances`, `RebindableSyntax`, `UndecidableSuperClasses`
 - HLint rules to warn against discouraged language extensions: `ImplicitParams`, `UndecidableInstances`
 
+### Changed
+
+- Document recommended language extensions beyond GHC2024 (e.g., `BlockArguments`, `StrictData`,
+  `OverloadedStrings`, `NoFieldSelectors`, etc.) with rationale for each
+- Document extensions intentionally not enabled (e.g., `Arrows`, `DeriveAnyClass`, `OverloadedLists`,
+  `OverloadedRecordUpdate`, `Strict`, `UnicodeSyntax`) with reasons
+- Document dangerous language extensions that should be avoided: `AllowAmbiguousTypes`, `DeferTypeErrors`,
+  `ExtendedDefaultRules`, `ImpredicativeTypes`, `IncoherentInstances`, `LiberalTypeSynonyms`,
+  `OverlappingInstances`, `RebindableSyntax`, `UndecidableSuperClasses`
+- Document discouraged language extensions that require caution: `ImplicitParams`, `UndecidableInstances`
+
 ## [1.0.4.0] - 2026-01-09
 
 ### Added
