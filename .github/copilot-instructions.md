@@ -1,10 +1,10 @@
-## 自然言語設定
+# 自然言語設定
 
 AIは日本語で出力してください。
 
-## 重要コマンド
+# 重要コマンド
 
-### `nix flake check`
+## `nix flake check`
 
 対応しているフォーマット・ビルド・テストを全て実行します。
 
@@ -14,11 +14,11 @@ nix flake check
 
 例えば`nix fmt`, `cabal build`, `cabal test`も全て含まれています。
 
-### フォーマット
+## フォーマット
 
 基本的にファイルはツールで自動フォーマットしています。
 
-#### nix fmt
+### nix fmt
 
 [treefmt-nix](https://github.com/numtide/treefmt-nix)が対応しているファイルは以下のコマンドでフォーマット出来ます。
 
@@ -28,9 +28,9 @@ nix fmt
 
 Claude CodeがStopするときも自動で`nix fmt`が実行されます。
 
-### ビルド
+## ビルド
 
-#### Haskell
+### Haskell
 
 ビルドは以下のコマンドを実行します。
 
@@ -38,7 +38,7 @@ Claude CodeがStopするときも自動で`nix fmt`が実行されます。
 cabal build --disable-optimization --enable-tests
 ```
 
-### テスト
+## テスト
 
 テストは以下のコマンドを実行します。
 
@@ -46,7 +46,7 @@ cabal build --disable-optimization --enable-tests
 cabal test --disable-optimization --enable-tests
 ```
 
-## 使用する技術スタックやライブラリ
+# 使用する技術スタックやライブラリ
 
 実装には[Haskell](https://www.haskell.org/)をメインに使っています。
 
@@ -54,11 +54,11 @@ cabal test --disable-optimization --enable-tests
 Nix FlakesでHaskell部分を管理するには[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使っています。
 Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)です。
 
-## ディレクトリ構成
+# ディレクトリ構成
 
-### ルートディレクトリ
+## ルートディレクトリ
 
-#### `.hlint.yaml`
+### `.hlint.yaml`
 
 `.hlint.yaml`は他の`hlint`ディレクトリ以下のDhallファイルから自動生成しているため、
 直接の読み書きは想定していません。
@@ -67,7 +67,7 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 このプロジェクトのリンターというだけではなく、
 他のユーザにも配るhimariライブラリのリンター設定として開発しています。
 
-#### `CHANGELOG.md`
+### `CHANGELOG.md`
 
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)形式で変更履歴を管理しています。
 
@@ -80,7 +80,7 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 `changelog-lint`を使うには`.changelog-lint.toml`をconfigとして使う必要があるため、
 簡単に実行するために`nix fmt`を使用してください。
 
-### hlint
+## hlint
 
 `.hlint.yaml`ファイルを生成するためのDhallソースコードが配置されています。
 
@@ -90,23 +90,23 @@ nix run '.#generate-hlint'
 
 コマンドで`.hlint.yaml`が新しく生成されます。
 
-### src
+## src
 
 カスタムPreludeとしてのhimariライブラリのソースコードが配置されています。
 
-### test
+## test
 
 動作を継続してある程度確認するためのテストコードが配置されています。
 
-## Nix
+# Nix
 
 Nix Flakesはgitで管理されていないファイルを意図的に無視します。
 よって新規にソースコードなどを追加した時に`nix flake check`を通すためには、
 git addで使いたいファイルを追加する必要があります。
 
-## Haskell
+# Haskell
 
-### 言語設定
+## 言語設定
 
 Haskellの言語バージョンや言語拡張はパッケージレベルで以下を設定しています。
 
@@ -145,7 +145,7 @@ default-extensions:
   ViewPatterns
 ```
 
-### 危険な言語拡張の禁止
+## 危険な言語拡張の禁止
 
 以下の言語拡張は危険なので使用することを禁止します。
 
@@ -159,7 +159,7 @@ default-extensions:
 - `UndecidableInstances`
 - `UndecidableSuperClasses`
 
-### 危険な関数の禁止
+## 危険な関数の禁止
 
 以下の関数は危険なので使用することを絶対に禁止します。
 
@@ -168,13 +168,13 @@ default-extensions:
 - `unsafeInterleaveIO`
 - `unsafePerformIO`
 
-### 警告は無効にしない
+## 警告は無効にしない
 
 警告をプラグマによって無効にすることは禁止です。
 特にHaskellの警告は無効にしない。
 どうしても無効にしないと書けない場合はこちらに確認をしてください。
 
-### exportは明示的に列挙する
+## exportは明示的に列挙する
 
 全てのシンボルをexportで公開するのは禁止です。
 
@@ -183,7 +183,7 @@ default-extensions:
 明示的に列挙することで公開しているAPIが明確になり、
 デッドコードの検出なども簡単になります。
 
-### 部分関数の禁止
+## 部分関数の禁止
 
 純粋関数なのに例外を頻繁に投げる以下のような関数の使用は禁止です。
 
@@ -192,13 +192,13 @@ default-extensions:
 
 例えば`read`には`readMaybe`などの安全な代替関数があるので、そちらを使ってください。
 
-### `error`関数の禁止
+## `error`関数の禁止
 
 純粋関数空間の中で例外を投げられる`error`関数の使用は禁止です。
 よほどの理由がない限りは正当化されません。
 上位空間に`MonadThrow`や`Either`などを使って例外を伝播させてください。
 
-### 例外は型をつけよう
+## 例外は型をつけよう
 
 `throwString`のような関数を使うより、
 ちゃんと例外に型をつけて`throwM`などで型がついた例外を使いましょう。
@@ -206,7 +206,7 @@ default-extensions:
 例外を表現するデータ型はなるべく`Text`などの文字列を使うのではなく、
 エラーが起きた理由を表現する構造的なデータ型をフィールドとして持ってください。
 
-### エラーを握り潰すのは禁止
+## エラーを握り潰すのは禁止
 
 `IO`の文脈などで例外が生じた場合に握りつぶして何もしないような行為は禁止。
 `IO`は文脈的に既に例外が発生する可能性があることを示しているので、
@@ -219,7 +219,7 @@ default-extensions:
 `Left`が来るのが正常系である場合はデフォルト値やフォールバック値を使ってください。
 単に握りつぶすのは禁止です。
 
-### `IO`的な文脈で`Either`や`Maybe`を包むのは推奨されない
+## `IO`的な文脈で`Either`や`Maybe`を包むのは推奨されない
 
 `IO`は例外が発生する可能性がある文脈を十分に表現しているモナドなので、
 その中で`Either`や`Maybe`を使って例外的な状況を示すのは二重にネストしていて混乱を招きます。
@@ -233,19 +233,19 @@ default-extensions:
 存在しないというデータが正常系として扱われるので、
 その場合は`IO (Maybe a)`のようなシグネチャを使うことは適切です。
 
-### `IO`をなるべく直接使わず型クラスを使う
+## `IO`をなるべく直接使わず型クラスを使う
 
 `IO`モナドはあまりにもプリミティブなので他のモナド変換子などと一緒に取り扱うのが不便です。
 呼び出すたびに`liftIO`を使うのは冗長なため、
 出来る限り`MonadIO`, `MonadUnliftIO`と言った型クラスで抽象化するべきです。
 
-### 無駄な`liftIO`の禁止
+## 無駄な`liftIO`の禁止
 
 既に`MonadIO m => m a`のような型を持っている関数を、
 `liftIO`に渡しても問題なく動きますが、
 冗長で読みづらいのでやめてください。
 
-#### `IO`内部で`MonadUnliftIO`のアクションを実行する
+### `IO`内部で`MonadUnliftIO`のアクションを実行する
 
 `MonadIO`や`MonadUnliftIO`の文脈で`IO`のアクションを実行する場合は`liftIO`を使うだけで良いです。
 
@@ -262,7 +262,7 @@ askRunInIO :: MonadUnliftIO m => m (m a -> IO a)
 
 これを使うと`IO`を要求するライブラリの型に対して`MonadUnliftIO`のアクションを少しラムダ式で包んだりすれば渡すことが出来ます。
 
-### `String`の使用をなるべく避ける
+## `String`の使用をなるべく避ける
 
 `String`は`[Char]`のエイリアスであり、
 Haskellの文字列を表現するために使われますが、
@@ -287,7 +287,7 @@ Unicodeで正しく表現できる文字列である場合`Text`を使い、
 詳しく知りたい場合は、
 [Haskellの文字列型：分類と特徴 #Haskell - Qiita](https://qiita.com/mod_poppo/items/740659702f31216fdade)を参照してください。
 
-### mutableな変数の使用を避ける
+## mutableな変数の使用を避ける
 
 Haskellに限らずmutableな変数は避けるべきだとされています。
 特にHaskellは純粋関数型言語でありimmutableにレコード全体を差分更新することが前提とされて効率よく行えるようになっているので、
@@ -296,7 +296,7 @@ mutableな変数がほしいことはめったにありません。
 スレッド間の通信などでトランザクションを作りたいとかのどうしても必要な理由でない場合、
 mutableな変数を表す型は使わないでください。
 
-### `threadDelay`の乱用を避ける
+## `threadDelay`の乱用を避ける
 
 `threadDelay`はスレッドを指定した時間だけ遅延させる関数です。
 `threadDelay`を乱用するのはやめましょう。
@@ -323,7 +323,7 @@ threadDelay maxBound
 パッケージの`exponentialBackoff`を使って、
 短い単位の繰り返しの待機をしてください。
 
-### shadowing警告を回避してレコードを初期化する
+## shadowing警告を回避してレコードを初期化する
 
 データ型のフィールド名と同じ変数を定義すると、
 しばしばlensのアクセサによってshadowing警告が発生します。
@@ -339,18 +339,18 @@ threadDelay maxBound
 { foo = foo' }
 ```
 
-### 関数の最後の値は捨てない
+## 関数の最後の値は捨てない
 
 わざわざ関数の最後で`pure ()`や`return ()`や`void`を使って値を捨てるのは禁止です。
 特に理由がないならば最後の関数の値を捨てないように型の方を合わせてください。
 
-### bracketで書ける時はそれを使う
+## bracketで書ける時はそれを使う
 
 `bracket`を使うと例外などを考慮してリソースを確実に解放することが出来ます。
 `bracket`でリソースの解放処理が書ける時はそちらを使ってください。
 わざわざバラバラの`do`ブロックで書き直さないでください。
 
-### 出来る限りwithパターンの関数を使う
+## 出来る限りwithパターンの関数を使う
 
 `bracket`関数の特化型であるリソースの確保と解放がセットになっていて、
 実行したいアクションだけを渡せる関数がしばしば存在します。
@@ -365,7 +365,7 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 
 存在するならばそれを優先します。
 
-### himari
+## himari
 
 このhimariプロジェクトはrioに変わるカスタムPreludeライブラリを提供することを目的としています。
 このプロジェクト自身でもhimariライブラリを使えます。
@@ -383,7 +383,7 @@ import Himari
 import Himari.Prelude
 ```
 
-### Template Haskellの`mkName`と`newName`の使いかた
+## Template Haskellの`mkName`と`newName`の使いかた
 
 既にスコープに存在する名前をキャプチャする形で参照したい時は`mkName`を使います。
 新しいフレッシュな衝突しない名前を生成したい時は`newName`を使います。
@@ -391,7 +391,7 @@ import Himari.Prelude
 キャプチャする必要がある場合は`mkName`、
 そうでなければ安全な`newName`を使うべきです。
 
-### [convertible: Typeclasses and instances for converting between types](https://hackage.haskell.org/package/convertible)
+## [convertible: Typeclasses and instances for converting between types](https://hackage.haskell.org/package/convertible)
 
 `convert`関数で汎用的な型変換を行っています。
 `pack`, `unpack`, `encodeUtf8`, `decodeUtf8`のような個別の関数よりなるべく`convert`を使うようにしてください。
@@ -402,9 +402,9 @@ convertibleをimportするときは単に以下のように書いてください
 import Data.Convertible
 ```
 
-### [lens: Lenses, Folds and Traversals](https://hackage.haskell.org/package/lens)
+## [lens: Lenses, Folds and Traversals](https://hackage.haskell.org/package/lens)
 
-#### `makeFieldsId`
+### `makeFieldsId`
 
 `NoFieldSelectors`を前提に定義したデータ構造に対してlensのレコードのフィールドアクセサを定義する時は、
 `makeFieldsId`というTemplate Haskell関数を使ってください。
@@ -423,32 +423,32 @@ import Data.Convertible
 循環参照などが発生した場合は型クラスの定義だけを別のモジュールに分割して、
 双方それをimportするのも手です。
 
-#### `makeFields`
+### `makeFields`
 
 サードパーティのデータ構造や自動生成されたデータ構造に対しては、
 プレフィクスやアンダースコアがあるかどうかを考慮して、
 `makeFields`などの他のTemplate Haskell関数を使ってください。
 
-#### lensで定義されたアクセサは、アクセサ単体ではなく型クラスごとexportする
+### lensで定義されたアクセサは、アクセサ単体ではなく型クラスごとexportする
 
 例えば`makeFieldsId`で`HasUser`型クラスと`user`アクセサを定義した場合、
 `user`アクセサをexportするのではなく、
 `HasUser`型クラスをexportしてください。
 
-#### なるべくlensを使う
+### なるべくlensを使う
 
 パターンマッチを使ってレコードのフィールドにアクセスすると、
 どうしてもshadowing警告が発生しやすくなります。
 そのため最初からlensを使ってフィールドにアクセスしてください。
 
-## テストや品質保証の基準
+# テストや品質保証の基準
 
 テストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
 
 主要なAPIは[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)を参照してください。
 sydtestはhspecそのものではないことに注意してください。
 
-### モジュール名
+## モジュール名
 
 テストする対象と同じ名前空間に置いて、
 テストするモジュール名の末尾に`Spec`をつけてください。
@@ -459,7 +459,7 @@ sydtestはhspecそのものではないことに注意してください。
 `Env.TypeSpec`
 となります。
 
-### 意味のないテストは禁止
+## 意味のないテストは禁止
 
 以下のような絶対に成功するのが自明なテストでコンパイラと人間を騙そうとするのは禁止。
 
@@ -476,7 +476,7 @@ it "Work Test" $ do
 テストが書けないときは書けないと報告する。
 無意味なテストは禁止。
 
-### Either値をテストするときは値を直接比較する
+## Either値をテストするときは値を直接比較する
 
 Eitherが返ってくる値`x`をテストするときは、
 次のように書くのは避ける。
