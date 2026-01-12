@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.0.5.0] - 2026-01-12
+
 ### Added
 
 - `data-default` package (^>=0.8.0.2) as a dependency for default value support
