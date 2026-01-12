@@ -9,6 +9,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
+- `data-default` package (^>=0.8.0.2) as a dependency for default value support
+- `Data.Default` re-export in `Himari.Prelude` for `Default` type class and `def` function
 - `retry` package (^>=0.9.3.1) as a dependency for retry combinators
 - `UnliftIO.Retry` re-export in `Himari.Prelude` for retry operations with exponential backoff
 - HLint rules to warn against dangerous language extensions: `AllowAmbiguousTypes`, `DeferTypeErrors`,
