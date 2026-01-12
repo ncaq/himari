@@ -1008,7 +1008,7 @@ import Himari.Prelude
 
 # このプロジェクトのテストや品質保証の基準
 
-このhimariテストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
+このhimariプロジェクトのテストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
 
 主要なAPIは[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)を参照してください。
 sydtestはhspecそのものではないことに注意してください。
