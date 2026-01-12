@@ -3,7 +3,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 -- Sample file to test extension restriction hlint rules
--- This file intentionally uses dangerous and deprecated extensions
+-- This file intentionally uses dangerous and discouraged extensions
 module HlintSamples.ExtensionDangerous where
 
 import Himari

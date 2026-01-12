@@ -11,7 +11,7 @@ spec = do
       itWithOuter "AllowAmbiguousTypes should warn" $ \output -> do
         output `shouldSatisfy` containsWarning "AllowAmbiguousTypes"
 
-    describe "Deprecated extensions" $ do
+    describe "Discouraged extensions" $ do
       itWithOuter "ImplicitParams should warn" $ \output -> do
         output `shouldSatisfy` containsWarning "ImplicitParams"
 
