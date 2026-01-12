@@ -148,38 +148,75 @@ default-extensions:
 以下の言語拡張は危険なので使用することを禁止します。
 
 - `AllowAmbiguousTypes`
-- `ImplicitParams`
 - `ImpredicativeTypes`
 - `IncoherentInstances`
 - `LiberalTypeSynonyms`
 - `OverlappingInstances`
 - `RebindableSyntax`
-- `UndecidableInstances`
 - `UndecidableSuperClasses`
+
+## 非推奨の言語拡張
+
+以下の言語拡張は動作が不安定になりがちですが、
+ライブラリを使用する時に必要になる場面があるため、
+最終手段として使用を許可します。
+
+- `ImplicitParams`
+- `UndecidableInstances`
 
 ## 危険な関数の禁止
 
-以下の関数は危険なので使用することを絶対に禁止します。
+以下の関数は危険なので使用することを禁止します。
 
 - `unsafeDupablePerformIO`
 - `unsafeFixIO`
 - `unsafeInterleaveIO`
 - `unsafePerformIO`
 
-## 警告は無効にしない
+## GHCの警告は無効にしない
 
-警告をプラグマによって無効にすることは禁止です。
-特にHaskellの警告は無効にしない。
-どうしても無効にしないと書けない場合はこちらに確認をしてください。
+警告をプラグマによって無効にすることは原則禁止します。
+
+ただし孤立インスタンスを仕方なく定義する場合は、
+
+```haskell
+{-# OPTIONS_GHC -Wno-orphans #-}
+```
+
+は最終手段として許可します。
+
+またTemplate Haskellを利用したコード生成で変数名のshadowingが発生する場合や、
+未使用変数が発生する場合も仕方なく無効にすることを許可します。
+
+```haskell
+{-# OPTIONS_GHC -Wno-shadowed-variables #-}
+{-# OPTIONS_GHC -Wno-unused-binds #-}
+```
+
+## hlintの警告は無効にしない
+
+hlintの警告を無効にすることは原則禁止します。
+
+ただしどうしてもその方法じゃないと書けなかったり、
+著しくパフォーマンスの低下を招く場合は仕方なく無効にすることを許可します。
+
+その場合でもなるべく局所的に無効にしてください。
+全体で無効にするのは禁止です。
 
 ## exportは明示的に列挙する
 
-全てのシンボルをexportで公開するのは禁止です。
+exportで全てのシンボルを公開するのは原則禁止です。
 
 外部に公開しないといけないシンボルだけをexportしてください。
 
+結果的に全てexportすることになっても、
+明示的に列挙してください。
+
 明示的に列挙することで公開しているAPIが明確になり、
 デッドコードの検出なども簡単になります。
+
+ただしTemplate Haskellでシンボルを大量に生成する場合で、
+全部把握して列挙するのが困難な場合は全てexportすることを許可します。
 
 ## 部分関数の禁止
 
@@ -188,7 +225,8 @@ default-extensions:
 - `fromJust`
 - `read`
 
-例えば`read`には`readMaybe`などの安全な代替関数があるので、そちらを使ってください。
+例えば`read`には`readMaybe`や`readMay`などの安全な代替関数があるので、
+そちらを使ってください。
 
 ## `error`関数の禁止
 
@@ -206,12 +244,14 @@ default-extensions:
 
 ## エラーを握り潰すのは禁止
 
-`IO`の文脈などで例外が生じた場合に握りつぶして何もしないような行為は禁止。
+`IO`の文脈などで例外が生じた場合に握りつぶして何もしないような行為は禁止です。
 `IO`は文脈的に既に例外が発生する可能性があることを示しているので、
 例外が上位に伝播することは許容されます。
-特に動作上問題がない場合は警告などのレベルのログを出しておく。
-問題が発生している場合は例外を上位に再伝達する。
-そこで例外を処理するのが完全に適切なら警告を出して処理する。
+
+例外が生じても問題がないケースはそのことをコメントなどで明示的に示してください。
+
+問題が発生している場合は例外を上位に再伝達します。
+そこで例外を処理するのが完全に適切ならwarnかerrorレベルのログを出して処理します。
 
 例外だけではなく`Either`の`Left`なども適切に処理してください。
 `Left`が来るのが正常系である場合はデフォルト値やフォールバック値を使ってください。
@@ -363,24 +403,6 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 
 存在するならばそれを優先します。
 
-## himari
-
-このhimariプロジェクトはrioに変わるカスタムPreludeライブラリを提供することを目的としています。
-このプロジェクト自身でもhimariライブラリを使えます。
-
-```haskell
-import Himari
-```
-
-ただし`Himari`モジュール自身がimportしているモジュールは循環参照の問題のためimport出来ません。
-
-`Himari.Prelude`は外部モジュールしかimportしていないので、
-循環参照の問題がある場合は以下のようにしてください。
-
-```haskell
-import Himari.Prelude
-```
-
 ## Template Haskellの`mkName`と`newName`の使いかた
 
 既にスコープに存在する名前をキャプチャする形で参照したい時は`mkName`を使います。
@@ -393,12 +415,6 @@ import Himari.Prelude
 
 `convert`関数で汎用的な型変換を行っています。
 `pack`, `unpack`, `encodeUtf8`, `decodeUtf8`のような個別の関数よりなるべく`convert`を使うようにしてください。
-
-convertibleをimportするときは単に以下のように書いてください。
-
-```haskell
-import Data.Convertible
-```
 
 ## [lens: Lenses, Folds and Traversals](https://hackage.haskell.org/package/lens)
 
@@ -419,7 +435,7 @@ import Data.Convertible
 そのため型クラスの重複を怖がってimportを少なくする必要はありません。
 むしろ積極的に既存の型クラスをimportしてください。
 循環参照などが発生した場合は型クラスの定義だけを別のモジュールに分割して、
-双方それをimportするのも手です。
+双方それをimportするのが良いでしょう。
 
 ### `makeFields`
 
@@ -431,23 +447,45 @@ import Data.Convertible
 
 例えば`makeFieldsId`で`HasUser`型クラスと`user`アクセサを定義した場合、
 `user`アクセサをexportするのではなく、
-`HasUser`型クラスをexportしてください。
+`HasUser`型クラスを内部のアクセサも含めてexportしてください。
 
-### なるべくlensを使う
+### なるべくlensか`OverloadedRecordDot`を使う
 
 パターンマッチを使ってレコードのフィールドにアクセスすると、
 どうしてもshadowing警告が発生しやすくなります。
-そのため最初からlensを使ってフィールドにアクセスしてください。
+そのためlensか`OverloadedRecordDot`を使ってフィールドにアクセスしてください。
 
-# テストや品質保証の基準
+## himari
 
-テストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
+このhimariプロジェクトはrioに変わるカスタムPreludeライブラリを提供することを目的としています。
+このプロジェクト自身でもhimariライブラリを使えます。
+
+```haskell
+import Himari
+```
+
+ただし`Himari`モジュール自身がimportしているモジュールは循環参照の問題のためimport出来ません。
+
+`Himari.Prelude`は外部モジュールしかimportしていないので、
+循環参照の問題がある場合は以下のようにしてください。
+
+```haskell
+import Himari.Prelude
+```
+
+外部のプロジェクトで`Himari.Prelude`をわざわざimportする必要はないはずです。
+`Himari`を直接importしてください。
+
+# このプロジェクトのテストや品質保証の基準
+
+このhimariテストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
 
 主要なAPIは[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)を参照してください。
 sydtestはhspecそのものではないことに注意してください。
 
 ## モジュール名
 
+モジュール名に悩んだときは、
 テストする対象と同じ名前空間に置いて、
 テストするモジュール名の末尾に`Spec`をつけてください。
 
