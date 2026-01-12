@@ -143,6 +143,250 @@ default-extensions:
   ViewPatterns
 ```
 
+### GHC2024に含まれている拡張
+
+GHC2024には以下の拡張が含まれています。
+
+- `BangPatterns`
+- `BinaryLiterals`
+- `ConstrainedClassMethods`
+- `ConstraintKinds`
+- `DataKinds`
+- `DeriveDataTypeable`
+- `DeriveFoldable`
+- `DeriveFunctor`
+- `DeriveGeneric`
+- `DeriveLift`
+- `DeriveTraversable`
+- `DerivingStrategies`
+- `DisambiguateRecordFields`
+- `DoAndIfThenElse`
+- `EmptyCase`
+- `EmptyDataDecls`
+- `EmptyDataDeriving`
+- `ExistentialQuantification`
+- `ExplicitForAll`
+- `ExplicitNamespaces`
+- `FlexibleContexts`
+- `FlexibleInstances`
+- `ForeignFunctionInterface`
+- `GADTSyntax`
+- `GADTs`
+- `GeneralisedNewtypeDeriving`
+- `HexFloatLiterals`
+- `ImportQualifiedPost`
+- `InstanceSigs`
+- `KindSignatures`
+- `LambdaCase`
+- `MonoLocalBinds`
+- `MultiParamTypeClasses`
+- `NamedFieldPuns`
+- `NamedWildCards`
+- `NumericUnderscores`
+- `PatternGuards`
+- `PolyKinds`
+- `PostfixOperators`
+- `RankNTypes`
+- `RelaxedPolyRec`
+- `RoleAnnotations`
+- `ScopedTypeVariables`
+- `StandaloneDeriving`
+- `StandaloneKindSignatures`
+- `StarIsType`
+- `TraditionalRecordSyntax`
+- `TupleSections`
+- `TypeAbstractions`
+- `TypeApplications`
+- `TypeOperators`
+- `TypeSynonymInstances`
+
+### 追加で有効にしている拡張
+
+GHC2024に加えて、以下の拡張をデフォルトで有効にしています。
+
+#### ApplicativeDo
+
+do記法をApplicativeに脱糖します。
+独立した操作の並列実行が可能になり、
+パフォーマンスが向上する場合があります。
+純粋な構文変換なので害はありません。
+
+#### BlockArguments
+
+`when cond do`のようにブロックを直接引数に渡せます。
+括弧を減らせる純粋な構文糖衣で既存コードに影響しません。
+
+#### CPP
+
+Cプリプロセッサを有効にします。
+GHCバージョン分岐などライブラリ開発で必要になります。
+行頭の`#`がディレクティブとして解釈されますが通常問題になりません。
+
+#### DefaultSignatures
+
+型クラスのデフォルト実装にジェネリクスを使えます。
+ボイラープレートを減らせ既存コードに影響しません。
+
+#### DerivingVia
+
+別の型経由でインスタンスを導出できます。
+明示的に使用するため安全で`newtype`パターンで特に有用です。
+
+#### DuplicateRecordFields
+
+異なる型で同名フィールドを許可します。
+`NoFieldSelectors`と組み合わせて使用することでフィールド名の衝突を避けられます。
+
+#### FunctionalDependencies
+
+型クラスパラメータ間の関数従属性を指定できます。
+型推論を助け`TypeFamilies`の代替として使えます。
+
+#### LexicalNegation
+
+`-`の字句解析を改善し、`f -1`が`f (-1)`として解釈されます。
+既存の`f - 1`(減算)の構文を壊しますが、
+より自然な解釈になります。
+
+減算では双方にスペースを入れたほうが良いのでそちらの構文を推奨します。
+
+#### LinearTypes
+
+線形型(`a %1 -> b`)の構文が使えます。
+新しい構文が追加されるだけで既存コードには影響しません。
+ライブラリが線形型を使っている場合に型シグネチャを読めるようになります。
+
+#### MonadComprehensions
+
+リスト内包表記をモナドに一般化します。
+純粋な構文拡張で既存のリスト内包表記も動作します。
+
+#### MultiWayIf
+
+`if | cond1 -> ... | cond2 -> ...`形式のガード風ifが書けます。
+純粋な構文糖衣で害はありません。
+
+#### NegativeLiterals
+
+`-1`を`negate 1`ではなくリテラルとして扱います。
+オーバフロー防止に便利で、
+既存コードへの影響は軽微です。
+
+#### NoFieldSelectors
+
+フィールドセレクタ関数を生成しません。
+`DuplicateRecordFields`や`OverloadedRecordDot`と組み合わせて、
+名前空間の汚染を防ぎます。
+
+これは非常に破壊的な言語拡張ですが、
+Haskellの同名フィールドを定義しづらいという問題を解決してくれる極めて重要な拡張機能のため、
+himariの強い方針としてデフォルト有効にしています。
+
+フィールドにはlensか`OverloadedRecordDot`かパターンマッチでアクセスできます。
+
+#### NoImplicitPrelude
+
+標準Preludeを自動インポートしません。
+カスタムPreludeライブラリであるhimariを使用するので自然な拡張です。
+
+#### OverloadedLabels
+
+`#label`記法が使えます。
+optics系ライブラリで有用で純粋な構文追加です。
+
+#### OverloadedRecordDot
+
+`person.name`記法でフィールドにアクセスできます。
+`NoFieldSelectors`と組み合わせて現代的なレコード操作を可能にします。
+
+#### OverloadedStrings
+
+文字列リテラルから`Text`や`ByteString`を直接作れます。
+`String`を避けて`Text`を使う方針だと便利です。
+たまに型注釈が必要になる程度の影響です。
+
+#### ParallelListComp
+
+並列リスト内包表記`[x + y | x <- xs | y <- ys]`が書けます。
+純粋な構文拡張で害はありません。
+
+#### PatternSynonyms
+
+パターンを抽象化できます。
+ライブラリ経由で使うことがあり、
+明示的に使用するため安全です。
+
+#### QualifiedDo
+
+`Module.do`で独自のdo記法を使えます。
+明示的に使用するため既存コードに影響しません。
+
+#### QuantifiedConstraints
+
+`forall a. C a => ...`のような量化された制約が書けます。
+高度な型レベルプログラミングで有用で既存コードに影響しません。
+
+#### QuasiQuotes
+
+準クォート`[quasi|...|]`が使えます。
+Template Haskellと組み合わせて使用し、
+明示的に使用するため安全です。
+
+#### RecordWildCards
+
+`Foo{..}`でフィールドを一括展開できます。
+外部ライブラリとの連携で便利な場面があります。
+`NoFieldSelectors`環境では内部で使いにくいですが、
+有効にしておいてもあまり害はありません。
+
+#### RecursiveDo
+
+`mdo`や`rec`で再帰的束縛ができます。
+明示的に使用しない限り有効にならず、
+無限再帰は拡張なしでも起こり得るため、
+デフォルト有効でも危険ではありません。
+
+### StrictData
+
+データ型のフィールドをデフォルトで正格評価にします。
+遅延評価を前提としたフィールド(無限リストなど)は注意が必要ですが、
+通常のアプリケーションのフィールドでは正格評価が適切です。
+`Strict`(全体を正格化)より影響範囲が限定的で安全です。
+
+これは破壊的な言語拡張ですが、
+モダンなHaskellでは通常フィールドレベルでは正格評価をするので、
+himariの方針としてデフォルト有効にしています。
+
+#### TemplateHaskell
+
+メタプログラミングが使えます。
+コンパイル時間が増加する可能性がありますが、
+あまり害はありません。
+
+#### TypeData
+
+型レベル専用のデータ型を定義できます。
+プロモーションの`'`プレフィックスが不要になり意図が明確になります。
+純粋な追加機能で害はありません。
+
+#### TypeFamilies
+
+型族(型レベル関数)が使えます。
+型レベルプログラミングの基盤で、
+多くのライブラリで必要です。
+`MonoLocalBinds`が暗黙的に有効になりますが、
+GHC2024で既に有効です。
+
+### TypeFamilyDependencies
+
+型族の単射性アノテーションを指定できます。
+`TypeFamilies`を使うなら型推論を助けるために便利です。
+
+#### ViewPatterns
+
+`f (view -> pattern) = ...`形式でパターンマッチ時に関数を適用できます。
+純粋な構文糖衣で害はありません。
+
 ## 危険な言語拡張の禁止
 
 以下の言語拡張は危険なので使用することを禁止します。
