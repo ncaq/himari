@@ -1,4 +1,4 @@
-cabal-version: 3.0
+cabal-version: 3.12
 name: himari
 version: 1.0.4.0
 synopsis: A standard library for Haskell as an alternative to rio
