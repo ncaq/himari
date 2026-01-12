@@ -35,7 +35,11 @@ let Module
 let ExtensionItem
     : Type
     = < Default : Bool
-      | Name : { name : List Text, within : Optional (List Text) }
+      | Name :
+          { name : List Text
+          , within : Optional (List Text)
+          , message : Optional Text
+          }
       >
 
 let Rule

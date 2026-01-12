@@ -637,20 +637,49 @@
       name: errorWithStackTrace
       within: []
 - extensions:
-    - name:
+    - message: "Defers ambiguity errors to call sites, making debugging harder"
+      name:
         - AllowAmbiguousTypes
+      within: []
+    - message: "Defers type errors to runtime, defeating Haskell's type safety"
+      name:
         - DeferTypeErrors
+      within: []
+    - message: "Causes unexpected type defaulting (e.g., show.read defaults to ())"
+      name:
         - ExtendedDefaultRules
+      within: []
+    - message: Experimental and may break in future GHC versions
+      name:
         - ImpredicativeTypes
+      within: []
+    - message: "Makes instance selection non-deterministic and order-dependent"
+      name:
         - IncoherentInstances
+      within: []
+    - message: Can cause Core Lint errors with DataKinds and PolyKinds
+      name:
         - LiberalTypeSynonyms
+      within: []
+    - message: "Deprecated since GHC 7.10, use OVERLAPPING pragma if truly needed"
+      name:
         - OverlappingInstances
+      within: []
+    - message: "Changes do/if-then-else semantics, breaks deriving and TH"
+      name:
         - RebindableSyntax
+      within: []
+    - message: "Can cause type checker non-termination or stack overflow"
+      name:
         - UndecidableSuperClasses
       within: []
 - extensions:
-    - name:
+    - message: 'Breaks coherence. If unavoidable, add {-# HLINT ignore "Avoid restricted extensions" #-}'
+      name:
         - ImplicitParams
+      within: []
+    - message: 'May cause type checker loops. If unavoidable, add {-# HLINT ignore "Avoid restricted extensions" #-}'
+      name:
         - UndecidableInstances
       within: []
 - functions:
