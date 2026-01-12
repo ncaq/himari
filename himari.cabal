@@ -49,6 +49,7 @@ common basic
   default-extensions:
     ApplicativeDo
     BlockArguments
+    CPP
     DefaultSignatures
     DerivingVia
     DuplicateRecordFields

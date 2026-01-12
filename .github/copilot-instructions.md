@@ -115,6 +115,7 @@ default-language: GHC2024
 default-extensions:
   ApplicativeDo
   BlockArguments
+  CPP
   DefaultSignatures
   DerivingVia
   DuplicateRecordFields
