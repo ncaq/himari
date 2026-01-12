@@ -144,7 +144,6 @@
           projectRootFile = "flake.nix";
           programs = {
             actionlint.enable = true;
-            cabal-gild.enable = true;
             deadnix.enable = true;
             dhall.enable = true;
             nixfmt.enable = true;
@@ -164,8 +163,40 @@
               enable = true;
               package = pkgs.fourmolu;
             };
+
+            # cabal-gildはモジュール自動発見対応のためsettings.formatterでカスタム設定します。
           };
           settings.formatter = {
+            # cabal-gildのモジュール自動発見機能に対応するため、
+            # Haskellソースファイルの変更も検知してcabal-gildを実行します。
+            # treefmt-nixの上流では変更されたファイルだけを修正したいと言われてマージされていませんが、
+            # ローカルで使う分には問題ありません。
+            # https://github.com/numtide/treefmt-nix/pull/384
+            cabal-gild = {
+              command = pkgs.lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "cabal-gild-wrapper";
+                  runtimeInputs = [
+                    (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.2")
+                    pkgs.git
+                    pkgs.parallel
+                  ];
+                  text = ''
+                    git ls-files -z "*.cabal" | parallel --null "cabal-gild --io {}"
+                  '';
+                }
+              );
+              includes = [
+                "*.cabal"
+                # Haskellソースファイルの変更を検知するために含める
+                "*.hs"
+                "*.lhs"
+                "*.hsc"
+                "*.chs"
+                "*.hsig"
+                "*.lhsig"
+              ];
+            };
             editorconfig-checker = {
               command = pkgs.lib.getExe (
                 pkgs.writeShellApplication {

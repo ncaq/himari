@@ -26,6 +26,8 @@ nix flake check
 nix fmt
 ```
 
+Claude CodeがStopするときも自動で`nix fmt`が実行されます。
+
 ### ビルド
 
 #### Haskell

@@ -1,26 +1,84 @@
 {
   "permissions": {
+    "additionalDirectories": [
+      "~/Desktop/aeson",
+      "~/Desktop/bytestring",
+      "~/Desktop/containers",
+      "~/Desktop/convertible",
+      "~/Desktop/ghc",
+      "~/Desktop/haskell-language-server",
+      "~/Desktop/haskell.nix",
+      "~/Desktop/hlint",
+      "~/Desktop/lens",
+      "~/Desktop/mtl",
+      "~/Desktop/pretty-simple",
+      "~/Desktop/rio",
+      "~/Desktop/safe",
+      "~/Desktop/text",
+      "~/Desktop/time",
+      "~/Desktop/typed-process",
+      "~/Desktop/unliftio",
+      "~/Desktop/unordered-containers",
+      "~/Desktop/vector"
+    ],
     "allow": [
-      "Bash(changelog-lint:*)",
+      "Bash(changelog-lint -config .changelog-lint.toml:*)",
       "Bash(dhall-to-yaml-ng:*)",
       "Bash(dhall:*)",
       "Bash(hlint:*)",
-      "Bash(nix run '.#generate-hlint')",
-      "Bash(timeout 600 nix flake check:*)"
+      "Bash(nix derivation show:*)",
+      "Bash(nix flake check:*)",
+      "Bash(nix run '.#generate-hlint')"
+    ],
+    "deny": [
+      "Edit(~/Desktop/aeson/**)",
+      "Edit(~/Desktop/bytestring/**)",
+      "Edit(~/Desktop/containers/**)",
+      "Edit(~/Desktop/convertible/**)",
+      "Edit(~/Desktop/ghc/**)",
+      "Edit(~/Desktop/haskell-language-server/**)",
+      "Edit(~/Desktop/haskell.nix/**)",
+      "Edit(~/Desktop/hlint/**)",
+      "Edit(~/Desktop/lens/**)",
+      "Edit(~/Desktop/mtl/**)",
+      "Edit(~/Desktop/pretty-simple/**)",
+      "Edit(~/Desktop/rio/**)",
+      "Edit(~/Desktop/safe/**)",
+      "Edit(~/Desktop/text/**)",
+      "Edit(~/Desktop/time/**)",
+      "Edit(~/Desktop/typed-process/**)",
+      "Edit(~/Desktop/unliftio/**)",
+      "Edit(~/Desktop/unordered-containers/**)",
+      "Edit(~/Desktop/vector/**)",
+      "Write(~/Desktop/aeson/**)",
+      "Write(~/Desktop/bytestring/**)",
+      "Write(~/Desktop/containers/**)",
+      "Write(~/Desktop/convertible/**)",
+      "Write(~/Desktop/ghc/**)",
+      "Write(~/Desktop/haskell-language-server/**)",
+      "Write(~/Desktop/haskell.nix/**)",
+      "Write(~/Desktop/hlint/**)",
+      "Write(~/Desktop/lens/**)",
+      "Write(~/Desktop/mtl/**)",
+      "Write(~/Desktop/pretty-simple/**)",
+      "Write(~/Desktop/rio/**)",
+      "Write(~/Desktop/safe/**)",
+      "Write(~/Desktop/text/**)",
+      "Write(~/Desktop/time/**)",
+      "Write(~/Desktop/typed-process/**)",
+      "Write(~/Desktop/unliftio/**)",
+      "Write(~/Desktop/unordered-containers/**)",
+      "Write(~/Desktop/vector/**)"
     ]
   },
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write|Edit|MultiEdit",
+        "matcher": "Stop",
         "hooks": [
           {
             "type": "command",
             "command": "cd $CLAUDE_PROJECT_DIR && nix fmt"
-          },
-          {
-            "type": "command",
-            "command": "cd $CLAUDE_PROJECT_DIR && git ls-files -z *.cabal|parallel --verbose --null cabal-gild --io {}"
           }
         ]
       }
