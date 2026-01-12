@@ -7,6 +7,13 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- HLint rules to warn against dangerous language extensions: `AllowAmbiguousTypes`, `DeferTypeErrors`,
+  `ExtendedDefaultRules`, `ImpredicativeTypes`, `IncoherentInstances`, `LiberalTypeSynonyms`,
+  `OverlappingInstances`, `RebindableSyntax`, `UndecidableSuperClasses`
+- HLint rules to warn against discouraged language extensions: `ImplicitParams`, `UndecidableInstances`
+
 ## [1.0.4.0] - 2026-01-09
 
 ### Added
