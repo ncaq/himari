@@ -461,11 +461,84 @@ fourmoluとの相性が悪く意図しない変換が発生することがある
 ## 非推奨の言語拡張
 
 以下の言語拡張は動作が不安定になりがちですが、
-ライブラリを使用する時に必要になる場面があるため、
+ライブラリを使用する時など必要になる場面があるため、
 最終手段として使用を許可します。
 
-- `ImplicitParams`
-- `UndecidableInstances`
+### ImplicitParams
+
+暗黙パラメータを使用できます。
+`?cmp`のような形式で動的スコーピングと静的型付けを組み合わせた機能を提供します。
+
+```haskell
+sort :: (?cmp :: a -> a -> Bool) => [a] -> [a]
+main = let ?cmp = (<=) in sort [3,1,2]
+```
+
+#### 問題点
+
+コヒーレンス(一貫性)の欠如が最大の問題です。
+型署名の有無でプログラムの動作が変わるという、
+Haskellの基本的な期待を破る現象が起きます。
+
+```haskell
+-- 型署名なし: 結果は(123, 123)
+result = let ?myparam = 456 in ?myparam
+terror = let ?myparam = 123 in (result, result)
+
+-- 型署名あり: 結果は(123, 456)
+result :: (?myparam :: Int) => Int
+result = let ?myparam = 456 in ?myparam
+horror = let ?myparam = 123 in (result, result)
+```
+
+また暗黙的な振る舞いがデバッグを困難にし、型推論との相性も悪いです。
+
+#### 代替手段
+
+- `ReaderT`モナド
+- `Has`型クラスとlensの組み合わせ
+- 明示的なパラメータ渡し
+
+#### 使わざるを得ない場面
+
+GHCの`HasCallStack`は内部実装として`ImplicitParams`を使用しています。
+`HasCallStack`を使うライブラリとの連携で必要になる場合があります。
+
+### UndecidableInstances
+
+GHCがインスタンス宣言に課すPaterson ConditionやCoverage Conditionを緩和します。
+これらの条件は型チェッカーが有限時間で終了することを保証するためのものです。
+
+#### 問題点
+
+型チェッカーの無限ループを引き起こす可能性があります。
+以下のような循環的なインスタンスが許可されてしまいます。
+
+```haskell
+class Bar a => Foo a
+instance Bar a => Foo a
+instance Foo a => Bar a
+```
+
+また重複インスタンスの隠蔽に悪用される危険があります。
+
+#### 安全性メカニズム
+
+GHCはデフォルトで型チェッカーの深さ制限を設けており、
+無限ループは検出されてエラーになります。
+
+#### 使わざるを得ない場面
+
+mtl、lens、servantなど多くの主要ライブラリで使用されています。
+モナド変換子に対する型クラスインスタンス(例: `MonadState s m => MonadState s (ReaderT r m)`)は、
+Coverage Conditionを満たさないため`UndecidableInstances`が必要です。
+
+#### 安全に使うためのガイドライン
+
+1. 重複インスタンスを書いていないか確認する
+2. 循環定義を避ける
+3. 型ファミリが無限に展開される可能性がないか検討する
+4. GHCが拡張の有効化を提案した場合その理由を理解する
 
 ## 危険な言語拡張の禁止
 
