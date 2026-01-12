@@ -22,7 +22,6 @@ in  [ Types.Rule.Arguments
           , "-XNoImplicitPrelude"
           , "-XOverloadedLabels"
           , "-XOverloadedRecordDot"
-          , "-XOverloadedRecordUpdate"
           , "-XOverloadedStrings"
           , "-XParallelListComp"
           , "-XPatternSynonyms"
