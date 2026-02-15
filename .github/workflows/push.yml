@@ -62,7 +62,7 @@ jobs:
           cabal build all --dry-run
       - name: Restore cached dependencies
         id: cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ${{ steps.setup.outputs.cabal-store }}
           key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-plan-${{ hashFiles('**/plan.json') }} # editorconfig-checker-disable-line
@@ -70,7 +70,7 @@ jobs:
             ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-
       - run: cabal test --disable-optimization --enable-tests
       - name: Save dependencies to cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ${{ steps.setup.outputs.cabal-store }}
           key: ${{ steps.cache.outputs.cache-primary-key }}
