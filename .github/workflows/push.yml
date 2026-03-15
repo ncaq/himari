@@ -20,37 +20,11 @@ jobs:
           - macos-15-intel # Intel (x86_64-darwin)
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: jlumbroso/free-disk-space@v1.3.1
-        if: runner.os == 'Linux'
-        with:
-          tool-cache: false # GitHub Actionsのツールキャッシュは残す
-          android: true
-          docker-images: true
-          dotnet: true
-          haskell: true # Nixで管理しているので不要
-          large-packages: false # ARMランナーに存在しないパッケージ削除で警告が出るため無効化
-          swap-storage: true
       - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
+      - uses: ./.github/actions/setup-nix
         with:
-          extra_nix_config: >
-            extra-substituters =
-            https://cache.nixos.org/
-            https://niks3-public.ncaq.net/
-            https://ncaq.cachix.org/
-            https://nix-community.cachix.org/
-            https://cache.iog.io/
-
-            extra-trusted-public-keys =
-            cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            niks3-public.ncaq.net-1:e/B9GomqDchMBmx3IW/TMQDF8sjUCQzEofKhpehXl04=
-            ncaq.cachix.org-1:XF346GXI2n77SB5Yzqwhdfo7r0nFcZBaHsiiMOEljiE=
-            nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
-            hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
-      - uses: cachix/cachix-action@v16
-        with:
-          name: ncaq
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          free-disk-space: "true"
       - run: nix flake check
 
   windows:
@@ -91,26 +65,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
+      - uses: ./.github/actions/setup-nix
         with:
-          extra_nix_config: >
-            extra-substituters =
-            https://cache.nixos.org/
-            https://niks3-public.ncaq.net/
-            https://ncaq.cachix.org/
-            https://nix-community.cachix.org/
-            https://cache.iog.io/
-
-            extra-trusted-public-keys =
-            cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            niks3-public.ncaq.net-1:e/B9GomqDchMBmx3IW/TMQDF8sjUCQzEofKhpehXl04=
-            ncaq.cachix.org-1:XF346GXI2n77SB5Yzqwhdfo7r0nFcZBaHsiiMOEljiE=
-            nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
-            hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
-      - uses: cachix/cachix-action@v16
-        with:
-          name: ncaq
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: generate-hlint
         run: nix run '.#generate-hlint'
       - run: git diff --exit-code
@@ -154,38 +111,11 @@ jobs:
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
       # 以降はタグが存在しない場合のみ実行
-      - uses: jlumbroso/free-disk-space@v1.3.1
+      - uses: ./.github/actions/setup-nix
         if: steps.check_tag.outputs.exists == 'false'
         with:
-          tool-cache: false
-          android: true
-          docker-images: true
-          dotnet: true
-          haskell: true # Nixで管理しているので不要
-          large-packages: false # ARMランナーに存在しないパッケージ削除で警告が出るため無効化
-          swap-storage: true
-      - uses: cachix/install-nix-action@v31
-        if: steps.check_tag.outputs.exists == 'false'
-        with:
-          extra_nix_config: >
-            extra-substituters =
-            https://cache.nixos.org/
-            https://niks3-public.ncaq.net/
-            https://ncaq.cachix.org/
-            https://nix-community.cachix.org/
-            https://cache.iog.io/
-
-            extra-trusted-public-keys =
-            cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            niks3-public.ncaq.net-1:e/B9GomqDchMBmx3IW/TMQDF8sjUCQzEofKhpehXl04=
-            ncaq.cachix.org-1:XF346GXI2n77SB5Yzqwhdfo7r0nFcZBaHsiiMOEljiE=
-            nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
-            hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
-      - uses: cachix/cachix-action@v16
-        if: steps.check_tag.outputs.exists == 'false'
-        with:
-          name: ncaq
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          free-disk-space: "true"
       # ビルドを先に実行して、成功した場合のみタグとリリースを作成する
       - name: Build sdist
         if: steps.check_tag.outputs.exists == 'false'
