@@ -302,7 +302,7 @@
       "https://cache.nixos.org/"
       "https://niks3-public.ncaq.net/"
       "https://ncaq.cachix.org/"
-      "https://nix-community.cachix.org"
+      "https://nix-community.cachix.org/"
       "https://cache.iog.io/"
     ];
     extra-trusted-public-keys = [
