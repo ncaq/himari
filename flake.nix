@@ -203,13 +203,12 @@
                   name = "editorconfig-checker-wrapper";
                   runtimeInputs = [ pkgs.editorconfig-checker ];
                   text = ''
-                    editorconfig-checker -config .editorconfig-checker.json "$@"
+                    editorconfig-checker "$@"
                   '';
                 }
               );
               includes = [ "*" ];
               excludes = [
-                ".git/*"
                 "dist-newstyle/*"
               ];
             };
