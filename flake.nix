@@ -92,6 +92,7 @@
             flake.variants = {
               ghc9102.compiler-nix-name = final.lib.mkDefault "ghc9102"; # GHC 9.10.2
               ghc9103.compiler-nix-name = final.lib.mkDefault "ghc9103"; # GHC 9.10.3
+              ghc9141.compiler-nix-name = final.lib.mkDefault "ghc9141"; # GHC 9.14.1
             };
             shell = {
               tools = {

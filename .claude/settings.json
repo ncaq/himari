@@ -26,6 +26,7 @@
       "Bash(dhall-to-yaml-ng:*)",
       "Bash(dhall:*)",
       "Bash(hlint:*)",
+      "Bash(nix build:*)",
       "Bash(nix derivation show:*)",
       "Bash(nix flake check:*)",
       "Bash(nix run '.#generate-hlint')"
