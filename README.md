@@ -8,7 +8,7 @@
 [![Haddock](https://img.shields.io/badge/docs-Haddock-purple.svg)](https://hackage.haskell.org/package/himari/docs/Himari.html)
 
 ![Linux](https://img.shields.io/badge/linux-x86__64%20|%20ARM64-brightgreen?logo=linux&logoColor=white)
-![macOS](https://img.shields.io/badge/macOS-x86__64%20|%20ARM64-brightgreen?logo=apple&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-ARM64-brightgreen?logo=apple&logoColor=white)
 ![Windows](https://img.shields.io/badge/windows-x86__64-brightgreen?logo=windows&logoColor=white)
 
 A standard library for Haskell to replace rio
