@@ -66,12 +66,16 @@ jobs:
         run: nix develop --command cabal haddock --haddock-for-hackage
       - name: Create tag
         if: steps.check_tag.outputs.skip != 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
+          gh auth setup-git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
-          git push origin "v${{ steps.version.outputs.version }}"
+          git tag -a "v$VERSION" -m "Release v$VERSION"
+          git push origin "v$VERSION"
       - name: Create GitHub Release
         if: steps.check_tag.outputs.skip != 'true'
         run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
