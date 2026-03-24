@@ -1,0 +1,87 @@
+name: release
+
+on:
+  # zizmor: ignore[dangerous-triggers] -- branchesで制限済み、信頼できない入力は使用していない
+  workflow_run:
+    workflows: [check]
+    types: [completed]
+    branches: [master, main]
+
+permissions:
+  contents: write # タグ作成のため
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    concurrency:
+      group: release-${{ github.ref }}
+      cancel-in-progress: false
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Extract version from cabal
+        id: version
+        run: |
+          set -euo pipefail
+          if [ ! -f himari.cabal ]; then
+            echo "himari.cabal not found"
+            exit 1
+          fi
+          VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
+          if [ -z "${VERSION:-}" ]; then
+            echo "Failed to extract version from himari.cabal"
+            exit 1
+          fi
+          if ! echo "$VERSION" | grep -qE '^[0-9]+(\.[0-9]+){1,3}$'; then
+            echo "Invalid PVP version format: $VERSION"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Check if tag exists
+        id: check_tag
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          if [ -z "$VERSION" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          elif git show-ref --verify --quiet "refs/tags/v$VERSION"; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: ./.github/actions/setup-nix
+        if: steps.check_tag.outputs.exists == 'false'
+        with:
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      # ビルドを先に実行して、成功した場合のみタグとリリースを作成する
+      - name: Build sdist
+        if: steps.check_tag.outputs.exists == 'false'
+        run: nix develop --command cabal sdist
+      - name: Build documentation for Hackage
+        if: steps.check_tag.outputs.exists == 'false'
+        run: nix develop --command cabal haddock --haddock-for-hackage
+      - name: Create tag
+        if: steps.check_tag.outputs.exists == 'false'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+          git push origin "v${{ steps.version.outputs.version }}"
+      - name: Create GitHub Release
+        if: steps.check_tag.outputs.exists == 'false'
+        run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to Hackage
+        if: steps.check_tag.outputs.exists == 'false'
+        uses: haskell-actions/hackage-publish@v1.1
+        with:
+          hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
+          packagesPath: dist-newstyle/sdist/
+          docsPath: dist-newstyle/
+          publish: true
