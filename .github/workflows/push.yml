@@ -17,7 +17,6 @@ jobs:
           - ubuntu-24.04 # x86_64-linux
           - ubuntu-24.04-arm # aarch64-linux
           - macos-15 # Apple Silicon (aarch64-darwin)
-          - macos-15-intel # Intel (x86_64-darwin)
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6

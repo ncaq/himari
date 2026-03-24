@@ -11,6 +11,10 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 - GHC 9.14.1 support
 
+### Removed
+
+- Drop Intel Mac (x86_64-darwin) from Nix build targets due to Nix ending support for this platform
+
 ## [1.0.5.0] - 2026-01-12
 
 ### Added
