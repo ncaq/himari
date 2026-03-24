@@ -1,0 +1,81 @@
+name: check
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read # リポジトリコンテンツの読み取り
+  id-token: write # niks3 OIDC認証
+
+jobs:
+  nix-flake-check:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04 # x86_64-linux
+          - ubuntu-24.04-arm # aarch64-linux
+          - macos-15 # Apple Silicon (aarch64-darwin)
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-nix
+        with:
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - run: nix flake check
+
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      # バージョンは一つに絞られてしまいますが、他のnix-flake-checkジョブで十分カバーできているので問題ありません。
+      - name: Extract GHC version from cabal.project
+        id: ghc
+        shell: bash
+        run: |
+          VERSION=$(sed -n 's/^with-compiler: ghc-//p' cabal.project)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+      - uses: haskell-actions/setup@v2
+        id: setup
+        with:
+          ghc-version: ${{ steps.ghc.outputs.version }}
+      - name: Configure and generate build plan
+        run: |
+          cabal configure --disable-optimization --enable-tests
+          cabal build all --dry-run
+      - name: Restore cached dependencies
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ steps.setup.outputs.cabal-store }}
+          key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-plan-${{ hashFiles('**/plan.json') }} # editorconfig-checker-disable-line
+          restore-keys: |
+            ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-
+      - run: cabal test --disable-optimization --enable-tests
+      - name: Save dependencies to cache
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.setup.outputs.cabal-store }}
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+
+  format: # `nix flake check`で実行される`nix fmt`で対応していない範囲のフォーマットチェックを行う。
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-nix
+        with:
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: generate-hlint
+        run: nix run '.#generate-hlint'
+      - run: git diff --exit-code
