@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write # タグ作成のため
+  id-token: write # niks3 OIDC認証
 
 jobs:
   release:
