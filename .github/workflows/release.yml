@@ -54,18 +54,18 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
       - uses: ./.github/actions/setup-nix
-        if: steps.check_tag.outputs.exists == 'false'
+        if: steps.check_tag.outputs.skip != 'true'
         with:
           cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
       # ビルドを先に実行して、成功した場合のみタグとリリースを作成する
       - name: Build sdist
-        if: steps.check_tag.outputs.exists == 'false'
+        if: steps.check_tag.outputs.skip != 'true'
         run: nix develop --command cabal sdist
       - name: Build documentation for Hackage
-        if: steps.check_tag.outputs.exists == 'false'
+        if: steps.check_tag.outputs.skip != 'true'
         run: nix develop --command cabal haddock --haddock-for-hackage
       - name: Create tag
-        if: steps.check_tag.outputs.exists == 'false'
+        if: steps.check_tag.outputs.skip != 'true'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -73,12 +73,12 @@ jobs:
           git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
           git push origin "v${{ steps.version.outputs.version }}"
       - name: Create GitHub Release
-        if: steps.check_tag.outputs.exists == 'false'
+        if: steps.check_tag.outputs.skip != 'true'
         run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to Hackage
-        if: steps.check_tag.outputs.exists == 'false'
+        if: steps.check_tag.outputs.skip != 'true'
         uses: haskell-actions/hackage-publish@v1.1
         with:
           hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
