@@ -6,12 +6,15 @@ on:
   pull_request:
   merge_group:
 
-permissions:
-  contents: read # リポジトリコンテンツの読み取り
-  id-token: write # niks3 OIDC認証
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   nix-flake-check:
+    name: nix-flake-check
     strategy:
       matrix:
         os:
@@ -19,21 +22,27 @@ jobs:
           - ubuntu-24.04-arm # aarch64-linux
           - macos-15 # Apple Silicon (aarch64-darwin)
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read # Read repository contents
+      id-token: write # niks3 OIDC authentication
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup-nix
         with:
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix flake check
 
   windows:
+    name: windows
     runs-on: windows-2025
+    permissions:
+      contents: read # Read repository contents
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
       # バージョンは一つに絞られてしまいますが、他のnix-flake-checkジョブで十分カバーできているので問題ありません。
@@ -43,7 +52,7 @@ jobs:
         run: |
           VERSION=$(sed -n 's/^with-compiler: ghc-//p' cabal.project)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-      - uses: haskell-actions/setup@v2
+      - uses: haskell-actions/setup@de26526e12bc780fb9d384c1fb61c0bf02e3a40d # v2.8.0
         id: setup
         with:
           ghc-version: ${{ steps.ghc.outputs.version }}
@@ -53,7 +62,7 @@ jobs:
           cabal build all --dry-run
       - name: Restore cached dependencies
         id: cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.setup.outputs.cabal-store }}
           key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-plan-${{ hashFiles('**/plan.json') }} # editorconfig-checker-disable-line
@@ -61,21 +70,25 @@ jobs:
             ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-
       - run: cabal test --disable-optimization --enable-tests
       - name: Save dependencies to cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.setup.outputs.cabal-store }}
           key: ${{ steps.cache.outputs.cache-primary-key }}
 
-  format: # `nix flake check`で実行される`nix fmt`で対応していない範囲のフォーマットチェックを行う。
+  format:
+    name: format # nix flake checkで実行されるnix fmtで対応していない範囲のフォーマットチェックを行う。
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read # Read repository contents
+      id-token: write # niks3 OIDC authentication
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup-nix
         with:
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: generate-hlint
         run: nix run '.#generate-hlint'
       - run: git diff --exit-code

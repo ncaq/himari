@@ -1,5 +1,3 @@
 {
-  "Disable": {
-    "IndentSize": true
-  }
+  "Exclude": ["\\.hs$", "\\.lhs$", "\\.hsc$", "\\.chs$", "\\.hsig$", "\\.lhsig$"]
 }
