@@ -7,41 +7,52 @@ on:
     types: [completed]
     branches: [master, main]
 
-permissions:
-  contents: write # タグ作成のため
-  id-token: write # niks3 OIDC認証
+permissions: {}
 
 jobs:
   release:
+    name: release
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write # タグ作成のため
+      id-token: write # niks3 OIDC認証
     concurrency:
       group: release-${{ github.ref }}
       cancel-in-progress: false
     if: github.event.workflow_run.conclusion == 'success'
+    env:
+      HACKAGE_AUTH_TOKEN: ${{ secrets.HACKAGE_AUTH_TOKEN }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          fetch-depth: 0
+          ref: "${{ github.event.workflow_run.head_sha }}"
           persist-credentials: false
-          ref: ${{ github.event.workflow_run.head_sha }}
-      - name: Extract version from cabal
+          fetch-depth: 0 # タグの存在確認と作成に全履歴が必要
+      - name: Check cabal file changed # workflow_runでpathsフィルタは使えないので、ジョブ内でのチェックが必要になります。
+        id: changed
+        run: |
+          set -euo pipefail
+          # 最新のリリースタグを取得(なければ全履歴を対象)
+          LAST_TAG=$(git describe --tags --match 'v*' --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          if git diff --name-only "$LAST_TAG" HEAD -- '*.cabal' | grep -q '.cabal'; then
+            echo "cabal_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "cabal_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Extract version
+        if: steps.changed.outputs.cabal_changed == 'true'
         id: version
         run: |
           set -euo pipefail
-          if [ ! -f himari.cabal ]; then
-            echo "himari.cabal not found"
+          VERSION=$(sed -n 's/^version:[[:space:]]*//p' ./*.cabal | head -1)
+          if [ "$VERSION" = "0.0.0.0" ]; then
+            echo "Initial version, skipping release"
+          elif ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "Invalid PVP format: $VERSION"
             exit 1
+          else
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           fi
-          VERSION=$(grep -m1 '^version:' himari.cabal | awk '{print $2}')
-          if [ -z "${VERSION:-}" ]; then
-            echo "Failed to extract version from himari.cabal"
-            exit 1
-          fi
-          if ! echo "$VERSION" | grep -qE '^[0-9]+(\.[0-9]+){1,3}$'; then
-            echo "Invalid PVP version format: $VERSION"
-            exit 1
-          fi
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Check if tag exists
         id: check_tag
         env:
@@ -58,8 +69,7 @@ jobs:
       - uses: ./.github/actions/setup-nix
         if: steps.check_tag.outputs.skip != 'true'
         with:
-          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      # ビルドを先に実行して、成功した場合のみタグとリリースを作成する
+          cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: Build sdist
         if: steps.check_tag.outputs.skip != 'true'
         run: nix develop --command cabal sdist
@@ -80,14 +90,15 @@ jobs:
           git push origin "v$VERSION"
       - name: Create GitHub Release
         if: steps.check_tag.outputs.skip != 'true'
-        run: gh release create "v${{ steps.version.outputs.version }}" --generate-notes
+        run: gh release create "v$VERSION" --generate-notes
         env:
+          VERSION: ${{ steps.version.outputs.version }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to Hackage
-        if: steps.check_tag.outputs.skip != 'true'
-        uses: haskell-actions/hackage-publish@v1.1
+        if: steps.check_tag.outputs.skip != 'true' && env.HACKAGE_AUTH_TOKEN != ''
+        uses: haskell-actions/hackage-publish@73c1489054aa60b7aa082cdde9b51502d960c0e1 # v1.1
         with:
-          hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
+          hackageToken: ${{ env.HACKAGE_AUTH_TOKEN }}
           packagesPath: dist-newstyle/sdist/
           docsPath: dist-newstyle/
           publish: true

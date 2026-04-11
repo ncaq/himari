@@ -490,6 +490,22 @@
         "type": "github"
       }
     },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1775811116,
+        "narHash": "sha256-t+HZK42pB6N+i5RGbuy7Xluez/VvWbembBdvzsc23Ss=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "54170c54449ea4d6725efd30d719c5e505f1c10e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-2305": {
       "locked": {
         "lastModified": 1705033721,
@@ -624,10 +640,7 @@
         "changelog-lint-src": "changelog-lint-src",
         "flake-utils": "flake-utils",
         "haskellNix": "haskellNix",
-        "nixpkgs": [
-          "haskellNix",
-          "nixpkgs-2511"
-        ],
+        "nixpkgs": "nixpkgs",
         "treefmt-nix": "treefmt-nix"
       }
     },

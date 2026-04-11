@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.follows = "haskellNix/nixpkgs-2511";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -103,18 +103,39 @@
               };
               # ランタイム依存。
               buildInputs = with prev; [
+                # treefmtで指定したプログラムの単体版。
+                actionlint
+                deadnix
+                editorconfig-checker
+                final.changelog-lint
+                nixfmt-rfc-style
+                prettier
+                shellcheck
+                shfmt
+                statix
+                typos
+                zizmor
+
+                # nixの関連ツール。
+                nil
+
+                # GitHub関連ツール。
+                gh
+
+                # Dhall関連ツール。
                 dhall
                 dhall-docs
                 dhall-lsp-server
                 dhall-yaml
-                final.changelog-lint
+
+                # Haskell関連ツール。
                 fourmolu
                 hlint
-                nil
-                nixfmt-rfc-style
                 parallel
-                yamllint
                 zlib # aesonを開発環境でビルド。
+
+                # その他。
+                yamllint
 
                 (writeScriptBin "haskell-language-server-wrapper" ''
                   #!${stdenv.shell}
@@ -152,6 +173,8 @@
             shellcheck.enable = true;
             shfmt.enable = true;
             statix.enable = true;
+            typos.enable = true;
+            zizmor.enable = true;
 
             hlint = {
               enable = true;
@@ -198,20 +221,17 @@
                 "*.lhsig"
               ];
             };
-            editorconfig-checker = {
+            cabal-check = {
               command = pkgs.lib.getExe (
                 pkgs.writeShellApplication {
-                  name = "editorconfig-checker-wrapper";
-                  runtimeInputs = [ pkgs.editorconfig-checker ];
+                  name = "cabal-check-wrapper";
+                  runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" cabal-version) ];
                   text = ''
-                    editorconfig-checker "$@"
+                    cabal check
                   '';
                 }
               );
-              includes = [ "*" ];
-              excludes = [
-                "dist-newstyle/*"
-              ];
+              includes = [ "*.cabal" ];
             };
             changelog-lint = {
               command = pkgs.lib.getExe (
@@ -225,18 +245,14 @@
               );
               includes = [ "CHANGELOG.md" ];
             };
-            cabal-check = {
-              command = pkgs.lib.getExe (
-                pkgs.writeShellApplication {
-                  name = "cabal-check-wrapper";
-                  runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" cabal-version) ];
-                  text = ''
-                    cabal check
-                  '';
-                }
-              );
-              includes = [ "*.cabal" ];
+            editorconfig-checker = {
+              command = pkgs.editorconfig-checker;
+              includes = [ "*" ];
+              excludes = [
+                "dist-newstyle/*"
+              ];
             };
+            zizmor.options = [ "--pedantic" ];
           };
         });
       in
