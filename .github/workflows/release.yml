@@ -93,10 +93,8 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to Hackage
-        if: steps.check_tag.outputs.skip != 'true' && env.HACKAGE_AUTH_TOKEN != ''
+        if: steps.check_tag.outputs.skip != 'true' && secrets.HACKAGE_AUTH_TOKEN != ''
         uses: haskell-actions/hackage-publish@73c1489054aa60b7aa082cdde9b51502d960c0e1 # v1.1
-        env:
-          HACKAGE_AUTH_TOKEN: ${{ secrets.HACKAGE_AUTH_TOKEN }}
         with:
           hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
           packagesPath: dist-newstyle/sdist/
