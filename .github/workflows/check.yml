@@ -52,7 +52,7 @@ jobs:
         run: |
           VERSION=$(sed -n 's/^with-compiler: ghc-//p' cabal.project)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-      - uses: haskell-actions/setup@de26526e12bc780fb9d384c1fb61c0bf02e3a40d # v2.8.0
+      - uses: haskell-actions/setup@96f3dafd067155f32643c2a0757ab71d2910e2c2 # v2.8.0
         id: setup
         with:
           ghc-version: ${{ steps.ghc.outputs.version }}
