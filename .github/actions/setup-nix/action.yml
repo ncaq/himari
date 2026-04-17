@@ -49,7 +49,7 @@ runs:
     # See: https://github.com/aleadag/niks3-action/issues/3
     - name: Setup niks3 cache
       if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-      uses: aleadag/niks3-action@ea2e7c1e92316f5da40a3b6fa867313a3e176fd3 # v0.4.2
+      uses: aleadag/niks3-action@8935c349a257dfc311834684bfbd4ab6c4ce6c86 # v0.5.0
       with:
         endpoint: "${{ inputs.niks3-endpoint }}"
         use-oidc: true
