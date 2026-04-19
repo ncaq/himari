@@ -66,7 +66,7 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-      - uses: ./.github/actions/setup-nix
+      - uses: ncaq/nix-composite-action@dc5ec3a596bed5cb62a417dd446ff955876b1f49 # v1.0.1
         if: steps.check_tag.outputs.skip != 'true'
         with:
           cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
