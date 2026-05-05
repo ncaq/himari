@@ -1,6 +1,6 @@
 # himari
 
-[![CI](https://github.com/ncaq/himari/actions/workflows/push.yml/badge.svg)](https://github.com/ncaq/himari/actions/workflows/push.yml)
+[![CI](https://github.com/ncaq/himari/actions/workflows/check.yml/badge.svg)](https://github.com/ncaq/himari/actions/workflows/check.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/ncaq/himari/blob/master/LICENSE)
 
 [![Haskell](https://img.shields.io/badge/language-Haskell-5D4F85.svg)](https://www.haskell.org/)
