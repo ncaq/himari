@@ -3,20 +3,30 @@ let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
 
-let callProcessMessage =
-      "Use System.Process.Typed.runProcess_ instead for type-safe process execution."
+let useTypeSafeSymbol =
+      \(replacement : Text) ->
+        "Use ${replacement} instead for type-safe process execution."
+
+let useTypeSafeSymbolWithShell =
+      \(replacement : Text) ->
+        "Use ${replacement} with shell instead for type-safe process execution."
+
+let useTypeSafeSymbolCapture =
+      \(replacement : Text) ->
+        "Use ${replacement} instead for type-safe output capture."
+
+let callProcessMessage = useTypeSafeSymbol "System.Process.Typed.runProcess_"
 
 let callProcess =
       Builder.restrictInModule "System.Process" "callProcess" callProcessMessage
 
 let callCommandMessage =
-      "Use System.Process.Typed.runProcess_ with shell instead for type-safe process execution."
+      useTypeSafeSymbolWithShell "System.Process.Typed.runProcess_"
 
 let callCommand =
       Builder.restrictInModule "System.Process" "callCommand" callCommandMessage
 
-let spawnProcessMessage =
-      "Use System.Process.Typed.startProcess instead for type-safe process execution."
+let spawnProcessMessage = useTypeSafeSymbol "System.Process.Typed.startProcess"
 
 let spawnProcess =
       Builder.restrictInModule
@@ -25,7 +35,7 @@ let spawnProcess =
         spawnProcessMessage
 
 let spawnCommandMessage =
-      "Use System.Process.Typed.startProcess with shell instead for type-safe process execution."
+      useTypeSafeSymbolWithShell "System.Process.Typed.startProcess"
 
 let spawnCommand =
       Builder.restrictInModule
@@ -33,8 +43,7 @@ let spawnCommand =
         "spawnCommand"
         spawnCommandMessage
 
-let createProcessMessage =
-      "Use System.Process.Typed.startProcess instead for type-safe process execution."
+let createProcessMessage = useTypeSafeSymbol "System.Process.Typed.startProcess"
 
 let createProcess =
       Builder.restrictInModule
@@ -43,7 +52,7 @@ let createProcess =
         createProcessMessage
 
 let createProcessUnderscoreMessage =
-      "Use System.Process.Typed.startProcess instead for type-safe process execution."
+      useTypeSafeSymbol "System.Process.Typed.startProcess_"
 
 let createProcessUnderscore =
       Builder.restrictInModule
@@ -61,13 +70,13 @@ let cleanupProcess =
         cleanupProcessMessage
 
 let readProcessMessage =
-      "Use System.Process.Typed.readProcessStdout instead for type-safe output capture."
+      useTypeSafeSymbolCapture "System.Process.Typed.readProcessStdout"
 
 let readProcess =
       Builder.restrictInModule "System.Process" "readProcess" readProcessMessage
 
 let readProcessWithExitCodeMessage =
-      "Use System.Process.Typed.readProcess instead for type-safe output capture."
+      useTypeSafeSymbolCapture "System.Process.Typed.readProcess"
 
 let readProcessWithExitCode =
       Builder.restrictInModule
@@ -76,7 +85,7 @@ let readProcessWithExitCode =
         readProcessWithExitCodeMessage
 
 let readCreateProcessMessage =
-      "Use System.Process.Typed.readProcessStdout instead for type-safe output capture."
+      useTypeSafeSymbolCapture "System.Process.Typed.readProcessStdout"
 
 let readCreateProcess =
       Builder.restrictInModule
@@ -85,7 +94,7 @@ let readCreateProcess =
         readCreateProcessMessage
 
 let readCreateProcessWithExitCodeMessage =
-      "Use System.Process.Typed.readProcess instead for type-safe output capture."
+      useTypeSafeSymbolCapture "System.Process.Typed.readProcess"
 
 let readCreateProcessWithExitCode =
       Builder.restrictInModule
@@ -135,8 +144,7 @@ let runCommandMessage =
 let runCommand =
       Builder.restrictInModule "System.Process" "runCommand" runCommandMessage
 
-let runProcessMessage =
-      "Use System.Process.Typed.runProcess instead for type-safe process execution."
+let runProcessMessage = useTypeSafeSymbol "System.Process.Typed.runProcess"
 
 let runProcess =
       Builder.restrictInModule "System.Process" "runProcess" runProcessMessage
@@ -159,8 +167,7 @@ let runInteractiveProcess =
         "runInteractiveProcess"
         runInteractiveProcessMessage
 
-let systemMessage =
-      "Use System.Process.Typed.runProcess with shell instead for type-safe process execution."
+let systemMessage = useTypeSafeSymbolWithShell "System.Process.Typed.runProcess"
 
 let system = Builder.restrictInModule "System.Process" "system" systemMessage
 
