@@ -6,7 +6,7 @@ module Himari.Env
   , mapHimari
   ) where
 
-import Control.Lens.Internal.Zoom (Effect) -- 直接の`UndecidableInstances`を避けるためにInternalを受け入れる。
+import Control.Lens.Internal.Zoom (Effect) -- 直接の`UndecidableInstances`の回避のためInternal許容。
 import Himari.Prelude
 
 -- | The Reader + IO monad.
@@ -14,7 +14,15 @@ import Himari.Prelude
 newtype Himari env a = Himari
   { unHimari :: ReaderT env IO a
   }
-  deriving newtype (Applicative, Functor, Monad, MonadIO, MonadReader env, MonadThrow, MonadUnliftIO)
+  deriving newtype
+    ( Applicative
+    , Functor
+    , Monad
+    , MonadIO
+    , MonadReader env
+    , MonadThrow
+    , MonadUnliftIO
+    )
 
 instance (Semigroup a) => Semigroup (Himari env a) where
   (<>) = liftA2 (<>)
