@@ -3,13 +3,11 @@ let Types = ../Types.dhall
 
 let Builder = ../Builder.dhall
 
-let getCharMessage = "Encoding depends on LANG env. Use Text or ByteString."
+let dependLangMessage = "Encoding depends on LANG env. Use Text or ByteString."
 
-let getChar = Builder.restrictInModule "System.IO" "getChar" getCharMessage
+let getChar = Builder.restrictInModule "System.IO" "getChar" dependLangMessage
 
-let getLineMessage = "Encoding depends on LANG env. Use Text or ByteString."
-
-let getLine = Builder.restrictInModule "System.IO" "getLine" getLineMessage
+let getLine = Builder.restrictInModule "System.IO" "getLine" dependLangMessage
 
 let getContentsMessage =
       "Lazy IO + env-dependent encoding. Use strict Text or ByteString."
@@ -34,21 +32,13 @@ let readLnMessage = "Env-dependent + partial (uses read)."
 
 let readLn = Builder.restrictInModule "System.IO" "readLn" readLnMessage
 
-let putCharMessage = "Encoding depends on LANG env. Use Text or ByteString."
+let putChar = Builder.restrictInModule "System.IO" "putChar" dependLangMessage
 
-let putChar = Builder.restrictInModule "System.IO" "putChar" putCharMessage
+let putStr = Builder.restrictInModule "System.IO" "putStr" dependLangMessage
 
-let putStrMessage = "Encoding depends on LANG env. Use Text or ByteString."
+let putStrLn = Builder.restrictInModule "System.IO" "putStrLn" dependLangMessage
 
-let putStr = Builder.restrictInModule "System.IO" "putStr" putStrMessage
-
-let putStrLnMessage = "Encoding depends on LANG env. Use Text or ByteString."
-
-let putStrLn = Builder.restrictInModule "System.IO" "putStrLn" putStrLnMessage
-
-let printMessage = "Encoding depends on LANG env. Use Text or ByteString."
-
-let print = Builder.restrictInModule "System.IO" "print" printMessage
+let print = Builder.restrictInModule "System.IO" "print" dependLangMessage
 
 let writeFileMessage =
       "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile."
