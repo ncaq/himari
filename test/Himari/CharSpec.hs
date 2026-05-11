@@ -1,3 +1,6 @@
+-- このテストモジュール自体が避けるべき関数のラッパーを作れているか検査するため、
+-- 避けるべき関数を呼び出して振る舞いの互換性の検査などを行う必要があります。
+{- HLINT ignore "Avoid restricted function"  -}
 module Himari.CharSpec (spec) where
 
 import Data.Char (chr, digitToInt, intToDigit, isHexDigit, ord, toUpper)
@@ -52,7 +55,7 @@ spec = do
       it "matches digitToInt for all valid characters" $ do
         let validChars = ['0' .. '9'] <> ['a' .. 'f'] <> ['A' .. 'F']
         forM_ validChars $ \c ->
-          digitToIntMay c `shouldBe` Just (digitToInt c {- HLINT ignore "Avoid restricted function" -})
+          digitToIntMay c `shouldBe` Just (digitToInt c)
 
     describe "QuickCheck properties" $ do
       it "returns Just for hex digit characters" $ do
@@ -65,7 +68,7 @@ spec = do
 
       it "matches digitToInt for all valid hex digit inputs" $ do
         property . forAll (elements (['0' .. '9'] <> ['a' .. 'f'] <> ['A' .. 'F'])) $ \c ->
-          digitToIntMay c == Just (digitToInt c {- HLINT ignore "Avoid restricted function" -})
+          digitToIntMay c == Just (digitToInt c)
 
       it "agrees with isHexDigit on validity" $ do
         property $ \c ->
@@ -104,7 +107,7 @@ spec = do
       it "matches intToDigit for all valid values" $ do
         let validRange = [0 .. 15]
         forM_ validRange $ \n ->
-          intToDigitMay n `shouldBe` Just (intToDigit n {- HLINT ignore "Avoid restricted function" -})
+          intToDigitMay n `shouldBe` Just (intToDigit n)
 
     describe "QuickCheck properties" $ do
       it "returns Just for values in range 0-15" $ do
@@ -121,7 +124,7 @@ spec = do
 
       it "matches intToDigit for all valid inputs" $ do
         property . forAll (choose (0, 15)) $ \n ->
-          intToDigitMay n == Just (intToDigit n {- HLINT ignore "Avoid restricted function" -})
+          intToDigitMay n == Just (intToDigit n)
 
       it "produces lowercase hex digits for 10-15" $ do
         property . forAll (choose (10, 15)) $ \n ->
@@ -195,7 +198,7 @@ spec = do
 
       it "matches chr for all valid inputs" $ do
         property . forAll (choose (0, 0xD7FF)) $ \n ->
-          chrMay n == Just (chr n {- HLINT ignore "Avoid restricted function" -})
+          chrMay n == Just (chr n)
 
       it "is inverse of ord for valid characters" $ do
         property $ \c ->

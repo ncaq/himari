@@ -15,11 +15,13 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Changed
 
-- Relax `sydtest` dependency upper bound from `<0.19` to `<0.24` to support nixpkgs sydtest 0.20.0.1+
+- Relax `sydtest` dependency upper bound from `<0.19` to `<0.24`
+  to support nixpkgs sydtest 0.20.0.1+
 
 ### Removed
 
-- Drop Intel Mac (x86_64-darwin) from Nix build targets due to Nix ending support for this platform
+- Drop Intel Mac (x86_64-darwin) from Nix build targets due
+  to Nix ending support for this platform
 
 ## [1.0.5.0] - 2026-01-12
 
@@ -29,21 +31,51 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `Data.Default` re-export in `Himari.Prelude` for `Default` type class and `def` function
 - `retry` package (^>=0.9.3.1) as a dependency for retry combinators
 - `UnliftIO.Retry` re-export in `Himari.Prelude` for retry operations with exponential backoff
-- HLint rules to warn against dangerous language extensions: `AllowAmbiguousTypes`, `DeferTypeErrors`,
-  `ExtendedDefaultRules`, `ImpredicativeTypes`, `IncoherentInstances`, `LiberalTypeSynonyms`,
-  `OverlappingInstances`, `RebindableSyntax`, `UndecidableSuperClasses`
-- HLint rules to warn against discouraged language extensions: `ImplicitParams`, `UndecidableInstances`
+- HLint rules to warn against dangerous language extensions:
+  `AllowAmbiguousTypes`,
+  `DeferTypeErrors`,
+  `ExtendedDefaultRules`,
+  `ImpredicativeTypes`,
+  `IncoherentInstances`,
+  `LiberalTypeSynonyms`,
+  `OverlappingInstances`,
+  `RebindableSyntax`,
+  `UndecidableSuperClasses`
+- HLint rules to warn against discouraged language extensions:
+  `ImplicitParams`,
+  `UndecidableInstances`
 
 ### Changed
 
-- Document recommended language extensions beyond GHC2024 (e.g., `BlockArguments`, `StrictData`,
-  `OverloadedStrings`, `NoFieldSelectors`, etc.) with rationale for each
-- Document extensions intentionally not enabled (e.g., `Arrows`, `DeriveAnyClass`, `OverloadedLists`,
-  `OverloadedRecordUpdate`, `Strict`, `UnicodeSyntax`) with reasons
-- Document dangerous language extensions that should be avoided: `AllowAmbiguousTypes`, `DeferTypeErrors`,
-  `ExtendedDefaultRules`, `ImpredicativeTypes`, `IncoherentInstances`, `LiberalTypeSynonyms`,
-  `OverlappingInstances`, `RebindableSyntax`, `UndecidableSuperClasses`
-- Document discouraged language extensions that require caution: `ImplicitParams`, `UndecidableInstances`
+- Document recommended language extensions beyond GHC2024
+  (e.g.,
+  `BlockArguments`,
+  `NoFieldSelectors`,
+  `OverloadedStrings`,
+  `StrictData`,
+  etc.) with rationale for each
+- Document extensions intentionally not enabled
+  (e.g.,
+  `Arrows`,
+  `DeriveAnyClass`,
+  `OverloadedLists`,
+  `OverloadedRecordUpdate`,
+  `Strict`,
+  `UnicodeSyntax`
+  ) with reasons
+- Document dangerous language extensions that should be avoided:
+  `AllowAmbiguousTypes`,
+  `DeferTypeErrors`,
+  `ExtendedDefaultRules`,
+  `ImpredicativeTypes`,
+  `IncoherentInstances`,
+  `LiberalTypeSynonyms`,
+  `OverlappingInstances`,
+  `RebindableSyntax`,
+  `UndecidableSuperClasses`
+- Document discouraged language extensions that require caution:
+  `ImplicitParams`,
+  `UndecidableInstances`
 
 ## [1.0.4.0] - 2026-01-09
 
@@ -55,9 +87,9 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `UnliftIO.Exception.Lens` re-export in `Himari.Prelude` for lens-based exception handling
 - `UnliftIO.Foreign` is not re-exported to avoid `withArray` conflict with `Data.Aeson`
 - `UnliftIO.IO.File` re-export in `Himari.Prelude` for atomic/durable file operations
-- HLint rules: prefer `UnliftIO.Concurrent` over `Control.Concurrent` for MonadIO support
-- HLint rules: prefer `UnliftIO.Environment` over `System.Environment` for MonadIO support
-- HLint rules: prefer `UnliftIO.Exception.Lens` over `Control.Exception.Lens` for MonadUnliftIO support
+- HLint rules: prefer `UnliftIO.Concurrent` over `Control.Concurrent`
+- HLint rules: prefer `UnliftIO.Environment` over `System.Environment`
+- HLint rules: prefer `UnliftIO.Exception.Lens` over `Control.Exception.Lens`
 - HLint rule: restrict `forkOnWithUnmask` (exceptions don't propagate to parent thread)
 
 ### Changed
@@ -79,9 +111,16 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 ### Added
 
 - HLint language extension support in Dhall configuration
-- Default language extensions for parsing: `QuasiQuotes`, `CPP`, `RecursiveDo`, `OverloadedRecordDot`,
-  `OverloadedRecordUpdate`, `TemplateHaskell`, `BlockArguments`
-- `ExtensionItem` type and helper functions (`extensionNames`, `extensionNamesWithin`, `extensions`)
+- Default language extensions for parsing:
+  `QuasiQuotes`,
+  `CPP`,
+  `RecursiveDo`,
+  `OverloadedRecordDot`,
+  `OverloadedRecordUpdate`,
+  `TemplateHaskell`,
+  `BlockArguments`
+- `ExtensionItem` type and helper functions
+  (`extensionNames`, `extensionNamesWithin`, `extensions`)
   in `hlint/Builder.dhall`
 - `hlint/rules/extensions.dhall` for managing default enabled extensions
 
@@ -89,7 +128,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
-- `GHC.Stack` re-export in `Himari.Prelude` for call stack support (`HasCallStack`, `CallStack`, etc.)
+- `GHC.Stack` re-export in `Himari.Prelude` for call stack support (`HasCallStack`, etc.)
 - HLint rule for `errorWithStackTrace` (deprecated function warning)
 
 ## [1.0.2.0] - 2026-01-07
@@ -126,7 +165,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 - Added `Magnify` instance for `Himari` monad
 - Bundle `fourmolu.yaml` in Cabal `data-files` so downstream users can reuse the formatter config
-- Add `fourmolu.yaml` reexports and fixity settings to resolve operator precedence for Himari’s Prelude
+- Add `fourmolu.yaml` reexports and fixity settings to resolve operator precedence
 - Document setup steps in README for copying/merging `.hlint.yaml` and `fourmolu.yaml`
 - Add fourmolu customization notes to README
 
@@ -141,7 +180,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `Himari.Prelude.Category` module for `Control.Category` re-exports (hiding `id` and `.`)
 - `Himari.Prelude.Generics` module for `GHC.Generics` re-exports (hiding `from` and `to`)
 - `Himari.Prelude.FilePath` module for `System.FilePath` re-exports (hiding `<.>`)
-- `Himari.Prelude.Type` module for type-only re-exports (`ByteString`, `Text`, `Map`, `Vector`, etc.)
+- `Himari.Prelude.Type` module for type-only re-exports (`ByteString`, `Text`, `Map`, etc.)
 
 ### Changed
 
@@ -151,7 +190,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Changed
 
-- Move `-j` option from `himari.cabal` ghc-options to `cabal.project` to fix Hackage upload compatibility
+- Move `-j` option from `himari.cabal` ghc-options to `cabal.project`
+  to fix Hackage upload compatibility
 
 ## [1.0.0.0] - 2026-01-01
 

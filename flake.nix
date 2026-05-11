@@ -56,17 +56,22 @@
               # CI専用に環境を分離するのも手ですが、
               # 元々`nix flake check`では最適化を無効にするのが面倒なので時間がかかるため、
               # あまり反復的に実行しません。
-              # 反復的に実行してテストの結果とかを確認するのには普通は`cabal test`のような言語固有のコマンドを使います。
+              # 反復的に実行してテストの結果とかを確認するのには、
+              # `cabal test`のような言語固有のコマンドを使います。
               # `cabal test`の方が実行するテストをフィルタリングとかも簡単に出来ますし。
               # そのことを考えると本番を考えてエラーにしても構わないでしょう。
-              # flake参照された時にnixpkgsをfollowすると問題ない警告をエラーにしてしまうかもしれないのが懸念点ですが、
+              # flake参照された時にnixpkgsをfollowすると、
+              # 問題ない警告をエラーにしてしまうかもしれないのが懸念点ですが、
               # 少なくとも現在は考慮する必要はないでしょう。
-              # 注意点として、srcやtestはビルドされますが、executableであるappはビルドされません。
-              # 「appはエントリーポイントとしてのみ使う」習慣を守っていれば問題にはならないです。
+              # 注意点としてsrcやtestはビルドされますが、
+              # executableであるappはビルドされません。
+              # 「appはエントリーポイントとしてのみ使う」習慣を守っていれば、
+              # 問題にはならないはずです。
               (
                 { lib, config, ... }:
                 {
-                  # パッケージたちをハードコーディングすると変更忘れが発生するので`config.package-keys`で取得。
+                  # パッケージたちをハードコーディングすると変更忘れが発生するので、
+                  # `config.package-keys`で取得。
                   options.packages = lib.genAttrs config.package-keys (
                     _name:
                     lib.mkOption {
@@ -85,7 +90,8 @@
                 }
               )
             ];
-            # `ghc-version`だけではなく`variants`で定義したGHCバージョンも`nix flake check`で自動的にテストされます。
+            # `ghc-version`だけではなく、
+            # `variants`で定義したGHCバージョンも`nix flake check`で自動的にテストされます。
             # 個別ビルド: `nix build .#ghc9103:himari:lib:himari`
             # サポート方針としてはサポートできるものは基本的にサポートしていきます。
             # あまりにも古かったり、ビルドが何かしらの問題で出来ないものは除外します。
@@ -97,7 +103,7 @@
             shell = {
               tools = {
                 cabal = cabal-version;
-                cabal-gild = "1.6.0.2"; # treefmtで管理されているがvscodeのHaskell拡張向けに使えるようにしておく
+                cabal-gild = "1.6.0.2"; # treefmtで管理されているが広く使えるように。
                 haskell-language-server = hls-version;
                 implicit-hie = "0.1.4.0";
               };
@@ -179,7 +185,13 @@
             hlint = {
               enable = true;
               package = pkgs.hlint;
-              # HlintSamplesディレクトリはhlintルールのテスト用であり、意図的に警告を出すコードを含む
+              # HlintSamplesディレクトリはhlintルールのテスト用であり、
+              # 意図的に警告を出すコードを含むため、
+              # hlintの対象から除外します。
+              # 本当はこういうのはhlintの設定として書くべきかもしれませんが、
+              # 現状配布するhlintのルールとプロジェクトで使うルールが同じなので、
+              # こちらで除外しています。
+              # 乖離が激しくなってきたら配布するものは分けることも検討します。
               excludes = [ "test/HlintSamples/*" ];
             };
 
@@ -193,7 +205,8 @@
           settings.formatter = {
             # cabal-gildのモジュール自動発見機能に対応するため、
             # Haskellソースファイルの変更も検知してcabal-gildを実行します。
-            # treefmt-nixの上流では変更されたファイルだけを修正したいと言われてマージされていませんが、
+            # treefmt-nixの上流では、
+            # 変更されたファイルだけを修正したいと言われてマージされていませんが、
             # ローカルで使う分には問題ありません。
             # https://github.com/numtide/treefmt-nix/pull/384
             cabal-gild = {
