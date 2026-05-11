@@ -62,7 +62,9 @@ curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/.hlint.yaml' -o '.
 fourmoluは演算子の優先順位(fixity)を正しく解決するために、
 カスタムPreludeがどのモジュールをre-exportしているかを知る必要があります。
 
-プロジェクトルートにある[fourmolu.yaml](./fourmolu.yaml)ファイルの`reexports`セクションをコピーしてください。
+プロジェクトルートにある、
+[fourmolu.yaml](./fourmolu.yaml)ファイルの、
+`reexports`セクションをコピーしてください。
 既存の`fourmolu.yaml`がある場合は`reexports`セクションをマージしてください。
 
 ```console
@@ -103,7 +105,8 @@ Haskellは静的にビルドする言語なので、
 
 使うとは限らない依存関係もドシドシimportしてしまいます。
 
-バージョンごとの依存関係の解決が大変なのはNixなどのパッケージマネージャのレイヤーで解決することにします。
+バージョンごとの依存関係の解決が大変なのは、
+Nixなどのパッケージマネージャのレイヤーで解決することにします。
 
 ### なるべく一行で済ませたい
 
@@ -125,8 +128,10 @@ LLMのコーディングエージェントに独自のシンボルを使うこ�
 しばしばオリジナルのシンボルをimportしてしまいます。
 
 ただし`Himari.Prelude`のサブモジュール(`Himari.Prelude.Aeson`など)は例外的に存在します。
-これはHaddockの制限により、`hiding`を使ったre-exportはシンボルが全て展開されてドキュメントが肥大化してしまうためです。
-サブモジュールでhidingを隠蔽することで、`Himari.Prelude`のドキュメントをコンパクトに保っています。
+これはHaddockの制限により、
+`hiding`を使ったre-exportはシンボルが全て展開されてドキュメントが肥大化してしまうためです。
+サブモジュールでhidingを隠蔽することで、
+`Himari.Prelude`のドキュメントをコンパクトに保っています。
 
 これらのサブモジュールは`Himari.Prelude`から自動的にre-exportされるため、
 rioの`RIO.Text`のように個別にimportする必要はありません。
