@@ -52,7 +52,7 @@ let createProcess =
         createProcessMessage
 
 let createProcessUnderscoreMessage =
-      useTypeSafeSymbol "System.Process.Typed.startProcess_"
+      useTypeSafeSymbol "System.Process.Typed.startProcess"
 
 let createProcessUnderscore =
       Builder.restrictInModule
