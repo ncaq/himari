@@ -13,32 +13,80 @@
 
 A standard library for Haskell to replace rio
 
-## 注意
+このプロジェクトは、
+[commercialhaskell/rio: A standard library for Haskell](https://github.com/commercialhaskell/rio)
+の思想を踏襲しつつ、
+よりスムーズな開発が出来ることを目指した改良ライブラリです。
 
-> [!IMPORTANT]
-> himariはrioとは完全に同じように使えるわけではありません。
-> ここで主な注意点を挙げます。
+## 背景
 
-### 重大なランタイムの非互換性
+私はrioの思想が好みで長く使っています。
 
-#### ログの出力先の変更
+しかしrioの好みではない点もいくつかあります。
+単純に質の問題であれば私がコントリビュートすれば良いのですが、
+非互換な選択である部分が多いため、
+それは受け入れられないだろうと考えて、
+rioに似たライブラリであるhimariを作成することにしました。
 
-rioは基本的に標準出力にログを出力しますが、
-himariはデフォルトのガイドラインに従うと標準エラー出力にログを出力します。
+## 目標
 
-ログは標準エラー出力に出すべきだと考えているためです。
+### 依存関係が大きくなることを恐れない
 
-変更したい時は出力先を`stderr`から`stdout`などに変更することで簡単に変更可能です。
+例えばrioは依存関係を小さくしようと考えているのか、
+[lens](https://hackage.haskell.org/package/lens)ではなく、
+[microlens](https://hackage.haskell.org/package/microlens)を採用しています。
 
-### 部分関数への対処方法の違い
+しかし実際のライブラリでは本家のlensに依存していることも多いです。
+開発でも実際のlensを使いたいです。
+その結果コンフリクトすることが多発します。
 
-rioは部分関数を独自のモジュールでexportして提供していますが、
-himariはそのままオリジナルのモジュールを使ってもらいます。
+Haskellは静的にビルドする言語なので、
+依存関係が多いことはあまり怖くありません。
 
-よってhimariは部分関数を除去していません。
+ビルドした時に使わないデッドコードはコンパイラが勝手に消してくれます。
 
-なのでhimariはhlintのルールで警告を出すことで対処しています。
-詳細は[セットアップ](#セットアップ)を参照してください。
+他にも使うとは限らない依存関係もドシドシimportしてしまいます。
+
+バージョンごとの依存関係の解決が大変なのは、
+Nixなどのパッケージマネージャのレイヤーで解決することにします。
+
+### なるべくimportを一行で済ませることを目指します
+
+himariは基本的には以下の一行で代替Preludeを提供することを目指します。
+
+```haskell
+import Himari
+```
+
+色々と書くのは面倒なので。
+衝突しない範囲で大量にimportしてしまいます。
+
+同じシンボル名をexportしていて衝突してしまうものは仕方がないので、
+qualified importを使ってもらいます。
+
+### なるべく独自のシンボルを定義しない
+
+himariはrioで言う`RIO.Text`のような独自のシンボルを定義することをなるべく避けます。
+開発メンバーやコーディングエージェントに独自のシンボルを使うことを守ってもらうのが難しいからです。
+しばしばオリジナルのシンボルをimportしてしまい、
+コードレビューなどで手戻りが発生します。
+
+ただし`Himari.Prelude`のサブモジュールは存在します。
+`Himari.Prelude.Aeson`などのシンボルです。
+これはHaddockの制限により、
+`hiding`を使ったre-exportはシンボルが全て展開されてしまうからです。
+シンボルの展開が発生するとドキュメントが肥大化してしまいます。
+サブモジュールでhidingを隠蔽することで、
+`Himari.Prelude`のドキュメントをコンパクトに保っています。
+
+これらのサブモジュールは`Himari.Prelude`から自動的にre-exportされるため、
+rioの`RIO.Text`のように個別にimportする必要はありません。
+ユーザから見ると直接扱う必要は基本的にないということです。
+
+万が一誤ってサブモジュールを直接importした場合でも、
+`Himari.Prelude`と重複importすることになり、
+GHCが警告を出してくれるので、
+気が付きやすいです。
 
 ## セットアップ
 
@@ -75,72 +123,41 @@ curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/fourmolu.yaml' -o 
 > fourmolu.yamlにはhimari固有のフォーマット設定(indentation, column-limitなど)も含まれています。
 > 素朴な設定ですが、プロジェクトに合わせて適宜変更してください。
 
-## 背景
+## 注意
 
-私は、
-[commercialhaskell/rio: A standard library for Haskell](https://github.com/commercialhaskell/rio)
-の思想が好みで長く使っています。
+> [!IMPORTANT]
+> himariはrioとは完全に同じように使えるわけではありません。
+> ここで主な注意点を挙げます。
 
-しかしrioの好みではない点もいくつかあります。
-単純に質の問題であれば私がコントリビュートすれば良いのですが、
-非互換な選択である部分が多いため、
-それは受け入れられないだろうと考えて、
-rioに似たライブラリであるhimariを作成することにしました。
+### 重大なランタイムの非互換性
 
-## 目標
+#### ログの出力先の変更
 
-### 依存関係が大きくなることを恐れない
+rioは基本的に標準出力にログを出力しますが、
+himariはデフォルトのセットアップ手順に従うと標準エラー出力にログを出力します。
 
-rioは依存関係を小さくしようと考えているのか、
-[lens: Lenses, Folds and Traversals](https://hackage.haskell.org/package/lens)
-ではなく、
-[microlens: A tiny lens library with no dependencies](https://hackage.haskell.org/package/microlens)
-を採用しています。
+ログは標準エラー出力に出すべきだと考えているためです。
 
-しかし実際のライブラリでは本家のlensに依存していることも多く、
-結局使おうとしてコンフリクトすることが多いです。
+変更したい時は出力先を`stderr`から`stdout`などに変更することで簡単に変更可能です。
 
-Haskellは静的にビルドする言語なので、
-依存関係が多いことはあまり怖くありません。
+### 部分関数への対処方法の違い
 
-使うとは限らない依存関係もドシドシimportしてしまいます。
+rioは部分関数を独自のモジュールでexportして提供していますが、
+himariはそのままオリジナルのモジュールを使う方針です。
 
-バージョンごとの依存関係の解決が大変なのは、
-Nixなどのパッケージマネージャのレイヤーで解決することにします。
+よってhimariは部分関数を除去していません。
 
-### なるべく一行で済ませたい
-
-himariは基本的には以下の一行で代替Preludeを提供することを目指します。
-
-```haskell
-import Himari
-```
-
-色々と書くのは面倒ですからね。
-これで衝突しない範囲はたくさんimportしてしまいます。
-
-同じシンボル名をexportしていて衝突してしまうものは仕方がないのでqualified importを使ってもらいます。
-
-### なるべく独自のシンボルを定義しない
-
-himariはrioで言う`RIO.Text`のような独自のシンボルを定義することをなるべく避けます。
-LLMのコーディングエージェントに独自のシンボルを使うことを守ってもらうのが難しいからです。
-しばしばオリジナルのシンボルをimportしてしまいます。
-
-ただし`Himari.Prelude`のサブモジュール(`Himari.Prelude.Aeson`など)は例外的に存在します。
-これはHaddockの制限により、
-`hiding`を使ったre-exportはシンボルが全て展開されてドキュメントが肥大化してしまうためです。
-サブモジュールでhidingを隠蔽することで、
-`Himari.Prelude`のドキュメントをコンパクトに保っています。
-
-これらのサブモジュールは`Himari.Prelude`から自動的にre-exportされるため、
-rioの`RIO.Text`のように個別にimportする必要はありません。
-万が一誤ってサブモジュールを直接importした場合でも、
-`Himari.Prelude`と重複importすることになり、GHCが警告を出してくれます。
+なのでhimariはhlintのルールで警告を出すことで対処しています。
+詳細は[セットアップ](#セットアップ)を参照してください。
 
 ## Nix
 
-このプロジェクトは[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使用しています。
+このプロジェクトは開発環境として、
+[haskell.nix](https://input-output-hk.github.io/haskell.nix/)
+を使用しています。
+
+あくまで開発環境として利用しているだけなので、
+himariを使うのにnixを利用する必要はありません。
 
 ### `nix flake show`が失敗する場合
 
