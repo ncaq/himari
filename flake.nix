@@ -47,7 +47,28 @@
         )
         (final: prev: {
           project = final.haskell-nix.cabalProject' {
-            src = ./.;
+            # cabalビルドに必要なファイルのみをsrcに含める。
+            # 関係ないファイル(.editorconfig, .githubなど)の変更で内部derivationのhashが動き、
+            # キャッシュミスが発生するのを避ける。
+            src = final.lib.fileset.toSource {
+              root = ./.;
+              fileset = final.lib.fileset.unions [
+                # dir
+                ./src
+                ./test
+                # file
+                ./cabal.project
+                ./himari.cabal
+                # license-file
+                ./LICENSE
+                # data-files
+                ./.hlint.yaml
+                ./fourmolu.yaml
+                # extra-doc-files
+                ./CHANGELOG.md
+                ./README.md
+              ];
+            };
             compiler-nix-name = ghc-version;
             modules = [
               # `nix flake check`レベルではcabalの警告をエラーとして扱います。
