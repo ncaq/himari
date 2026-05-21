@@ -114,7 +114,13 @@ nix run '.#generate-hlint'
 
 Nix Flakesはgitで管理されていないファイルを意図的に無視します。
 よって新規にソースコードなどを追加した時に`nix flake check`を通すためには、
-`git add`で使いたいファイルを追加する必要があります。
+Gitにステージングする必要があります。
+以下のコマンドでステージングだけを行ってください。
+単純に`git add`するのに比べて差分をあまり壊さなくて済みます。
+
+```zsh
+git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
+```
 
 # Haskell
 
