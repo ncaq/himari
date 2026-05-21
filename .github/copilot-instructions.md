@@ -123,14 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## Template Haskellの`mkName`と`newName`の使いかた
-
-既にスコープに存在する名前をキャプチャする形で参照したい時は`mkName`を使います。
-新しいフレッシュな衝突しない名前を生成したい時は`newName`を使います。
-
-キャプチャする必要がある場合は`mkName`、
-そうでなければ安全な`newName`を使うべきです。
-
 ## [convertible: Typeclasses and instances for converting between types](https://hackage.haskell.org/package/convertible)
 
 `convert`関数で汎用的な型変換を行っています。
