@@ -141,11 +141,6 @@ git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec
 { foo = foo' }
 ```
 
-## 関数の最後の値は捨てない
-
-わざわざ関数の最後で`pure ()`や`return ()`や`void`を使って値を捨てるのは禁止です。
-特に理由がないならば最後の関数の値を捨てないように型の方を合わせてください。
-
 ## bracketで書ける時はそれを使う
 
 `bracket`を使うと例外などを考慮してリソースを確実に解放することが出来ます。
