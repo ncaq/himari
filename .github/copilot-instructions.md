@@ -123,33 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## `threadDelay`の乱用を避ける
-
-`threadDelay`はスレッドを指定した時間だけ遅延させる関数です。
-`threadDelay`を乱用するのはやめましょう。
-
-時間に依存するコードは安定性や移植性が低いためです。
-他のマシンでは同じ時間で処理が完了しないかもしれません。
-
-また必然的にその時間だけ実行がストップしてしまうので、
-待つように命令した分だけ実行が遅くなります。
-
-ただし以下のようにリソースを保持するために明確に意図的に永久的に停止する場合は問題ありません。
-
-```haskell
-threadDelay maxBound
-```
-
-テストコードを書く時に実行を待つ部分が実装されていない場合などは仕方ない時もあります。
-しかしなるべく避けましょう。
-
-`MVar`や`TMVar`などの同期変数を使って正確に同期するのが望ましいです。
-
-外部のコントロールに依存する場合は、
-[retry: Retry combinators for monadic actions that may fail](https://hackage.haskell.org/package/retry)
-パッケージの`exponentialBackoff`を使って、
-短い単位の繰り返しの待機をしてください。
-
 ## shadowing警告を回避してレコードを初期化する
 
 データ型のフィールド名と同じ変数を定義すると、
