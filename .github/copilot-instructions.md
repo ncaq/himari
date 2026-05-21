@@ -173,23 +173,6 @@ sydtestはhspecにAPIを寄せていますが、
 `Env.TypeSpec`
 となります。
 
-## 意味のないテストは禁止
-
-以下のような絶対に成功するのが自明なテストでコンパイラと人間を騙そうとするのは禁止。
-
-```haskell
-it "Dummy Test" $ do
-  True `shouldBe` True
-```
-
-```haskell
-it "Work Test" $ do
-  expect `shouldBe` expect
-```
-
-テストが書けないときは書けないと報告する。
-無意味なテストは禁止。
-
 ## Either値をテストするときは値を直接比較する
 
 Eitherが返ってくる値`x`をテストするときは、
