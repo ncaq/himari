@@ -123,16 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## mutableな変数の使用を避ける
-
-Haskellに限らずmutableな変数は避けるべきだとされています。
-特にHaskellは純粋関数型言語であり、
-immutableにレコード全体を差分更新することが前提とされて効率よく行えるようになっているので、
-mutableな変数がほしいことはめったにありません。
-
-スレッド間の通信などでトランザクションを作りたいなどのどうしても必要な場面でない場合、
-mutableな変数を表す型は使わないでください。
-
 ## `threadDelay`の乱用を避ける
 
 `threadDelay`はスレッドを指定した時間だけ遅延させる関数です。
