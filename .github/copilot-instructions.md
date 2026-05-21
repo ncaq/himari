@@ -123,15 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## 危険な関数の禁止
-
-以下の関数は危険なので使用することを禁止します。
-
-- `unsafeDupablePerformIO`
-- `unsafeFixIO`
-- `unsafeInterleaveIO`
-- `unsafePerformIO`
-
 ## GHCの警告は無効にしない
 
 警告をプラグマによって無効にすることは原則禁止します。
@@ -176,16 +167,6 @@ exportで全てのシンボルを公開するのは原則禁止です。
 
 ただしTemplate Haskellでシンボルを大量に生成する場合で、
 全部把握して列挙するのが困難な場合は全てexportすることを許可します。
-
-## 部分関数の禁止
-
-純粋関数なのに例外を頻繁に投げる以下のような関数の使用は禁止です。
-
-- `fromJust`
-- `read`
-
-例えば`read`には`readMaybe`や`readMay`などの安全な代替関数があるので、
-そちらを使ってください。
 
 ## `error`関数の禁止
 
