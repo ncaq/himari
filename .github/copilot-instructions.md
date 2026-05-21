@@ -51,22 +51,6 @@ nix flake check
 
 例えば`nix fmt`, `cabal build`, `cabal test`も全て含まれています。
 
-## ビルド
-
-ビルドは以下のコマンドを実行します。
-
-```console
-cabal build --disable-optimization --enable-tests
-```
-
-## テスト
-
-テストは以下のコマンドを実行します。
-
-```console
-cabal test --disable-optimization --enable-tests
-```
-
 # ディレクトリ構成
 
 ## ルートディレクトリ
