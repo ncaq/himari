@@ -123,36 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## GHCの警告は無効にしない
-
-警告をプラグマによって無効にすることは原則禁止します。
-
-ただし孤立インスタンスを仕方なく定義する場合は、
-
-```haskell
-{-# OPTIONS_GHC -Wno-orphans #-}
-```
-
-は最終手段として許可します。
-
-またTemplate Haskellを利用したコード生成で変数名のshadowingが発生する場合や、
-未使用変数が発生する場合も仕方なく無効にすることを許可します。
-
-```haskell
-{-# OPTIONS_GHC -Wno-shadowed-variables #-}
-{-# OPTIONS_GHC -Wno-unused-binds #-}
-```
-
-## hlintの警告は無効にしない
-
-hlintの警告を無効にすることは原則禁止します。
-
-ただしどうしてもその方法じゃないと書けなかったり、
-著しくパフォーマンスの低下を招く場合は仕方なく無効にすることを許可します。
-
-その場合でもなるべく局所的に無効にしてください。
-全体で無効にするのは禁止です。
-
 ## exportは明示的に列挙する
 
 exportで全てのシンボルを公開するのは原則禁止です。
