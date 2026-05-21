@@ -123,11 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## [convertible: Typeclasses and instances for converting between types](https://hackage.haskell.org/package/convertible)
-
-`convert`関数で汎用的な型変換を行っています。
-`pack`, `unpack`, `encodeUtf8`, `decodeUtf8`のような個別の関数よりなるべく`convert`を使うようにしてください。
-
 ## himari
 
 このhimariプロジェクトはrioに変わるカスタムPreludeライブラリを提供することを目的としています。
