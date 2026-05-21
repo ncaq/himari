@@ -123,21 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## exportは明示的に列挙する
-
-exportで全てのシンボルを公開するのは原則禁止です。
-
-外部に公開しないといけないシンボルだけをexportしてください。
-
-結果的に全てexportすることになっても、
-明示的に列挙してください。
-
-明示的に列挙することで公開しているAPIが明確になり、
-デッドコードの検出なども簡単になります。
-
-ただしTemplate Haskellでシンボルを大量に生成する場合で、
-全部把握して列挙するのが困難な場合は全てexportすることを許可します。
-
 ## `error`関数の禁止
 
 純粋関数空間の中で例外を投げられる`error`関数の使用は禁止です。
