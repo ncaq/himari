@@ -123,32 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## `String`の使用をなるべく避ける
-
-`String`は`[Char]`のエイリアスであり、
-Haskellの文字列を表現するために使われますが、
-非常に非効率的であり、
-さらに表示したときの日本語文字列がしばしばエスケープされます。
-昔からある型のため仕方なく使われていますが、
-なるべく`Text`を使ってください。
-
-`Text`はUTF-8でエンコードされた文字列を効率的に扱うための型です。
-基本的に`Text.Lazy`ではなくStrictな`Text`を使ってください。
-`ByteString`との使い分けに関しては、
-Unicodeで正しく表現できる文字列である場合`Text`を使い、
-バイナリデータやエンコードが不明な場合は`ByteString`を使うのが正しいです。
-
-しかし現代においてはUnicodeで表現できない文字列はあまりないので、
-バッファ上のバイナリデータを使う場合などを除いては、
-基本的に`Text`を使うことが適切でしょう。
-
-`String`は古くから使われているからライブラリに蔓延しているだけのガンです。
-使わなければいけない場合に一瞬`convert`などで変換するだけにしてください。
-
-詳しく知りたい場合は、
-[Haskellの文字列型：分類と特徴 - Qiita](https://qiita.com/mod_poppo/items/740659702f31216fdade)
-を参照してください。
-
 ## mutableな変数の使用を避ける
 
 Haskellに限らずmutableな変数は避けるべきだとされています。
