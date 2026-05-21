@@ -18,6 +18,14 @@ ASCIIに対応する全角形(Fullwidth Forms)は使用禁止。
 - 全角カンマ `，` → 半角 `,`
 - 全角数字 `０-９` → 半角 `0-9`
 
+# 使用する技術スタックやライブラリ
+
+実装には[Haskell](https://www.haskell.org/)をメインに使っています。
+
+環境構築には[Nix Flakes](https://wiki.nixos.org/wiki/Flakes/ja)を利用しています。
+Nix FlakesでHaskell部分を管理するには[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使っています。
+Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)です。
+
 # 重要コマンド
 
 ## フォーマット
@@ -57,14 +65,6 @@ cabal build --disable-optimization --enable-tests
 ```console
 cabal test --disable-optimization --enable-tests
 ```
-
-# 使用する技術スタックやライブラリ
-
-実装には[Haskell](https://www.haskell.org/)をメインに使っています。
-
-環境構築には[Nix Flakes](https://wiki.nixos.org/wiki/Flakes/ja)を利用しています。
-Nix FlakesでHaskell部分を管理するには[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使っています。
-Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)です。
 
 # ディレクトリ構成
 
