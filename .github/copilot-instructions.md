@@ -2,23 +2,46 @@
 
 ## 言語
 
-AIは人間にテキストを出力するときは日本語で出力してください。
-しかしコードのコメントなどが日本語ではない場合は元の言語のままにしてください。
+AIは人間に話すときは日本語を使ってください。
+
+しかし既存のコードのコメントなどが日本語ではない場合は、
+コメント等は既存の言語に合わせてください。
 
 ## 記号
 
 ASCIIに対応する全角形(Fullwidth Forms)は使用禁止。
 
-具体的には以下のような文字:
+具体的には以下のような文字は右のように変換してください:
 
 - 全角括弧 `（）` → 半角 `()`
 - 全角コロン `：` → 半角 `:`
 - 全角カンマ `，` → 半角 `,`
 - 全角数字 `０-９` → 半角 `0-9`
 
+# 使用する技術スタックやライブラリ
+
+実装には[Haskell](https://www.haskell.org/)をメインに使っています。
+
+環境構築には[Nix Flakes](https://wiki.nixos.org/wiki/Flakes/ja)を利用しています。
+Nix FlakesでHaskell部分を管理するには、
+[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使っています。
+Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)です。
+
 # 重要コマンド
 
-## `nix flake check`
+## フォーマット
+
+nix fmtでフォーマットとリントを実行できます。
+
+```console
+nix fmt
+```
+
+[nix-tasuke](https://github.com/ncaq/konoka/tree/master/plugins/nix-tasuke)プラグインにより、
+Claudeの応答完了時にStopフックで`nix fmt`が自動実行されます。
+ファイルの差分が出ることがあります。
+
+## 統合チェック
 
 対応しているフォーマット・ビルド・テストを全て実行します。
 
@@ -27,20 +50,6 @@ nix flake check
 ```
 
 例えば`nix fmt`, `cabal build`, `cabal test`も全て含まれています。
-
-## フォーマット
-
-基本的にファイルはツールで自動フォーマットしています。
-
-### nix fmt
-
-[treefmt-nix](https://github.com/numtide/treefmt-nix)が対応しているファイルは以下のコマンドでフォーマット出来ます。
-
-```console
-nix fmt
-```
-
-Claude CodeがStopするときもhooksで`nix fmt`が実行されます。
 
 ## ビルド
 
@@ -57,14 +66,6 @@ cabal build --disable-optimization --enable-tests
 ```console
 cabal test --disable-optimization --enable-tests
 ```
-
-# 使用する技術スタックやライブラリ
-
-実装には[Haskell](https://www.haskell.org/)をメインに使っています。
-
-環境構築には[Nix Flakes](https://wiki.nixos.org/wiki/Flakes/ja)を利用しています。
-Nix FlakesでHaskell部分を管理するには[haskell.nix](https://input-output-hk.github.io/haskell.nix/)を使っています。
-Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)です。
 
 # ディレクトリ構成
 
@@ -85,7 +86,7 @@ Haskellのビルドに使うツールは[Cabal](https://www.haskell.org/cabal/)�
 
 このChangeLogは英語で記述してください。
 
-行はなるべく最大120文字程度の長さまで収めてください。
+行は最大100文字の長さまで収めてください。
 
 編集したあとは`nix fmt`で正しく書けているかチェックしてください。
 
@@ -114,7 +115,13 @@ nix run '.#generate-hlint'
 
 Nix Flakesはgitで管理されていないファイルを意図的に無視します。
 よって新規にソースコードなどを追加した時に`nix flake check`を通すためには、
-`git add`で使いたいファイルを追加する必要があります。
+Gitにステージングする必要があります。
+以下のコマンドでステージングだけを行ってください。
+単純に`git add`するのに比べて差分をあまり壊さなくて済みます。
+
+```zsh
+git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
+```
 
 # Haskell
 
@@ -216,7 +223,8 @@ GHC2024には以下の拡張が含まれています。
 
 ### 追加で有効にしている拡張
 
-GHC2024に加えて、以下の拡張をデフォルトで有効にしています。
+GHC2024に加えて、
+以下の拡張をデフォルトで有効にしています。
 
 #### ApplicativeDo
 
@@ -227,7 +235,8 @@ do記法をApplicativeに脱糖します。
 副作用の実行順序が変わる可能性があるため、
 順序に依存するコードでは注意が必要です。
 ただし順序に依存する処理は`Monad`を使うべきであり、
-`Applicative`で順序依存するコードは設計上の問題があるため、有効にしています。
+`Applicative`で順序依存するコードは設計上の問題があるため、
+有効にしています。
 
 #### BlockArguments
 
@@ -262,7 +271,8 @@ GHCバージョン分岐などライブラリ開発で必要になります。
 
 #### LexicalNegation
 
-`-`の字句解析を改善し、`f -1`が`f (-1)`として解釈されます。
+`-`の字句解析を改善し、
+`f -1`が`f (-1)`として解釈されます。
 既存の`f - 1`(減算)の構文を壊しますが、
 より自然な解釈になります。
 
@@ -407,7 +417,8 @@ GHC2024で既に有効です。
 
 ### 有効にしなかった拡張
 
-以下の拡張は検討の結果、デフォルトでは有効にしないことにしました。
+以下の拡張は検討の結果、
+デフォルトでは有効にしないことにしました。
 
 #### Arrows
 
@@ -491,7 +502,8 @@ result = let ?myparam = 456 in ?myparam
 horror = let ?myparam = 123 in (result, result)
 ```
 
-また暗黙的な振る舞いがデバッグを困難にし、型推論との相性も悪いです。
+また暗黙的な振る舞いがデバッグを困難にし、
+型推論との相性も悪いです。
 
 ##### 代替手段
 
@@ -529,7 +541,7 @@ GHCはデフォルトで型チェッカーの深さ制限を設けており、
 
 ##### 使わざるを得ない場面
 
-mtl、lens、servantなど多くの主要ライブラリで使用されています。
+mtlやlensなど多くの主要ライブラリで使用されています。
 モナド変換子に対する型クラスインスタンス(例: `MonadState s m => MonadState s (ReaderT r m)`)は、
 Coverage Conditionを満たさないため`UndecidableInstances`が必要です。
 
@@ -668,7 +680,8 @@ if-then-else、
 `ifThenElse`は正しくオーバーロードできません。
 実際の`ifThenElse`には通常の関数にはない特殊な振る舞いがあります。
 
-`deriving`との相性が悪く、導出されたコードには適用されないため型エラーが発生する可能性があります。
+`deriving`との相性が悪く、
+導出されたコードには適用されないため型エラーが発生する可能性があります。
 
 `Template Haskell`との互換性の問題があります。
 
@@ -828,7 +841,8 @@ askRunInIO :: MonadUnliftIO m => m (m a -> IO a)
 `askRunInIO`を`MonadUnliftIO`の文脈で呼び出すことで、
 `MonadUnliftIO`のアクションを`IO`に変換する関数を取得できます。
 
-これを使うと`IO`を要求するライブラリの型に対して`MonadUnliftIO`のアクションを少しラムダ式で包んだりすれば渡すことが出来ます。
+これを使うと`IO`を要求するライブラリの型に対して、
+`MonadUnliftIO`のアクションを少しラムダ式で包んだりすれば渡すことが出来ます。
 
 ## `String`の使用をなるべく避ける
 
@@ -853,15 +867,17 @@ Unicodeで正しく表現できる文字列である場合`Text`を使い、
 使わなければいけない場合に一瞬`convert`などで変換するだけにしてください。
 
 詳しく知りたい場合は、
-[Haskellの文字列型：分類と特徴 - Qiita](https://qiita.com/mod_poppo/items/740659702f31216fdade)を参照してください。
+[Haskellの文字列型：分類と特徴 - Qiita](https://qiita.com/mod_poppo/items/740659702f31216fdade)
+を参照してください。
 
 ## mutableな変数の使用を避ける
 
 Haskellに限らずmutableな変数は避けるべきだとされています。
-特にHaskellは純粋関数型言語でありimmutableにレコード全体を差分更新することが前提とされて効率よく行えるようになっているので、
+特にHaskellは純粋関数型言語であり、
+immutableにレコード全体を差分更新することが前提とされて効率よく行えるようになっているので、
 mutableな変数がほしいことはめったにありません。
 
-スレッド間の通信などでトランザクションを作りたいとかのどうしても必要な理由でない場合、
+スレッド間の通信などでトランザクションを作りたいなどのどうしても必要な場面でない場合、
 mutableな変数を表す型は使わないでください。
 
 ## `threadDelay`の乱用を避ける
@@ -900,8 +916,10 @@ threadDelay maxBound
 
 単にフィールドを設定する場合はlensのSetterを使ってください。
 
-初期化時などlensが使えない場合は、フィールド名に`'`をつけた変数名を使ってください。
-例えば`foo`フィールドの場合`foo'`変数を定義して、最終的に以下のように代入に使います。
+初期化時などlensが使えない場合は、
+フィールド名に`'`をつけた変数名を使ってください。
+例えば`foo`フィールドの場合`foo'`変数を定義して、
+最終的に以下のように代入に使います。
 
 ```haskell
 { foo = foo' }
@@ -950,7 +968,8 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 
 ### `makeFieldsId`
 
-`NoFieldSelectors`を前提に定義したデータ構造に対してlensのレコードのフィールドアクセサを定義する時は、
+`NoFieldSelectors`を前提に定義したデータ構造に対して、
+lensのレコードのフィールドアクセサを定義する時は、
 `makeFieldsId`というTemplate Haskell関数を使ってください。
 
 `makeFieldsId`を使うときはフィールドにプレフィクスやアンダースコアは付けないでください。
@@ -973,7 +992,7 @@ withAsync :: IO a -> (Async a -> IO b) -> IO b
 プレフィクスやアンダースコアがあるかどうかを考慮して、
 `makeFields`などの他のTemplate Haskell関数を使ってください。
 
-### lensで定義されたアクセサは、アクセサ単体ではなく型クラスごとexportする
+### lensで定義されたアクセサはアクセサ単体ではなく型クラスごとexportする
 
 例えば`makeFieldsId`で`HasUser`型クラスと`user`アクセサを定義した場合、
 `user`アクセサをexportするのではなく、
@@ -1008,10 +1027,15 @@ import Himari.Prelude
 
 # このプロジェクトのテストや品質保証の基準
 
-このhimariプロジェクトのテストフレームワークには[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)を使用しています。
+このhimariプロジェクトのテストフレームワークには、
+[sydtest: A modern testing framework for Haskell with good defaults and advanced testing features.](https://hackage.haskell.org/package/sydtest)
+を使用しています。
 
-主要なAPIは[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)を参照してください。
-sydtestはhspecそのものではないことに注意してください。
+主要なAPIは
+[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)
+を参照してください。
+sydtestはhspecにAPIを寄せていますが、
+あくまで違うライブラリであることに注意してください。
 
 ## モジュール名
 
@@ -1051,11 +1075,13 @@ Eitherが返ってくる値`x`をテストするときは、
 isLeft x `shouldBe` True
 ```
 
-このように書くとテストフレームワーク側が実際どのような値が想定外なのか分からなくてテスト失敗時に情報がなくなってしまう。
+このように書くとテストフレームワーク側が実際どのような値が想定外なのか分からなくて、
+テスト失敗時に情報がなくなってしまいます。
 Eitherの値が`Eq`のインスタンスである場合は以下のように単純に比較できる。
 
 ```haskell
 x `shouldBe` Left "expected error"
 ```
 
-`Eq`のインスタンスでない場合でも`isLeft`よりは実際の中身の振る舞いを検査する関数が何かしらあるはず。
+`Eq`のインスタンスでない場合でも、
+`isLeft`よりは実際の中身の振る舞いを検査する関数が何かしらあるはずです。
