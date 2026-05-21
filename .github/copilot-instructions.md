@@ -20,7 +20,19 @@ ASCIIに対応する全角形(Fullwidth Forms)は使用禁止。
 
 # 重要コマンド
 
-## `nix flake check`
+## フォーマット
+
+nix fmtでフォーマットとリントを実行できます。
+
+```console
+nix fmt
+```
+
+[nix-tasuke](https://github.com/ncaq/konoka/tree/master/plugins/nix-tasuke)プラグインにより、
+Claudeの応答完了時にStopフックで`nix fmt`が自動実行されます。
+ファイルの差分が出ることがあります。
+
+## 統合チェック
 
 対応しているフォーマット・ビルド・テストを全て実行します。
 
@@ -29,20 +41,6 @@ nix flake check
 ```
 
 例えば`nix fmt`, `cabal build`, `cabal test`も全て含まれています。
-
-## フォーマット
-
-基本的にファイルはツールで自動フォーマットしています。
-
-### nix fmt
-
-[treefmt-nix](https://github.com/numtide/treefmt-nix)が対応しているファイルは以下のコマンドでフォーマット出来ます。
-
-```console
-nix fmt
-```
-
-Claude CodeがStopするときもhooksで`nix fmt`が実行されます。
 
 ## ビルド
 
