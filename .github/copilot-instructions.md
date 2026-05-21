@@ -123,36 +123,6 @@ Gitにステージングする必要があります。
 git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec-from-file=- --pathspec-file-nul
 ```
 
-## `IO`をなるべく直接使わず型クラスを使う
-
-`IO`モナドはあまりにもプリミティブなので他のモナド変換子などと一緒に取り扱うのが不便です。
-呼び出すたびに`liftIO`を使うのは冗長なため、
-出来る限り`MonadIO`, `MonadUnliftIO`といった型クラスで抽象化するべきです。
-
-## 無駄な`liftIO`の禁止
-
-既に`MonadIO m => m a`のような型を持っている関数を、
-`liftIO`に渡しても問題なく動きますが、
-冗長で読みづらいのでやめてください。
-
-## `IO`内部で`MonadUnliftIO`のアクションを実行する
-
-`MonadIO`や`MonadUnliftIO`の文脈で`IO`のアクションを実行する場合は`liftIO`を使うだけで良いです。
-
-逆に`IO`の文脈で`MonadUnliftIO`のアクションを実行する場合はひと工夫必要です。
-
-以下の関数を使うことで解決できます。
-
-```haskell
-askRunInIO :: MonadUnliftIO m => m (m a -> IO a)
-```
-
-`askRunInIO`を`MonadUnliftIO`の文脈で呼び出すことで、
-`MonadUnliftIO`のアクションを`IO`に変換する関数を取得できます。
-
-これを使うと`IO`を要求するライブラリの型に対して、
-`MonadUnliftIO`のアクションを少しラムダ式で包んだりすれば渡すことが出来ます。
-
 ## `String`の使用をなるべく避ける
 
 `String`は`[Char]`のエイリアスであり、
