@@ -141,27 +141,6 @@ git ls-files --others --exclude-standard -z | git add --intent-to-add --pathspec
 { foo = foo' }
 ```
 
-## bracketで書ける時はそれを使う
-
-`bracket`を使うと例外などを考慮してリソースを確実に解放することが出来ます。
-`bracket`でリソースの解放処理が書ける時はそちらを使ってください。
-わざわざバラバラの`do`ブロックで書き直さないでください。
-
-## 出来る限りwithパターンの関数を使う
-
-`bracket`関数の特化型であるリソースの確保と解放がセットになっていて、
-実行したいアクションだけを渡せる関数がしばしば存在します。
-
-例えば、
-
-```haskell
-withAsync :: IO a -> (Async a -> IO b) -> IO b
-```
-
-などの関数です。
-
-存在するならばそれを優先します。
-
 ## Template Haskellの`mkName`と`newName`の使いかた
 
 既にスコープに存在する名前をキャプチャする形で参照したい時は`mkName`を使います。
