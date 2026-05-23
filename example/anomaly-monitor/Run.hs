@@ -21,6 +21,5 @@ runAnomalyMonitor = do
     Nothing -> logErrorN "Failed to read initial CPU stats. Is /proc/stat available?"
     Just initialStats -> do
       logInfoN "Starting monitoring loop..."
-      -- Run with updated config using local
       monitorLoop initialStats 0
       logInfoN "Monitoring complete."
