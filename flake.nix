@@ -54,6 +54,7 @@
               root = ./.;
               fileset = final.lib.fileset.unions [
                 # dir
+                ./example
                 ./src
                 ./test
                 # file
