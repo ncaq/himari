@@ -164,9 +164,8 @@ test-suite himari-test
 
 executable anomaly-monitor
   import: basic
-  hs-source-dirs: example
-  main-is: AnomalyMonitor.hs
-
+  hs-source-dirs: example/anomaly-monitor
+  main-is: Main.hs
   ghc-options:
     -threaded
     -rtsopts
