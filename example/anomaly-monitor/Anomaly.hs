@@ -26,6 +26,7 @@ data AnomalyReport = AnomalyReport
   deriving (Eq, Generic, Ord, Read, Show)
 
 -- | Determine severity based on how much the threshold is exceeded.
+-- returns `Normal` when not exceeded
 determineSeverity :: Double -> Double -> AnomalySeverity
 determineSeverity threshold' usage
   | usage < threshold' = Normal
