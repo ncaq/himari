@@ -14,7 +14,7 @@ import Env
 import Himari
 import Numeric
 
--- | CPU time statistics from /proc/stat
+-- | CPU time statistics from `/proc/stat`.
 data CpuStats = CpuStats
   { user :: Int
   , nice :: Int
