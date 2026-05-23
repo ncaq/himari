@@ -13,11 +13,11 @@ printBanner = liftIO $ T.putStrLn banner
 banner :: Text
 banner =
   T.unlines
-    [ "╔════════════════════════════════════════════════════════════════════╗"
-    , "║ Millennium Science School - Paranormal Affairs Dept.               ║"
-    , "║ Anomaly Monitoring System                                          ║"
-    , "║                                                                    ║"
-    , "║ I am the all-knowing Himari! Leave system monitoringto me, Sensei! ║"
-    , "║                                                                    ║"
-    , "╚════════════════════════════════════════════════════════════════════╝"
+    [ "╔═════════════════════════════════════════════════════════════════════╗"
+    , "║ Millennium Science School - Paranormal Affairs Dept.                ║"
+    , "║ Anomaly Monitoring System                                           ║"
+    , "║                                                                     ║"
+    , "║ I am the all-knowing Himari! Leave system monitoring to me, Sensei! ║"
+    , "║                                                                     ║"
+    , "╚═════════════════════════════════════════════════════════════════════╝"
     ]
