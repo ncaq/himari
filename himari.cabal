@@ -135,19 +135,6 @@ test-suite himari-test
   type: exitcode-stdio-1.0
   hs-source-dirs: test
   main-is: Main.hs
-  ghc-options:
-    -threaded
-    -rtsopts
-    -with-rtsopts=-N
-
-  build-depends:
-    QuickCheck ^>=2.15.0.1,
-    himari,
-    sydtest >=0.18.0.0 && <0.24,
-
-  build-tool-depends:
-    hlint:hlint ^>=3.10
-
   -- cabal-gild: discover ./test --exclude=**/Main.hs
   other-modules:
     Himari.CharSpec
@@ -162,10 +149,24 @@ test-suite himari-test
     HlintUnliftioSpec
     TitleSpec
 
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+
+  build-depends:
+    QuickCheck ^>=2.15.0.1,
+    himari,
+    sydtest >=0.18.0.0 && <0.24,
+
+  build-tool-depends:
+    hlint:hlint ^>=3.10
+
 executable anomaly-monitor
   import: basic
   hs-source-dirs: example
   main-is: AnomalyMonitor.hs
+
   ghc-options:
     -threaded
     -rtsopts
