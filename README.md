@@ -127,11 +127,14 @@ curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/fourmolu.yaml' -o 
 
 himariとAIエージェントを組み合わせて開発する時には、
 [ncaq/konoka: AI prompts, agents, and skills as loadable plugins.](https://github.com/ncaq/konoka)
-のマーケットプレイスで開発されている、
-[konoka/plugins/haskell-tasuke at master · ncaq/konoka](https://github.com/ncaq/konoka/tree/master/plugins/haskell-tasuke)
+というマーケットプレイスで開発している、
+[haskell-tasukeプラグイン](https://github.com/ncaq/konoka/tree/master/plugins/haskell-tasuke)
 を利用することを強く推奨します。
 
-セットアップ方法はリポジトリのREADMEを参照してください。
+セットアップ方法はリポジトリにあるREADMEを参照してください。
+
+konokaリポジトリのREADMEに従ってマーケットプレイスを追加し、
+その後haskell-tasukeプラグインのREADMEに従ってインストールしてください。
 
 一般的なHaskellの開発にも役立つプラグインにしていますが、
 特にhimariを利用するのにフィットするようになっています。
