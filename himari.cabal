@@ -168,6 +168,14 @@ executable anomaly-monitor
   main-is: Main.hs
   -- cabal-gild: discover ./example/anomaly-monitor --exclude=**/Main.hs
   other-modules:
+    Anomaly
+    Banner
+    Config
+    Cpu
+    Env
+    Exception
+    Loop
+
   ghc-options:
     -threaded
     -rtsopts
