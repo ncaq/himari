@@ -82,7 +82,7 @@ readCpuStats = do
       pure Nothing
     Right content -> pure $ parseCpuStats content
 
--- | Print CPU threshold and other config values.
+-- | Format CPU threshold and other config values as text.
 showIOCpuThreshold :: (MonadIO m, MonadReader MonitorEnv m) => m Text
 showIOCpuThreshold = do
   config' <- view config
