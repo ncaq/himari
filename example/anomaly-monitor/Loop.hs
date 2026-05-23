@@ -35,28 +35,23 @@ monitorLoop prevStats checkCount = do
       Just currStats -> do
         let usage = calculateCpuUsage prevStats currStats
             severity' = determineSeverity cpuThreshold' usage
+        formattedReport <- mkFormattedReport usage cpuThreshold' severity'
         -- Log based on severity
         case severity' of
-          Normal ->
-            logDebugN $ "System normal. CPU: " <> convert (showFFloat (Just 1) usage "%")
-          Warning -> do
-            report <- mkReport usage cpuThreshold' severity'
-            logWarnN $ formatReport report
-          Critical -> do
-            report <- mkReport usage cpuThreshold' severity'
-            logErrorN $ formatReport report
-          Catastrophic -> do
-            report <- mkReport usage cpuThreshold' severity'
-            logErrorN $ "!!! " <> formatReport report <> " !!!"
+          Normal -> logDebugN $ "System normal. CPU: " <> convert (showFFloat (Just 1) usage "%")
+          Warning -> logWarnN formattedReport
+          Critical -> logErrorN formattedReport
+          Catastrophic -> logErrorN $ "!!! " <> formattedReport <> " !!!"
         -- Continue monitoring
         monitorLoop currStats (checkCount + 1)
  where
-  mkReport usage threshold' severity' = do
+  mkFormattedReport usage threshold' severity' = do
     now <- liftIO getCurrentTime
-    pure
-      AnomalyReport
-        { cpuUsage = usage
-        , threshold = threshold'
-        , severity = severity'
-        , timestamp = now
-        }
+    return $
+      formatReport
+        AnomalyReport
+          { cpuUsage = usage
+          , threshold = threshold'
+          , severity = severity'
+          , timestamp = now
+          }
