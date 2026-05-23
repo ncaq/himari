@@ -12,7 +12,7 @@ import Himari
 -- | Monitoring configuration loaded from JSON file.
 data MonitorConfig = MonitorConfig
   { cpuThreshold :: Double
-  -- ^ CPU usage threshold percentage (0-100). Anomaly detected if exceeded.
+  -- ^ CPU usage threshold percentage (0-100). Anomaly detected if reached or exceeded.
   , checkInterval :: Int
   -- ^ Interval between checks in seconds.
   , maxChecks :: Int
