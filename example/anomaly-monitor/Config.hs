@@ -18,7 +18,7 @@ data MonitorConfig = MonitorConfig
   , maxChecks :: Int
   -- ^ Maximum number of checks to perform (0 = unlimited).
   }
-  deriving stock (Eq, Generic, Show)
+  deriving (Eq, Generic, Show)
   deriving (FromJSON, ToJSON) via CustomJSON '[FieldLabelModifier '[CamelToSnake]] MonitorConfig
 
 makeFieldsId ''MonitorConfig
