@@ -166,6 +166,8 @@ executable anomaly-monitor
   import: basic
   hs-source-dirs: example/anomaly-monitor
   main-is: Main.hs
+  -- cabal-gild: discover ./example/anomaly-monitor --exclude=**/Main.hs
+  other-modules:
   ghc-options:
     -threaded
     -rtsopts
