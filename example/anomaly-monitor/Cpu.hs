@@ -10,6 +10,7 @@ module Cpu
 import Config
 import Data.Text qualified as T
 import Data.Text.IO qualified as T
+import Data.Text.Read qualified as T
 import Env
 import Himari
 import Numeric
@@ -31,7 +32,10 @@ parseCpuStats :: Text -> Maybe CpuStats
 parseCpuStats content = do
   -- Find the "cpu " line (aggregate of all CPUs)
   cpuLine <- find ("cpu " `T.isPrefixOf`) $ T.lines content
-  let values = mapMaybe (readMay . convert) . drop 1 $ T.words cpuLine
+  let readDecimal x = case T.decimal x of
+        Left _ -> Nothing
+        Right (n, _) -> Just n
+      values = mapMaybe readDecimal . drop 1 $ T.words cpuLine
   case values of
     (user' : nice' : system' : idle' : iowait' : irq' : softirq' : _) ->
       Just
