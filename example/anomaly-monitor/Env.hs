@@ -27,7 +27,7 @@ instance MonadLogger (Himari MonitorEnv) where
     logAction' <- view logAction
     liftIO . logAction' loc src level $ toLogStr msg
 
--- | create context.
+-- | Create the monitoring environment by loading configuration from command line arguments.
 mkEnv :: (MonadIO m) => m MonitorEnv
 mkEnv = do
   -- Get config file path from command line args (optional)
