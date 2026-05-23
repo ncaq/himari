@@ -8,35 +8,20 @@
 -- when thresholds are exceeded.
 module Main (main) where
 
-import Banner
 import Config
-import Cpu
 import Env
 import Himari
-import Loop
+import Run
 
 -- | Main entry point.
 main :: IO ()
 main = do
-  printBanner
   -- Get config file path from command line args (optional)
   args <- getArgs
-  let configPath = listToMaybe args
-  -- Create environment and run
   let logAction' = defaultOutput stderr
-      initialEnv = MonitorEnv{logAction = logAction', config = def}
+      configPath = listToMaybe args
+  config' <- runSimpleEnv $ loadConfig configPath
+  -- Create environment and run
+  let initialEnv = MonitorEnv{logAction = logAction', config = config'}
   -- Load config within Himari monad, then update env
-  runHimari initialEnv do
-    logInfoN "Initializing Anomaly Monitoring System..."
-    config' <- loadConfig configPath
-    cpuThresholdText <- showIOCpuThreshold
-    logInfoN cpuThresholdText
-    -- Read initial CPU stats
-    maybeInitialStats <- readCpuStats
-    case maybeInitialStats of
-      Nothing -> logErrorN "Failed to read initial CPU stats. Is /proc/stat available?"
-      Just initialStats -> do
-        logInfoN "Starting monitoring loop..."
-        -- Run with updated config using local
-        local (set config config') $ monitorLoop initialStats 0
-        logInfoN "Monitoring complete."
+  runHimari initialEnv runAnomalyMonitor

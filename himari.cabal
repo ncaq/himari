@@ -175,6 +175,7 @@ executable anomaly-monitor
     Env
     Exception
     Loop
+    Run
 
   ghc-options:
     -threaded
