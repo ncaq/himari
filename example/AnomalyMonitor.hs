@@ -30,13 +30,13 @@ data MonitorConfig = MonitorConfig
 makeFieldsId ''MonitorConfig
 
 -- | Default configuration when no config file is provided.
-defaultConfig :: MonitorConfig
-defaultConfig =
-  MonitorConfig
-    { cpuThreshold = 80.0
-    , checkInterval = 1
-    , maxChecks = 5
-    }
+instance Default MonitorConfig where
+  def =
+    MonitorConfig
+      { cpuThreshold = 80.0
+      , checkInterval = 1
+      , maxChecks = 5
+      }
 
 -- * Environment
 
@@ -224,7 +224,7 @@ loadConfig :: (MonadIO m, MonadLogger m) => Maybe FilePath -> m MonitorConfig
 loadConfig maybePath = case maybePath of
   Nothing -> do
     logInfoN "No config file specified, using defaults"
-    pure defaultConfig
+    pure def
   Just path -> do
     logInfoN $ "Loading config from: " <> convert path
     contentEither <- liftIO . tryIO $ BL.readFile path
@@ -232,12 +232,12 @@ loadConfig maybePath = case maybePath of
       Left exception -> do
         logWarnN $ "Failed to read config file: " <> convert (displayException exception)
         logWarnN "Using default configuration"
-        pure defaultConfig
+        pure def
       Right content -> case eitherDecode content of
         Left decodeError -> do
           logWarnN $ "Failed to parse config file: " <> convert decodeError
           logWarnN "Using default configuration"
-          pure defaultConfig
+          pure def
         Right config' -> do
           logInfoN "Configuration loaded successfully"
           pure config'
@@ -268,7 +268,7 @@ main = do
 
   -- Create environment and run
   let logAction' = defaultOutput stderr
-      initialEnv = MonitorEnv{logAction = logAction', config = defaultConfig}
+      initialEnv = MonitorEnv{logAction = logAction', config = def}
 
   -- Load config within Himari monad, then update env
   runHimari initialEnv do
