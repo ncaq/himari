@@ -91,7 +91,7 @@ GHCが警告を出してくれるので、
 ## セットアップ
 
 himariを使うプロジェクトでは、
-以下の設定ファイルをコピーすることを強く推奨します。
+以下の設定ファイルをセットアップすることを強く推奨します。
 
 ### hlint
 
@@ -122,6 +122,21 @@ curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/fourmolu.yaml' -o 
 > [!NOTE]
 > fourmolu.yamlにはhimari固有のフォーマット設定(indentation, column-limitなど)も含まれています。
 > 素朴な設定ですが、プロジェクトに合わせて適宜変更してください。
+
+### AIエージェント向けのプラグイン
+
+himariとAIエージェントを組み合わせて開発する時には、
+[ncaq/konoka: AI prompts, agents, and skills as loadable plugins.](https://github.com/ncaq/konoka)
+のマーケットプレイスで開発されている、
+[konoka/plugins/haskell-tasuke at master · ncaq/konoka](https://github.com/ncaq/konoka/tree/master/plugins/haskell-tasuke)
+を利用することを強く推奨します。
+
+セットアップ方法はリポジトリのREADMEを参照してください。
+
+一般的なHaskellの開発にも役立つプラグインにしていますが、
+特にhimariを利用するのにフィットするようになっています。
+
+現在はClaude Codeでのみ動作確認をしています。
 
 ## 注意
 
