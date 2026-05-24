@@ -8,6 +8,7 @@ module Himari.Logger
   , mkDefaultLogAction
   ) where
 
+import Himari.Env
 import Himari.Prelude
 
 -- | ログ出力を行う能力があることを検査するための型クラス。
@@ -21,9 +22,11 @@ class HasLogAction s a | s -> a where
 type LogAction = Loc -> LogSource -> LogLevel -> LogStr -> IO ()
 
 -- | "MonadLogger".'monadLoggerLog'に渡せるデフォルトの実装。
-defaultMonadLoggerLog :: (MonadIO m, ToLogStr msg) => Loc -> LogSource -> LogLevel -> msg -> m ()
+defaultMonadLoggerLog
+  :: (HasLogAction env LogAction, ToLogStr msg)
+  => Loc -> LogSource -> LogLevel -> msg -> Himari env ()
 defaultMonadLoggerLog loc src level msg = do
-  let logAction' = mkDefaultLogAction
+  logAction' <- view logAction
   liftIO . logAction' loc src level $ toLogStr msg
 
 -- | デフォルトのログ出力。
