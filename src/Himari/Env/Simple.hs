@@ -35,9 +35,7 @@ runSimpleEnv f = do
 
 -- | `SimpleEnv`をデフォルト設定で作成します。
 newSimpleEnv :: (MonadIO m) => m SimpleEnv
-newSimpleEnv = do
-  let logAction' = defaultOutput stderr
-  return $ SimpleEnv{logAction = logAction'}
+newSimpleEnv = return $ SimpleEnv{logAction = mkDefaultLogAction}
 
 -- | `SimpleEnv`のコンテキストのアクションをカスタム出力で実行します。
 runSimpleEnvWith

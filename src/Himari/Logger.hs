@@ -4,6 +4,7 @@
 module Himari.Logger
   ( HasLogAction (..)
   , LogAction
+  , mkDefaultLogAction
   ) where
 
 import Himari.Prelude
@@ -17,3 +18,8 @@ class HasLogAction s a | s -> a where
 -- | ログ出力を行う関数の型。
 -- 出力をカスタムしたい場合、このシグネチャに合わせた関数を作成するとやりやすい。
 type LogAction = Loc -> LogSource -> LogLevel -> LogStr -> IO ()
+
+-- | デフォルトのログ出力。
+-- 標準エラー出力にログを出力します。
+mkDefaultLogAction :: LogAction
+mkDefaultLogAction = defaultOutput stderr
