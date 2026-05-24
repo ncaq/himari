@@ -13,7 +13,6 @@ import Data.Text.IO qualified as T
 import Data.Text.Read qualified as T
 import Env
 import Himari
-import Numeric
 
 -- | CPU time statistics from `/proc/stat`.
 data CpuStats = CpuStats

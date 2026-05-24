@@ -18,6 +18,7 @@ let rules
       # ./rules/extensions.dhall
       # ./rules/lens.dhall
       # ./rules/mtl.dhall
+      # ./rules/numeric.dhall
       # ./rules/performance.dhall
       # ./rules/pretty-simple.dhall
       # ./rules/primitive.dhall

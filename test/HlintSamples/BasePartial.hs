@@ -4,6 +4,7 @@
 -- This file intentionally uses partial functions to test hlint rules
 module HlintSamples.BasePartial where
 
+import Data.Char (intToDigit) -- test only partial functions
 import Data.List qualified as L
 import Data.List.NonEmpty qualified as NE
 import Debug.Trace (trace, traceM, traceShow)
@@ -29,3 +30,20 @@ useTraceShow x = traceShow x x
 
 useTraceM :: IO ()
 useTraceM = traceM "debug"
+
+-- Numeric integer-showing functions are partial (throw on negative input)
+useShowHex :: Int -> String
+useShowHex n = showHex n ""
+
+useShowInt :: Int -> String
+useShowInt n = showInt n ""
+
+useShowOct :: Int -> String
+useShowOct n = showOct n ""
+
+useShowBin :: Int -> String
+useShowBin n = showBin n ""
+
+-- A base of 12 avoids hlint suggesting showHex/showOct/showBin
+useShowIntAtBase :: Int -> String
+useShowIntAtBase n = showIntAtBase 12 intToDigit n ""

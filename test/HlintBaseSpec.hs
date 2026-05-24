@@ -25,6 +25,22 @@ spec = do
       itWithOuter "Debug.Trace.traceM should suggest pTraceM" $ \output -> do
         output `shouldSatisfy` containsWarningAt "traceM" "pTraceM"
 
+    describe "Numeric integer-showing functions are partial" $ do
+      itWithOuter "showHex should warn (partial function)" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "showHex" "non-negative"
+
+      itWithOuter "showInt should warn (partial function)" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "showInt" "non-negative"
+
+      itWithOuter "showOct should warn (partial function)" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "showOct" "non-negative"
+
+      itWithOuter "showBin should warn (partial function)" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "showBin" "non-negative"
+
+      itWithOuter "showIntAtBase should warn (partial function)" $ \output -> do
+        output `shouldSatisfy` containsWarningAt "showIntAtBase" "base > 1"
+
 runHlintOnSample :: IO Text
 runHlintOnSample = do
   (exitCode, stdoutOutput, stderrOutput) <-

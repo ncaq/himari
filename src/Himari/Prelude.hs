@@ -54,6 +54,7 @@ import Himari.Prelude.Process as Export
 import Himari.Prelude.Safe as Export
 import Himari.Prelude.Type as Export
 import Himari.Prelude.TypeLevel as Export
+import Numeric as Export
 import Numeric.Natural as Export
 import Text.Pretty.Simple as Export
 import Text.Show as Export

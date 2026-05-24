@@ -43,6 +43,7 @@ reexports:
   - module Himari.Prelude exports "base" Data.Void
   - module Himari.Prelude exports "base" Data.Word
   - module Himari.Prelude exports "base" GHC.Stack
+  - module Himari.Prelude exports "base" Numeric
   - module Himari.Prelude exports "base" Numeric.Natural
   - module Himari.Prelude exports "base" Prelude
   - module Himari.Prelude exports "base" Text.Show
