@@ -6,6 +6,7 @@ module Himari.Env.Simple
   ( SimpleEnv
   , runSimpleEnv
   , runSimpleEnvWith
+  , newSimpleEnv
   ) where
 
 import Himari.Env
@@ -31,10 +32,6 @@ runSimpleEnv f = do
   env <- newSimpleEnv
   runHimari env f
 
--- | `SimpleEnv`をデフォルト設定で作成します。
-newSimpleEnv :: (MonadIO m) => m SimpleEnv
-newSimpleEnv = return $ SimpleEnv{logAction = mkDefaultLogAction}
-
 -- | `SimpleEnv`のコンテキストのアクションをカスタム出力で実行します。
 runSimpleEnvWith
   :: (MonadIO m)
@@ -46,3 +43,7 @@ runSimpleEnvWith
   -- ^ 実行したいアクション。
   -> m a
 runSimpleEnvWith logAction' = runHimari (SimpleEnv logAction')
+
+-- | `SimpleEnv`をデフォルト設定で作成します。
+newSimpleEnv :: (MonadIO m) => m SimpleEnv
+newSimpleEnv = return $ SimpleEnv{logAction = mkDefaultLogAction}
