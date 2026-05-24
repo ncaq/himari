@@ -6,7 +6,6 @@ module Anomaly
   ) where
 
 import Himari
-import Numeric
 
 -- | Severity level of detected anomaly.
 data AnomalySeverity

@@ -7,7 +7,6 @@ import Config
 import Cpu
 import Env
 import Himari
-import Numeric
 
 -- | Run monitoring loop.
 monitorLoop
