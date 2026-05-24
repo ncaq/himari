@@ -35,7 +35,9 @@ runSimpleEnv = runSimpleEnvWith $ defaultOutput stderr
 runSimpleEnvWith
   :: (MonadIO m)
   => LogAction
-  -- ^ ログの出力方法。例えば`defaultOutput stdout`にすれば標準出力にログが出力されます。
+  -- ^ ログの出力方法。
+  -- 例えば`defaultOutput stderr`にすれば標準エラー出力にログが出力されます。
+  -- `defaultOutput stdout`にすれば標準出力にログが出力されます。
   -> Himari SimpleEnv a
   -- ^ 実行したいアクション。
   -> m a
