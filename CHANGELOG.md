@@ -9,6 +9,12 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
+- `mkSimpleEnv` export in `Himari.Env.Simple` to construct a `SimpleEnv`
+  with the default settings separately from running it
+- `defaultMonadLoggerLog` export in `Himari.Logger`,
+  a reusable `monadLoggerLog` implementation for any `HasLogAction` environment
+- `defaultLogAction` export in `Himari.Logger`
+  for the default `LogAction` that writes to standard error
 - Safe Haskell annotations.
   Modules that expose only safe APIs and import only safe modules are marked `Safe`;
   they disable `TemplateHaskell`, `DerivingVia`, and `GeneralizedNewtypeDeriving`,

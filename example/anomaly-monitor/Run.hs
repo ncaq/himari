@@ -9,7 +9,7 @@ import Himari
 import Loop
 
 -- | Run application.
-runAnomalyMonitor :: (MonadLogger m, MonadReader MonitorEnv m, MonadUnliftIO m) => m ()
+runAnomalyMonitor :: (MonadLogger m, MonadReader Env m, MonadUnliftIO m) => m ()
 runAnomalyMonitor = do
   logInfoN "Initializing Anomaly Monitoring System..."
   printBanner

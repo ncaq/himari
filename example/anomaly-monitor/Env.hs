@@ -1,8 +1,8 @@
 module Env
-  ( MonitorEnv (..)
+  ( Env (..)
   , HasLogAction (..)
   , HasConfig (..)
-  , mkEnv
+  , newEnv
   ) where
 
 import Config
@@ -10,7 +10,7 @@ import Himari
 
 -- | Custom environment for the monitoring application.
 -- This demonstrates how to create your own Env instead of using SimpleEnv.
-data MonitorEnv = MonitorEnv
+data Env = Env
   { logAction :: LogAction
   -- ^ Log output function.
   , config :: MonitorConfig
@@ -18,20 +18,17 @@ data MonitorEnv = MonitorEnv
   }
   deriving (Generic)
 
-makeFieldsId ''MonitorEnv
+makeFieldsId ''Env
 
 -- | Enable MonadLogger for our custom environment.
 -- This is the key instance that allows us to use logging functions.
-instance MonadLogger (Himari MonitorEnv) where
-  monadLoggerLog loc src level msg = do
-    logAction' <- view logAction
-    liftIO . logAction' loc src level $ toLogStr msg
+instance MonadLogger (Himari Env) where
+  monadLoggerLog = defaultMonadLoggerLog
 
--- | Create the monitoring environment by loading configuration from command line arguments.
-mkEnv :: (MonadIO m) => m MonitorEnv
-mkEnv = do
+-- | Create the application environment by loading configuration from command line arguments.
+newEnv :: (MonadIO m) => m Env
+newEnv = do
   -- Get config file path from command line args (optional)
   args <- getArgs
-  let logAction' = defaultOutput stderr -- use stderr for logging
   config' <- runSimpleEnv . loadConfig $ listToMaybe args
-  return $ MonitorEnv{logAction = logAction', config = config'}
+  return $ Env{logAction = defaultLogAction, config = config'}

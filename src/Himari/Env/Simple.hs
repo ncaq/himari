@@ -6,6 +6,7 @@ module Himari.Env.Simple
   ( SimpleEnv
   , runSimpleEnv
   , runSimpleEnvWith
+  , mkSimpleEnv
   ) where
 
 import Himari.Env
@@ -23,20 +24,26 @@ newtype SimpleEnv = SimpleEnv
 makeFieldsId ''SimpleEnv
 
 instance MonadLogger (Himari SimpleEnv) where
-  monadLoggerLog loc src level msg = do
-    logAction' <- view logAction
-    liftIO . logAction' loc src level $ toLogStr msg
+  monadLoggerLog = defaultMonadLoggerLog
 
--- | `SimpleEnv`をデフォルト設定で実行する。
+-- | `SimpleEnv`のコンテキストのアクションをデフォルト設定で実行します。
 runSimpleEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
-runSimpleEnv = runSimpleEnvWith $ defaultOutput stderr
+runSimpleEnv f = do
+  env <- mkSimpleEnv
+  runHimari env f
 
--- | `SimpleEnv`をカスタム出力で実行します。
+-- | `SimpleEnv`のコンテキストのアクションをカスタム出力で実行します。
 runSimpleEnvWith
   :: (MonadIO m)
   => LogAction
-  -- ^ ログの出力方法。例えば`defaultOutput stdout`にすれば標準出力にログが出力されます。
+  -- ^ ログの出力方法。
+  -- 例えば`defaultOutput stderr`にすれば標準エラー出力にログが出力されます。
+  -- `defaultOutput stdout`にすれば標準出力にログが出力されます。
   -> Himari SimpleEnv a
   -- ^ 実行したいアクション。
   -> m a
 runSimpleEnvWith logAction' = runHimari (SimpleEnv logAction')
+
+-- | `SimpleEnv`をデフォルト設定で作成します。
+mkSimpleEnv :: (MonadIO m) => m SimpleEnv
+mkSimpleEnv = return $ SimpleEnv{logAction = defaultLogAction}
