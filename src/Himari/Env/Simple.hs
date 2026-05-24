@@ -27,11 +27,19 @@ instance MonadLogger (Himari SimpleEnv) where
     logAction' <- view logAction
     liftIO . logAction' loc src level $ toLogStr msg
 
--- | `SimpleEnv`をデフォルト設定で実行する。
+-- | `SimpleEnv`のコンテキストのアクションをデフォルト設定で実行します。
 runSimpleEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
-runSimpleEnv = runSimpleEnvWith $ defaultOutput stderr
+runSimpleEnv f = do
+  env <- newSimpleEnv
+  runHimari env f
 
--- | `SimpleEnv`をカスタム出力で実行します。
+-- | `SimpleEnv`をデフォルト設定で作成します。
+newSimpleEnv :: (MonadIO m) => m SimpleEnv
+newSimpleEnv = do
+  let logAction' = defaultOutput stderr
+  return $ SimpleEnv{logAction = logAction'}
+
+-- | `SimpleEnv`のコンテキストのアクションをカスタム出力で実行します。
 runSimpleEnvWith
   :: (MonadIO m)
   => LogAction
