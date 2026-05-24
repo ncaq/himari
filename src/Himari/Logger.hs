@@ -9,7 +9,8 @@ module Himari.Logger
 import Himari.Prelude
 
 -- | ログ出力を行う能力があることを検査するための型クラス。
--- lensと互換性を持たせているので適切にフィールド名を設定してTemplate Haskellで生成すれば自動で実装されます。
+-- lensと互換性を持たせているので適切にフィールド名を設定して、
+-- Template Haskellで生成すれば自動で実装されます。
 class HasLogAction s a | s -> a where
   logAction :: Lens' s a
 
