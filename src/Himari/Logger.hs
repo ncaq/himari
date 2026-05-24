@@ -1,3 +1,5 @@
+{-# LANGUAGE Trustworthy #-}
+
 -- | Logger utilities for Himari.
 module Himari.Logger
   ( HasLogAction (..)

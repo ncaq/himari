@@ -1,3 +1,5 @@
+{-# LANGUAGE Trustworthy #-}
+
 -- | Type-only re-exports from various modules.
 --
 -- Includes types from "Data.ByteString", "Data.HashMap.Strict",

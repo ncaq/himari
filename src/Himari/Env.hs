@@ -1,3 +1,5 @@
+{-# LANGUAGE Trustworthy #-}
+
 -- | Core environment monad for Himari.
 module Himari.Env
   ( Himari (..)

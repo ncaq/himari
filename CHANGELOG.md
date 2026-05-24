@@ -7,6 +7,17 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- Safe Haskell annotations.
+  Modules that expose only safe APIs and import only safe modules are marked `Safe`;
+  they disable `TemplateHaskell`, `DerivingVia`, and `GeneralizedNewtypeDeriving`,
+  which are enabled globally but not allowed under Safe Haskell.
+  Modules that expose only safe APIs but cannot be inferred `Safe`
+  (because a dependency is not marked safe,
+  or because they use Template Haskell or `GeneralizedNewtypeDeriving` internally)
+  are marked `Trustworthy`.
+
 ## [1.1.1.0] - 2026-05-24
 
 ### Added
