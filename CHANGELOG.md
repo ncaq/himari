@@ -10,6 +10,9 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 ### Added
 
 - `Numeric` re-export in `Himari.Prelude` for extra numeric functions
+- HLint rules to warn against partial functions re-exported from `Numeric`:
+  `showIntAtBase`, `showInt`, `showHex`, `showOct`, and `showBin`,
+  which throw on negative (or invalid base) input
 
 ## [1.1.0.0] - 2026-04-11
 

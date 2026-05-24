@@ -741,6 +741,22 @@
       name: Control.Monad.Identity
       within: []
 - functions:
+    - message: "Partial: throws on base <= 1 or negative input. Ensure base > 1 and non-negative input."
+      name: showIntAtBase
+      within: []
+    - message: "Partial: throws on negative numbers. Ensure non-negative input."
+      name: showInt
+      within: []
+    - message: "Partial: throws on negative numbers. Ensure non-negative input."
+      name: showHex
+      within: []
+    - message: "Partial: throws on negative numbers. Ensure non-negative input."
+      name: showOct
+      within: []
+    - message: "Partial: throws on negative numbers. Ensure non-negative input."
+      name: showBin
+      within: []
+- functions:
     - message: "O(n^2) complexity. Use ordNub or nubOrd instead."
       name: nub
       within: []
