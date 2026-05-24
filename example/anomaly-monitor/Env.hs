@@ -30,6 +30,5 @@ newEnv :: (MonadIO m) => m MonitorEnv
 newEnv = do
   -- Get config file path from command line args (optional)
   args <- getArgs
-  let logAction' = defaultOutput stderr -- use stderr for logging
   config' <- runSimpleEnv . loadConfig $ listToMaybe args
-  return $ MonitorEnv{logAction = logAction', config = config'}
+  return $ MonitorEnv{logAction = mkDefaultLogAction, config = config'}
