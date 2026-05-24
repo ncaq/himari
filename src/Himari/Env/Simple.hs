@@ -23,9 +23,7 @@ newtype SimpleEnv = SimpleEnv
 makeFieldsId ''SimpleEnv
 
 instance MonadLogger (Himari SimpleEnv) where
-  monadLoggerLog loc src level msg = do
-    logAction' <- view logAction
-    liftIO . logAction' loc src level $ toLogStr msg
+  monadLoggerLog = defaultMonadLoggerLog
 
 -- | `SimpleEnv`のコンテキストのアクションをデフォルト設定で実行します。
 runSimpleEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
