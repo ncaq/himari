@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.1.0] - 2026-05-24
+
 ### Added
 
 - `Numeric` re-export in `Himari.Prelude` for extra numeric functions
