@@ -9,7 +9,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Added
 
-- `newSimpleEnv` export in `Himari.Env.Simple` to construct a `SimpleEnv`
+- `mkSimpleEnv` export in `Himari.Env.Simple` to construct a `SimpleEnv`
   with the default settings separately from running it
 - `defaultMonadLoggerLog` export in `Himari.Logger`,
   a reusable `monadLoggerLog` implementation for any `HasLogAction` environment
