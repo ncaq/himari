@@ -2,7 +2,7 @@ module Env
   ( MonitorEnv (..)
   , HasLogAction (..)
   , HasConfig (..)
-  , mkEnv
+  , newEnv
   ) where
 
 import Config
@@ -28,8 +28,8 @@ instance MonadLogger (Himari MonitorEnv) where
     liftIO . logAction' loc src level $ toLogStr msg
 
 -- | Create the monitoring environment by loading configuration from command line arguments.
-mkEnv :: (MonadIO m) => m MonitorEnv
-mkEnv = do
+newEnv :: (MonadIO m) => m MonitorEnv
+newEnv = do
   -- Get config file path from command line args (optional)
   args <- getArgs
   let logAction' = defaultOutput stderr -- use stderr for logging

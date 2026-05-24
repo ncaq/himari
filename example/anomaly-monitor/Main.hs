@@ -15,5 +15,5 @@ import Run
 -- | Main entry point.
 main :: IO ()
 main = do
-  initialEnv <- mkEnv
+  initialEnv <- newEnv
   runHimari initialEnv runAnomalyMonitor
