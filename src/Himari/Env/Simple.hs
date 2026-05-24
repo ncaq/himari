@@ -46,4 +46,4 @@ runSimpleEnvWith logAction' = runHimari (SimpleEnv logAction')
 
 -- | `SimpleEnv`をデフォルト設定で作成します。
 newSimpleEnv :: (MonadIO m) => m SimpleEnv
-newSimpleEnv = return $ SimpleEnv{logAction = mkDefaultLogAction}
+newSimpleEnv = return $ SimpleEnv{logAction = defaultLogAction}

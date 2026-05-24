@@ -13,7 +13,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
   with the default settings separately from running it
 - `defaultMonadLoggerLog` export in `Himari.Logger`,
   a reusable `monadLoggerLog` implementation for any `HasLogAction` environment
-- `mkDefaultLogAction` export in `Himari.Logger`
+- `defaultLogAction` export in `Himari.Logger`
   for the default `LogAction` that writes to standard error
 - Safe Haskell annotations.
   Modules that expose only safe APIs and import only safe modules are marked `Safe`;

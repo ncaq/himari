@@ -5,7 +5,7 @@ module Himari.Logger
   ( HasLogAction (..)
   , LogAction
   , defaultMonadLoggerLog
-  , mkDefaultLogAction
+  , defaultLogAction
   ) where
 
 import Himari.Env
@@ -31,5 +31,5 @@ defaultMonadLoggerLog loc src level msg = do
 
 -- | デフォルトのログ出力。
 -- 標準エラー出力にログを出力します。
-mkDefaultLogAction :: LogAction
-mkDefaultLogAction = defaultOutput stderr
+defaultLogAction :: LogAction
+defaultLogAction = defaultOutput stderr

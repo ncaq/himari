@@ -31,4 +31,4 @@ newEnv = do
   -- Get config file path from command line args (optional)
   args <- getArgs
   config' <- runSimpleEnv . loadConfig $ listToMaybe args
-  return $ Env{logAction = mkDefaultLogAction, config = config'}
+  return $ Env{logAction = defaultLogAction, config = config'}
