@@ -1,3 +1,8 @@
+{-# LANGUAGE Safe #-}
+{-# LANGUAGE NoDerivingVia #-}
+{-# LANGUAGE NoGeneralizedNewtypeDeriving #-}
+{-# LANGUAGE NoTemplateHaskell #-}
+
 -- | "Safe", "Safe.Exact", and "Safe.Foldable" re-exports.
 -- Only total functions are exported; partial functions are hidden.
 -- "Safe.Foldable" is preferred for more generic versions,

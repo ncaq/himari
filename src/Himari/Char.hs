@@ -1,3 +1,5 @@
+{-# LANGUAGE Trustworthy #-}
+
 -- | Safe alternatives to partial functions from "Data.Char".
 module Himari.Char
   ( digitToIntMay
