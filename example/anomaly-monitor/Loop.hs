@@ -10,7 +10,7 @@ import Himari
 
 -- | Run monitoring loop.
 monitorLoop
-  :: (MonadLogger m, MonadReader MonitorEnv m, MonadUnliftIO m)
+  :: (MonadLogger m, MonadReader Env m, MonadUnliftIO m)
   => CpuStats
   -> Int
   -> m ()
