@@ -25,9 +25,9 @@
       changelog-lint-src,
     }:
     let
-      ghc-version = "ghc9122"; # GHC 9.12.2
+      ghc-version = "ghc9124"; # GHC 9.12.4
       cabal-version = "3.16.1.0";
-      hls-version = "2.12.0.0";
+      hls-version = "2.13.0.0";
       overlays = [
         haskellNix.overlay
         (
@@ -111,6 +111,19 @@
                   );
                 }
               )
+              # テストはhlintを外部プログラムとして`proc "hlint"`で呼び出します。
+              # `build-tool-depends`でhlintをHackageからビルドさせると、
+              # その依存であるghc-lib-parserをプロジェクトのGHCで再コンパイルすることになり、
+              # ghc-lib-parserのスナップショットとGHCのバージョンが食い違うと、
+              # コンパイルできず壊れます。
+              #
+              # 例: `ghc-lib-parser-9.12.2`を`GHC 9.12.4`でビルドすると、
+              # `GHC.Internal.TH.Ppr`が見つからない。
+              #
+              # そのためHLS経由で用意済みの動作実績のあるhlintをテストのPATHに供給します。
+              {
+                packages.himari.components.tests.himari-test.build-tools = [ final.hlint ];
+              }
             ];
             # `ghc-version`だけではなく、
             # `variants`で定義したGHCバージョンも`nix flake check`で自動的にテストされます。
@@ -120,12 +133,15 @@
             flake.variants = {
               ghc9102.compiler-nix-name = final.lib.mkDefault "ghc9102"; # GHC 9.10.2
               ghc9103.compiler-nix-name = final.lib.mkDefault "ghc9103"; # GHC 9.10.3
+              ghc9122.compiler-nix-name = final.lib.mkDefault "ghc9122"; # GHC 9.12.2
+              ghc9123.compiler-nix-name = final.lib.mkDefault "ghc9123"; # GHC 9.12.3
+              # 9.12.4はデフォルト選択なので省略。
               ghc9141.compiler-nix-name = final.lib.mkDefault "ghc9141"; # GHC 9.14.1
             };
             shell = {
               tools = {
                 cabal = cabal-version;
-                cabal-gild = "1.6.0.2"; # treefmtで管理されているが広く使えるように。
+                cabal-gild = "1.6.0.4"; # treefmtで管理されているが広く使えるように。
                 haskell-language-server = hls-version;
                 implicit-hie = "0.1.4.0";
               };
@@ -236,7 +252,7 @@
                 pkgs.writeShellApplication {
                   name = "cabal-gild-wrapper";
                   runtimeInputs = [
-                    (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.2")
+                    (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.4")
                     pkgs.git
                     pkgs.parallel
                   ];

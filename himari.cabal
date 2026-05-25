@@ -1,6 +1,6 @@
 cabal-version: 3.12
 name: himari
-version: 1.1.2.0
+version: 1.1.2.1
 synopsis: A standard library for Haskell as an alternative to rio
 description:
   A standard library for Haskell inspired by rio.
@@ -30,6 +30,8 @@ tested-with:
   ghc ==9.10.2
   ghc ==9.10.3
   ghc ==9.12.2
+  ghc ==9.12.3
+  ghc ==9.12.4
   ghc ==9.14.1
 
 source-repository head
@@ -158,9 +160,6 @@ test-suite himari-test
     QuickCheck ^>=2.15.0.1,
     himari,
     sydtest >=0.18.0.0 && <0.24,
-
-  build-tool-depends:
-    hlint:hlint ^>=3.10
 
 executable anomaly-monitor
   import: basic
