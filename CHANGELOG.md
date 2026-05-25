@@ -7,6 +7,12 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.2.1] - 2026-05-25
+
+### Added
+
+- GHC 9.12.3 and 9.12.4 support
+
 ## [1.1.2.0] - 2026-05-25
 
 ### Added
