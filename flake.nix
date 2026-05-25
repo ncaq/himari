@@ -25,7 +25,7 @@
       changelog-lint-src,
     }:
     let
-      ghc-version = "ghc9122"; # GHC 9.12.2
+      ghc-version = "ghc9124"; # GHC 9.12.4
       cabal-version = "3.16.1.0";
       hls-version = "2.12.0.0";
       overlays = [
@@ -120,6 +120,9 @@
             flake.variants = {
               ghc9102.compiler-nix-name = final.lib.mkDefault "ghc9102"; # GHC 9.10.2
               ghc9103.compiler-nix-name = final.lib.mkDefault "ghc9103"; # GHC 9.10.3
+              ghc9122.compiler-nix-name = final.lib.mkDefault "ghc9122"; # GHC 9.12.2
+              ghc9123.compiler-nix-name = final.lib.mkDefault "ghc9123"; # GHC 9.12.3
+              # 9.12.4はデフォルト選択なので省略。
               ghc9141.compiler-nix-name = final.lib.mkDefault "ghc9141"; # GHC 9.14.1
             };
             shell = {
