@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.2.0] - 2026-05-25
+
 ### Added
 
 - `mkSimpleEnv` export in `Himari.Env.Simple` to construct a `SimpleEnv`
