@@ -28,12 +28,16 @@ jobs:
           ref: "${{ github.event.workflow_run.head_sha }}"
           persist-credentials: false
           fetch-depth: 0 # タグの存在確認と作成に全履歴が必要
-      - name: Check cabal file changed # workflow_runでpathsフィルタは使えないので、ジョブ内でのチェックが必要になります。
+      # `workflow_run`で`paths`フィルタは使えないので、
+      # ジョブ内でのチェックが必要になります。
+      - name: Check cabal file changed
         id: changed
         run: |
           set -euo pipefail
-          # 最新のリリースタグを取得(なければ全履歴を対象)
-          LAST_TAG=$(git describe --tags --match 'v*' --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          # 最新のリリースタグを取得。
+          # なければ全履歴が対象。
+          LAST_TAG=$(git describe --tags --match 'v*' --abbrev=0 ||
+                     git rev-list --max-parents=0 HEAD)
           if git diff --name-only "$LAST_TAG" HEAD -- '*.cabal' | grep -q '.cabal'; then
             echo "cabal_changed=true" >> "$GITHUB_OUTPUT"
           else

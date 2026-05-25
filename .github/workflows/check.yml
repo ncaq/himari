@@ -20,7 +20,7 @@ jobs:
         os:
           - ubuntu-24.04 # x86_64-linux
           - ubuntu-24.04-arm # aarch64-linux
-          - macos-15 # Apple Silicon (aarch64-darwin)
+          - macos-15 # aarch64-darwin
     runs-on: ${{ matrix.os }}
     permissions:
       contents: read # Read repository contents
@@ -45,7 +45,8 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      # バージョンは一つに絞られてしまいますが、他のnix-flake-checkジョブで十分カバーできているので問題ありません。
+      # バージョンは一つに絞られてしまいますが、
+      # 他のnix-flake-checkジョブで十分カバーできているので問題ありません。
       - name: Extract GHC version from cabal.project
         id: ghc
         shell: bash
@@ -65,7 +66,7 @@ jobs:
         uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ${{ steps.setup.outputs.cabal-store }}
-          key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-plan-${{ hashFiles('**/plan.json') }} # editorconfig-checker-disable-line
+          key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-plan-${{ hashFiles('**/plan.json') }}
           restore-keys: |
             ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}-
       - run: cabal test --disable-optimization --enable-tests
@@ -75,8 +76,9 @@ jobs:
           path: ${{ steps.setup.outputs.cabal-store }}
           key: ${{ steps.cache.outputs.cache-primary-key }}
 
+  # `nix flake check`で対応していないチェックを行う。
   format:
-    name: format # nix flake checkで実行されるnix fmtで対応していない範囲のフォーマットチェックを行う。
+    name: format
     runs-on: ubuntu-24.04
     permissions:
       contents: read # Read repository contents
