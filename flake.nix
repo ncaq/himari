@@ -27,7 +27,7 @@
     let
       ghc-version = "ghc9124"; # GHC 9.12.4
       cabal-version = "3.16.1.0";
-      hls-version = "2.12.0.0";
+      hls-version = "2.13.0.0";
       overlays = [
         haskellNix.overlay
         (
@@ -128,7 +128,7 @@
             shell = {
               tools = {
                 cabal = cabal-version;
-                cabal-gild = "1.6.0.2"; # treefmtで管理されているが広く使えるように。
+                cabal-gild = "1.6.0.4"; # treefmtで管理されているが広く使えるように。
                 haskell-language-server = hls-version;
                 implicit-hie = "0.1.4.0";
               };
@@ -239,7 +239,7 @@
                 pkgs.writeShellApplication {
                   name = "cabal-gild-wrapper";
                   runtimeInputs = [
-                    (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.2")
+                    (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.4")
                     pkgs.git
                     pkgs.parallel
                   ];
