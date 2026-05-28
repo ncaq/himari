@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.2.2] - 2026-05-28
+
 ### Changed
 
 - Relax `time` dependency upper bound from `^>=1.12.2` to `>=1.12.2 && <2`
