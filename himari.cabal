@@ -166,7 +166,11 @@ test-suite himari-test
 
   -- hlint経由のghc-lib-parserの参照バージョンに問題が出やすいので、
   -- こちら側でヒントを出して誘導します。
-  -- [ghc-lib-parser bound to forbid 9.12.2 on `GHC >= 9.12.3`](https://github.com/ndmitchell/hlint/pull/1696)
+  -- <https://github.com/ndmitchell/hlint/pull/1696>
+  -- で既にhlint側に問題提起しているため、
+  -- それが解決するか、
+  -- hlintの使用ライブラリがGHC 9.14系統に変われば、
+  -- この条件は削除して問題ありません。
   if impl(ghc >=9.12.3)
     -- ghc-lib-parser 9.12.2 does not build with GHC >= 9.12.3
     -- (`GHC.Internal.TH.Ppr` was removed).
