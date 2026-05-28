@@ -152,6 +152,8 @@
                 deadnix
                 editorconfig-checker
                 final.changelog-lint
+                fourmolu
+                hlint
                 nixfmt-rfc-style
                 prettier
                 shellcheck
@@ -173,8 +175,6 @@
                 dhall-yaml
 
                 # Haskell関連ツール。
-                fourmolu
-                hlint
                 parallel
                 zlib # aesonを開発環境でビルド。
 
