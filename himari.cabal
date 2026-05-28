@@ -178,9 +178,6 @@ test-suite himari-test
     -- See https://github.com/digital-asset/ghc-lib/issues/624
     build-depends:
       ghc-lib-parser >=9.12.3
-  else
-    build-depends:
-      ghc-lib-parser ==9.12.*
 
 executable anomaly-monitor
   import: basic
