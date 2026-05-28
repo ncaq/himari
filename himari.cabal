@@ -161,6 +161,9 @@ test-suite himari-test
     himari,
     sydtest >=0.18.0.0 && <0.24,
 
+  build-tool-depends:
+    hlint:hlint ^>=3.10
+
 executable anomaly-monitor
   import: basic
   hs-source-dirs: example/anomaly-monitor
