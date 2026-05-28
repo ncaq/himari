@@ -57,7 +57,6 @@ jobs:
         id: setup
         with:
           ghc-version: ${{ steps.ghc.outputs.version }}
-      - uses: haskell-actions/hlint-setup@fe9cd1cd1af94a23900c06738e73f6ddb092966a # v2.4.10
       - name: Configure and generate build plan
         run: |
           cabal configure --disable-optimization --enable-tests

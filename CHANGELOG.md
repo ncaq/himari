@@ -7,6 +7,18 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Changed
+
+- Relax `time` dependency upper bound from `^>=1.12.2` to `>=1.12.2 && <2`
+  to allow building against future `time` 1.x releases
+- Declare `hlint ^>=3.10` as `build-tool-depends` for the test suite
+  so `cabal test` no longer requires `hlint` to be pre-installed on `PATH`
+- Constrain `ghc-lib-parser >=9.12.3` for the test suite under GHC `>=9.12.3`
+  to avoid an unbuildable install plan with `ghc-lib-parser-9.12.2`
+  (which fails on GHC `>=9.12.3` because `GHC.Internal.TH.Ppr` was removed).
+  See <https://github.com/digital-asset/ghc-lib/issues/624>
+  and <https://github.com/ndmitchell/hlint/pull/1696>
+
 ## [1.1.2.1] - 2026-05-25
 
 ### Added

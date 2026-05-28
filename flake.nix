@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -8,7 +8,12 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    haskellNix.url = "github:input-output-hk/haskell.nix";
+    haskellNix = {
+      url = "github:input-output-hk/haskell.nix";
+      inputs = {
+        nixpkgs-unstable.follows = "nixpkgs";
+      };
+    };
     changelog-lint-src = {
       url = "git+https://codeberg.org/chavacava/changelog-lint.git";
       flake = false;
@@ -111,19 +116,6 @@
                   );
                 }
               )
-              # テストはhlintを外部プログラムとして`proc "hlint"`で呼び出します。
-              # `build-tool-depends`でhlintをHackageからビルドさせると、
-              # その依存であるghc-lib-parserをプロジェクトのGHCで再コンパイルすることになり、
-              # ghc-lib-parserのスナップショットとGHCのバージョンが食い違うと、
-              # コンパイルできず壊れます。
-              #
-              # 例: `ghc-lib-parser-9.12.2`を`GHC 9.12.4`でビルドすると、
-              # `GHC.Internal.TH.Ppr`が見つからない。
-              #
-              # そのためHLS経由で用意済みの動作実績のあるhlintをテストのPATHに供給します。
-              {
-                packages.himari.components.tests.himari-test.build-tools = [ final.hlint ];
-              }
             ];
             # `ghc-version`だけではなく、
             # `variants`で定義したGHCバージョンも`nix flake check`で自動的にテストされます。
@@ -152,6 +144,8 @@
                 deadnix
                 editorconfig-checker
                 final.changelog-lint
+                fourmolu
+                hlint
                 nixfmt-rfc-style
                 prettier
                 shellcheck
@@ -173,8 +167,6 @@
                 dhall-yaml
 
                 # Haskell関連ツール。
-                fourmolu
-                hlint
                 parallel
                 zlib # aesonを開発環境でビルド。
 

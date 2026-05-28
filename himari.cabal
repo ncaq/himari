@@ -102,7 +102,7 @@ common basic
     retry ^>=0.9.3.1,
     safe ^>=0.3.21,
     text ^>=2.1.2,
-    time ^>=1.12.2,
+    time >=1.12.2 && <2,
     typed-process ^>=0.2.13.0,
     unliftio ^>=0.2.25.1,
     unordered-containers ^>=0.2.20,
@@ -160,6 +160,24 @@ test-suite himari-test
     QuickCheck ^>=2.15.0.1,
     himari,
     sydtest >=0.18.0.0 && <0.24,
+
+  build-tool-depends:
+    hlint:hlint ^>=3.10
+
+  -- hlint経由のghc-lib-parserの参照バージョンに問題が出やすいので、
+  -- こちら側でヒントを出して誘導します。
+  -- <https://github.com/ndmitchell/hlint/pull/1696>
+  -- で既にhlint側に問題提起しているため、
+  -- それが解決するか、
+  -- hlintの使用ライブラリがGHC 9.14系統に変われば、
+  -- この条件は削除して問題ありません。
+  if impl(ghc >=9.12.3)
+    -- ghc-lib-parser 9.12.2 does not build with GHC >= 9.12.3
+    -- (`GHC.Internal.TH.Ppr` was removed).
+    -- Require >= 9.12.3 to avoid producing an unbuildable install plan.
+    -- See https://github.com/digital-asset/ghc-lib/issues/624
+    build-depends:
+      ghc-lib-parser >=9.12.3
 
 executable anomaly-monitor
   import: basic
