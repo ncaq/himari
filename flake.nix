@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -8,7 +8,12 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    haskellNix.url = "github:input-output-hk/haskell.nix";
+    haskellNix = {
+      url = "github:input-output-hk/haskell.nix";
+      inputs = {
+        nixpkgs-unstable.follows = "nixpkgs";
+      };
+    };
     changelog-lint-src = {
       url = "git+https://codeberg.org/chavacava/changelog-lint.git";
       flake = false;
