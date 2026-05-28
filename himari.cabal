@@ -164,6 +164,20 @@ test-suite himari-test
   build-tool-depends:
     hlint:hlint ^>=3.10
 
+  -- hlint経由のghc-lib-parserの参照バージョンに問題が出やすいので、
+  -- こちら側でヒントを出して誘導します。
+  -- [ghc-lib-parser bound to forbid 9.12.2 on `GHC >= 9.12.3`](https://github.com/ndmitchell/hlint/pull/1696)
+  if impl(ghc >=9.12.3)
+    -- ghc-lib-parser 9.12.2 does not build with GHC >= 9.12.3
+    -- (`GHC.Internal.TH.Ppr` was removed).
+    -- Require >= 9.12.3 to avoid producing an unbuildable install plan.
+    -- See https://github.com/digital-asset/ghc-lib/issues/624
+    build-depends:
+      ghc-lib-parser >=9.12.3 && <9.13
+  else
+    build-depends:
+      ghc-lib-parser ==9.12.*
+
 executable anomaly-monitor
   import: basic
   hs-source-dirs: example/anomaly-monitor
