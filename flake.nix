@@ -33,6 +33,31 @@
       ghc-version = "ghc9124"; # GHC 9.12.4
       cabal-version = "3.16.1.0";
       hls-version = "2.13.0.0";
+      # cabalビルドに必要なファイルのみを含める。
+      # 関係ないファイル(.editorconfig, .githubなど)の変更で内部derivationのhashが動き、
+      # キャッシュミスが発生するのを避ける。
+      himariFileset =
+        lib:
+        lib.fileset.toSource {
+          root = ./.;
+          fileset = lib.fileset.unions [
+            # dir
+            ./example
+            ./src
+            ./test
+            # file
+            ./cabal.project
+            ./himari.cabal
+            # license-file
+            ./LICENSE
+            # data-files
+            ./.hlint.yaml
+            ./fourmolu.yaml
+            # extra-doc-files
+            ./CHANGELOG.md
+            ./README.md
+          ];
+        };
       overlays = [
         haskellNix.overlay
         (
@@ -52,29 +77,7 @@
         )
         (final: prev: {
           project = final.haskell-nix.cabalProject' {
-            # cabalビルドに必要なファイルのみをsrcに含める。
-            # 関係ないファイル(.editorconfig, .githubなど)の変更で内部derivationのhashが動き、
-            # キャッシュミスが発生するのを避ける。
-            src = final.lib.fileset.toSource {
-              root = ./.;
-              fileset = final.lib.fileset.unions [
-                # dir
-                ./example
-                ./src
-                ./test
-                # file
-                ./cabal.project
-                ./himari.cabal
-                # license-file
-                ./LICENSE
-                # data-files
-                ./.hlint.yaml
-                ./fourmolu.yaml
-                # extra-doc-files
-                ./CHANGELOG.md
-                ./README.md
-              ];
-            };
+            src = himariFileset final.lib;
             compiler-nix-name = ghc-version;
             modules = [
               # `nix flake check`レベルではcabalの警告をエラーとして扱います。
@@ -180,6 +183,7 @@
               ];
             };
           };
+          # nixpkgsにないので埋め込み。
           changelog-lint = final.buildGoModule {
             pname = "changelog-lint";
             version = "0.3.0";
@@ -298,6 +302,12 @@
             zizmor.options = [ "--pedantic" ];
           };
         });
+        # nixpkgsの`haskellPackages`越しにhimariをビルド・テストする派生。
+        # haskell.nixはCabalソルバーで依存解決するため柔軟だが、
+        # 素のnixpkgsは1パッケージ1バージョン固定なので、
+        # 依存パッケージのバージョン変動などでビルド・テストが失敗することがある。
+        # nixpkgs越しでも壊れていないことを継続的に検証する。
+        himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (himariFileset pkgs.lib) { };
       in
       # haskell.nixのproject.flakeはciJobsとhydraJobsを生成するが、
       # ciJobsは非標準のoutputであり警告を誘発し、
@@ -346,8 +356,14 @@
             );
           };
         };
+        packages = flake.packages // {
+          inherit himari-nixpkgs;
+        };
         checks =
           flake.packages # テストがないパッケージもビルドしてエラーを検出する。
+          // {
+            inherit himari-nixpkgs;
+          }
           // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
