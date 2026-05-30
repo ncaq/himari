@@ -1,7 +1,5 @@
 {-# LANGUAGE Safe #-}
-{-# LANGUAGE NoDerivingVia #-}
 {-# LANGUAGE NoGeneralizedNewtypeDeriving #-}
-{-# LANGUAGE NoTemplateHaskell #-}
 
 -- | Re-exports from "Control.Monad.Catch" that don't conflict with "UnliftIO".
 --

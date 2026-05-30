@@ -54,7 +54,6 @@ common basic
     BlockArguments
     CPP
     DefaultSignatures
-    DerivingVia
     DuplicateRecordFields
     FunctionalDependencies
     LexicalNegation
@@ -75,7 +74,6 @@ common basic
     RecordWildCards
     RecursiveDo
     StrictData
-    TemplateHaskell
     TypeData
     TypeFamilies
     TypeFamilyDependencies
