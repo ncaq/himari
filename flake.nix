@@ -308,6 +308,12 @@
         # 依存パッケージのバージョン変動などでビルド・テストが失敗することがある。
         # nixpkgs越しでも壊れていないことを継続的に検証する。
         himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (himariFileset pkgs.lib) { };
+        # ビルドとビルドテストの対象。
+        packages =
+          flake.packages # テストがないパッケージもビルドしてエラーを検出する。
+          // {
+            inherit himari-nixpkgs;
+          };
       in
       # haskell.nixのproject.flakeはciJobsとhydraJobsを生成するが、
       # ciJobsは非標準のoutputであり警告を誘発し、
@@ -356,14 +362,9 @@
             );
           };
         };
-        packages = flake.packages // {
-          inherit himari-nixpkgs;
-        };
+        inherit packages;
         checks =
-          flake.packages # テストがないパッケージもビルドしてエラーを検出する。
-          // {
-            inherit himari-nixpkgs;
-          }
+          packages
           // flake.checks
           // {
             formatting = treefmtEval.config.build.check self;
