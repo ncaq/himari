@@ -7,6 +7,13 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `Himari.SafePrelude`,
+  a Safe Haskell-compatible subset of `Himari.Prelude` re-exported by `Himari.Prelude`,
+  so downstream `Safe` modules can `import Himari.SafePrelude` directly
+  without dragging in unsafe re-exports
+
 ### Changed
 
 - Relax `data-default` dependency lower bound from `^>=0.8.0.2` to `^>=0.8.0.0`
@@ -14,6 +21,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - Remove `DerivingVia` and `TemplateHaskell` from `default-extensions`
   and enable them only in modules that use them,
   so `Safe` modules no longer need `NoDerivingVia` and `NoTemplateHaskell` overrides
+- Promote `Himari.Char` and `Himari.Logger` from `Trustworthy` to `Safe`
+  by switching them to import `Himari.SafePrelude` instead of `Himari.Prelude`
 
 ## [1.1.2.2] - 2026-05-28
 
