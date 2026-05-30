@@ -149,7 +149,7 @@
                 final.changelog-lint
                 fourmolu
                 hlint
-                nixfmt-rfc-style
+                nixfmt
                 prettier
                 shellcheck
                 shfmt
