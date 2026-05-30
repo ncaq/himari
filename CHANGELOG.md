@@ -7,6 +7,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Changed
+
+- Relax `data-default` dependency lower bound from `^>=0.8.0.2` to `^>=0.8.0.0`
+  to widen the range of compatible `data-default` 0.8.x releases
+
 ## [1.1.2.2] - 2026-05-28
 
 ### Changed
