@@ -1,3 +1,6 @@
+{-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE TemplateHaskell #-}
+
 module Config
   ( MonitorConfig (..)
   , HasCpuThreshold (..)

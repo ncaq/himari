@@ -1,7 +1,5 @@
 {-# LANGUAGE Safe #-}
-{-# LANGUAGE NoDerivingVia #-}
 {-# LANGUAGE NoGeneralizedNewtypeDeriving #-}
-{-# LANGUAGE NoTemplateHaskell #-}
 
 -- | "Data.Monoid" and "Data.Semigroup" re-exports, hiding conflicting symbols.
 module Himari.Prelude.Monoid

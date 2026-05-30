@@ -1,3 +1,5 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module Env
   ( Env (..)
   , HasLogAction (..)

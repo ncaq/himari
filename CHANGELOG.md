@@ -11,6 +11,9 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 - Relax `data-default` dependency lower bound from `^>=0.8.0.2` to `^>=0.8.0.0`
   to widen the range of compatible `data-default` 0.8.x releases
+- Remove `DerivingVia` and `TemplateHaskell` from `default-extensions`
+  and enable them only in modules that use them,
+  so `Safe` modules no longer need `NoDerivingVia` and `NoTemplateHaskell` overrides
 
 ## [1.1.2.2] - 2026-05-28
 
