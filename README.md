@@ -98,7 +98,7 @@ himariを使うプロジェクトでは、
 himariは部分関数を除去する代わりに、
 hlintで警告を出すことで対処しています。
 プロジェクトルートにある[.hlint.yaml](./.hlint.yaml)ファイルをコピーしてください。
-既存の`hlint.yaml`がある場合はマージしてください。
+既存の`.hlint.yaml`がある場合はマージしてください。
 
 ```console
 curl -L 'https://raw.githubusercontent.com/ncaq/himari/master/.hlint.yaml' -o '.hlint.yaml'
