@@ -129,6 +129,7 @@ library
     Himari.Prelude.Safe
     Himari.Prelude.Type
     Himari.Prelude.TypeLevel
+    Himari.SafePrelude
 
 test-suite himari-test
   import: basic

@@ -7,6 +7,13 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `Himari.SafePrelude`,
+  a Safe Haskell-compatible subset of `Himari.Prelude` re-exported by `Himari.Prelude`,
+  so downstream `Safe` modules can `import Himari.SafePrelude` directly
+  without dragging in unsafe re-exports
+
 ### Changed
 
 - Relax `data-default` dependency lower bound from `^>=0.8.0.2` to `^>=0.8.0.0`
