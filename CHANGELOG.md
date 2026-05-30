@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.3.0] - 2026-05-30
+
 ### Added
 
 - `Himari.SafePrelude`,
