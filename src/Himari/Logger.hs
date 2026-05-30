@@ -1,4 +1,5 @@
-{-# LANGUAGE Trustworthy #-}
+{-# LANGUAGE Safe #-}
+{-# LANGUAGE NoGeneralizedNewtypeDeriving #-}
 
 -- | Logger utilities for Himari.
 module Himari.Logger
@@ -9,7 +10,8 @@ module Himari.Logger
   ) where
 
 import Himari.Env
-import Himari.Prelude
+import Himari.SafePrelude
+import System.IO (stderr)
 
 -- | ログ出力を行う能力があることを検査するための型クラス。
 -- lensと互換性を持たせているので適切にフィールド名を設定して、

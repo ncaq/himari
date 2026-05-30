@@ -21,6 +21,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - Remove `DerivingVia` and `TemplateHaskell` from `default-extensions`
   and enable them only in modules that use them,
   so `Safe` modules no longer need `NoDerivingVia` and `NoTemplateHaskell` overrides
+- Promote `Himari.Char` and `Himari.Logger` from `Trustworthy` to `Safe`
+  by switching them to import `Himari.SafePrelude` instead of `Himari.Prelude`
 
 ## [1.1.2.2] - 2026-05-28
 

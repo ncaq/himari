@@ -1,4 +1,5 @@
-{-# LANGUAGE Trustworthy #-}
+{-# LANGUAGE Safe #-}
+{-# LANGUAGE NoGeneralizedNewtypeDeriving #-}
 
 -- | Safe alternatives to partial functions from "Data.Char".
 module Himari.Char
@@ -8,7 +9,7 @@ module Himari.Char
   ) where
 
 import Data.Char qualified as C
-import Himari.Prelude
+import Himari.SafePrelude
 
 -- | Safe version of "Data.Char".'digitToInt'.
 --
