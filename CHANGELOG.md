@@ -7,6 +7,15 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- `discardLogAction` export in `Himari.Logger`,
+  a `LogAction` that discards all log output,
+  useful for tests that should not write logs to the real terminal
+- `runSimpleNoLogEnv` export in `Himari.Env.Simple`,
+  a shorthand for `runSimpleEnvWith discardLogAction`
+  that runs a `SimpleEnv` action while discarding all log output
+
 ## [1.1.3.0] - 2026-05-30
 
 ### Added

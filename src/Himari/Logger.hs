@@ -7,6 +7,7 @@ module Himari.Logger
   , LogAction
   , defaultMonadLoggerLog
   , defaultLogAction
+  , discardLogAction
   ) where
 
 import Himari.Env
@@ -35,3 +36,8 @@ defaultMonadLoggerLog loc src level msg = do
 -- 標準エラー出力にログを出力します。
 defaultLogAction :: LogAction
 defaultLogAction = defaultOutput stderr
+
+-- | ログを一切出力せず破棄するログ出力。
+-- テストなどで実際のターミナルにログを出力したくない場合に使えます。
+discardLogAction :: LogAction
+discardLogAction _loc _src _level _msg = pure ()

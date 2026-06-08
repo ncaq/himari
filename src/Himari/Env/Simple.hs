@@ -6,6 +6,7 @@
 module Himari.Env.Simple
   ( SimpleEnv
   , runSimpleEnv
+  , runSimpleNoLogEnv
   , runSimpleEnvWith
   , mkSimpleEnv
   ) where
@@ -32,6 +33,11 @@ runSimpleEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
 runSimpleEnv f = do
   env <- mkSimpleEnv
   runHimari env f
+
+-- | `SimpleEnv`のコンテキストのアクションをログを破棄して実行します。
+-- テストなど実際のターミナルにログを出力したくない場合に使えます。
+runSimpleNoLogEnv :: (MonadIO m) => Himari SimpleEnv a -> m a
+runSimpleNoLogEnv = runSimpleEnvWith discardLogAction
 
 -- | `SimpleEnv`のコンテキストのアクションをカスタム出力で実行します。
 runSimpleEnvWith

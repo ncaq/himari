@@ -7,26 +7,29 @@ import Test.Syd
 
 spec :: Spec
 spec = do
+  -- テスト実行時に実際のターミナルへログを出力すると、
+  -- Errorなどがログディスプレイでハイライトされて紛らわしいので、
+  -- ログの出力を検証しないテストでは`runSimpleNoLogEnv`で出力を破棄する。
   describe "logging" $ do
     it
       "outputs debug level logs"
-      (runSimpleEnv $ $(logDebug) "debug message" :: IO ())
+      (runSimpleNoLogEnv $ $(logDebug) "debug message" :: IO ())
 
     it
       "outputs info level logs"
-      (runSimpleEnv $ $(logInfo) "info message" :: IO ())
+      (runSimpleNoLogEnv $ $(logInfo) "info message" :: IO ())
 
     it
       "outputs warning level logs"
-      (runSimpleEnv $ $(logWarn) "warning message" :: IO ())
+      (runSimpleNoLogEnv $ $(logWarn) "warning message" :: IO ())
 
     it
       "outputs error level logs"
-      (runSimpleEnv $ $(logError) "error message" :: IO ())
+      (runSimpleNoLogEnv $ $(logError) "error message" :: IO ())
 
     it
       "handles multiple log calls"
-      ( runSimpleEnv
+      ( runSimpleNoLogEnv
           ( do
               $(logInfo) "first log"
               $(logInfo) "second log"
@@ -36,7 +39,7 @@ spec = do
       )
 
     it "works with monadic composition" $ do
-      result <- runSimpleEnv $ do
+      result <- runSimpleNoLogEnv $ do
         $(logInfo) "starting computation"
         let x = 20 :: Int
         $(logDebug) ("intermediate value: " <> convert (show x))
@@ -47,7 +50,7 @@ spec = do
 
     it
       "supports monad-logger functions"
-      ( runSimpleEnv
+      ( runSimpleNoLogEnv
           ( do
               logInfoN "using logInfoN"
               logDebugN "using logDebugN"
@@ -85,7 +88,7 @@ spec = do
       result `shouldBe` 42
 
     it "can access and use the environment" $ do
-      result <- runSimpleEnv $ do
+      result <- runSimpleNoLogEnv $ do
         $(logInfo) "computing result"
         pure (10 + 32 :: Int)
       result `shouldBe` 42
