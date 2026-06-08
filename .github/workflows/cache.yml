@@ -1,0 +1,44 @@
+name: cache
+
+on:
+  push:
+    branches: [master, main]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # 開発ツール(devShell)をビルドしてキャッシュに補充するジョブ。
+  # `nix flake check`はチェックに必要なderivationしかビルドしないため、
+  # `nix develop`で入る開発環境のツール群はキャッシュされません。
+  # このライブラリを使う人が貧弱な環境でも開発環境を高速にセットアップできるように、
+  # ここで明示的にビルドしてpost-build-hook経由でキャッシュにpushします。
+  # devShellが既にキャッシュ済みなら単なるキャッシュヒットで高速に終わるので、
+  # 重いビルドはflake.lockが更新された時だけ発生します。
+  # このジョブはキャッシュ補充が目的でありビルドの成否は開発をブロックすべきではないので、
+  # ブランチ保護の必須チェックには含めない想定です。
+  cache-dev-shell:
+    name: cache-dev-shell
+    strategy:
+      matrix:
+        # WindowsはNixが対応していないので対象外です。
+        os:
+          - ubuntu-24.04 # x86_64-linux
+          - ubuntu-24.04-arm # aarch64-linux
+          - macos-15 # aarch64-darwin
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read # Read repository contents
+      id-token: write # niks3 OIDC authentication
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: ncaq/nix-composite-action@5a61f70ad5b7d2f276732e14355b7fb2ddd4caaf # v1.3.0
+        with:
+          cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix develop --command true
