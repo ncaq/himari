@@ -16,6 +16,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
   a shorthand for `runSimpleEnvWith discardLogAction`
   that runs a `SimpleEnv` action while discarding all log output
 
+### Changed
+
+- Relax `aeson` dependency upper bound from `^>=2.2.3.0` to `^>=2.2.3.0 || ^>=2.3.0.0`
+  to allow building against `aeson` 2.3.y.z
+
 ## [1.1.3.0] - 2026-05-30
 
 ### Added
