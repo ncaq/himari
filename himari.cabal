@@ -178,7 +178,7 @@ test-suite himari-test
     build-depends:
       ghc-lib-parser >=9.12.3
 
-executable anomaly-monitor
+executable example-anomaly-monitor
   import: basic
   hs-source-dirs: example/anomaly-monitor
   main-is: Main.hs
