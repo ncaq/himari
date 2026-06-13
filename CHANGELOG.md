@@ -9,6 +9,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Changed
 
+- Widen the `containers` version bound from `<0.8` to `<0.9`
+  to allow `containers` 0.8, which ships with GHC 9.14.
 - Switch dependency version bounds from the PVP caret operator (`^>=`)
   to explicit `>=x && <y` ranges.
   So that Renovate can recognize and update them.
