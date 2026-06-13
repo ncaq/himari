@@ -60,6 +60,17 @@ reexports:
   - module Himari.Prelude exports "pretty-simple" Text.Pretty.Simple
   - module Himari.Prelude exports "primitive" Control.Monad.Primitive
   - module Himari.Prelude exports "time" Data.Time
+  - module Himari.Prelude exports "time" Data.Time.Calendar.Easter
+  - module Himari.Prelude exports "time" Data.Time.Calendar.Julian
+  - module Himari.Prelude exports "time" Data.Time.Calendar.Month
+  - module Himari.Prelude exports "time" Data.Time.Calendar.MonthDay
+  - module Himari.Prelude exports "time" Data.Time.Calendar.OrdinalDate
+  - module Himari.Prelude exports "time" Data.Time.Calendar.Quarter
+  - module Himari.Prelude exports "time" Data.Time.Calendar.WeekDate
+  - module Himari.Prelude exports "time" Data.Time.Clock.POSIX
+  - module Himari.Prelude exports "time" Data.Time.Clock.System
+  - module Himari.Prelude exports "time" Data.Time.Clock.TAI
+  - module Himari.Prelude exports "time" Data.Time.Format.ISO8601
   - module Himari.Prelude exports "unliftio" UnliftIO
   - module Himari.Prelude exports "unliftio" UnliftIO.Concurrent
   - module Himari.Prelude exports "unliftio" UnliftIO.Directory

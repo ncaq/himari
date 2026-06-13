@@ -15,6 +15,20 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `runSimpleNoLogEnv` export in `Himari.Env.Simple`,
   a shorthand for `runSimpleEnvWith discardLogAction`
   that runs a `SimpleEnv` action while discarding all log output
+- Re-export all public `time` modules that `Data.Time` itself does not re-export
+  in `Himari.SafePrelude`:
+  `Data.Time.Calendar.Easter`,
+  `Data.Time.Calendar.Julian`,
+  `Data.Time.Calendar.MonthDay`,
+  `Data.Time.Calendar.Month`,
+  `Data.Time.Calendar.OrdinalDate`,
+  `Data.Time.Calendar.Quarter`,
+  `Data.Time.Calendar.WeekDate`,
+  `Data.Time.Clock.POSIX`,
+  `Data.Time.Clock.System`,
+  `Data.Time.Clock.TAI`,
+  `Data.Time.Format.ISO8601`,
+  and register them in the `fourmolu.yaml` `reexports` setting
 
 ### Changed
 
