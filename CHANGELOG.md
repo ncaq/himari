@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.4.1] - 2026-06-13
+
 ### Changed
 
 - Widen the `containers` version bound from `<0.8` to `<0.9`
