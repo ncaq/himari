@@ -156,7 +156,7 @@ test-suite himari-test
     -with-rtsopts=-N
 
   build-depends:
-    QuickCheck >=2.15.0.1 && <2.16,
+    QuickCheck >=2.15.0.1 && <2.19,
     himari,
     sydtest >=0.18.0.0 && <0.24,
 
