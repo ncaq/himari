@@ -35,6 +35,14 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - Relax `aeson` dependency upper bound from `^>=2.2.3.0` to `^>=2.2.3.0 || ^>=2.3.0.0`
   to allow building against `aeson` 2.3.y.z
 
+### Fixed
+
+- Restructure the `fourmolu.yaml` `reexports` chain to match the module hierarchy
+  introduced with `Himari.SafePrelude` in 1.1.3.0:
+  re-exports that moved to `Himari.SafePrelude` are now registered under it
+  instead of `Himari.Prelude`,
+  and the previously missing `Data.Default` and `UnliftIO.Retry` entries are added
+
 ## [1.1.3.0] - 2026-05-30
 
 ### Added
