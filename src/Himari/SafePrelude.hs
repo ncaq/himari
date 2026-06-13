@@ -38,6 +38,17 @@ import Data.Proxy as Export
 import Data.Ratio as Export
 import Data.String as Export
 import Data.Time as Export
+import Data.Time.Calendar.Easter as Export
+import Data.Time.Calendar.Julian as Export
+import Data.Time.Calendar.Month as Export
+import Data.Time.Calendar.MonthDay as Export
+import Data.Time.Calendar.OrdinalDate as Export
+import Data.Time.Calendar.Quarter as Export
+import Data.Time.Calendar.WeekDate as Export
+import Data.Time.Clock.POSIX as Export
+import Data.Time.Clock.System as Export
+import Data.Time.Clock.TAI as Export
+import Data.Time.Format.ISO8601 as Export
 import Data.Traversable as Export
 import Data.Tuple as Export
 import Data.Void as Export
