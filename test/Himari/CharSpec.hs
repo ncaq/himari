@@ -209,3 +209,12 @@ spec = do
           case chrMay n of
             Just _ -> True
             Nothing -> True
+
+#if !MIN_VERSION_QuickCheck(2,18,0)
+-- | `withNumTests`は`QuickCheck 2.18.0.0`で、
+-- `withMaxSuccess`から改名された関数です。
+-- それより古いQuickCheckには存在しないため、
+-- `withMaxSuccess`で互換定義します。
+withNumTests :: (Testable prop) => Int -> prop -> Property
+withNumTests = withMaxSuccess
+#endif
