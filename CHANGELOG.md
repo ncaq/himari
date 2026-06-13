@@ -7,6 +7,12 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Changed
+
+- Switch dependency version bounds from the PVP caret operator (`^>=`)
+  to explicit `>=x && <y` ranges.
+  So that Renovate can recognize and update them.
+
 ## [1.1.4.0] - 2026-06-13
 
 ### Added
