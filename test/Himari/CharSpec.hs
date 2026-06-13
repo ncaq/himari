@@ -205,7 +205,7 @@ spec = do
           chrMay (ord c) == Just c
 
       it "never throws an exception for any Int value" $ do
-        withMaxSuccess 10000 . property $ \n ->
+        withNumTests 10000 . property $ \n ->
           case chrMay n of
             Just _ -> True
             Nothing -> True
