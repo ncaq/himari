@@ -29,6 +29,7 @@ reexports:
   # Himari.Prelude → 内部サブモジュール
   - module Himari.Prelude exports "himari" Himari.Prelude.Aeson
   - module Himari.Prelude exports "himari" Himari.Prelude.Casing
+  - module Himari.Prelude exports "himari" Himari.Prelude.Here
   - module Himari.Prelude exports "himari" Himari.Prelude.Process
   - module Himari.Prelude exports "himari" Himari.Prelude.TypeLevel
   - module Himari.Prelude exports "himari" Himari.SafePrelude
@@ -106,6 +107,9 @@ reexports:
 
   # Himari.Prelude.Casing → 外部モジュール
   - module Himari.Prelude.Casing exports "casing" Text.Casing
+
+  # Himari.Prelude.Here → 外部モジュール
+  - module Himari.Prelude.Here exports "here" Data.String.Here
 
   # Himari.Prelude.Category → 外部モジュール
   - module Himari.Prelude.Category exports "base" Control.Category
