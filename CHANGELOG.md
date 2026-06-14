@@ -15,6 +15,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `here` package (>=1.2.14) as a dependency for here documents and string interpolation
 - `Himari.Prelude.Here`: `Data.String.Here` re-exports from the `here` package
   (hiding the overly general `i` and `template` to avoid name conflicts)
+- `uuid` package (>=1.3.16.1) as a dependency for UUID values and their generation
+- `Himari.Prelude.UUID`: `Data.UUID` and `Data.UUID.V4` re-exports
+  from the `uuid` package
+  (hiding the overly general `null`, `toString`, `fromString`, `toText`, and `fromText`
+  to avoid name conflicts)
 
 ## [1.1.4.1] - 2026-06-13
 

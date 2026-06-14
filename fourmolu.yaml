@@ -32,6 +32,7 @@ reexports:
   - module Himari.Prelude exports "himari" Himari.Prelude.Here
   - module Himari.Prelude exports "himari" Himari.Prelude.Process
   - module Himari.Prelude exports "himari" Himari.Prelude.TypeLevel
+  - module Himari.Prelude exports "himari" Himari.Prelude.UUID
   - module Himari.Prelude exports "himari" Himari.SafePrelude
 
   # Himari.SafePrelude → 外部モジュール
@@ -162,6 +163,10 @@ reexports:
   # Himari.Prelude.TypeLevel → 外部モジュール
   - module Himari.Prelude.TypeLevel exports "base" Data.Type.Coercion
   - module Himari.Prelude.TypeLevel exports "base" Data.Type.Equality
+
+  # Himari.Prelude.UUID → 外部モジュール
+  - module Himari.Prelude.UUID exports "uuid" Data.UUID
+  - module Himari.Prelude.UUID exports "uuid" Data.UUID.V4
 
 # 利用者向けの汎用的なfixity設定
 # hspecは既にfourmoluによってサポートされているため不要

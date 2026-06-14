@@ -11,6 +11,7 @@ import Himari.Prelude.Casing as Export
 import Himari.Prelude.Here as Export
 import Himari.Prelude.Process as Export
 import Himari.Prelude.TypeLevel as Export
+import Himari.Prelude.UUID as Export
 import Himari.SafePrelude as Export
 import UnliftIO as Export
 import UnliftIO.Concurrent as Export
