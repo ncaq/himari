@@ -28,8 +28,11 @@ reexports:
   - module Himari.Prelude exports "unliftio" UnliftIO.IO.File
   # Himari.Prelude → 内部サブモジュール
   - module Himari.Prelude exports "himari" Himari.Prelude.Aeson
+  - module Himari.Prelude exports "himari" Himari.Prelude.Casing
+  - module Himari.Prelude exports "himari" Himari.Prelude.Here
   - module Himari.Prelude exports "himari" Himari.Prelude.Process
   - module Himari.Prelude exports "himari" Himari.Prelude.TypeLevel
+  - module Himari.Prelude exports "himari" Himari.Prelude.UUID
   - module Himari.Prelude exports "himari" Himari.SafePrelude
 
   # Himari.SafePrelude → 外部モジュール
@@ -103,6 +106,12 @@ reexports:
   - module Himari.Prelude.Aeson exports "aeson-pretty" Data.Aeson.Encode.Pretty
   - module Himari.Prelude.Aeson exports "deriving-aeson" Deriving.Aeson
 
+  # Himari.Prelude.Casing → 外部モジュール
+  - module Himari.Prelude.Casing exports "casing" Text.Casing
+
+  # Himari.Prelude.Here → 外部モジュール
+  - module Himari.Prelude.Here exports "here" Data.String.Here
+
   # Himari.Prelude.Category → 外部モジュール
   - module Himari.Prelude.Category exports "base" Control.Category
 
@@ -154,6 +163,10 @@ reexports:
   # Himari.Prelude.TypeLevel → 外部モジュール
   - module Himari.Prelude.TypeLevel exports "base" Data.Type.Coercion
   - module Himari.Prelude.TypeLevel exports "base" Data.Type.Equality
+
+  # Himari.Prelude.UUID → 外部モジュール
+  - module Himari.Prelude.UUID exports "uuid" Data.UUID
+  - module Himari.Prelude.UUID exports "uuid" Data.UUID.V4
 
 # 利用者向けの汎用的なfixity設定
 # hspecは既にfourmoluによってサポートされているため不要
