@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.5.0] - 2026-06-14
+
 ### Added
 
 - `casing` package (>=0.1.4.1) as a dependency for identifier case conversion
