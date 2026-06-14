@@ -18,7 +18,14 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - `uuid` package (>=1.3.16.1) as a dependency for UUID values and their generation
 - `Himari.Prelude.UUID`: `Data.UUID` and `Data.UUID.V4` re-exports
   from the `uuid` package
-  (hiding the overly general `null`, `toString`, `fromString`, `toText`, and `fromText`
+  (hiding the overly general:
+  `null`,
+  `toString`,
+  `fromString`,
+  `toText`,
+  `fromText`,
+  `fromWords`,
+  `toWords`,
   to avoid name conflicts)
 
 ## [1.1.4.1] - 2026-06-13
