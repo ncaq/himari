@@ -28,6 +28,7 @@ reexports:
   - module Himari.Prelude exports "unliftio" UnliftIO.IO.File
   # Himari.Prelude → 内部サブモジュール
   - module Himari.Prelude exports "himari" Himari.Prelude.Aeson
+  - module Himari.Prelude exports "himari" Himari.Prelude.Casing
   - module Himari.Prelude exports "himari" Himari.Prelude.Process
   - module Himari.Prelude exports "himari" Himari.Prelude.TypeLevel
   - module Himari.Prelude exports "himari" Himari.SafePrelude
@@ -102,6 +103,9 @@ reexports:
   - module Himari.Prelude.Aeson exports "aeson" Data.Aeson.QQ.Simple
   - module Himari.Prelude.Aeson exports "aeson-pretty" Data.Aeson.Encode.Pretty
   - module Himari.Prelude.Aeson exports "deriving-aeson" Deriving.Aeson
+
+  # Himari.Prelude.Casing → 外部モジュール
+  - module Himari.Prelude.Casing exports "casing" Text.Casing
 
   # Himari.Prelude.Category → 外部モジュール
   - module Himari.Prelude.Category exports "base" Control.Category

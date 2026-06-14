@@ -84,6 +84,7 @@ common basic
     aeson-pretty >=0.8.10 && <0.9,
     base >=4.19.2.0 && <4.23,
     bytestring >=0.12.2.0 && <0.13,
+    casing >=0.1.4.1 && <0.2,
     containers >=0.7 && <0.9,
     convertible >=1.1.1.1 && <1.2,
     data-default >=0.8.0.0 && <0.9,
@@ -119,6 +120,7 @@ library
     Himari.Prelude
     Himari.Prelude.Aeson
     Himari.Prelude.Arrow
+    Himari.Prelude.Casing
     Himari.Prelude.Catch
     Himari.Prelude.Category
     Himari.Prelude.Data
