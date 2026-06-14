@@ -11,7 +11,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 - `casing` package (>=0.1.4.1) as a dependency for identifier case conversion
 - `Himari.Prelude.Casing`: `Text.Casing` re-exports from the `casing` package
-  (hiding the overly general `dropPrefix` to avoid name conflicts)
+  (hiding the overly general `dropPrefix`, `toWords`, and `fromWords` to avoid name conflicts)
 - `here` package (>=1.2.14) as a dependency for here documents and string interpolation
 - `Himari.Prelude.Here`: `Data.String.Here` re-exports from the `here` package
   (hiding the overly general `i` and `template` to avoid name conflicts)

@@ -5,5 +5,6 @@ module Himari.Prelude.Casing
   ) where
 
 -- casing exposes mostly safe pure conversion functions,
--- but @dropPrefix@ has a name too generic and likely to conflict, so we hide only it.
-import Text.Casing as Export hiding (dropPrefix)
+-- but @dropPrefix@, @toWords@, and @fromWords@ have names too generic and likely to conflict,
+-- so we hide them.
+import Text.Casing as Export hiding (dropPrefix, fromWords, toWords)
