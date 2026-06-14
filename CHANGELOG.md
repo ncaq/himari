@@ -7,6 +7,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Changed
+
+- Relax the lower bound of the `uuid` dependency from `>=1.3.16.1` to `>=1.3.11`,
+  the first version that provides all of the re-exported and hidden names
+
 ## [1.1.5.0] - 2026-06-14
 
 ### Added
