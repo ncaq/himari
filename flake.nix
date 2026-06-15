@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.follows = "haskellNix/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs = {
@@ -16,13 +16,13 @@
   };
 
   outputs =
-    {
-      self,
+    inputs@{
       nixpkgs,
-      flake-utils,
+      flake-parts,
       treefmt-nix,
       haskellNix,
       changelog-lint-src,
+      ...
     }:
     let
       # `cabal.project`の`with-compiler`で指定したGHCバージョンを尊重し、
@@ -41,7 +41,7 @@
       # cabalビルドに必要なファイルのみを含める。
       # 関係ないファイル(.editorconfig, .githubなど)の変更で内部derivationのhashが動き、
       # キャッシュミスが発生するのを避ける。
-      himariFileset =
+      cabalFileset =
         lib:
         lib.fileset.toSource {
           root = ./.;
@@ -82,22 +82,12 @@
         )
         (final: prev: {
           project = final.haskell-nix.cabalProject' {
-            src = himariFileset final.lib;
+            src = cabalFileset final.lib;
             compiler-nix-name = ghc-version;
             modules = [
               # `nix flake check`レベルではcabalの警告をエラーとして扱います。
               # ライブラリの問題ない範囲の不一致とか考えるとcabalの警告はエラーにしないべきですが、
               # CIでは通したくないので警告も含めてエラーにします。
-              # CI専用に環境を分離するのも手ですが、
-              # 元々`nix flake check`では最適化を無効にするのが面倒なので時間がかかるため、
-              # あまり反復的に実行しません。
-              # 反復的に実行してテストの結果とかを確認するのには、
-              # `cabal test`のような言語固有のコマンドを使います。
-              # `cabal test`の方が実行するテストをフィルタリングとかも簡単に出来ますし。
-              # そのことを考えると本番を考えてエラーにしても構わないでしょう。
-              # flake参照された時にnixpkgsをfollowすると、
-              # 問題ない警告をエラーにしてしまうかもしれないのが懸念点ですが、
-              # 少なくとも現在は考慮する必要はないでしょう。
               # 注意点としてsrcやtestはビルドされますが、
               # executableであるappはビルドされません。
               # 「appはエントリーポイントとしてのみ使う」習慣を守っていれば、
@@ -198,185 +188,186 @@
         })
       ];
     in
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          inherit (haskellNix) config;
-        };
-        flake = pkgs.project.flake { };
-        treefmtEval = treefmt-nix.lib.evalModule pkgs (_: {
-          # yamlfmtはprettierと競合する。
-          projectRootFile = "flake.nix";
-          programs = {
-            actionlint.enable = true;
-            deadnix.enable = true;
-            dhall.enable = true;
-            nixfmt.enable = true;
-            prettier.enable = true;
-            shellcheck.enable = true;
-            shfmt.enable = true;
-            statix.enable = true;
-            typos.enable = true;
-            zizmor.enable = true;
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        treefmt-nix.flakeModule
+      ];
 
-            hlint = {
-              enable = true;
-              package = pkgs.hlint;
-              # HlintSamplesディレクトリはhlintルールのテスト用であり、
-              # 意図的に警告を出すコードを含むため、
-              # hlintの対象から除外します。
-              # 本当はこういうのはhlintの設定として書くべきかもしれませんが、
-              # 現状配布するhlintのルールとプロジェクトで使うルールが同じなので、
-              # こちらで除外しています。
-              # 乖離が激しくなってきたら配布するものは分けることも検討します。
-              excludes = [ "test/HlintSamples/*" ];
-            };
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
 
-            fourmolu = {
-              enable = true;
-              package = pkgs.fourmolu;
-            };
-
-            # cabal-gildはモジュール自動発見対応のためsettings.formatterでカスタム設定します。
+      perSystem =
+        { system, ... }:
+        let
+          pkgs = import nixpkgs {
+            inherit system overlays;
+            inherit (haskellNix) config;
           };
-          settings.formatter = {
-            # cabal-gildのモジュール自動発見機能に対応するため、
-            # Haskellソースファイルの変更も検知してcabal-gildを実行します。
-            # treefmt-nixの上流では、
-            # 変更されたファイルだけを修正したいと言われてマージされていませんが、
-            # ローカルで使う分には問題ありません。
-            # https://github.com/numtide/treefmt-nix/pull/384
-            cabal-gild = {
-              command = pkgs.lib.getExe (
-                pkgs.writeShellApplication {
-                  name = "cabal-gild-wrapper";
-                  runtimeInputs = [
-                    (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.4")
-                    pkgs.git
-                    pkgs.parallel
-                  ];
-                  text = ''
-                    git ls-files -z "*.cabal" | parallel --null "cabal-gild --io {}"
-                  '';
-                }
-              );
-              includes = [
-                "*.cabal"
-                # Haskellソースファイルの変更を検知するために含める
-                "*.hs"
-                "*.lhs"
-                "*.hsc"
-                "*.chs"
-                "*.hsig"
-                "*.lhsig"
-              ];
+          flake = pkgs.project.flake { };
+          # nixpkgsの`haskellPackages`越しにhimariをビルド・テストする派生。
+          # haskell.nixはCabalソルバーで依存解決するため柔軟だが、
+          # 素のnixpkgsは1パッケージ1バージョン固定なので、
+          # 依存パッケージのバージョン変動などでビルド・テストが失敗することがある。
+          # nixpkgs越しでも壊れていないことを継続的に検証する。
+          himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (cabalFileset pkgs.lib) { };
+        in
+        {
+          treefmt.config = {
+            projectRootFile = "flake.nix";
+            programs = {
+              actionlint.enable = true;
+              deadnix.enable = true;
+              dhall.enable = true;
+              nixfmt.enable = true;
+              prettier.enable = true;
+              shellcheck.enable = true;
+              shfmt.enable = true;
+              statix.enable = true;
+              typos.enable = true;
+              zizmor.enable = true;
+
+              hlint = {
+                enable = true;
+                package = pkgs.hlint;
+                # HlintSamplesディレクトリはhlintルールのテスト用であり、
+                # 意図的に警告を出すコードを含むため、
+                # hlintの対象から除外します。
+                # 本当はこういうのはhlintの設定として書くべきかもしれませんが、
+                # 現状配布するhlintのルールとプロジェクトで使うルールが同じなので、
+                # こちらで除外しています。
+                # 乖離が激しくなってきたら配布するものは分けることも検討します。
+                excludes = [ "test/HlintSamples/*" ];
+              };
+
+              fourmolu = {
+                enable = true;
+                package = pkgs.fourmolu;
+              };
+
+              # cabal-gildはモジュール自動発見対応のためsettings.formatterでカスタム設定します。
             };
-            cabal-check = {
-              command = pkgs.lib.getExe (
-                pkgs.writeShellApplication {
-                  name = "cabal-check-wrapper";
-                  runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" cabal-version) ];
-                  text = ''
-                    cabal check
-                  '';
-                }
-              );
-              includes = [ "*.cabal" ];
+            settings.formatter = {
+              # cabal-gildのモジュール自動発見機能に対応するため、
+              # Haskellソースファイルの変更も検知してcabal-gildを実行します。
+              # treefmt-nixの上流では、
+              # 変更されたファイルだけを修正したいと言われてマージされていませんが、
+              # ローカルで使う分には問題ありません。
+              # https://github.com/numtide/treefmt-nix/pull/384
+              cabal-gild = {
+                command = pkgs.lib.getExe (
+                  pkgs.writeShellApplication {
+                    name = "cabal-gild-wrapper";
+                    runtimeInputs = [
+                      (pkgs.haskell-nix.tool ghc-version "cabal-gild" "1.6.0.4")
+                      pkgs.git
+                      pkgs.parallel
+                    ];
+                    text = ''
+                      git ls-files -z "*.cabal" | parallel --null "cabal-gild --io {}"
+                    '';
+                  }
+                );
+                includes = [
+                  "*.cabal"
+                  # Haskellソースファイルの変更を検知するために含める
+                  "*.hs"
+                  "*.lhs"
+                  "*.hsc"
+                  "*.chs"
+                  "*.hsig"
+                  "*.lhsig"
+                ];
+              };
+              cabal-check = {
+                command = pkgs.lib.getExe (
+                  pkgs.writeShellApplication {
+                    name = "cabal-check-wrapper";
+                    runtimeInputs = [ (pkgs.haskell-nix.tool ghc-version "cabal" cabal-version) ];
+                    text = ''
+                      cabal check
+                    '';
+                  }
+                );
+                includes = [ "*.cabal" ];
+              };
+              changelog-lint = {
+                command = pkgs.lib.getExe (
+                  pkgs.writeShellApplication {
+                    name = "changelog-lint-wrapper";
+                    runtimeInputs = [ pkgs.changelog-lint ];
+                    text = ''
+                      changelog-lint -config .changelog-lint.toml "$@"
+                    '';
+                  }
+                );
+                includes = [ "CHANGELOG.md" ];
+              };
+              editorconfig-checker = {
+                command = pkgs.editorconfig-checker;
+                includes = [ "*" ];
+                excludes = [
+                  "dist-newstyle/*"
+                ];
+              };
+              zizmor.options = [ "--pedantic" ];
             };
-            changelog-lint = {
-              command = pkgs.lib.getExe (
-                pkgs.writeShellApplication {
-                  name = "changelog-lint-wrapper";
-                  runtimeInputs = [ pkgs.changelog-lint ];
-                  text = ''
-                    changelog-lint -config .changelog-lint.toml "$@"
-                  '';
-                }
-              );
-              includes = [ "CHANGELOG.md" ];
-            };
-            editorconfig-checker = {
-              command = pkgs.editorconfig-checker;
-              includes = [ "*" ];
-              excludes = [
-                "dist-newstyle/*"
-              ];
-            };
-            zizmor.options = [ "--pedantic" ];
           };
-        });
-        # nixpkgsの`haskellPackages`越しにhimariをビルド・テストする派生。
-        # haskell.nixはCabalソルバーで依存解決するため柔軟だが、
-        # 素のnixpkgsは1パッケージ1バージョン固定なので、
-        # 依存パッケージのバージョン変動などでビルド・テストが失敗することがある。
-        # nixpkgs越しでも壊れていないことを継続的に検証する。
-        himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (himariFileset pkgs.lib) { };
-        # ビルドとビルドテストの対象。
-        packages =
-          flake.packages # テストがないパッケージもビルドしてエラーを検出する。
-          // {
+
+          checks =
+            # テストがないパッケージもビルドしてエラーを検出する。
+            flake.packages
+            // himari-nixpkgs
+            # テストの実行パッケージを後に書くことで上書き。
+            // flake.checks;
+
+          packages = flake.packages // {
             inherit himari-nixpkgs;
           };
-      in
-      # haskell.nixのproject.flakeはciJobsとhydraJobsを生成するが、
-      # ciJobsは非標準のoutputであり警告を誘発し、
-      # hydraJobsもGitHub Actionsを使うため不要なので除外。
-      builtins.removeAttrs flake [
-        "ciJobs"
-        "hydraJobs"
-      ]
-      // {
-        apps = flake.apps // {
-          generate-hlint = {
-            type = "app";
-            meta.description = "Generate .hlint.yaml from Dhall source";
-            program = pkgs.lib.getExe (
-              pkgs.writeShellApplication {
-                name = "generate-hlint";
-                runtimeInputs = [
-                  pkgs.dhall-yaml
-                  pkgs.git
-                  pkgs.prettier
-                ];
-                text = ''
-                  #!/usr/bin/env bash
-                  set -euo pipefail
-                  cd "$(git rev-parse --show-toplevel)"
-                  {
-                    cat <<'HEADER'
-                  # himari hlint configuration
-                  #
-                  # このファイルはDhallによって自動生成されています。
-                  # 直接編集しないでください。
-                  #
-                  # himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
-                  # 部分関数や危険な関数の使用を警告したり、
-                  # より可読性の高いパターンを提案します。
-                  #
-                  # 使い方:
-                  #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
-                  #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
-                  HEADER
-                    dhall-to-yaml-ng --file hlint/hlint.dhall
-                  } > .hlint.yaml
-                  prettier --write .hlint.yaml
-                '';
-              }
-            );
+
+          apps = flake.apps // {
+            generate-hlint = {
+              type = "app";
+              meta.description = "Generate .hlint.yaml from Dhall source";
+              program = pkgs.lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "generate-hlint";
+                  runtimeInputs = with pkgs; [
+                    dhall-yaml
+                    git
+                    prettier
+                  ];
+                  text = ''
+                    cd "$(git rev-parse --show-toplevel)"
+                    {
+                      cat <<'HEADER'
+                    # himari hlint configuration
+                    #
+                    # このファイルはDhallによって自動生成されています。
+                    # 直接編集しないでください。
+                    #
+                    # himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
+                    # 部分関数や危険な関数の使用を警告したり、
+                    # より可読性の高いパターンを提案します。
+                    #
+                    # 使い方:
+                    #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
+                    #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
+                    HEADER
+                      dhall-to-yaml-ng --file hlint/hlint.dhall
+                    } > .hlint.yaml
+                    prettier --write .hlint.yaml
+                  '';
+                }
+              );
+            };
           };
+
+          inherit (flake) devShells;
         };
-        inherit packages;
-        checks =
-          packages
-          // flake.checks
-          // {
-            formatting = treefmtEval.config.build.check self;
-          };
-        formatter = treefmtEval.config.build.wrapper;
-      }
-    );
+    };
 
   nixConfig = {
     extra-substituters = [
