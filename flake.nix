@@ -213,6 +213,10 @@
           # 依存パッケージのバージョン変動などでビルド・テストが失敗することがある。
           # nixpkgs越しでも壊れていないことを継続的に検証する。
           himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (cabalFileset pkgs.lib) { };
+          # `haskell.nix`の生成したパッケージとその他のものをまとめます。
+          packages = flake.packages // {
+            inherit himari-nixpkgs;
+          };
         in
         {
           treefmt.config = {
@@ -318,14 +322,10 @@
 
           checks =
             # テストがないパッケージもビルドしてエラーを検出する。
-            flake.packages
-            // himari-nixpkgs
             # テストの実行パッケージを後に書くことで上書き。
-            // flake.checks;
+            packages // flake.checks;
 
-          packages = flake.packages // {
-            inherit himari-nixpkgs;
-          };
+          inherit packages;
 
           apps = flake.apps // {
             generate-hlint = {
