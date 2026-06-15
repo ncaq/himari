@@ -25,7 +25,17 @@
       changelog-lint-src,
     }:
     let
-      ghc-version = "ghc9124"; # GHC 9.12.4
+      # `cabal.project`の`with-compiler`で指定したGHCバージョンを尊重し、
+      # 対応するnixpkgsのパッケージセットを選択します。
+      # こうすることでGHCバージョンの管理が`cabal.project`に一元化されます。
+      cabalHaskellGhcVersion =
+        let
+          m = builtins.match ".*with-compiler:[[:space:]]*ghc-([0-9.]+).*" (
+            builtins.readFile ./cabal.project
+          );
+        in
+        if m == null then throw "cabal.projectにwith-compilerが見つかりません" else builtins.head m;
+      ghc-version = "ghc${builtins.replaceStrings [ "." ] [ "" ] cabalHaskellGhcVersion}";
       cabal-version = "3.16.1.0";
       hls-version = "2.13.0.0";
       # cabalビルドに必要なファイルのみを含める。
