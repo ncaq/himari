@@ -18,9 +18,12 @@ maintainer: ncaq@ncaq.net
 copyright: ncaq
 category: Control
 build-type: Simple
-data-files:
+-- テスト(`HlintBaseSpec`など)が`hlint`を実行する際に、
+-- プロジェクトルートの`.hlint.yaml`を読み込むため必要。
+-- `data-files`としての利用者向け配布はやめたが、
+-- テスト実行には必要。
+extra-source-files:
   .hlint.yaml
-  fourmolu.yaml
 
 extra-doc-files:
   CHANGELOG.md

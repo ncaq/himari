@@ -17,6 +17,12 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 - Relax the lower bound of the `uuid` dependency from `>=1.3.16.1` to `>=1.3.11`,
   the first version that provides all of the re-exported and hidden names
 
+### Removed
+
+- Stop distributing `.hlint.yaml` and `fourmolu.yaml` as Cabal `data-files`,
+  since downstream usage cannot be verified.
+  `.hlint.yaml` is kept under `extra-source-files` only because the test suite needs it
+
 ## [1.1.5.0] - 2026-06-14
 
 ### Added
