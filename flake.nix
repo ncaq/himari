@@ -184,9 +184,8 @@
           # 別経路の検証として価値があります。
           # `resolver`を`stack.yaml`にハードコードすると更新忘れが起きるため、
           # `flake.lock`に固定された`haskell.nix`のstackageデータの中から、
-          # 最新のLTSとnightlyを自動的に選択します。
+          # 最新のnightlyを自動的に選択します。
           # `nix flake update`でhaskell.nixが更新されれば検証対象も自動で追従します。
-          # LTSは登録の最終目的であり、nightlyは登録時にまず整合を問われるため、両方を対象にします。
           himari-stackage-projects =
             let
               snapshotNames = builtins.attrNames final.haskell-nix.snapshots;
@@ -194,11 +193,6 @@
               # 文字列の昇順ソートが日付の昇順と一致するため、単純な文字列比較で最新を選べます。
               latestNightly = final.lib.last (
                 builtins.sort (a: b: a < b) (builtins.filter (final.lib.hasPrefix "nightly-") snapshotNames)
-              );
-              # `lts-MAJOR.MINOR`はMINORが2桁になると単純な文字列ソートでは順序が崩れるため、
-              # 数値を考慮する`naturalSort`で最新を選びます。
-              latestLts = final.lib.last (
-                final.lib.naturalSort (builtins.filter (final.lib.hasPrefix "lts-") snapshotNames)
               );
               # 指定したresolverのstackageスナップショットでビルドするプロジェクトを作ります。
               mkStackageProject =
@@ -251,7 +245,6 @@
             in
             {
               nightly = mkStackageProject latestNightly;
-              lts = mkStackageProject latestLts;
             };
           # nixpkgsにないので埋め込み。
           changelog-lint = final.buildGoModule {
@@ -284,10 +277,8 @@
           flake = pkgs.project.flake { };
           # stackageのスナップショットでビルドしたhimariライブラリ。
           himari-stackage-nightly = pkgs.himari-stackage-projects.nightly.hsPkgs.himari.components.library;
-          himari-stackage-lts = pkgs.himari-stackage-projects.lts.hsPkgs.himari.components.library;
           # stackage上でのパッケージのテスト実行。
           himari-stackage-nightly-test = pkgs.haskell-nix.haskellLib.check pkgs.himari-stackage-projects.nightly.hsPkgs.himari.components.tests.himari-test;
-          himari-stackage-lts-test = pkgs.haskell-nix.haskellLib.check pkgs.himari-stackage-projects.lts.hsPkgs.himari.components.tests.himari-test;
           # nixpkgsの`haskellPackages`越しにhimariをビルド・テストする派生。
           # haskell.nixはCabalソルバーで依存解決するため柔軟だが、
           # 素のnixpkgsは1パッケージ1バージョン固定なので、
@@ -298,7 +289,6 @@
           packages = flake.packages // {
             inherit
               himari-stackage-nightly
-              himari-stackage-lts
               himari-nixpkgs
               ;
           };
@@ -411,7 +401,7 @@
             packages
             // flake.checks
             // {
-              inherit himari-stackage-nightly-test himari-stackage-lts-test;
+              inherit himari-stackage-nightly-test;
             };
 
           inherit packages;
