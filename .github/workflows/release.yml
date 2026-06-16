@@ -13,7 +13,6 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-24.04
-    environment: production
     permissions:
       contents: write # タグ作成のため
       id-token: write # niks3 OIDC認証

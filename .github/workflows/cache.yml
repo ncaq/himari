@@ -30,7 +30,6 @@ jobs:
           - ubuntu-24.04-arm # aarch64-linux
           - macos-15 # aarch64-darwin
     runs-on: ${{ matrix.os }}
-    environment: development
     permissions:
       contents: read # Read repository contents
       id-token: write # niks3 OIDC authentication
