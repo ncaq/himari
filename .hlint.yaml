@@ -908,6 +908,9 @@
     - as: L
       importStyle: explicitOrQualified
       name: Data.List
+    - as: L
+      importStyle: explicitOrQualified
+      name: Data.Containers.ListUtils
     - as: NE
       importStyle: explicitOrQualified
       name: Data.List.NonEmpty
