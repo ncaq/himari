@@ -177,67 +177,81 @@
               ];
             };
           };
-          # stackageの最新LTSスナップショットでビルド・テストできることを検証するプロジェクト。
+          # stackageの最新スナップショットでビルド・テストできることを検証するプロジェクト群。
           # 通常の`project`(cabalProject)は、
           # Cabalソルバーがindex-state時点のHackageから制約を満たす最新版を選びますが、
           # stackageは固定されたバージョンセット(snapshot)でビルドするため、
           # 別経路の検証として価値があります。
           # `resolver`を`stack.yaml`にハードコードすると更新忘れが起きるため、
           # `flake.lock`に固定された`haskell.nix`のstackageデータの中から、
-          # 最新のLTSを自動的に選択します。
+          # 最新のLTSとnightlyを自動的に選択します。
           # `nix flake update`でhaskell.nixが更新されれば検証対象も自動で追従します。
-          himari-stackage-project =
+          # LTSは登録の最終目的であり、nightlyは登録時にまず整合を問われるため、両方を対象にします。
+          himari-stackage-projects =
             let
+              snapshotNames = builtins.attrNames final.haskell-nix.snapshots;
+              # `nightly-YYYY-MM-DD`は0埋めされており、
+              # 文字列の昇順ソートが日付の昇順と一致するため、単純な文字列比較で最新を選べます。
+              latestNightly = final.lib.last (
+                builtins.sort (a: b: a < b) (builtins.filter (final.lib.hasPrefix "nightly-") snapshotNames)
+              );
               # `lts-MAJOR.MINOR`はMINORが2桁になると単純な文字列ソートでは順序が崩れるため、
               # 数値を考慮する`naturalSort`で最新を選びます。
               latestLts = final.lib.last (
-                final.lib.naturalSort (
-                  builtins.filter (final.lib.hasPrefix "lts-") (builtins.attrNames final.haskell-nix.snapshots)
-                )
+                final.lib.naturalSort (builtins.filter (final.lib.hasPrefix "lts-") snapshotNames)
               );
-              # `cabalFileset`を基に`stack.yaml`を動的生成したソースツリーを作ります。
-              stackageSrc = final.runCommand "himari-stackage-src" { } ''
-                cp -r ${cabalFileset final.lib} "$out"
-                chmod -R +w "$out"
-                printf 'resolver: ${latestLts}\npackages:\n  - .\n' > "$out/stack.yaml"
-              '';
-              # haskell.nixはstackageがピンするboot library(unix, filepathなど)を、
-              # Hackageから再ビルドしようとするが、
-              # unixの`os-string`依存の配線失敗などでビルドが壊れる。
-              # stackage本家のCIはこれらをGHC同梱のグローバルパッケージとして扱い再ビルドしないため、
-              # これはhaskell.nix固有の問題。
-              # 再ビルドせずGHC同梱版を使ってもスナップショットとの忠実性は損なわれない。
-              # むしろグローバルパッケージをGHCに固定するstackage本家の挙動に一致する。
-              # override無しの素のプロジェクトを用意し、
-              # その既定の`nonReinstallablePkgs`にGHC同梱パッケージ全体を加える。
-              # `nonReinstallablePkgs`のマージは最後の定義が優先される(全置換)仕様のため、
-              # 既定値を読み取って継ぎ足すことでhaskell.nixの既定リストの変化にも追従する。
-              baseProject = final.haskell-nix.stackProject' { src = stackageSrc; };
-              # プロジェクトが実際に使うGHCの同梱パッケージ名一覧。
-              # 最新LTSがGHCバージョンを跨いで変わっても自動追従するよう、
-              # 名前をハードコードせずGHCから取得する。
-              ghcBundledPkgs =
+              # 指定したresolverのstackageスナップショットでビルドするプロジェクトを作ります。
+              mkStackageProject =
+                resolver:
                 let
-                  ghc = baseProject.pkg-set.config.ghc.package;
+                  # `cabalFileset`を基に`stack.yaml`を動的生成したソースツリーを作ります。
+                  stackageSrc = final.runCommand "himari-stackage-src-${resolver}" { } ''
+                    cp -r ${cabalFileset final.lib} "$out"
+                    chmod -R +w "$out"
+                    printf 'resolver: ${resolver}\npackages:\n  - .\n' > "$out/stack.yaml"
+                  '';
+                  # haskell.nixはstackageがピンするboot library(unix, filepathなど)を、
+                  # Hackageから再ビルドしようとするが、
+                  # unixの`os-string`依存の配線失敗などでビルドが壊れる。
+                  # stackage本家のCIはこれらをGHC同梱のグローバルパッケージとして扱い再ビルドしないため、
+                  # これはhaskell.nix固有の問題。
+                  # 再ビルドせずGHC同梱版を使ってもスナップショットとの忠実性は損なわれない。
+                  # むしろグローバルパッケージをGHCに固定するstackage本家の挙動に一致する。
+                  # override無しの素のプロジェクトを用意し、
+                  # その既定の`nonReinstallablePkgs`にGHC同梱パッケージ全体を加える。
+                  # `nonReinstallablePkgs`のマージは最後の定義が優先される(全置換)仕様のため、
+                  # 既定値を読み取って継ぎ足すことでhaskell.nixの既定リストの変化にも追従する。
+                  baseProject = final.haskell-nix.stackProject' { src = stackageSrc; };
+                  # プロジェクトが実際に使うGHCの同梱パッケージ名一覧。
+                  # スナップショットがGHCバージョンを跨いで変わっても自動追従するよう、
+                  # 名前をハードコードせずGHCから取得する。
+                  ghcBundledPkgs =
+                    let
+                      ghc = baseProject.pkg-set.config.ghc.package;
+                    in
+                    builtins.filter (s: s != "") (
+                      final.lib.splitString "\n" (
+                        final.lib.fileContents (
+                          final.runCommand "ghc-bundled-package-names-${resolver}" { } ''
+                            ${ghc}/bin/ghc-pkg --global list --simple-output \
+                              | tr ' ' '\n' \
+                              | sed -E 's/-[0-9][0-9.]*$//' \
+                              | sort -u > "$out"
+                          ''
+                        )
+                      )
+                    );
                 in
-                builtins.filter (s: s != "") (
-                  final.lib.splitString "\n" (
-                    final.lib.fileContents (
-                      final.runCommand "ghc-bundled-package-names" { } ''
-                        ${ghc}/bin/ghc-pkg --global list --simple-output \
-                          | tr ' ' '\n' \
-                          | sed -E 's/-[0-9][0-9.]*$//' \
-                          | sort -u > "$out"
-                      ''
-                    )
-                  )
-                );
+                final.haskell-nix.stackProject' {
+                  src = stackageSrc;
+                  modules = [
+                    { nonReinstallablePkgs = baseProject.pkg-set.config.nonReinstallablePkgs ++ ghcBundledPkgs; }
+                  ];
+                };
             in
-            final.haskell-nix.stackProject' {
-              src = stackageSrc;
-              modules = [
-                { nonReinstallablePkgs = baseProject.pkg-set.config.nonReinstallablePkgs ++ ghcBundledPkgs; }
-              ];
+            {
+              nightly = mkStackageProject latestNightly;
+              lts = mkStackageProject latestLts;
             };
           # nixpkgsにないので埋め込み。
           changelog-lint = final.buildGoModule {
@@ -269,9 +283,11 @@
           };
           flake = pkgs.project.flake { };
           # stackageのスナップショットでビルドしたhimariライブラリ。
-          himari-stackage = pkgs.himari-stackage-project.hsPkgs.himari.components.library;
+          himari-stackage-nightly = pkgs.himari-stackage-projects.nightly.hsPkgs.himari.components.library;
+          himari-stackage-lts = pkgs.himari-stackage-projects.lts.hsPkgs.himari.components.library;
           # stackage上でのパッケージのテスト実行。
-          himari-stackage-test = pkgs.haskell-nix.haskellLib.check pkgs.himari-stackage-project.hsPkgs.himari.components.tests.himari-test;
+          himari-stackage-nightly-test = pkgs.haskell-nix.haskellLib.check pkgs.himari-stackage-projects.nightly.hsPkgs.himari.components.tests.himari-test;
+          himari-stackage-lts-test = pkgs.haskell-nix.haskellLib.check pkgs.himari-stackage-projects.lts.hsPkgs.himari.components.tests.himari-test;
           # nixpkgsの`haskellPackages`越しにhimariをビルド・テストする派生。
           # haskell.nixはCabalソルバーで依存解決するため柔軟だが、
           # 素のnixpkgsは1パッケージ1バージョン固定なので、
@@ -280,7 +296,11 @@
           himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (cabalFileset pkgs.lib) { };
           # `haskell.nix`の生成したパッケージとその他のものをまとめます。
           packages = flake.packages // {
-            inherit himari-stackage himari-nixpkgs;
+            inherit
+              himari-stackage-nightly
+              himari-stackage-lts
+              himari-nixpkgs
+              ;
           };
         in
         {
@@ -388,7 +408,11 @@
           checks =
             # テストがないパッケージもビルドしてエラーを検出する。
             # テストの実行パッケージを後に書くことで上書き。
-            packages // flake.checks // { inherit himari-stackage-test; };
+            packages
+            // flake.checks
+            // {
+              inherit himari-stackage-nightly-test himari-stackage-lts-test;
+            };
 
           inherit packages;
 
