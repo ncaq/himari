@@ -55,9 +55,8 @@
             ./himari.cabal
             # license-file
             ./LICENSE
-            # data-files
+            # extra-source-files
             ./.hlint.yaml
-            ./fourmolu.yaml
             # extra-doc-files
             ./CHANGELOG.md
             ./README.md
