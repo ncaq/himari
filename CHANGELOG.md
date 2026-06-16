@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.6.0] - 2026-06-16
+
 ### Added
 
 - hlint rule to import `Data.Containers.ListUtils` qualified as `L`,
