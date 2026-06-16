@@ -177,6 +177,68 @@
               ];
             };
           };
+          # stackageの最新LTSスナップショットでビルド・テストできることを検証するプロジェクト。
+          # 通常の`project`(cabalProject)は、
+          # Cabalソルバーがindex-state時点のHackageから制約を満たす最新版を選びますが、
+          # stackageは固定されたバージョンセット(snapshot)でビルドするため、
+          # 別経路の検証として価値があります。
+          # `resolver`を`stack.yaml`にハードコードすると更新忘れが起きるため、
+          # `flake.lock`に固定された`haskell.nix`のstackageデータの中から、
+          # 最新のLTSを自動的に選択します。
+          # `nix flake update`でhaskell.nixが更新されれば検証対象も自動で追従します。
+          himari-stackage-project =
+            let
+              # `lts-MAJOR.MINOR`はMINORが2桁になると単純な文字列ソートでは順序が崩れるため、
+              # 数値を考慮する`naturalSort`で最新を選びます。
+              latestLts = final.lib.last (
+                final.lib.naturalSort (
+                  builtins.filter (final.lib.hasPrefix "lts-") (builtins.attrNames final.haskell-nix.snapshots)
+                )
+              );
+              # `cabalFileset`を基に`stack.yaml`を動的生成したソースツリーを作ります。
+              stackageSrc = final.runCommand "himari-stackage-src" { } ''
+                cp -r ${cabalFileset final.lib} "$out"
+                chmod -R +w "$out"
+                printf 'resolver: ${latestLts}\npackages:\n  - .\n' > "$out/stack.yaml"
+              '';
+              # haskell.nixはstackageがピンするboot library(unix, filepathなど)を、
+              # Hackageから再ビルドしようとするが、
+              # unixの`os-string`依存の配線失敗などでビルドが壊れる。
+              # stackage本家のCIはこれらをGHC同梱のグローバルパッケージとして扱い再ビルドしないため、
+              # これはhaskell.nix固有の問題。
+              # 再ビルドせずGHC同梱版を使ってもスナップショットとの忠実性は損なわれない。
+              # むしろグローバルパッケージをGHCに固定するstackage本家の挙動に一致する。
+              # override無しの素のプロジェクトを用意し、
+              # その既定の`nonReinstallablePkgs`にGHC同梱パッケージ全体を加える。
+              # `nonReinstallablePkgs`のマージは最後の定義が優先される(全置換)仕様のため、
+              # 既定値を読み取って継ぎ足すことでhaskell.nixの既定リストの変化にも追従する。
+              baseProject = final.haskell-nix.stackProject' { src = stackageSrc; };
+              # プロジェクトが実際に使うGHCの同梱パッケージ名一覧。
+              # 最新LTSがGHCバージョンを跨いで変わっても自動追従するよう、
+              # 名前をハードコードせずGHCから取得する。
+              ghcBundledPkgs =
+                let
+                  ghc = baseProject.pkg-set.config.ghc.package;
+                in
+                builtins.filter (s: s != "") (
+                  final.lib.splitString "\n" (
+                    final.lib.fileContents (
+                      final.runCommand "ghc-bundled-package-names" { } ''
+                        ${ghc}/bin/ghc-pkg --global list --simple-output \
+                          | tr ' ' '\n' \
+                          | sed -E 's/-[0-9][0-9.]*$//' \
+                          | sort -u > "$out"
+                      ''
+                    )
+                  )
+                );
+            in
+            final.haskell-nix.stackProject' {
+              src = stackageSrc;
+              modules = [
+                { nonReinstallablePkgs = baseProject.pkg-set.config.nonReinstallablePkgs ++ ghcBundledPkgs; }
+              ];
+            };
           # nixpkgsにないので埋め込み。
           changelog-lint = final.buildGoModule {
             pname = "changelog-lint";
@@ -206,6 +268,10 @@
             inherit (haskellNix) config;
           };
           flake = pkgs.project.flake { };
+          # stackageのスナップショットでビルドしたhimariライブラリ。
+          himari-stackage = pkgs.himari-stackage-project.hsPkgs.himari.components.library;
+          # stackage上でのパッケージのテスト実行。
+          himari-stackage-test = pkgs.haskell-nix.haskellLib.check pkgs.himari-stackage-project.hsPkgs.himari.components.tests.himari-test;
           # nixpkgsの`haskellPackages`越しにhimariをビルド・テストする派生。
           # haskell.nixはCabalソルバーで依存解決するため柔軟だが、
           # 素のnixpkgsは1パッケージ1バージョン固定なので、
@@ -214,7 +280,7 @@
           himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (cabalFileset pkgs.lib) { };
           # `haskell.nix`の生成したパッケージとその他のものをまとめます。
           packages = flake.packages // {
-            inherit himari-nixpkgs;
+            inherit himari-stackage himari-nixpkgs;
           };
         in
         {
@@ -322,7 +388,7 @@
           checks =
             # テストがないパッケージもビルドしてエラーを検出する。
             # テストの実行パッケージを後に書くことで上書き。
-            packages // flake.checks;
+            packages // flake.checks // { inherit himari-stackage-test; };
 
           inherit packages;
 
