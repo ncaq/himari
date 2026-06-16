@@ -49,6 +49,8 @@ let hashSet = Builder.qualifiedAs "Data.HashSet" "HS"
 
 let list = Builder.qualifiedAs "Data.List" "L"
 
+let listUtils = Builder.qualifiedAs "Data.Containers.ListUtils" "L"
+
 let nonEmpty = Builder.qualifiedAs "Data.List.NonEmpty" "NE"
 
 let char = Builder.qualifiedAs "Data.Char" "C"
@@ -87,6 +89,7 @@ let rules
           , hashMapLazy
           , hashSet
           , list
+          , listUtils
           , nonEmpty
           , char
           , aesonKey
