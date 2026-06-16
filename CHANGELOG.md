@@ -7,6 +7,11 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Added
+
+- hlint rule to import `Data.Containers.ListUtils` qualified as `L`,
+  matching the alias used for `Data.List`
+
 ### Changed
 
 - Relax the lower bound of the `uuid` dependency from `>=1.3.16.1` to `>=1.3.11`,
