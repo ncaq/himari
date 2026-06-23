@@ -70,7 +70,7 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-      - uses: ncaq/nix-composite-action@9b26867355388b589de67c08de87e8786e2e8094 # v3.0.0
+      - uses: ncaq/nix-composite-action@87f6ca5941aa5e43013ce99c6c8a3aaaa8bebdaa # v3.0.1
         if: steps.check_tag.outputs.skip != 'true'
       - name: Build sdist
         if: steps.check_tag.outputs.skip != 'true'
