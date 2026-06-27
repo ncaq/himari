@@ -5,6 +5,7 @@ module Loop
 import Anomaly
 import Config
 import Cpu
+import Data.Text qualified as T
 import Env
 import Himari
 
@@ -37,7 +38,7 @@ monitorLoop prevStats checkCount = do
         formattedReport <- mkFormattedReport usage cpuThreshold' severity'
         -- Log based on severity
         case severity' of
-          Normal -> logDebugN $ "System normal. CPU: " <> convert (showFFloat (Just 1) usage "%")
+          Normal -> logDebugN $ "System normal. CPU: " <> T.pack (showFFloat (Just 1) usage "%")
           Warning -> logWarnN formattedReport
           Critical -> logErrorN formattedReport
           Catastrophic -> logErrorN $ "!!! " <> formattedReport <> " !!!"

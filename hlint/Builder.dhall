@@ -29,13 +29,16 @@ let hint
       \(note : Optional Text) ->
         Types.Rule.Hint { hint = { lhs, rhs, note } }
 
-let useConvert
+let useSafeConvert
     : Text -> Types.Rule
-    = \(lhs : Text) ->
-        hint
-          lhs
-          "convert"
-          (Some "Use convert from Data.Convertible for uniform type conversion")
+    = \(name : Text) ->
+        functions
+          [ restrictFunction
+              name
+              (     "Use safeConvert from Data.Convertible to surface conversion errors"
+                ++  " as Either ConvertError instead of relying on a partial function"
+              )
+          ]
 
 let enableGroup
     : Text -> Types.Rule
@@ -117,7 +120,7 @@ in  { restrictFunction
     , restrictInModule
     , functions
     , hint
-    , useConvert
+    , useSafeConvert
     , enableGroup
     , preferModule
     , modules

@@ -5,6 +5,7 @@ module Anomaly
   , formatReport
   ) where
 
+import Data.Text qualified as T
 import Himari
 
 -- | Severity level of detected anomaly.
@@ -39,11 +40,11 @@ formatReport report =
   mconcat
     [ "[ANOMALY DETECTED] "
     , "Severity: "
-    , convert $ show report.severity
+    , T.pack $ show report.severity
     , " | CPU: "
-    , convert $ showFFloat (Just 1) report.cpuUsage "%"
+    , T.pack $ showFFloat (Just 1) report.cpuUsage "%"
     , " (threshold: "
-    , convert $ showFFloat (Just 1) report.threshold "%"
+    , T.pack $ showFFloat (Just 1) report.threshold "%"
     , ") | Time: "
-    , convert $ formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S UTC" report.timestamp
+    , T.pack $ formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S UTC" report.timestamp
     ]
