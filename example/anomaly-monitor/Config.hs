@@ -9,6 +9,7 @@ module Config
   , loadConfig
   ) where
 
+import Data.Text qualified as T
 import Exception
 import Himari
 
@@ -42,8 +43,8 @@ loadConfig maybePath = case maybePath of
     logInfoN "No config file specified, using defaults"
     pure def
   Just path -> do
-    logInfoN $ "Loading config from: " <> convert path
+    logInfoN $ "Loading config from: " <> T.pack path
     contentEither <- liftIO $ eitherDecodeFileStrict path
     case contentEither of
-      Left exception -> throwM . ConfigDecodeException $ convert exception
+      Left exception -> throwM . ConfigDecodeException $ T.pack exception
       Right config' -> pure config'

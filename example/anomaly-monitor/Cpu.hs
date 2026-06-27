@@ -81,7 +81,7 @@ readCpuStats = do
   contentEither <- tryAny . liftIO $ T.readFile "/proc/stat"
   case contentEither of
     Left exception -> do
-      logWarnN $ "Failed to read /proc/stat: " <> convert (displayException exception)
+      logWarnN $ "Failed to read /proc/stat: " <> T.pack (displayException exception)
       pure Nothing
     Right content -> pure $ parseCpuStats content
 
@@ -91,9 +91,9 @@ showIOCpuThreshold = do
   config' <- view config
   return $
     "Configuration: CPU threshold = "
-      <> convert (showFFloat (Just 1) (config' ^. cpuThreshold) "%")
+      <> T.pack (showFFloat (Just 1) (config' ^. cpuThreshold) "%")
       <> ", interval = "
-      <> convert (show $ config' ^. checkInterval)
+      <> T.pack (show $ config' ^. checkInterval)
       <> "s"
       <> ", max checks = "
-      <> convert (show $ config' ^. maxChecks)
+      <> T.pack (show $ config' ^. maxChecks)
