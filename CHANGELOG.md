@@ -7,6 +7,19 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Changed
+
+- Stop preferring `convert` over total functions
+  like `pack`, `unpack`, `toStrict`, `fromStrict`, `encodeUtf8`,
+  and lazy/strict `Builder` conversions,
+  because `convert` can be partial depending
+  on the `Convertible` instance and this project avoids partial functions
+- Warn against partial conversion functions like `decodeUtf8`
+  with a message that recommends `safeConvert` from `Data.Convertible`,
+  which returns `Either ConvertError` so the failure can be handled as a value
+  rather than thrown. The rule is a usage restriction rather than a hint,
+  since `safeConvert` is not a drop-in replacement (the return type changes)
+
 ## [1.1.6.0] - 2026-06-16
 
 ### Added
