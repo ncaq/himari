@@ -23,6 +23,7 @@ jobs:
   cache-dev-shell:
     name: cache-dev-shell
     strategy:
+      fail-fast: false
       matrix:
         # WindowsはNixが対応していないので対象外です。
         os:
