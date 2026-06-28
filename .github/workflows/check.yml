@@ -16,6 +16,7 @@ jobs:
   nix-flake-check:
     name: nix-flake-check
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-24.04 # x86_64-linux
