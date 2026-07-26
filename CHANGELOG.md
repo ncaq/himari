@@ -9,8 +9,7 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Changed
 
-- Relax `sydtest` dependency upper bound from `<0.24` to `<0.28`
-  to support `sydtest` 0.27.2.0.
+- Relax `sydtest` dependency upper bound from `<0.24` to `<0.28` to support `sydtest` 0.27.2.0.
 - Stop preferring `convert` over total functions
   like `pack`, `unpack`, `toStrict`, `fromStrict`, `encodeUtf8`,
   and lazy/strict `Builder` conversions,
