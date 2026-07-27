@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.6.1] - 2026-07-27
+
 ### Changed
 
 - Stop preferring `convert` over total functions
