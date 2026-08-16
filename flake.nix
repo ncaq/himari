@@ -151,9 +151,6 @@
                 typos
                 zizmor
 
-                # nixの関連ツール。
-                nil
-
                 # GitHub関連ツール。
                 gh
 
