@@ -184,11 +184,6 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 - GHC 9.14.1 support
 
-### Changed
-
-- Relax `sydtest` dependency upper bound from `<0.19` to `<0.24`
-  to support nixpkgs sydtest 0.20.0.1+
-
 ### Removed
 
 - Drop Intel Mac (x86_64-darwin) from Nix build targets due
