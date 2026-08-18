@@ -77,6 +77,10 @@ nix flake check
 `changelog-lint`を使うには`.changelog-lint.toml`をconfigとして使う必要があるため、
 簡単に実行するために`nix fmt`を使用してください。
 
+#### 開発者用ツールのバージョン変更は記載しない
+
+ライブラリ利用者に影響しない開発者用ツール・テスト専用依存のバージョン更新はCHANGELOGに記載しない。
+
 ## hlint
 
 `.hlint.yaml`ファイルを生成するためのDhallソースコードが配置されています。
