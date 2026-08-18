@@ -135,7 +135,7 @@ import Himari.Prelude
 を使用しています。
 
 主要なAPIは
-[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)
+[Test.Syd](https://hackage.haskell.org/package/sydtest/docs/Test-Syd.html)
 を参照してください。
 sydtestはhspecにAPIを寄せていますが、
 あくまで違うライブラリであることに注意してください。
