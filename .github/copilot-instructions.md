@@ -77,6 +77,10 @@ nix flake check
 `changelog-lint`を使うには`.changelog-lint.toml`をconfigとして使う必要があるため、
 簡単に実行するために`nix fmt`を使用してください。
 
+#### 開発者用ツールのバージョン変更は記載しない
+
+ライブラリ利用者に影響しない開発者用ツール・テスト専用依存のバージョン更新はCHANGELOGに記載しない。
+
 ## hlint
 
 `.hlint.yaml`ファイルを生成するためのDhallソースコードが配置されています。
@@ -135,7 +139,7 @@ import Himari.Prelude
 を使用しています。
 
 主要なAPIは
-[Test.Syd](https://hackage-content.haskell.org/package/sydtest-0.22.0.0/docs/Test-Syd.html)
+[Test.Syd](https://hackage.haskell.org/package/sydtest/docs/Test-Syd.html)
 を参照してください。
 sydtestはhspecにAPIを寄せていますが、
 あくまで違うライブラリであることに注意してください。
