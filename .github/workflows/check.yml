@@ -78,7 +78,7 @@ jobs:
   # `nix flake check`で対応していないチェックを行う。
   format:
     name: format
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read # Read repository contents
       id-token: write # niks3 OIDC authentication
