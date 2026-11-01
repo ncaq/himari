@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.6.2] - 2026-11-01
+
 ### Changed
 
 - Remove the upper bounds of the test-only dependencies `QuickCheck`, `sydtest`, and `hlint`,
