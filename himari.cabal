@@ -165,12 +165,12 @@ test-suite himari-test
     -with-rtsopts=-N
 
   build-depends:
-    QuickCheck >=2.15.0.1 && <2.20,
+    QuickCheck >=2.15.0.1,
     himari,
-    sydtest >=0.18.0.0 && <0.32,
+    sydtest >=0.18.0.0,
 
   build-tool-depends:
-    hlint:hlint >=3.10 && <4
+    hlint:hlint >=3.10
 
   -- hlint経由のghc-lib-parserの参照バージョンに問題が出やすいので、
   -- こちら側でヒントを出して誘導します。
