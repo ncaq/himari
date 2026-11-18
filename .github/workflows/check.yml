@@ -21,7 +21,7 @@ jobs:
         os:
           - ubuntu-26.04 # x86_64-linux
           - ubuntu-26.04-arm # aarch64-linux
-          - macos-15 # aarch64-darwin
+          - macos-26 # aarch64-darwin
     runs-on: ${{ matrix.os }}
     permissions:
       contents: read # Read repository contents
