@@ -7,6 +7,15 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+### Fixed
+
+- hlint rules written with a module-qualified name, such as `Data.List.head` and `System.IO.readFile`,
+  did not match symbols used through `import Himari`,
+  because hlint does not follow re-exports.
+  The partial functions and `String` IO functions re-exported by `Himari`,
+  `Himari.Prelude`, and `Himari.SafePrelude` are now warned when used through these modules.
+  Projects that use them through `import Himari` will get new warnings
+
 ## [1.1.6.2] - 2026-11-01
 
 ### Changed

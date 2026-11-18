@@ -363,15 +363,15 @@ let exceptionLensFuncs =
       [ "catching", "catching_", "handling", "handling_", "trying", "trying_" ]
 
 let untypedExceptionFuncs =
-      [ Builder.restrictInModule
-          "UnliftIO.Exception"
-          "throwString"
-          "Use typed exceptions instead. Define a proper exception type."
-      , Builder.restrictInModule
+        [ Builder.restrictInModule
+            "UnliftIO.Exception"
+            "throwString"
+            "Use typed exceptions instead. Define a proper exception type."
+        ]
+      # Builder.restrictReexportedByPrelude
           "UnliftIO.Exception"
           "stringException"
           "Use typed exceptions instead. Define a proper exception type."
-      ]
 
 let rules
     : List Types.Rule

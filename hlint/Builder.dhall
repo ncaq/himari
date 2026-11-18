@@ -18,6 +18,26 @@ let restrictInModule
       \(message : Text) ->
         restrictFunction "${module}.${func}" message
 
+let restrictReexported
+    : List Text -> Text -> Text -> Text -> List Types.Function
+    = \(reexporters : List Text) ->
+      \(module : Text) ->
+      \(func : Text) ->
+      \(message : Text) ->
+        Prelude.List.map
+          Text
+          Types.Function
+          (\(m : Text) -> restrictInModule m func message)
+          ([ module ] # reexporters)
+
+let restrictReexportedBySafePrelude
+    : Text -> Text -> Text -> List Types.Function
+    = restrictReexported [ "Himari", "Himari.Prelude", "Himari.SafePrelude" ]
+
+let restrictReexportedByPrelude
+    : Text -> Text -> Text -> List Types.Function
+    = restrictReexported [ "Himari", "Himari.Prelude" ]
+
 let functions
     : List Types.Function -> Types.Rule
     = \(fs : List Types.Function) -> Types.Rule.Functions { functions = fs }
@@ -118,6 +138,8 @@ let extensions
 
 in  { restrictFunction
     , restrictInModule
+    , restrictReexportedBySafePrelude
+    , restrictReexportedByPrelude
     , functions
     , hint
     , useSafeConvert

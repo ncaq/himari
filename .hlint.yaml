@@ -620,14 +620,50 @@
     - message: "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
       name: Control.Lens.Traversal.singular
       within: []
+    - message: "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
+      name: Himari.singular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
+      name: Himari.Prelude.singular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
+      name: Himari.SafePrelude.singular
+      within: []
     - message: "Partial: throws on 0 or >1 elements."
       name: Control.Lens.Traversal.unsafeSingular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements."
+      name: Himari.unsafeSingular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements."
+      name: Himari.Prelude.unsafeSingular
+      within: []
+    - message: "Partial: throws on 0 or >1 elements."
+      name: Himari.SafePrelude.unsafeSingular
       within: []
     - message: "Unsafe: may throw if list length changes."
       name: Control.Lens.Traversal.unsafePartsOf
       within: []
     - message: "Unsafe: may throw if list length changes."
+      name: Himari.unsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Himari.Prelude.unsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Himari.SafePrelude.unsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
       name: Control.Lens.Traversal.iunsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Himari.iunsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Himari.Prelude.iunsafePartsOf
+      within: []
+    - message: "Unsafe: may throw if list length changes."
+      name: Himari.SafePrelude.iunsafePartsOf
       within: []
 - functions:
     - message: "Unsound: violates lens laws unless lenses are disjoint. Use alongside instead."
@@ -877,14 +913,50 @@
     - message: "Partial: throws on empty list. Use headMay or headDef from Safe instead."
       name: Data.List.head
       within: []
+    - message: "Partial: throws on empty list. Use headMay or headDef from Safe instead."
+      name: Himari.head
+      within: []
+    - message: "Partial: throws on empty list. Use headMay or headDef from Safe instead."
+      name: Himari.Prelude.head
+      within: []
+    - message: "Partial: throws on empty list. Use headMay or headDef from Safe instead."
+      name: Himari.SafePrelude.head
+      within: []
     - message: "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
       name: Data.List.tail
+      within: []
+    - message: "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
+      name: Himari.tail
+      within: []
+    - message: "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
+      name: Himari.Prelude.tail
+      within: []
+    - message: "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
+      name: Himari.SafePrelude.tail
       within: []
     - message: "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
       name: Data.List.init
       within: []
+    - message: "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
+      name: Himari.init
+      within: []
+    - message: "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
+      name: Himari.Prelude.init
+      within: []
+    - message: "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
+      name: Himari.SafePrelude.init
+      within: []
     - message: "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
       name: Data.List.last
+      within: []
+    - message: "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
+      name: Himari.last
+      within: []
+    - message: "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
+      name: Himari.Prelude.last
+      within: []
+    - message: "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
+      name: Himari.SafePrelude.last
       within: []
     - message: "Partial: throws on out-of-bounds. Use atMay or atDef from Safe instead."
       name: "Data.List.!!"
@@ -892,11 +964,38 @@
     - message: "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
       name: Data.List.cycle
       within: []
+    - message: "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
+      name: Himari.cycle
+      within: []
+    - message: "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
+      name: Himari.Prelude.cycle
+      within: []
+    - message: "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
+      name: Himari.SafePrelude.cycle
+      within: []
     - message: "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
       name: Data.List.scanl1
       within: []
+    - message: "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
+      name: Himari.scanl1
+      within: []
+    - message: "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
+      name: Himari.Prelude.scanl1
+      within: []
+    - message: "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
+      name: Himari.SafePrelude.scanl1
+      within: []
     - message: "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
       name: Data.List.scanr1
+      within: []
+    - message: "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
+      name: Himari.scanr1
+      within: []
+    - message: "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
+      name: Himari.Prelude.scanr1
+      within: []
+    - message: "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
+      name: Himari.SafePrelude.scanr1
       within: []
     - message: "Partial: throws on empty list. Use foldl1May from Safe instead."
       name: Data.List.foldl1
@@ -923,6 +1022,15 @@
     - message: "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
       name: Data.Maybe.fromJust
       within: []
+    - message: "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
+      name: Himari.fromJust
+      within: []
+    - message: "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
+      name: Himari.Prelude.fromJust
+      within: []
+    - message: "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
+      name: Himari.SafePrelude.fromJust
+      within: []
 - functions:
     - message: "Partial: throws on parse failure. Use readMay or readDef from Safe instead."
       name: read
@@ -931,39 +1039,147 @@
     - message: "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
       name: Data.Foldable.foldl1
       within: []
+    - message: "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
+      name: Himari.foldl1
+      within: []
+    - message: "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
+      name: Himari.Prelude.foldl1
+      within: []
+    - message: "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
+      name: Himari.SafePrelude.foldl1
+      within: []
     - message: "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
       name: Data.Foldable.foldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
+      name: Himari.foldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
+      name: Himari.Prelude.foldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
+      name: Himari.SafePrelude.foldr1
       within: []
     - message: "Partial: throws on empty structure. Use maximumMay or maximumBound from Safe.Foldable instead."
       name: Data.Foldable.maximum
       within: []
+    - message: "Partial: throws on empty structure. Use maximumMay or maximumBound from Safe.Foldable instead."
+      name: Himari.maximum
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumMay or maximumBound from Safe.Foldable instead."
+      name: Himari.Prelude.maximum
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumMay or maximumBound from Safe.Foldable instead."
+      name: Himari.SafePrelude.maximum
+      within: []
     - message: "Partial: throws on empty structure. Use minimumMay or minimumBound from Safe.Foldable instead."
       name: Data.Foldable.minimum
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumMay or minimumBound from Safe.Foldable instead."
+      name: Himari.minimum
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumMay or minimumBound from Safe.Foldable instead."
+      name: Himari.Prelude.minimum
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumMay or minimumBound from Safe.Foldable instead."
+      name: Himari.SafePrelude.minimum
       within: []
     - message: "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
       name: Data.Foldable.maximumBy
       within: []
+    - message: "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
+      name: Himari.maximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
+      name: Himari.Prelude.maximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
+      name: Himari.SafePrelude.maximumBy
+      within: []
     - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
       name: Data.Foldable.minimumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
+      name: Himari.minimumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
+      name: Himari.Prelude.minimumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
+      name: Himari.SafePrelude.minimumBy
       within: []
 - functions:
     - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
       name: Data.Bifoldable.bifoldl1
       within: []
+    - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
+      name: Himari.bifoldl1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
+      name: Himari.Prelude.bifoldl1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldl with a default value instead."
+      name: Himari.SafePrelude.bifoldl1
+      within: []
     - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
       name: Data.Bifoldable.bifoldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
+      name: Himari.bifoldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
+      name: Himari.Prelude.bifoldr1
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with a default value instead."
+      name: Himari.SafePrelude.bifoldr1
       within: []
     - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
       name: Data.Bifoldable.bimaximum
       within: []
     - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.bimaximum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.Prelude.bimaximum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.SafePrelude.bimaximum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
       name: Data.Bifoldable.biminimum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.biminimum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.Prelude.biminimum
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.SafePrelude.biminimum
       within: []
     - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
       name: Data.Bifoldable.bimaximumBy
       within: []
     - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.bimaximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.Prelude.bimaximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.SafePrelude.bimaximumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
       name: Data.Bifoldable.biminimumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.biminimumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.Prelude.biminimumBy
+      within: []
+    - message: "Partial: throws on empty structure. Use bifoldr with explicit initial value."
+      name: Himari.SafePrelude.biminimumBy
       within: []
 - functions:
     - message: "Partial: throws on out-of-bounds. Use atMay or atDef from Safe with toList instead."
@@ -1153,40 +1369,157 @@
       name: System.IO.getChar
       within: []
     - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.getChar
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.Prelude.getChar
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.SafePrelude.getChar
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
       name: System.IO.getLine
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.getLine
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.Prelude.getLine
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.SafePrelude.getLine
       within: []
     - message: "Lazy IO + env-dependent encoding. Use strict Text or ByteString."
       name: System.IO.getContents
       within: []
+    - message: "Lazy IO + env-dependent encoding. Use strict Text or ByteString."
+      name: Himari.getContents
+      within: []
+    - message: "Lazy IO + env-dependent encoding. Use strict Text or ByteString."
+      name: Himari.Prelude.getContents
+      within: []
+    - message: "Lazy IO + env-dependent encoding. Use strict Text or ByteString."
+      name: Himari.SafePrelude.getContents
+      within: []
     - message: "Lazy IO + env-dependent encoding. Use Data.Text.IO.readFile or Data.ByteString.readFile."
       name: System.IO.readFile
       within: []
+    - message: "Lazy IO + env-dependent encoding. Use Data.Text.IO.readFile or Data.ByteString.readFile."
+      name: Himari.readFile
+      within: []
+    - message: "Lazy IO + env-dependent encoding. Use Data.Text.IO.readFile or Data.ByteString.readFile."
+      name: Himari.Prelude.readFile
+      within: []
+    - message: "Lazy IO + env-dependent encoding. Use Data.Text.IO.readFile or Data.ByteString.readFile."
+      name: Himari.SafePrelude.readFile
+      within: []
     - message: "Lazy IO + env-dependent encoding."
       name: System.IO.interact
+      within: []
+    - message: "Lazy IO + env-dependent encoding."
+      name: Himari.interact
+      within: []
+    - message: "Lazy IO + env-dependent encoding."
+      name: Himari.Prelude.interact
+      within: []
+    - message: "Lazy IO + env-dependent encoding."
+      name: Himari.SafePrelude.interact
       within: []
     - message: "Env-dependent + partial (uses read)."
       name: System.IO.readIO
       within: []
     - message: "Env-dependent + partial (uses read)."
+      name: Himari.readIO
+      within: []
+    - message: "Env-dependent + partial (uses read)."
+      name: Himari.Prelude.readIO
+      within: []
+    - message: "Env-dependent + partial (uses read)."
+      name: Himari.SafePrelude.readIO
+      within: []
+    - message: "Env-dependent + partial (uses read)."
       name: System.IO.readLn
+      within: []
+    - message: "Env-dependent + partial (uses read)."
+      name: Himari.readLn
+      within: []
+    - message: "Env-dependent + partial (uses read)."
+      name: Himari.Prelude.readLn
+      within: []
+    - message: "Env-dependent + partial (uses read)."
+      name: Himari.SafePrelude.readLn
       within: []
     - message: Encoding depends on LANG env. Use Text or ByteString.
       name: System.IO.putChar
       within: []
     - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.putChar
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.Prelude.putChar
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.SafePrelude.putChar
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
       name: System.IO.putStr
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.putStr
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.Prelude.putStr
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.SafePrelude.putStr
       within: []
     - message: Encoding depends on LANG env. Use Text or ByteString.
       name: System.IO.putStrLn
       within: []
     - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.putStrLn
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.Prelude.putStrLn
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.SafePrelude.putStrLn
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
       name: System.IO.print
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.print
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.Prelude.print
+      within: []
+    - message: Encoding depends on LANG env. Use Text or ByteString.
+      name: Himari.SafePrelude.print
       within: []
     - message: "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile."
       name: System.IO.writeFile
       within: []
+    - message: "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile."
+      name: Himari.writeFile
+      within: []
+    - message: "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile."
+      name: Himari.Prelude.writeFile
+      within: []
+    - message: "Env-dependent encoding. Use Data.Text.IO.writeFile or Data.ByteString.writeFile."
+      name: Himari.SafePrelude.writeFile
+      within: []
     - message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile."
       name: System.IO.appendFile
+      within: []
+    - message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile."
+      name: Himari.appendFile
+      within: []
+    - message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile."
+      name: Himari.Prelude.appendFile
+      within: []
+    - message: "Env-dependent encoding. Use Data.Text.IO.appendFile or Data.ByteString.appendFile."
+      name: Himari.SafePrelude.appendFile
       within: []
 - functions:
     - message: Use Data.Text.uncons instead
@@ -1348,6 +1681,12 @@
       within: []
     - message: Use typed exceptions instead. Define a proper exception type.
       name: UnliftIO.Exception.stringException
+      within: []
+    - message: Use typed exceptions instead. Define a proper exception type.
+      name: Himari.stringException
+      within: []
+    - message: Use typed exceptions instead. Define a proper exception type.
+      name: Himari.Prelude.stringException
       within: []
 - functions:
     - message: Use UnliftIO.Async.async instead for MonadUnliftIO support.
