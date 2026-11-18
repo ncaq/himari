@@ -411,12 +411,25 @@
                 pkgs.writeShellApplication {
                   name = "generate-hlint";
                   runtimeInputs = with pkgs; [
+                    coreutils
                     dhall-yaml
                     git
                     prettier
                   ];
                   text = ''
                     cd "$(git rev-parse --show-toplevel)"
+                    # Dhallはハッシュ付きのimportをまずキャッシュから探します。
+                    # nixpkgsのDhall Preludeをキャッシュとして渡すことで、
+                    # `prelude.dhall-lang.org`が落ちていても生成できるようにします。
+                    # Dhallソースのimportのバージョンとハッシュは、
+                    # nixpkgsの`dhallPackages.Prelude`と一致させる必要があります。
+                    # Dhallは書き込めないキャッシュディレクトリを無視するので、
+                    # Nixストアを直接指定せずに一時ディレクトリへコピーします。
+                    dhall_cache_home="$(mktemp -d)"
+                    trap 'rm -rf "$dhall_cache_home"' EXIT
+                    cp -r --no-preserve=mode \
+                      "${pkgs.dhallPackages.Prelude}/.cache/dhall" \
+                      "$dhall_cache_home/dhall"
                     {
                       cat <<'HEADER'
                     # himari hlint configuration
@@ -432,7 +445,8 @@
                     #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
                     #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
                     HEADER
-                      dhall-to-yaml-ng --file hlint/hlint.dhall
+                      XDG_CACHE_HOME="$dhall_cache_home" \
+                        dhall-to-yaml-ng --file hlint/hlint.dhall
                     } > .hlint.yaml
                     prettier --write .hlint.yaml
                   '';
