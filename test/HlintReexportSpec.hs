@@ -70,7 +70,11 @@ spec = do
         shouldWarnFunction sample "useSingular" "singular" "(^?)"
 
       itWithOuter "stringException should warn" $ \sample ->
-        shouldWarnFunction sample "useStringException" "stringException" "typed exceptions"
+        shouldWarnFunction
+          sample
+          "useStringException"
+          "stringException"
+          "Define a proper exception type"
 
       itWithOuter "headMay should NOT warn" $ \sample ->
         sample `shouldNotWarnFunctionIn` "useHeadMay"
@@ -197,7 +201,7 @@ reexportedRestrictedFunctions =
   , ("useUnsafeSingular", "unsafeSingular", "0 or >1 elements")
   , ("useUnsafePartsOf", "unsafePartsOf", "list length changes")
   , ("useIunsafePartsOf", "iunsafePartsOf", "list length changes")
-  , ("useStringException", "stringException", "typed exceptions")
+  , ("useStringException", "stringException", "Define a proper exception type")
   ]
 
 -- | Functions that both "Data.List" and "Data.Foldable" export as the very same entity.
