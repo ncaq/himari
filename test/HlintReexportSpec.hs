@@ -31,6 +31,9 @@ spec = do
           shouldWarnFunction sample "useThrowString" "throwString" "typed exceptions with throwM"
 
       describe "functions of both Data.List and Data.Foldable should have a single message" $ do
+        itWithOuter "every function should be among the tested functions" $ \(_ :: Sample) ->
+          fmap snd listAndFoldableFunctions `shouldBe` listAndFoldableFunctionNames
+
         forM_ listAndFoldableFunctions $ \(declName, function) ->
           itWithOuter (convert function <> " should not have concatenated messages") $ \sample ->
             shouldWarnFunctionOnce sample declName function "Partial:"
@@ -199,14 +202,23 @@ reexportedRestrictedFunctions =
 
 -- | Functions that both "Data.List" and "Data.Foldable" export as the very same entity.
 -- Both modules have a rule for them, so their messages are prone to be concatenated.
+-- The declarations that use them are looked up in 'reexportedRestrictedFunctions'.
 listAndFoldableFunctions :: [(Text, Text)]
 listAndFoldableFunctions =
-  [ ("useFoldl1", "foldl1")
-  , ("useFoldr1", "foldr1")
-  , ("useMaximum", "maximum")
-  , ("useMinimum", "minimum")
-  , ("useMaximumBy", "maximumBy")
-  , ("useMinimumBy", "minimumBy")
+  [ (declName, function)
+  | (declName, function, _) <- reexportedRestrictedFunctions
+  , function `elem` listAndFoldableFunctionNames
+  ]
+
+-- | Names of the functions in 'listAndFoldableFunctions'.
+listAndFoldableFunctionNames :: [Text]
+listAndFoldableFunctionNames =
+  [ "foldl1"
+  , "foldr1"
+  , "maximum"
+  , "minimum"
+  , "maximumBy"
+  , "minimumBy"
   ]
 
 -- | Declarations of the sample that use the UnliftIO version of a name
