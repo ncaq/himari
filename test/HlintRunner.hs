@@ -2,11 +2,8 @@
 -- Assertions are keyed on declaration names instead of substrings of the whole output,
 -- so a warning for one declaration can never satisfy an expectation for another one.
 module HlintRunner
-  ( Sample (..)
-  , Idea (..)
-  , loadSample
+  ( Sample
   , withSample
-  , restrictedFunctionsIn
   , shouldWarnFunction
   , shouldWarnFunctionOnce
   , shouldNotWarnFunctionIn
@@ -23,6 +20,8 @@ import Test.Syd
 data Idea = Idea
   { decl :: [Text]
   -- ^ Names of the declarations the hint belongs to.
+  , severity :: Text
+  -- ^ Severity of the hint. hlint reports a file it failed to parse as @Error@.
   , hint :: Text
   -- ^ Title of the hint such as @Avoid restricted function@.
   , from :: Text
@@ -45,12 +44,19 @@ data Sample = Sample
 
 -- | Run hlint with the project's @.hlint.yaml@ on a sample file.
 -- hlint exits with a failure code when it reports hints, so the exit code is ignored.
+-- A sample hlint failed to parse is rejected here,
+-- because hlint reports nothing but the parse error for it
+-- and every negative expectation on it would pass without checking anything.
 loadSample :: FilePath -> IO Sample
 loadSample path = do
   source <- T.readFile path
   (_, stdoutOutput, stderrOutput) <- readProcess $ proc "hlint" ["--json", path]
   case eitherDecode stdoutOutput of
-    Right ideas -> pure Sample{path, source, ideas}
+    Right ideas -> case filter (\idea -> idea.severity == "Error") ideas of
+      [] -> pure Sample{path, source, ideas}
+      errors ->
+        expectationFailure $
+          "hlint reported errors for " <> path <> ": " <> show errors
     Left err ->
       expectationFailure $
         "failed to parse hlint output for "
