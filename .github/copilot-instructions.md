@@ -91,6 +91,13 @@ nix run '.#generate-hlint'
 
 コマンドで`.hlint.yaml`が新しく生成されます。
 
+生成はNixのビルドとして行われるので、
+新規に追加したDhallファイルはGitにステージングする必要があります。
+
+`nix flake check`は、
+`.hlint.yaml`がDhallソースから生成したものと一致することも検査します。
+Dhallソースを変更したら再生成してください。
+
 ## src
 
 カスタムPreludeとしてのhimariライブラリのソースコードが配置されています。
