@@ -226,7 +226,7 @@ listAndFoldableFunctionNames =
   ]
 
 -- | Declarations of the sample that use the UnliftIO version of a name
--- whose base version has a rule in @.hlint.yaml@.
+-- whose non-UnliftIO version has a rule in @.hlint.yaml@.
 unliftioDeclarations :: [Text]
 unliftioDeclarations =
   [ "useCatch"

@@ -41,14 +41,19 @@ let -- hlintはimport宣言に書かれたモジュール名だけでシンボ�
 let -- `Himari.SafePrelude`が再エクスポートしている関数を制限します。
     -- `Himari.SafePrelude`は`Himari.Prelude`と`Himari`からも再エクスポートされているので、
     -- 3つのモジュール名のルールを生成します。
-    -- baseやlensなどSafe Haskellで使えるモジュールの関数にはこちらを使ってください。
+    -- `Himari.SafePrelude`が定義元と同じ実体をエクスポートしていることを確認してから使ってください。
+    -- baseやlensの関数の多くが該当しますが、
+    -- `Himari.SafePrelude`がエクスポートしていない関数や`hiding`している関数に使うと、
+    -- 存在しないシンボルに対するルールが生成されます。
     restrictReexportedBySafePrelude
     : Text -> Text -> Text -> List Types.Function
     = restrictReexported [ "Himari", "Himari.Prelude", "Himari.SafePrelude" ]
 
 let -- `Himari.Prelude`が再エクスポートしていて、
     -- `Himari.SafePrelude`には含まれない関数を制限します。
-    -- UnliftIOの関数など`Himari.Prelude`にだけある関数にはこちらを使ってください。
+    -- `Himari.Prelude`が定義元と同じ実体をエクスポートしていて、
+    -- `Himari.SafePrelude`はエクスポートしていないことを確認してから使ってください。
+    -- UnliftIOの関数の多くが該当します。
     restrictReexportedByPrelude
     : Text -> Text -> Text -> List Types.Function
     = restrictReexported [ "Himari", "Himari.Prelude" ]
