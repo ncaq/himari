@@ -153,8 +153,15 @@ test-suite himari-test
     Himari.Title
     HlintBaseSpec
     HlintExtensionSpec
+    HlintReexportSpec
+    HlintRunner
     HlintSamples.BasePartial
     HlintSamples.ExtensionDangerous
+    HlintSamples.ReexportExplicitImport
+    HlintSamples.ReexportHimari
+    HlintSamples.ReexportHimariPrelude
+    HlintSamples.ReexportImportForms
+    HlintSamples.ReexportSafePrelude
     HlintSamples.UnliftioPreference
     HlintUnliftioSpec
     TitleSpec

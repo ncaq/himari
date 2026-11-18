@@ -6,6 +6,7 @@ import Himari.Env.SimpleSpec qualified as SimpleSpec
 import Himari.Prelude.FunctorSpec qualified as FunctorSpec
 import HlintBaseSpec qualified
 import HlintExtensionSpec qualified
+import HlintReexportSpec qualified
 import HlintUnliftioSpec qualified
 import Test.Syd
 import TitleSpec qualified
@@ -19,3 +20,4 @@ main = sydTest $ do
   describe "HlintUnliftio" HlintUnliftioSpec.spec
   describe "HlintBase" HlintBaseSpec.spec
   describe "HlintExtension" HlintExtensionSpec.spec
+  describe "HlintReexport" HlintReexportSpec.spec

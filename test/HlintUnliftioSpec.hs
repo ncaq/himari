@@ -1,45 +1,33 @@
 module HlintUnliftioSpec (spec) where
 
-import Data.Text qualified as T
 import Himari
+import HlintRunner
 import Test.Syd
 
 spec :: Spec
 spec = do
-  describe "hlint unliftio preference rules" . beforeAll runHlintOnSample $ do
+  describe "hlint unliftio preference rules" . withSample "UnliftioPreference.hs" $ do
     describe "Control" $ do
       describe "Exception" $ do
-        itWithOuter "catch should warn to use UnliftIO.Exception" $ \output -> do
-          output `shouldSatisfy` containsWarning "UnliftIO.Exception.catch"
+        itWithOuter "catch should warn to use UnliftIO.Exception" $ \sample ->
+          shouldWarnFunction sample "badCatch" "Exception.catch" "UnliftIO.Exception.catch"
 
-        itWithOuter "bracket should warn to use UnliftIO.Exception" $ \output -> do
-          output `shouldSatisfy` containsWarning "UnliftIO.Exception.bracket"
+        itWithOuter "bracket should warn to use UnliftIO.Exception" $ \sample ->
+          shouldWarnFunction sample "badBracket" "Exception.bracket" "UnliftIO.Exception.bracket"
 
-        itWithOuter "finally should warn to use UnliftIO.Exception" $ \output -> do
-          output `shouldSatisfy` containsWarning "UnliftIO.Exception.finally"
+        itWithOuter "finally should warn to use UnliftIO.Exception" $ \sample ->
+          shouldWarnFunction sample "badFinally" "Exception.finally" "UnliftIO.Exception.finally"
 
-        itWithOuter "try should warn to use UnliftIO.Exception" $ \output -> do
-          output `shouldSatisfy` containsWarning "UnliftIO.Exception.try"
+        itWithOuter "try should warn to use UnliftIO.Exception" $ \sample ->
+          shouldWarnFunction sample "badTry" "Exception.try" "UnliftIO.Exception.try"
 
       describe "Concurrent.MVar" $ do
-        itWithOuter "withMVar should warn to use UnliftIO.MVar" $ \output -> do
-          output `shouldSatisfy` containsWarning "UnliftIO.MVar.withMVar"
+        itWithOuter "withMVar should warn to use UnliftIO.MVar" $ \sample ->
+          shouldWarnFunction sample "badWithMVar" "MVar.withMVar" "UnliftIO.MVar.withMVar"
 
-        itWithOuter "modifyMVar_ should warn to use UnliftIO.MVar" $ \output -> do
-          output `shouldSatisfy` containsWarning "UnliftIO.MVar.modifyMVar_"
+        itWithOuter "modifyMVar_ should warn to use UnliftIO.MVar" $ \sample ->
+          shouldWarnFunction sample "badModifyMVar" "MVar.modifyMVar_" "UnliftIO.MVar.modifyMVar_"
 
     describe "System.Timeout" $ do
-      itWithOuter "timeout should warn to use UnliftIO.Timeout" $ \output -> do
-        output `shouldSatisfy` containsWarning "UnliftIO.Timeout.timeout"
-
-runHlintOnSample :: IO Text
-runHlintOnSample = do
-  (exitCode, stdoutOutput, stderrOutput) <-
-    readProcess $
-      proc "hlint" ["test/HlintSamples/UnliftioPreference.hs"]
-  pure $ case exitCode of
-    ExitSuccess -> convert stdoutOutput
-    ExitFailure _ -> convert stdoutOutput <> convert stderrOutput
-
-containsWarning :: Text -> Text -> Bool
-containsWarning expectedMsg output = expectedMsg `T.isInfixOf` output
+      itWithOuter "timeout should warn to use UnliftIO.Timeout" $ \sample ->
+        shouldWarnFunction sample "badTimeout" "Timeout.timeout" "UnliftIO.Timeout.timeout"
