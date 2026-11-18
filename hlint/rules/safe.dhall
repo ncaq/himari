@@ -73,7 +73,18 @@ let listScanr1 =
         "scanr1"
         listScanr1Message
 
-let listFoldl1Message =
+let -- `Data.List`の以下の関数は`Data.Foldable`の同名の関数と同じ実体です。
+    --
+    -- * `foldl1`
+    -- * `foldr1`
+    -- * `maximum`
+    -- * `minimum`
+    -- * `maximumBy`
+    -- * `minimumBy`
+    --
+    -- himari経由のルールを両方から生成するとメッセージが連結されてしまうので、
+    -- himari経由のルールは`Data.Foldable`側だけで生成します。
+    listFoldl1Message =
       "Partial: throws on empty list. Use foldl1May from Safe instead."
 
 let listFoldl1 = Builder.restrictInModule "Data.List" "foldl1" listFoldl1Message

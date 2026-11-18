@@ -18,7 +18,15 @@ let restrictInModule
       \(message : Text) ->
         restrictFunction "${module}.${func}" message
 
-let restrictReexported
+let -- hlintはimport宣言に書かれたモジュール名だけでシンボルの由来を判断するため、
+    -- 再エクスポートを追跡しません。
+    -- 定義元のモジュール名で修飾したルールは`import Himari`経由のシンボルに一致しないので、
+    -- 再エクスポートしているhimariのモジュール名で修飾したルールも生成します。
+    -- himariが同じ名前で別の実体をエクスポートしている関数に使ってはいけません。
+    -- 定義元が違っても同じ実体になる関数は、
+    -- hlintが一致したルールのメッセージを全て連結してしまうので、
+    -- どれか1つのルールにだけ使ってください。
+    restrictReexported
     : List Text -> Text -> Text -> Text -> List Types.Function
     = \(reexporters : List Text) ->
       \(module : Text) ->
@@ -30,11 +38,18 @@ let restrictReexported
           (\(m : Text) -> restrictInModule m func message)
           ([ module ] # reexporters)
 
-let restrictReexportedBySafePrelude
+let -- `Himari.SafePrelude`が再エクスポートしている関数を制限します。
+    -- `Himari.SafePrelude`は`Himari.Prelude`と`Himari`からも再エクスポートされているので、
+    -- 3つのモジュール名のルールを生成します。
+    -- baseやlensなどSafe Haskellで使えるモジュールの関数にはこちらを使ってください。
+    restrictReexportedBySafePrelude
     : Text -> Text -> Text -> List Types.Function
     = restrictReexported [ "Himari", "Himari.Prelude", "Himari.SafePrelude" ]
 
-let restrictReexportedByPrelude
+let -- `Himari.Prelude`が再エクスポートしていて、
+    -- `Himari.SafePrelude`には含まれない関数を制限します。
+    -- UnliftIOの関数など`Himari.Prelude`にだけある関数にはこちらを使ってください。
+    restrictReexportedByPrelude
     : Text -> Text -> Text -> List Types.Function
     = restrictReexported [ "Himari", "Himari.Prelude" ]
 
