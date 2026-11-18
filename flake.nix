@@ -421,7 +421,7 @@
                     # Dhallはハッシュ付きのimportをまずキャッシュから探します。
                     # nixpkgsのDhall Preludeをキャッシュとして渡すことで、
                     # `prelude.dhall-lang.org`が落ちていても生成できるようにします。
-                    # Dhallソースのimportのバージョンとハッシュは、
+                    # `hlint/Prelude.dhall`のimportのバージョンとハッシュは、
                     # nixpkgsの`dhallPackages.Prelude`と一致させる必要があります。
                     # Dhallは書き込めないキャッシュディレクトリを無視するので、
                     # Nixストアを直接指定せずに一時ディレクトリへコピーします。
