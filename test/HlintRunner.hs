@@ -4,6 +4,7 @@
 module HlintRunner
   ( Sample
   , withSample
+  , loadRestrictedFunctionNames
   , shouldWarnFunction
   , shouldWarnFunctionOnce
   , shouldNotWarnFunctionIn
@@ -13,6 +14,7 @@ module HlintRunner
 
 import Data.Text qualified as T
 import Data.Text.IO qualified as T
+import Data.Yaml qualified as Yaml
 import Himari
 import Test.Syd
 
@@ -69,6 +71,33 @@ loadSample path = do
 -- | Run hlint once on a file of @test/HlintSamples@ and share the result among the tests.
 withSample :: FilePath -> TestDefM '[Sample] () () -> Spec
 withSample name = beforeAll (loadSample ("test/HlintSamples/" <> name))
+
+-- | A rule of @.hlint.yaml@.
+-- Only the function restrictions are read, the other kinds of rules have no @functions@ key.
+newtype Rule = Rule
+  { functions :: Maybe [FunctionRestriction]
+  }
+  deriving stock (Eq, Generic, Show)
+
+instance FromJSON Rule
+
+-- | A function restriction of @.hlint.yaml@.
+newtype FunctionRestriction = FunctionRestriction
+  { name :: Text
+  }
+  deriving stock (Eq, Generic, Show)
+
+instance FromJSON FunctionRestriction
+
+-- | Names of all the functions restricted by the project's @.hlint.yaml@.
+loadRestrictedFunctionNames :: IO [Text]
+loadRestrictedFunctionNames =
+  Yaml.decodeFileEither ".hlint.yaml" >>= \case
+    Right (rules :: [Rule]) ->
+      pure [restriction.name | rule <- rules, restriction <- fold rule.functions]
+    Left err ->
+      expectationFailure $
+        "failed to parse .hlint.yaml: " <> Yaml.prettyPrintParseException err
 
 -- | Fail unless the sample defines the declaration.
 -- This keeps negative expectations from passing vacuously
