@@ -9,12 +9,22 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ### Fixed
 
-- hlint rules written with a module-qualified name, such as `Data.List.head` and `System.IO.readFile`,
+- hlint rules written with a module-qualified name,
+  such as `Data.List.head` and `System.IO.readFile`,
   did not match symbols used through `import Himari`,
   because hlint does not follow re-exports.
-  The partial functions and `String` IO functions re-exported by `Himari`,
-  `Himari.Prelude`, and `Himari.SafePrelude` are now warned when used through these modules.
-  Projects that use them through `import Himari` will get new warnings
+  The functions listed in the following items are now warned when used through `Himari`,
+  `Himari.Prelude`, or `Himari.SafePrelude`.
+  Projects that use them through these modules will get new warnings
+- Warn partial functions of `Data.List`, `Data.Foldable`, and `Data.Bifoldable`
+  used through himari, such as `head`, `tail`, `foldl1`, `maximum`, and `bifoldl1`
+- Warn `fromJust` of `Data.Maybe` used through himari
+- Warn `String` IO functions of `System.IO` used through himari,
+  such as `print`, `putStrLn`, `getLine`, and `readFile`
+- Warn `singular`, `unsafeSingular`, `unsafePartsOf`, and `iunsafePartsOf`
+  of `Control.Lens.Traversal` used through himari
+- Warn `stringException` of `UnliftIO.Exception` used through `Himari` or `Himari.Prelude`.
+  `Himari.SafePrelude` does not export it
 
 ## [1.1.6.2] - 2026-11-01
 
