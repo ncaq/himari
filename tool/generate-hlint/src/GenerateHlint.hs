@@ -46,7 +46,8 @@ run = runWith treefmt
 runWith :: (MonadThrow m, MonadUnliftIO m) => Formatter m -> Options -> m ()
 runWith formatter options = do
   liftIO $ setLocaleEncoding utf8
-  root <- maybe (getCurrentDirectory >>= findProjectRoot) pure options.projectRoot
+  -- 以降の処理やフォーマッターが作業ディレクトリに左右されないように絶対パスにします。
+  root <- makeAbsolute =<< maybe (getCurrentDirectory >>= findProjectRoot) pure options.projectRoot
   if options.checkOnly
     then check formatter options.dhallCache root
     else do
