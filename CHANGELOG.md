@@ -7,6 +7,8 @@ and this project adheres to [Haskell Package Versioning Policy](https://pvp.hask
 
 ## [Unreleased]
 
+## [1.1.6.3] - 2026-11-19
+
 ### Fixed
 
 - hlint rules written with a module-qualified name,
