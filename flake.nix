@@ -298,10 +298,14 @@
           generate-hlint-unwrapped =
             pkgs.haskellPackages.callCabal2nix "generate-hlint" ./tool/generate-hlint
               {
+                # `nix flake check`でビルドする`himari-nixpkgs`をそのまま使います。
+                # テストを実行しないhimariを別に用意すると、
+                # nixpkgs版のhimariを2回コンパイルすることになるためです。
                 # himariのテストは`.hlint.yaml`を読むので、
-                # テストを通してからでないと`.hlint.yaml`を再生成できない循環を避けるために、
-                # テストを実行しないhimariに依存させます。
-                himari = pkgs.haskell.lib.dontCheck himari-nixpkgs;
+                # テストが通らない状態では`generate-hlint`をビルドできません。
+                # Dhallのルールとそれを期待するテストを両方変える時は、
+                # 先にDhallだけを変えて`.hlint.yaml`を再生成してからテストを変えてください。
+                himari = himari-nixpkgs;
               };
           # nixpkgsのDhall Preludeをキャッシュとして渡した`generate-hlint`。
           # Dhallはハッシュ付きのimportをまずキャッシュから探すので、
