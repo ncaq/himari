@@ -9,10 +9,6 @@
       };
     };
     haskellNix.url = "github:input-output-hk/haskell.nix";
-    changelog-lint-src = {
-      url = "git+https://codeberg.org/chavacava/changelog-lint.git";
-      flake = false;
-    };
   };
 
   outputs =
@@ -21,7 +17,6 @@
       flake-parts,
       treefmt-nix,
       haskellNix,
-      changelog-lint-src,
       ...
     }:
     let
@@ -247,7 +242,17 @@
           changelog-lint = final.buildGoModule {
             pname = "changelog-lint";
             version = "0.3.0";
-            src = changelog-lint-src;
+            # flakeのinputにすると、
+            # 関係のない出力を評価する時にも毎回Codebergから取得しようとします。
+            # Codebergは不安定なことが多く、
+            # その度に全てのコマンドが失敗していました。
+            # 固定出力のderivationにすることで、
+            # ビルド結果やソースがバイナリキャッシュにあればCodebergにアクセスしません。
+            src = final.fetchgit {
+              url = "https://codeberg.org/chavacava/changelog-lint.git";
+              rev = "e9310dee1b58d2bd19223034d48a654849bc9d96";
+              hash = "sha256-ZVLuE0SbNY1LZ773GeVs3em/G2vCNRXiV41VYNOtcGA=";
+            };
             vendorHash = "sha256-b0cTP7aIh26/E9BvG6aGnpktmFmL49Nb8t4AhWvZzP8=";
           };
         })
