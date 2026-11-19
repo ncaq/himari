@@ -20,22 +20,26 @@ let toEnum = Builder.restrictFunction "toEnum" toEnumMessage
 let listHeadMessage =
       "Partial: throws on empty list. Use headMay or headDef from Safe instead."
 
-let listHead = Builder.restrictInModule "Data.List" "head" listHeadMessage
+let listHead =
+      Builder.restrictReexportedBySafePrelude "Data.List" "head" listHeadMessage
 
 let listTailMessage =
       "Partial: throws on empty list. Use tailMay, tailDef, or tailSafe from Safe instead."
 
-let listTail = Builder.restrictInModule "Data.List" "tail" listTailMessage
+let listTail =
+      Builder.restrictReexportedBySafePrelude "Data.List" "tail" listTailMessage
 
 let listInitMessage =
       "Partial: throws on empty list. Use initMay, initDef, or initSafe from Safe instead."
 
-let listInit = Builder.restrictInModule "Data.List" "init" listInitMessage
+let listInit =
+      Builder.restrictReexportedBySafePrelude "Data.List" "init" listInitMessage
 
 let listLastMessage =
       "Partial: throws on empty list. Use lastMay or lastDef from Safe instead."
 
-let listLast = Builder.restrictInModule "Data.List" "last" listLastMessage
+let listLast =
+      Builder.restrictReexportedBySafePrelude "Data.List" "last" listLastMessage
 
 let listIndexMessage =
       "Partial: throws on out-of-bounds. Use atMay or atDef from Safe instead."
@@ -45,19 +49,42 @@ let listIndex = Builder.restrictFunction "Data.List.!!" listIndexMessage
 let listCycleMessage =
       "Partial: throws on empty list. Use cycleMay or cycleDef from Safe instead."
 
-let listCycle = Builder.restrictInModule "Data.List" "cycle" listCycleMessage
+let listCycle =
+      Builder.restrictReexportedBySafePrelude
+        "Data.List"
+        "cycle"
+        listCycleMessage
 
 let listScanl1Message =
       "Partial: throws on empty list. Use scanl1May or scanl1Def from Safe instead."
 
-let listScanl1 = Builder.restrictInModule "Data.List" "scanl1" listScanl1Message
+let listScanl1 =
+      Builder.restrictReexportedBySafePrelude
+        "Data.List"
+        "scanl1"
+        listScanl1Message
 
 let listScanr1Message =
       "Partial: throws on empty list. Use scanr1May or scanr1Def from Safe instead."
 
-let listScanr1 = Builder.restrictInModule "Data.List" "scanr1" listScanr1Message
+let listScanr1 =
+      Builder.restrictReexportedBySafePrelude
+        "Data.List"
+        "scanr1"
+        listScanr1Message
 
-let listFoldl1Message =
+let -- `Data.List`の以下の関数は`Data.Foldable`の同名の関数と同じ実体です。
+    --
+    -- * `foldl1`
+    -- * `foldr1`
+    -- * `maximum`
+    -- * `minimum`
+    -- * `maximumBy`
+    -- * `minimumBy`
+    --
+    -- himari経由のルールを両方から生成するとメッセージが連結されてしまうので、
+    -- himari経由のルールは`Data.Foldable`側だけで生成します。
+    listFoldl1Message =
       "Partial: throws on empty list. Use foldl1May from Safe instead."
 
 let listFoldl1 = Builder.restrictInModule "Data.List" "foldl1" listFoldl1Message
@@ -100,7 +127,11 @@ let listMinimumBy =
 let fromJustMessage =
       "Partial: throws on Nothing. Use fromMaybe or pattern match instead."
 
-let fromJust = Builder.restrictInModule "Data.Maybe" "fromJust" fromJustMessage
+let fromJust =
+      Builder.restrictReexportedBySafePrelude
+        "Data.Maybe"
+        "fromJust"
+        fromJustMessage
 
 let readMessage =
       "Partial: throws on parse failure. Use readMay or readDef from Safe instead."
@@ -111,34 +142,46 @@ let foldableFoldl1Message =
       "Partial: throws on empty structure. Use foldl1May from Safe.Foldable instead."
 
 let foldableFoldl1 =
-      Builder.restrictInModule "Data.Foldable" "foldl1" foldableFoldl1Message
+      Builder.restrictReexportedBySafePrelude
+        "Data.Foldable"
+        "foldl1"
+        foldableFoldl1Message
 
 let foldableFoldr1Message =
       "Partial: throws on empty structure. Use foldr1May from Safe.Foldable instead."
 
 let foldableFoldr1 =
-      Builder.restrictInModule "Data.Foldable" "foldr1" foldableFoldr1Message
+      Builder.restrictReexportedBySafePrelude
+        "Data.Foldable"
+        "foldr1"
+        foldableFoldr1Message
 
 let foldableMaximumMessage =
           "Partial: throws on empty structure. "
       ++  "Use maximumMay or maximumBound from Safe.Foldable instead."
 
 let foldableMaximum =
-      Builder.restrictInModule "Data.Foldable" "maximum" foldableMaximumMessage
+      Builder.restrictReexportedBySafePrelude
+        "Data.Foldable"
+        "maximum"
+        foldableMaximumMessage
 
 let foldableMinimumMessage =
           "Partial: throws on empty structure. "
       ++  "Use minimumMay or minimumBound from Safe.Foldable instead."
 
 let foldableMinimum =
-      Builder.restrictInModule "Data.Foldable" "minimum" foldableMinimumMessage
+      Builder.restrictReexportedBySafePrelude
+        "Data.Foldable"
+        "minimum"
+        foldableMinimumMessage
 
 let foldableMaximumByMessage =
           "Partial: throws on empty structure. "
       ++  "Use maximumByMay or maximumBoundBy from Safe.Foldable instead."
 
 let foldableMaximumBy =
-      Builder.restrictInModule
+      Builder.restrictReexportedBySafePrelude
         "Data.Foldable"
         "maximumBy"
         foldableMaximumByMessage
@@ -148,7 +191,7 @@ let foldableMinimumByMessage =
       ++  "Use minimumByMay or minimumBoundBy from Safe.Foldable instead."
 
 let foldableMinimumBy =
-      Builder.restrictInModule
+      Builder.restrictReexportedBySafePrelude
         "Data.Foldable"
         "minimumBy"
         foldableMinimumByMessage
@@ -157,31 +200,43 @@ let bifoldl1Message =
       "Partial: throws on empty structure. Use bifoldl with a default value instead."
 
 let bifoldl1 =
-      Builder.restrictInModule "Data.Bifoldable" "bifoldl1" bifoldl1Message
+      Builder.restrictReexportedBySafePrelude
+        "Data.Bifoldable"
+        "bifoldl1"
+        bifoldl1Message
 
 let bifoldr1Message =
       "Partial: throws on empty structure. Use bifoldr with a default value instead."
 
 let bifoldr1 =
-      Builder.restrictInModule "Data.Bifoldable" "bifoldr1" bifoldr1Message
+      Builder.restrictReexportedBySafePrelude
+        "Data.Bifoldable"
+        "bifoldr1"
+        bifoldr1Message
 
 let bimaximumMessage =
       "Partial: throws on empty structure. Use bifoldr with explicit initial value."
 
 let bimaximum =
-      Builder.restrictInModule "Data.Bifoldable" "bimaximum" bimaximumMessage
+      Builder.restrictReexportedBySafePrelude
+        "Data.Bifoldable"
+        "bimaximum"
+        bimaximumMessage
 
 let biminimumMessage =
       "Partial: throws on empty structure. Use bifoldr with explicit initial value."
 
 let biminimum =
-      Builder.restrictInModule "Data.Bifoldable" "biminimum" biminimumMessage
+      Builder.restrictReexportedBySafePrelude
+        "Data.Bifoldable"
+        "biminimum"
+        biminimumMessage
 
 let bimaximumByMessage =
       "Partial: throws on empty structure. Use bifoldr with explicit initial value."
 
 let bimaximumBy =
-      Builder.restrictInModule
+      Builder.restrictReexportedBySafePrelude
         "Data.Bifoldable"
         "bimaximumBy"
         bimaximumByMessage
@@ -190,7 +245,7 @@ let biminimumByMessage =
       "Partial: throws on empty structure. Use bifoldr with explicit initial value."
 
 let biminimumBy =
-      Builder.restrictInModule
+      Builder.restrictReexportedBySafePrelude
         "Data.Bifoldable"
         "biminimumBy"
         biminimumByMessage
@@ -573,34 +628,41 @@ let rules
       -- Prelude/base partial functions -> Safe alternatives
       [ Builder.functions [ succ, pred, toEnum ]
       , Builder.functions
-          [ listHead
-          , listTail
-          , listInit
-          , listLast
-          , listIndex
-          , listCycle
-          , listScanl1
-          , listScanr1
-          , listFoldl1
-          , listFoldl1Strict
-          , listFoldr1
-          , listMaximum
-          , listMinimum
-          , listMaximumBy
-          , listMinimumBy
-          ]
-      , Builder.functions [ fromJust ]
+          (   listHead
+            # listTail
+            # listInit
+            # listLast
+            # [ listIndex ]
+            # listCycle
+            # listScanl1
+            # listScanr1
+            # [ listFoldl1
+              , listFoldl1Strict
+              , listFoldr1
+              , listMaximum
+              , listMinimum
+              , listMaximumBy
+              , listMinimumBy
+              ]
+          )
+      , Builder.functions fromJust
       , Builder.functions [ read ]
       , Builder.functions
-          [ foldableFoldl1
-          , foldableFoldr1
-          , foldableMaximum
-          , foldableMinimum
-          , foldableMaximumBy
-          , foldableMinimumBy
-          ]
+          (   foldableFoldl1
+            # foldableFoldr1
+            # foldableMaximum
+            # foldableMinimum
+            # foldableMaximumBy
+            # foldableMinimumBy
+          )
       , Builder.functions
-          [ bifoldl1, bifoldr1, bimaximum, biminimum, bimaximumBy, biminimumBy ]
+          (   bifoldl1
+            # bifoldr1
+            # bimaximum
+            # biminimum
+            # bimaximumBy
+            # biminimumBy
+          )
       , Builder.functions [ neIndex, neFromList ]
       , Builder.functions [ ixIndex ]
       , Builder.functions

@@ -362,16 +362,19 @@ let environmentFuncs =
 let exceptionLensFuncs =
       [ "catching", "catching_", "handling", "handling_", "trying", "trying_" ]
 
-let untypedExceptionFuncs =
-      [ Builder.restrictInModule
-          "UnliftIO.Exception"
-          "throwString"
-          "Use typed exceptions instead. Define a proper exception type."
-      , Builder.restrictInModule
+let -- `throwString`はモジュール修飾の無いルールが`exceptions.dhall`にあり、
+    -- himari経由でもそちらで検出されるので、
+    -- himari経由のルールは生成しません。
+    untypedExceptionFuncs =
+        [ Builder.restrictInModule
+            "UnliftIO.Exception"
+            "throwString"
+            "Use typed exceptions instead. Define a proper exception type."
+        ]
+      # Builder.restrictReexportedByPrelude
           "UnliftIO.Exception"
           "stringException"
           "Use typed exceptions instead. Define a proper exception type."
-      ]
 
 let rules
     : List Types.Rule

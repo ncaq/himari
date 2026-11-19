@@ -153,8 +153,15 @@ test-suite himari-test
     Himari.Title
     HlintBaseSpec
     HlintExtensionSpec
+    HlintReexportSpec
+    HlintRunner
     HlintSamples.BasePartial
     HlintSamples.ExtensionDangerous
+    HlintSamples.ReexportExplicitImport
+    HlintSamples.ReexportHimari
+    HlintSamples.ReexportHimariPrelude
+    HlintSamples.ReexportImportForms
+    HlintSamples.ReexportSafePrelude
     HlintSamples.UnliftioPreference
     HlintUnliftioSpec
     TitleSpec
@@ -168,6 +175,7 @@ test-suite himari-test
     QuickCheck >=2.15.0.1,
     himari,
     sydtest >=0.18.0.0,
+    yaml >=0.11.11.2,
 
   build-tool-depends:
     hlint:hlint >=3.10

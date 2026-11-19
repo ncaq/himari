@@ -3,29 +3,29 @@ let Types = ../Types.dhall
 let Builder = ../Builder.dhall
 
 let partialLensFuncs =
-      [ Builder.restrictFunction
-          "Control.Lens.Fold.^?!"
-          "Partial: throws on empty Fold. Use (^?) instead."
-      , Builder.restrictFunction
-          "Control.Lens.Fold.^@?!"
-          "Partial: throws on empty Fold. Use (^@?) instead."
-      , Builder.restrictInModule
+        [ Builder.restrictFunction
+            "Control.Lens.Fold.^?!"
+            "Partial: throws on empty Fold. Use (^?) instead."
+        , Builder.restrictFunction
+            "Control.Lens.Fold.^@?!"
+            "Partial: throws on empty Fold. Use (^@?) instead."
+        ]
+      # Builder.restrictReexportedBySafePrelude
           "Control.Lens.Traversal"
           "singular"
           "Partial: throws on 0 or >1 elements. Consider using (^?) or ensure exactly 1 element."
-      , Builder.restrictInModule
+      # Builder.restrictReexportedBySafePrelude
           "Control.Lens.Traversal"
           "unsafeSingular"
           "Partial: throws on 0 or >1 elements."
-      , Builder.restrictInModule
+      # Builder.restrictReexportedBySafePrelude
           "Control.Lens.Traversal"
           "unsafePartsOf"
           "Unsafe: may throw if list length changes."
-      , Builder.restrictInModule
+      # Builder.restrictReexportedBySafePrelude
           "Control.Lens.Traversal"
           "iunsafePartsOf"
           "Unsafe: may throw if list length changes."
-      ]
 
 let unsoundLensFuncs =
       [ Builder.restrictInModule
