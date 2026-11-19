@@ -65,6 +65,22 @@ withReadOnly paths = bracket_ (setWritable False) (setWritable True)
   setWritable writable =
     for_ paths \path -> getPermissions path >>= setPermissions path . setOwnerWritable writable
 
+xdgCacheHome :: String
+xdgCacheHome = "XDG_CACHE_HOME"
+
+-- | `XDG_CACHE_HOME`を指定した状態にして処理を実行します。
+-- `Nothing`は未設定を表します。
+-- テストの結果が実行環境の値に左右されないようにするためのもので、
+-- 処理が終わったら実行環境の値に戻します。
+withCacheHomeEnv :: Maybe String -> IO a -> IO a
+withCacheHomeEnv value = bracket (lookupEnv xdgCacheHome <* put value) put . const
+ where
+  put = maybe (unsetEnv xdgCacheHome) (setEnv xdgCacheHome)
+
+-- | テストする`XDG_CACHE_HOME`の状態と、テスト名に使う説明。
+cacheHomeCases :: [(String, Maybe String)]
+cacheHomeCases = [("a set", Just "/generate-hlint-test-cache-home"), ("an unset", Nothing)]
+
 isRemoteImportNotCached :: GenerateHlintException -> Bool
 isRemoteImportNotCached = \case
   RemoteImportNotCached url -> "example.invalid" `T.isInfixOf` url
@@ -152,11 +168,21 @@ main = sydTest . sequential $ do
         withSystemTempDirectory "generate-hlint-test-cache" \cache ->
           generate unformatted (Just cache) root `shouldThrow` isRemoteImportNotCached
 
-    it "restores XDG_CACHE_HOME after the generation" $ withProject sampleSource \root ->
-      withSystemTempDirectory "generate-hlint-test-cache" \cache -> do
-        original <- lookupEnv "XDG_CACHE_HOME"
-        _ <- generate unformatted (Just cache) root
-        lookupEnv "XDG_CACHE_HOME" `shouldReturn` original
+    -- 元の値が設定されている場合と未設定の場合では元に戻す処理が違うので、両方を確かめます。
+    for_ cacheHomeCases \(label, original) -> do
+      it ("restores " <> label <> " XDG_CACHE_HOME after a successful generation") $
+        withProject sampleSource \root ->
+          withSystemTempDirectory "generate-hlint-test-cache" \cache ->
+            withCacheHomeEnv original do
+              _ <- generate unformatted (Just cache) root
+              lookupEnv xdgCacheHome `shouldReturn` original
+
+      it ("restores " <> label <> " XDG_CACHE_HOME after a failed generation") $
+        withProject remoteSource \root ->
+          withSystemTempDirectory "generate-hlint-test-cache" \cache ->
+            withCacheHomeEnv original do
+              generate unformatted (Just cache) root `shouldThrow` isRemoteImportNotCached
+              lookupEnv xdgCacheHome `shouldReturn` original
 
     it "reports a missing cache directory" $ withProject sampleSource \root ->
       generate unformatted (Just (root </> "missing")) root
