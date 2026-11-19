@@ -127,6 +127,19 @@ main = sydTest . sequential $ do
       withProject sampleSource \root ->
         generate (\_ _ -> pure "[]\n") Nothing root `shouldThrow` (== GeneratedYamlChanged)
 
+    it "rejects a formatter that breaks the YAML" $
+      withProject sampleSource \root ->
+        generate (\_ _ -> pure "[") Nothing root `shouldThrow` \case
+          GeneratedYamlUnreadable _ -> True
+          _ -> False
+
+    it "reports a Dhall source that is not UTF-8" $
+      withProject sampleSource \root -> do
+        B.writeFile (root </> dhallSourcePath) "\xff\xfe"
+        generate unformatted Nothing root `shouldThrow` \case
+          DhallSourceNotUtf8 path _ -> path == root </> dhallSourcePath
+          _ -> False
+
   describe "treefmtWith" $ do
     it "reports a command that cannot be started" $
       withSystemTempDirectory "generate-hlint-test" \root ->
