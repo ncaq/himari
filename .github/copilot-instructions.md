@@ -91,12 +91,31 @@ nix run '.#generate-hlint'
 
 コマンドで`.hlint.yaml`が新しく生成されます。
 
-生成はNixのビルドとして行われるので、
-新規に追加したDhallファイルはGitにステージングする必要があります。
+生成は`tool/generate-hlint`のHaskell製のコマンドが行います。
+Dhallの評価からYAMLの書き出し、
+treefmtによる整形までをこのコマンドが担当します。
 
 `nix flake check`は、
 `.hlint.yaml`がDhallソースから生成したものと一致することも検査します。
 Dhallソースを変更したら再生成してください。
+この検査はNixのビルドとして行われるので、
+新規に追加したDhallファイルはGitにステージングする必要があります。
+
+## tool
+
+### `tool/generate-hlint`
+
+`.hlint.yaml`を生成・検査するコマンドのHaskellパッケージです。
+
+Hackageのdhallとdhall-jsonは依存の上限が古く、
+himariと同じビルド計画に入れられないので、
+`cabal.project`には含めずにnixpkgsの`haskellPackages`でビルドしています。
+
+```zsh
+nix build '.#generate-hlint'
+```
+
+でビルドとテストが実行されます。
 
 ## src
 

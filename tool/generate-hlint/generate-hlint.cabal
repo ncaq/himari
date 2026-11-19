@@ -1,0 +1,111 @@
+cabal-version: 3.12
+name: generate-hlint
+version: 0
+synopsis: Generate .hlint.yaml of himari from Dhall sources
+description:
+  A development tool of himari.
+  It evaluates the Dhall sources in the hlint directory
+  and writes or verifies .hlint.yaml at the project root.
+  This package is not published.
+
+license: Apache-2.0
+author: ncaq
+maintainer: ncaq@ncaq.net
+copyright: ncaq
+category: Development
+build-type: Simple
+
+common basic
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Widentities
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wpartial-fields
+    -Wredundant-constraints
+
+  default-language: GHC2024
+  default-extensions:
+    ApplicativeDo
+    BlockArguments
+    CPP
+    DefaultSignatures
+    DuplicateRecordFields
+    FunctionalDependencies
+    LexicalNegation
+    LinearTypes
+    MonadComprehensions
+    MultiWayIf
+    NegativeLiterals
+    NoFieldSelectors
+    NoImplicitPrelude
+    OverloadedLabels
+    OverloadedRecordDot
+    OverloadedStrings
+    ParallelListComp
+    PatternSynonyms
+    QualifiedDo
+    QuantifiedConstraints
+    QuasiQuotes
+    RecordWildCards
+    RecursiveDo
+    StrictData
+    TypeData
+    TypeFamilies
+    TypeFamilyDependencies
+    ViewPatterns
+
+  build-depends:
+    bytestring >=0.12,
+    himari,
+    text >=2.1,
+
+library
+  import: basic
+  hs-source-dirs: src
+  -- cabal-gild: discover ./src
+  exposed-modules:
+    GenerateHlint
+    GenerateHlint.Check
+    GenerateHlint.Dhall
+    GenerateHlint.Exception
+    GenerateHlint.Formatter
+    GenerateHlint.Generate
+    GenerateHlint.Path
+    GenerateHlint.Yaml
+
+  build-depends:
+    Diff >=1.0,
+    base >=4.20,
+    dhall >=1.42,
+    dhall-json >=1.7,
+    yaml >=0.11,
+
+executable generate-hlint
+  import: basic
+  hs-source-dirs: app
+  main-is: Main.hs
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+
+  build-depends:
+    generate-hlint,
+    optparse-applicative >=0.18,
+
+test-suite generate-hlint-test
+  import: basic
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Main.hs
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+
+  build-depends:
+    generate-hlint,
+    sydtest >=0.18,
+    yaml >=0.11,
