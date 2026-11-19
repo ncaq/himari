@@ -9,10 +9,6 @@
       };
     };
     haskellNix.url = "github:input-output-hk/haskell.nix";
-    changelog-lint-src = {
-      url = "git+https://codeberg.org/chavacava/changelog-lint.git";
-      flake = false;
-    };
   };
 
   outputs =
@@ -21,7 +17,6 @@
       flake-parts,
       treefmt-nix,
       haskellNix,
-      changelog-lint-src,
       ...
     }:
     let
@@ -247,7 +242,17 @@
           changelog-lint = final.buildGoModule {
             pname = "changelog-lint";
             version = "0.3.0";
-            src = changelog-lint-src;
+            # flakeのinputにすると、
+            # 関係のない出力を評価する時にも毎回Codebergから取得しようとします。
+            # Codebergは不安定なことが多く、
+            # その度に全てのコマンドが失敗していました。
+            # 固定出力のderivationにすることで、
+            # ビルド結果やソースがバイナリキャッシュにあればCodebergにアクセスしません。
+            src = final.fetchgit {
+              url = "https://codeberg.org/chavacava/changelog-lint.git";
+              rev = "e9310dee1b58d2bd19223034d48a654849bc9d96";
+              hash = "sha256-ZVLuE0SbNY1LZ773GeVs3em/G2vCNRXiV41VYNOtcGA=";
+            };
             vendorHash = "sha256-b0cTP7aIh26/E9BvG6aGnpktmFmL49Nb8t4AhWvZzP8=";
           };
         })
@@ -282,6 +287,95 @@
           # 依存パッケージのバージョン変動などでビルド・テストが失敗することがある。
           # nixpkgs越しでも壊れていないことを継続的に検証する。
           himari-nixpkgs = pkgs.haskellPackages.callCabal2nix "himari" (cabalFileset pkgs.lib) { };
+          # Dhallソースから生成した`.hlint.yaml`。
+          # ネットワークにアクセスしないのでサンドボックスの中で生成できます。
+          hlint-yaml =
+            pkgs.runCommand "hlint.yaml"
+              {
+                nativeBuildInputs = with pkgs; [
+                  dhall-yaml
+                  gnugrep
+                  prettier
+                ];
+                # prettierは`.editorconfig`を読んで行の長さなどを決めるので、
+                # リポジトリで実行した時と同じ結果になるように含めます。
+                src = pkgs.lib.fileset.toSource {
+                  root = ./.;
+                  fileset = pkgs.lib.fileset.unions [
+                    ./.editorconfig
+                    ./hlint
+                  ];
+                };
+              }
+              ''
+                cp -r --no-preserve=mode "$src" source
+                cd source
+                # Dhallはハッシュ付きのimportをまずキャッシュから探します。
+                # nixpkgsのDhall Preludeをキャッシュとして渡すことで、
+                # `prelude.dhall-lang.org`にアクセスせずに生成できるようにします。
+                # `hlint/Prelude.dhall`のimportのバージョンとハッシュは、
+                # nixpkgsの`dhallPackages.Prelude`と一致させる必要があります。
+                # Dhallは書き込めないキャッシュディレクトリを無視するので、
+                # Nixストアを直接指定せずに一時ディレクトリへコピーします。
+                dhall_cache_home="$(mktemp -d)"
+                cp -r --no-preserve=mode \
+                  "${pkgs.dhallPackages.Prelude}/.cache/dhall" \
+                  "$dhall_cache_home/dhall"
+                # ハッシュがnixpkgsのものとずれていると、
+                # Dhallはキャッシュに当たらず通信して取得しようとするので、
+                # 生成の前に検出して原因が分かるメッセージで失敗させます。
+                # Dhallのキャッシュのファイル名は`1220`にsha256のハッシュを続けたものです。
+                prelude_hash="$(
+                  grep --only-matching --extended-regexp 'sha256:[0-9a-f]{64}' hlint/Prelude.dhall |
+                    cut --delimiter=: --fields=2 || true
+                )"
+                if [[ ! -e "$dhall_cache_home/dhall/1220$prelude_hash" ]]; then
+                  echo "hlint/Prelude.dhallのハッシュがnixpkgsのdhallPackages.Preludeと一致しません。" >&2
+                  echo "hlint/Prelude.dhallのバージョンとハッシュをnixpkgsのものに合わせてください。" >&2
+                  echo "nixpkgsのPrelude: ${pkgs.dhallPackages.Prelude.name}" >&2
+                  echo "nixpkgsのPreludeのキャッシュ: $(ls "$dhall_cache_home/dhall")" >&2
+                  exit 1
+                fi
+                {
+                  cat <<'HEADER'
+                # himari hlint configuration
+                #
+                # このファイルはDhallによって自動生成されています。
+                # 直接編集しないでください。
+                #
+                # himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
+                # 部分関数や危険な関数の使用を警告したり、
+                # より可読性の高いパターンを提案します。
+                #
+                # 使い方:
+                #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
+                #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
+                HEADER
+                  XDG_CACHE_HOME="$dhall_cache_home" \
+                    dhall-to-yaml-ng --file hlint/hlint.dhall
+                } > .hlint.yaml
+                prettier --write .hlint.yaml
+                cp .hlint.yaml "$out"
+              '';
+          # リポジトリの`.hlint.yaml`がDhallソースから生成したものと一致することを検査します。
+          # Dhallソースを変更して再生成を忘れた場合に失敗します。
+          hlint-yaml-up-to-date =
+            pkgs.runCommand "hlint-yaml-up-to-date"
+              {
+                # Nixストアのパスの名前は`.`から始められないので名前を付け直します。
+                committed = builtins.path {
+                  path = ./.hlint.yaml;
+                  name = "hlint.yaml";
+                };
+              }
+              ''
+                if ! diff --unified "$committed" "${hlint-yaml}"; then
+                  echo ".hlint.yamlがDhallソースから生成したものと一致しません。" >&2
+                  echo "nix run '.#generate-hlint'を実行して再生成してください。" >&2
+                  exit 1
+                fi
+                touch "$out"
+              '';
           # `haskell.nix`の生成したパッケージとその他のものをまとめます。
           packages = flake.packages // {
             inherit
@@ -398,7 +492,7 @@
             packages
             // flake.checks
             // {
-              inherit himari-stackage-nightly-test;
+              inherit himari-stackage-nightly-test hlint-yaml-up-to-date;
             };
 
           inherit packages;
@@ -411,30 +505,15 @@
                 pkgs.writeShellApplication {
                   name = "generate-hlint";
                   runtimeInputs = with pkgs; [
-                    dhall-yaml
+                    coreutils
                     git
-                    prettier
                   ];
+                  # 生成はNixのビルドとして行い、
+                  # 結果をリポジトリにコピーするだけにします。
+                  # `nix flake check`の検査と同じものを書き出すことになります。
                   text = ''
                     cd "$(git rev-parse --show-toplevel)"
-                    {
-                      cat <<'HEADER'
-                    # himari hlint configuration
-                    #
-                    # このファイルはDhallによって自動生成されています。
-                    # 直接編集しないでください。
-                    #
-                    # himariが推奨するスタイルを機械的にチェックするためのhlint設定ファイルです。
-                    # 部分関数や危険な関数の使用を警告したり、
-                    # より可読性の高いパターンを提案します。
-                    #
-                    # 使い方:
-                    #   * このファイルをプロジェクトルートに .hlint.yaml としてコピー
-                    #   * または .hlint.yaml から参照: - arguments: [--hint=path/to/this/.hlint.yaml]
-                    HEADER
-                      dhall-to-yaml-ng --file hlint/hlint.dhall
-                    } > .hlint.yaml
-                    prettier --write .hlint.yaml
+                    install --mode=644 "${hlint-yaml}" .hlint.yaml
                   '';
                 }
               );
