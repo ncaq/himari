@@ -139,6 +139,18 @@ main = sydTest . sequential $ do
         `shouldThrow` isOutOfDate
       B.readFile (root </> hlintYamlPath) `shouldReturn` stale
 
+    it "passes an absolute path to the formatter for a relative project root" $
+      withProject sampleSource \root -> do
+        formattedPath <- newIORef Nothing
+        let formatter path content = do
+              writeIORef formattedPath (Just path)
+              pure content
+        withCurrentDirectory (takeDirectory root) $
+          runWith
+            formatter
+            Options{projectRoot = Just (takeFileName root), dhallCache = Nothing, checkOnly = False}
+        readIORef formattedPath `shouldReturn` Just (root </> hlintYamlPath)
+
   describe "findProjectRoot" $ do
     it "finds the root from a nested directory" $ withProject sampleSource \root -> do
       let nested = root </> "a" </> "b"
