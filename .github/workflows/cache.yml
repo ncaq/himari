@@ -27,9 +27,9 @@ jobs:
       matrix:
         # WindowsはNixが対応していないので対象外です。
         os:
-          - ubuntu-24.04 # x86_64-linux
-          - ubuntu-24.04-arm # aarch64-linux
-          - macos-15 # aarch64-darwin
+          - ubuntu-26.04 # x86_64-linux
+          - ubuntu-26.04-arm # aarch64-linux
+          - macos-26 # aarch64-darwin
     runs-on: ${{ matrix.os }}
     permissions:
       contents: read # Read repository contents
