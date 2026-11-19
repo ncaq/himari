@@ -126,10 +126,18 @@ main = sydTest . sequential $ do
     it "reports a missing file" $ withProject sampleSource \root ->
       check unformatted Nothing root `shouldThrow` (== HlintYamlNotFound (root </> hlintYamlPath))
 
+  describe "runWith" $ do
+    it "writes the generated file" $ withProject sampleSource \root -> do
+      runWith unformatted Options{projectRoot = Just root, dhallCache = Nothing, checkOnly = False}
+      generated <- generate unformatted Nothing root
+      B.readFile (root </> hlintYamlPath) `shouldReturn` generated
+
     it "does not write in check mode" $ withProject sampleSource \root -> do
-      run Options{projectRoot = Just root, dhallCache = Nothing, checkOnly = True}
-        `shouldThrow` (== HlintYamlNotFound (root </> hlintYamlPath))
-      doesFileExist (root </> hlintYamlPath) `shouldReturn` False
+      let stale = "- stale: true\n"
+      B.writeFile (root </> hlintYamlPath) stale
+      runWith unformatted Options{projectRoot = Just root, dhallCache = Nothing, checkOnly = True}
+        `shouldThrow` isOutOfDate
+      B.readFile (root </> hlintYamlPath) `shouldReturn` stale
 
   describe "findProjectRoot" $ do
     it "finds the root from a nested directory" $ withProject sampleSource \root -> do

@@ -7,6 +7,7 @@
 module GenerateHlint
   ( Options (..)
   , run
+  , runWith
   ) where
 
 import GHC.IO.Encoding (setLocaleEncoding, utf8)
@@ -38,11 +39,16 @@ data Options = Options
 -- Nixのサンドボックスの中のようにロケールがUTF-8ではない環境では、
 -- 日本語のコメントを含むDhallソースを読めないためです。
 run :: (MonadThrow m, MonadUnliftIO m) => Options -> m ()
-run options = do
+run = runWith treefmt
+
+-- | 整形の方法を指定して`run`と同じ処理を行います。
+-- treefmtが無い環境でも生成と検査の流れをテストできるように分けています。
+runWith :: (MonadThrow m, MonadUnliftIO m) => Formatter m -> Options -> m ()
+runWith formatter options = do
   liftIO $ setLocaleEncoding utf8
   root <- maybe (getCurrentDirectory >>= findProjectRoot) pure options.projectRoot
   if options.checkOnly
-    then check treefmt options.dhallCache root
+    then check formatter options.dhallCache root
     else do
-      generated <- generate treefmt options.dhallCache root
+      generated <- generate formatter options.dhallCache root
       writeBinaryFileDurableAtomic (root </> hlintYamlPath) generated
