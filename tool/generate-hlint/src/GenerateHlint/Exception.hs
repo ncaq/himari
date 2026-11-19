@@ -14,7 +14,7 @@ data GenerateHlintException
     DhallSourceNotFound FilePath
   | -- | Dhallソースの文字コードがUTF-8ではなかった。
     DhallSourceNotUtf8 FilePath Text
-  | -- | 指定されたDhallのキャッシュがディレクトリではなかった。
+  | -- | 指定されたDhallのキャッシュのディレクトリが存在しないか、ディレクトリではなかった。
     DhallCacheNotFound FilePath
   | -- | キャッシュに無いリモートのimportを解決しようとした。URLを持ちます。
     RemoteImportNotCached Text
@@ -49,7 +49,8 @@ message = \case
   DhallSourceNotUtf8 path reason ->
     "DhallソースがUTF-8として読めません: " <> T.pack path <> "\n" <> reason
   DhallCacheNotFound path ->
-    "Dhallのキャッシュとして指定されたディレクトリが見つかりません: " <> T.pack path
+    "Dhallのキャッシュとして指定されたディレクトリが存在しないか、ディレクトリではありません: "
+      <> T.pack path
   RemoteImportNotCached url ->
     "リモートのimportがDhallのキャッシュにありません: "
       <> url
