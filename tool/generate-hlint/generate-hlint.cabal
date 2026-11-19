@@ -106,6 +106,7 @@ test-suite generate-hlint-test
     -with-rtsopts=-N
 
   build-depends:
+    dhall >=1.42,
     generate-hlint,
     sydtest >=0.18,
     yaml >=0.11,

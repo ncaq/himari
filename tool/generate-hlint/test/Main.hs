@@ -1,10 +1,15 @@
 module Main (main) where
 
 import Data.ByteString qualified as B
+import Data.ByteString.Lazy qualified as BL
 import Data.Text qualified as T
 import Data.Text.Encoding qualified as TE
 import Data.Text.IO.Utf8 qualified as TO
 import Data.Yaml qualified as Yaml
+import Dhall.Binary qualified
+import Dhall.Core qualified
+import Dhall.Import qualified
+import Dhall.Parser qualified
 import GenerateHlint
 import GenerateHlint.Check
 import GenerateHlint.Exception
@@ -51,6 +56,14 @@ remoteSource =
 -- treefmtを使った生成は`nix flake check`の`hlint-yaml-up-to-date`が検査します。
 unformatted :: Formatter IO
 unformatted _ = pure
+
+-- | 指定したパスを読み取り専用にして処理を実行します。
+-- 一時ディレクトリを削除できるように、処理が終わったら書き込めるように戻します。
+withReadOnly :: [FilePath] -> IO a -> IO a
+withReadOnly paths = bracket_ (setWritable False) (setWritable True)
+ where
+  setWritable writable =
+    for_ paths \path -> getPermissions path >>= setPermissions path . setOwnerWritable writable
 
 isRemoteImportNotCached :: GenerateHlintException -> Bool
 isRemoteImportNotCached = \case
@@ -114,6 +127,26 @@ main = sydTest . sequential $ do
             _ -> False
 
   describe "offline import" $ do
+    it "resolves a cached remote import from a read-only cache without the network" $ do
+      parsed <- either throwM pure $ Dhall.Parser.exprFromText "(sample)" sampleSource
+      resolved <- Dhall.Import.assertNoImports parsed
+      let expression :: Dhall.Core.Expr Void Void
+          expression = Dhall.Core.alphaNormalize $ Dhall.Core.normalize resolved
+          digest = show $ Dhall.Import.hashExpression expression
+          source = "https://example.invalid/package.dhall\n  sha256:" <> T.pack digest <> "\n"
+      withProject source \root ->
+        withSystemTempDirectory "generate-hlint-test-cache" \cache -> do
+          -- Dhallのキャッシュのファイル名は`1220`にsha256のハッシュを続けたものです。
+          let cacheFile = cache </> ("1220" <> digest)
+          B.writeFile cacheFile . BL.toStrict $ Dhall.Binary.encodeExpression expression
+          -- ファイルではないものは読み飛ばされることも確かめます。
+          createDirectory (cache </> "subdirectory")
+          generated <-
+            withReadOnly [cacheFile, cache] $ generate unformatted (Just cache) root
+          case Yaml.decodeEither' generated of
+            Right (decoded :: Value) -> decoded `shouldBe` sampleRules
+            Left err -> expectationFailure $ Yaml.prettyPrintParseException err
+
     it "fails with the URL instead of accessing the network on a cache miss" $
       withProject remoteSource \root ->
         withSystemTempDirectory "generate-hlint-test-cache" \cache ->
