@@ -98,6 +98,21 @@ main = sydTest . sequential $ do
       withProject sampleSource \root ->
         generate (\_ _ -> pure "[]\n") Nothing root `shouldThrow` (== GeneratedYamlChanged)
 
+  describe "treefmtWith" $ do
+    it "reports a command that cannot be started" $
+      withSystemTempDirectory "generate-hlint-test" \root ->
+        treefmtWith "generate-hlint-test-missing-command" (root </> hlintYamlPath) "[]\n"
+          `shouldThrow` \case
+            FormatterNotStarted _ -> True
+            _ -> False
+
+    it "reports the exit code of a failed command" $
+      withSystemTempDirectory "generate-hlint-test" \root ->
+        treefmtWith "false" (root </> hlintYamlPath) "[]\n"
+          `shouldThrow` \case
+            FormatterFailed code _ -> code == 1
+            _ -> False
+
   describe "offline import" $ do
     it "fails with the URL instead of accessing the network on a cache miss" $
       withProject remoteSource \root ->

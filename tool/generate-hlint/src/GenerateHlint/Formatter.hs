@@ -2,6 +2,7 @@
 module GenerateHlint.Formatter
   ( Formatter
   , treefmt
+  , treefmtWith
   ) where
 
 import Data.ByteString.Lazy qualified as BL
@@ -25,13 +26,18 @@ type Formatter m = FilePath -> ByteString -> m ByteString
 -- 標準入力で内容を渡すので、作業ツリーのファイルは変更されません。
 -- キャッシュはサンドボックスの中など書き込めない環境でも動くように使いません。
 treefmt :: (MonadThrow m, MonadUnliftIO m) => Formatter m
-treefmt path content = do
+treefmt = treefmtWith "treefmt"
+
+-- | treefmtとして起動するコマンドを指定して`treefmt`と同じ処理を行います。
+-- 起動や整形に失敗した場合の扱いをテストできるように分けています。
+treefmtWith :: (MonadThrow m, MonadUnliftIO m) => FilePath -> Formatter m
+treefmtWith command path content = do
   -- treefmtはカレントディレクトリから上に向かってプロジェクトルートを探すので、
   -- どこから実行されても見つけられるように書き出し先のディレクトリで起動します。
   let config =
         setWorkingDir (takeDirectory path)
           . setStdin (byteStringInput (BL.fromStrict content))
-          $ proc "treefmt" ["--no-cache", "--stdin", path]
+          $ proc command ["--no-cache", "--stdin", path]
   (exitCode, formatted, errorOutput) <-
     readProcess config `catchIO` (throwM . FormatterNotStarted . T.pack . displayException)
   case exitCode of
